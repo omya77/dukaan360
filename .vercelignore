@@ -1,0 +1,6 @@
+*.py
+Dukaan360_Backend/
+Dukaan360_Scripts/
+render.yaml
+requirements.txt
+*.db
