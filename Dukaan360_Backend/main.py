@@ -8,6 +8,8 @@ from dotenv import load_dotenv
 load_dotenv()
 
 from fastapi import FastAPI, Depends, HTTPException, status, APIRouter, Response
+from fastapi.staticfiles import StaticFiles
+from fastapi.responses import FileResponse
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
 from sqlalchemy.orm import Session
@@ -50,8 +52,8 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-@app.get("/")
-def root():
+@app.get("/health")
+def health_check():
     return {
         "status": "online",
         "service": "Dukaan360 Cloud POS API",
@@ -1827,3 +1829,29 @@ def download_my_store_backup_pdf(db: Session = Depends(get_db), user: models.Use
         raise HTTPException(status_code=500, detail=f"Failed to generate store backup PDF: {str(e)}")
 
 app.include_router(api)
+
+# --- SERVE COMPILED REACT FRONTEND (STATIC & SPA ROUTING) ---
+STATIC_DIR = os.path.join(BASE_DIR, "static")
+
+if os.path.exists(STATIC_DIR):
+    for sub in ["assets", "images", "products", "uploads"]:
+        folder = os.path.join(STATIC_DIR, sub)
+        if os.path.exists(folder):
+            app.mount(f"/{sub}", StaticFiles(directory=folder), name=sub)
+
+    @app.get("/{full_path:path}")
+    async def serve_frontend_spa(full_path: str):
+        # Do not catch backend API, documentation or schema routes
+        if full_path.startswith(("api", "auth", "admin", "docs", "openapi.json", "health")):
+            raise HTTPException(status_code=404, detail="API route not found")
+        
+        # Check if direct static file exists (e.g. favicon.svg, phonepe-qr-full.jpg)
+        target = os.path.join(STATIC_DIR, full_path)
+        if full_path and os.path.isfile(target):
+            return FileResponse(target)
+            
+        # Return React index.html for client-side routing
+        index_file = os.path.join(STATIC_DIR, "index.html")
+        if os.path.exists(index_file):
+            return FileResponse(index_file)
+        return {"status": "online", "message": "Dukaan360 API running"}
