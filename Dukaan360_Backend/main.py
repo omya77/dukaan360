@@ -50,6 +50,16 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+@app.get("/")
+def root():
+    return {
+        "status": "online",
+        "service": "Dukaan360 Cloud POS API",
+        "version": "2.0.0",
+        "docs": "/docs",
+        "superadmin_system": "verified"
+    }
+
 # --- AUTH & CRYPTOGRAPHY CONFIG ---
 SECRET_KEY = os.getenv("SECRET_KEY", "dukaan360_sec_key_e8f29c41b8a73094d1264c7e5a0f18d6a3b97e5c128490aef683b21d5c0e479a")
 ALGORITHM = "HS256"
