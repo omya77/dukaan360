@@ -1,0 +1,10 @@
+{
+  "buildCommand": "cd Dukaan360_Frontend && npm install && npm run build",
+  "outputDirectory": "Dukaan360_Frontend/dist",
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/"
+    }
+  ]
+}

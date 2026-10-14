@@ -1,5 +1,9 @@
 import os
+import sys
 os.environ["DISABLE_SQLALCHEMY_CEXT"] = "1"
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+if BASE_DIR not in sys.path:
+    sys.path.insert(0, BASE_DIR)
 from dotenv import load_dotenv
 load_dotenv()
 

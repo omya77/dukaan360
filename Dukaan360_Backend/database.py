@@ -1,13 +1,18 @@
 import os
 os.environ["DISABLE_SQLALCHEMY_CEXT"] = "1"
 
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+import sys
+if BASE_DIR not in sys.path:
+    sys.path.insert(0, BASE_DIR)
+
 from sqlalchemy import create_engine, event
 from sqlalchemy.orm import sessionmaker
 from models import Base
 
-# For development, we use SQLite. It creates a local file named 'dukaan.db'.
-# For production, this URL can change to PostgreSQL or MySQL.
-SQLALCHEMY_DATABASE_URL = os.getenv("DATABASE_URL", "sqlite:///./dukaan.db")
+# For development and standalone hosting, use absolute path to dukaan.db so working directory doesn't break it
+DEFAULT_DB_PATH = os.path.join(BASE_DIR, "dukaan.db").replace("\\", "/")
+SQLALCHEMY_DATABASE_URL = os.getenv("DATABASE_URL", f"sqlite:///{DEFAULT_DB_PATH}")
 
 engine = create_engine(
     SQLALCHEMY_DATABASE_URL, 

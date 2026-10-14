@@ -1,0 +1,9 @@
+{
+  "name": "dukaan360-root",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "build": "cd Dukaan360_Frontend && npm install && npm run build",
+    "start": "cd Dukaan360_Frontend && npm run preview"
+  }
+}
