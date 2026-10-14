@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dukaan360 - Premium POS</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Phosphor Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['"Plus Jakarta Sans"', 'sans-serif'] },
+                    colors: {
+                        brand: {
+                            50: '#eff6ff',
+                            100: '#dbeafe',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            900: '#1e3a8a',
+                        },
+                        accent: '#10b981', // Emerald for totals
+                    },
+                    boxShadow: {
+                        'soft': '0 10px 40px -10px rgba(0,0,0,0.05)',
+                        'floating': '0 20px 40px -15px rgba(37,99,235,0.15)',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+        }
+        .cart-scroll::-webkit-scrollbar { width: 4px; }
+        .cart-scroll::-webkit-scrollbar-thumb { background-color: #cbd5e1; border-radius: 4px; }
+        
+        /* Hide scrollbar for category menu but allow scrolling */
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-slate-100 to-brand-50 h-screen overflow-hidden flex text-slate-800">
+
+    <!-- Sidebar Navigation (Icons only) -->
+    <nav class="w-20 bg-white border-r border-slate-200/60 flex flex-col items-center py-6 gap-8 shrink-0 z-20 shadow-soft">
+        <div class="w-12 h-12 bg-gradient-to-tr from-brand-600 to-brand-500 rounded-xl flex items-center justify-center text-white font-bold text-xl shadow-floating">
+            D
+        </div>
+        <div class="flex flex-col gap-4 w-full px-3">
+            <button class="w-full aspect-square rounded-xl bg-brand-50 text-brand-600 flex flex-col items-center justify-center transition hover:bg-brand-100">
+                <i class="ph ph-shopping-cart text-2xl mb-1"></i>
+                <span class="text-[10px] font-bold">POS</span>
+            </button>
+            <button class="w-full aspect-square rounded-xl text-slate-400 hover:text-brand-600 hover:bg-slate-50 flex flex-col items-center justify-center transition">
+                <i class="ph ph-package text-2xl mb-1"></i>
+                <span class="text-[10px] font-bold">Stock</span>
+            </button>
+            <button class="w-full aspect-square rounded-xl text-slate-400 hover:text-brand-600 hover:bg-slate-50 flex flex-col items-center justify-center transition">
+                <i class="ph ph-users text-2xl mb-1"></i>
+                <span class="text-[10px] font-bold">Khata</span>
+            </button>
+        </div>
+        <div class="mt-auto">
+            <button class="w-12 h-12 rounded-full overflow-hidden border-2 border-slate-200">
+                <img src="https://i.pravatar.cc/100?img=11" alt="User" class="w-full h-full object-cover">
+            </button>
+        </div>
+    </nav>
+
+    <!-- Main Content Area -->
+    <main class="flex-1 flex flex-col overflow-hidden relative">
+        
+        <!-- Header -->
+        <header class="h-20 px-8 flex items-center justify-between shrink-0">
+            <div>
+                <h1 class="text-2xl font-bold tracking-tight text-slate-900">Checkout</h1>
+                <p class="text-sm text-slate-500 font-medium">Main Branch • Terminal 1</p>
+            </div>
+            <div class="flex items-center gap-4">
+                <div class="relative w-96">
+                    <i class="ph ph-barcode absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 text-xl"></i>
+                    <input type="text" placeholder="Scan barcode or search..." 
+                           class="w-full h-12 pl-12 pr-4 bg-white border border-white rounded-2xl shadow-sm focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent transition-all">
+                </div>
+            </div>
+        </header>
+
+        <!-- Product Area -->
+        <section class="flex-1 overflow-hidden flex flex-col px-8 pb-8 gap-6">
+            
+            <!-- Category Pills -->
+            <div class="flex gap-3 overflow-x-auto no-scrollbar shrink-0">
+                <button class="px-6 py-2.5 bg-slate-800 text-white rounded-full font-semibold text-sm shadow-md flex items-center gap-2">
+                    <i class="ph-fill ph-squares-four text-lg"></i> All Items
+                </button>
+                <button class="px-6 py-2.5 bg-white text-slate-600 rounded-full font-semibold text-sm hover:bg-slate-50 hover:shadow-sm border border-slate-100 transition flex items-center gap-2">
+                    <span class="text-xl">🍅</span> Groceries
+                </button>
+                <button class="px-6 py-2.5 bg-white text-slate-600 rounded-full font-semibold text-sm hover:bg-slate-50 hover:shadow-sm border border-slate-100 transition flex items-center gap-2">
+                    <span class="text-xl">🥛</span> Dairy
+                </button>
+                <button class="px-6 py-2.5 bg-white text-slate-600 rounded-full font-semibold text-sm hover:bg-slate-50 hover:shadow-sm border border-slate-100 transition flex items-center gap-2">
+                    <span class="text-xl">🍪</span> Snacks
+                </button>
+                <button class="px-6 py-2.5 bg-white text-slate-600 rounded-full font-semibold text-sm hover:bg-slate-50 hover:shadow-sm border border-slate-100 transition flex items-center gap-2">
+                    <span class="text-xl">🧴</span> Personal Care
+                </button>
+            </div>
+
+            <!-- Grid -->
+            <div class="flex-1 overflow-y-auto cart-scroll pb-10 grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 pr-2">
+                
+                <!-- Card 1 -->
+                <div class="bg-white rounded-3xl p-3 shadow-soft border border-slate-100 hover:border-brand-300 hover:shadow-floating transition-all cursor-pointer group flex flex-col h-[260px]">
+                    <div class="w-full h-36 bg-slate-50 rounded-2xl mb-3 overflow-hidden relative flex items-center justify-center p-4">
+                        <img src="https://m.media-amazon.com/images/I/61F+fEibN6L._AC_UF1000,1000_QL80_.jpg" class="object-contain h-full mix-blend-multiply transition-transform group-hover:scale-110">
+                        <div class="absolute top-2 right-2 bg-white/90 backdrop-blur text-xs font-bold px-2 py-1 rounded-lg text-slate-700 shadow-sm">
+                            5 KG
+                        </div>
+                    </div>
+                    <div class="flex-1 flex flex-col justify-between px-1">
+                        <h3 class="font-semibold text-slate-800 leading-tight">Aashirvaad Atta</h3>
+                        <div class="flex justify-between items-center mt-2">
+                            <span class="text-xl font-bold text-slate-900">₹240</span>
+                            <button class="w-8 h-8 rounded-full bg-slate-100 text-brand-600 flex items-center justify-center group-hover:bg-brand-600 group-hover:text-white transition-colors">
+                                <i class="ph ph-plus font-bold"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="bg-white rounded-3xl p-3 shadow-soft border border-brand-500 ring-4 ring-brand-50 hover:shadow-floating transition-all cursor-pointer group flex flex-col h-[260px] relative">
+                    <div class="absolute -top-2 -right-2 w-6 h-6 bg-brand-500 rounded-full text-white flex items-center justify-center text-xs font-bold z-10 shadow-md">2</div>
+                    <div class="w-full h-36 bg-slate-50 rounded-2xl mb-3 overflow-hidden relative flex items-center justify-center p-4">
+                        <img src="https://m.media-amazon.com/images/I/71u96V3Y8vL._AC_UF1000,1000_QL80_.jpg" class="object-contain h-full mix-blend-multiply transition-transform group-hover:scale-110">
+                        <div class="absolute top-2 right-2 bg-white/90 backdrop-blur text-xs font-bold px-2 py-1 rounded-lg text-slate-700 shadow-sm">
+                            1 KG
+                        </div>
+                    </div>
+                    <div class="flex-1 flex flex-col justify-between px-1">
+                        <h3 class="font-semibold text-slate-800 leading-tight">Madhur Sugar</h3>
+                        <div class="flex justify-between items-center mt-2">
+                            <span class="text-xl font-bold text-slate-900">₹45</span>
+                            <button class="w-8 h-8 rounded-full bg-brand-600 text-white flex items-center justify-center transition-colors">
+                                <i class="ph ph-plus font-bold"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="bg-white rounded-3xl p-3 shadow-soft border border-slate-100 hover:border-brand-300 hover:shadow-floating transition-all cursor-pointer group flex flex-col h-[260px]">
+                    <div class="w-full h-36 bg-slate-50 rounded-2xl mb-3 overflow-hidden relative flex items-center justify-center p-4">
+                        <img src="https://m.media-amazon.com/images/I/51R5U1L8pPL.jpg" class="object-contain h-full mix-blend-multiply transition-transform group-hover:scale-110">
+                        <div class="absolute top-2 right-2 bg-white/90 backdrop-blur text-xs font-bold px-2 py-1 rounded-lg text-slate-700 shadow-sm">
+                            500 ML
+                        </div>
+                    </div>
+                    <div class="flex-1 flex flex-col justify-between px-1">
+                        <h3 class="font-semibold text-slate-800 leading-tight">Amul Taaza Milk</h3>
+                        <div class="flex justify-between items-center mt-2">
+                            <span class="text-xl font-bold text-slate-900">₹28</span>
+                            <button class="w-8 h-8 rounded-full bg-slate-100 text-brand-600 flex items-center justify-center group-hover:bg-brand-600 group-hover:text-white transition-colors">
+                                <i class="ph ph-plus font-bold"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Card 4 -->
+                <div class="bg-white rounded-3xl p-3 shadow-soft border border-slate-100 hover:border-brand-300 hover:shadow-floating transition-all cursor-pointer group flex flex-col h-[260px]">
+                    <div class="w-full h-36 bg-slate-50 rounded-2xl mb-3 overflow-hidden relative flex items-center justify-center p-4">
+                        <img src="https://m.media-amazon.com/images/I/61r5f8hR7bL.jpg" class="object-contain h-full mix-blend-multiply transition-transform group-hover:scale-110">
+                        <div class="absolute top-2 right-2 bg-white/90 backdrop-blur text-xs font-bold px-2 py-1 rounded-lg text-slate-700 shadow-sm">
+                            250 G
+                        </div>
+                    </div>
+                    <div class="flex-1 flex flex-col justify-between px-1">
+                        <h3 class="font-semibold text-slate-800 leading-tight">Tata Tea Premium</h3>
+                        <div class="flex justify-between items-center mt-2">
+                            <span class="text-xl font-bold text-slate-900">₹140</span>
+                            <button class="w-8 h-8 rounded-full bg-slate-100 text-brand-600 flex items-center justify-center group-hover:bg-brand-600 group-hover:text-white transition-colors">
+                                <i class="ph ph-plus font-bold"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Right Sidebar / Cart (Glassmorphism & Premium UI) -->
+    <aside class="w-[420px] bg-white shadow-[-10px_0_40px_rgba(0,0,0,0.04)] z-30 flex flex-col relative rounded-l-[2.5rem] my-2 mr-2 border border-slate-100 overflow-hidden">
+        
+        <!-- Customer Select -->
+        <div class="p-6 pb-4">
+            <div class="bg-slate-50 border border-slate-100 rounded-2xl p-3 flex items-center justify-between group hover:border-brand-300 transition cursor-pointer">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 bg-brand-100 text-brand-600 rounded-full flex items-center justify-center">
+                        <i class="ph-fill ph-user text-lg"></i>
+                    </div>
+                    <div>
+                        <p class="text-xs text-slate-400 font-medium">Customer</p>
+                        <p class="text-sm font-bold text-slate-700 group-hover:text-brand-600 transition">Walk-in Customer</p>
+                    </div>
+                </div>
+                <i class="ph-bold ph-caret-down text-slate-400"></i>
+            </div>
+        </div>
+
+        <!-- Order Items -->
+        <div class="flex-1 overflow-y-auto cart-scroll px-6 flex flex-col gap-4 pb-4">
+            <!-- Item -->
+            <div class="flex gap-4 items-center bg-white">
+                <div class="w-16 h-16 bg-slate-50 rounded-xl flex items-center justify-center p-2 border border-slate-100 shrink-0">
+                    <img src="https://m.media-amazon.com/images/I/71u96V3Y8vL._AC_UF1000,1000_QL80_.jpg" class="object-contain h-full mix-blend-multiply">
+                </div>
+                <div class="flex-1">
+                    <h4 class="text-sm font-bold text-slate-800">Madhur Sugar</h4>
+                    <p class="text-xs text-slate-400 mt-0.5">1 KG • ₹45.00/pc</p>
+                    <div class="flex items-center gap-3 mt-2">
+                        <button class="w-6 h-6 rounded-md bg-slate-100 text-slate-600 flex items-center justify-center hover:bg-slate-200"><i class="ph-bold ph-minus text-xs"></i></button>
+                        <span class="text-sm font-bold w-4 text-center">2</span>
+                        <button class="w-6 h-6 rounded-md bg-slate-100 text-slate-600 flex items-center justify-center hover:bg-slate-200"><i class="ph-bold ph-plus text-xs"></i></button>
+                    </div>
+                </div>
+                <div class="flex flex-col items-end gap-3 self-stretch pt-1">
+                    <span class="font-bold text-slate-900">₹90.00</span>
+                    <button class="text-slate-300 hover:text-red-500 transition mt-auto mb-1"><i class="ph-fill ph-trash text-lg"></i></button>
+                </div>
+            </div>
+
+            <!-- Item -->
+            <div class="flex gap-4 items-center bg-white">
+                <div class="w-16 h-16 bg-slate-50 rounded-xl flex items-center justify-center p-2 border border-slate-100 shrink-0">
+                    <img src="https://m.media-amazon.com/images/I/61F+fEibN6L._AC_UF1000,1000_QL80_.jpg" class="object-contain h-full mix-blend-multiply">
+                </div>
+                <div class="flex-1">
+                    <h4 class="text-sm font-bold text-slate-800">Aashirvaad Atta</h4>
+                    <p class="text-xs text-slate-400 mt-0.5">5 KG • ₹240.00/pc</p>
+                    <div class="flex items-center gap-3 mt-2">
+                        <button class="w-6 h-6 rounded-md bg-slate-100 text-slate-600 flex items-center justify-center hover:bg-slate-200"><i class="ph-bold ph-minus text-xs"></i></button>
+                        <span class="text-sm font-bold w-4 text-center">1</span>
+                        <button class="w-6 h-6 rounded-md bg-slate-100 text-slate-600 flex items-center justify-center hover:bg-slate-200"><i class="ph-bold ph-plus text-xs"></i></button>
+                    </div>
+                </div>
+                <div class="flex flex-col items-end gap-3 self-stretch pt-1">
+                    <span class="font-bold text-slate-900">₹240.00</span>
+                    <button class="text-slate-300 hover:text-red-500 transition mt-auto mb-1"><i class="ph-fill ph-trash text-lg"></i></button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Checkout Area (Premium Gradient Block) -->
+        <div class="mt-auto p-6 bg-slate-900 text-white rounded-b-[2.5rem] relative overflow-hidden">
+            <!-- Decorative circle -->
+            <div class="absolute -top-20 -right-20 w-48 h-48 bg-brand-500 rounded-full blur-3xl opacity-30"></div>
+            
+            <div class="relative z-10">
+                <div class="flex justify-between text-sm mb-2 text-slate-300">
+                    <span>Subtotal</span>
+                    <span class="font-medium text-white">₹330.00</span>
+                </div>
+                <div class="flex justify-between text-sm mb-4 text-slate-300">
+                    <span>GST (5%)</span>
+                    <span class="font-medium text-white">₹16.50</span>
+                </div>
+                
+                <div class="flex justify-between items-end mb-6 pt-4 border-t border-slate-700/50">
+                    <span class="text-slate-300 text-sm pb-1">Grand Total</span>
+                    <span class="text-4xl font-extrabold tracking-tight text-accent">₹346.50</span>
+                </div>
+
+                <!-- Payment Methods -->
+                <div class="grid grid-cols-3 gap-2 mb-4">
+                    <button class="py-3 bg-white/10 hover:bg-white/20 border border-white/10 rounded-xl text-sm font-semibold transition flex flex-col items-center gap-1">
+                        <i class="ph-fill ph-money text-xl text-emerald-400"></i> Cash
+                    </button>
+                    <button class="py-3 bg-white/10 hover:bg-white/20 border border-white/10 rounded-xl text-sm font-semibold transition flex flex-col items-center gap-1">
+                        <i class="ph-fill ph-qr-code text-xl text-blue-400"></i> UPI
+                    </button>
+                    <button class="py-3 bg-white/10 hover:bg-white/20 border border-white/10 rounded-xl text-sm font-semibold transition flex flex-col items-center gap-1">
+                        <i class="ph-fill ph-book-bookmark text-xl text-orange-400"></i> Khata
+                    </button>
+                </div>
+                
+                <button class="w-full h-14 bg-brand-500 hover:bg-brand-400 text-white rounded-xl font-bold text-lg shadow-[0_0_20px_rgba(59,130,246,0.4)] transition-all flex items-center justify-center gap-2">
+                    Charge ₹346.50 <i class="ph-bold ph-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+
+    </aside>
+
+</body>
+</html>

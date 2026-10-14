@@ -1,0 +1,90 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --color-brand: #FF5722;
+  --color-brandHover: #E64A19;
+  --color-brandLight: #FFF0ED;
+  --color-surface: #F8F9FA;
+  --color-dark: #1E293B;
+  --font-sans: "Poppins", sans-serif;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: var(--color-surface);
+  color: var(--color-dark);
+}
+
+.hide-scroll::-webkit-scrollbar { display: none; }
+.hide-scroll { -ms-overflow-style: none; scrollbar-width: none; }
+
+.cart-scroll::-webkit-scrollbar { width: 4px; }
+.cart-scroll::-webkit-scrollbar-thumb { background-color: #CBD5E1; border-radius: 10px; }
+
+/* Existing Shadow */
+.card-shadow { box-shadow: 0 2px 10px rgba(0,0,0,0.03), 0 1px 2px rgba(0,0,0,0.05); }
+
+/* --- PREMIUM GLASSMORPHISM UTILITIES --- */
+
+/* App Background for Glass to look good */
+.bg-premium-app {
+  background: linear-gradient(135deg, #fdfbfb 0%, #fff0ed 40%, #f1f5f9 100%);
+  background-attachment: fixed;
+}
+
+/* Header Glass */
+.glass-header {
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.8);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.03);
+}
+
+/* Panel Glass (Cart, Sidebars) */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.65);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.05);
+}
+
+/* Product Card Glass */
+.glass-card {
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.glass-card:hover {
+  background: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 10px 25px -5px rgba(255, 87, 34, 0.2); /* Soft brand glow */
+  transform: translateY(-3px);
+  border-color: rgba(255, 87, 34, 0.3);
+}
+
+/* Input Glass */
+.glass-input {
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(4px);
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  box-shadow: inset 0 2px 4px rgba(0,0,0,0.02);
+  transition: all 0.2s;
+}
+.glass-input:focus {
+  background: rgba(255, 255, 255, 0.95);
+  border-color: var(--color-brand);
+  box-shadow: 0 0 0 3px rgba(255, 87, 34, 0.15);
+}
+
+.mobile-cart {
+    transform: translateY(100%);
+    transition: transform 0.3s ease-in-out;
+}
+.mobile-cart.open {
+    transform: translateY(0);
+}
