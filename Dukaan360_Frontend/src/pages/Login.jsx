@@ -217,15 +217,17 @@ const Login = () => {
         </div>
 
         {/* Action Controls: 3-Language Selector & Register Link */}
-        <div className="flex items-center gap-2 sm:gap-3">
+        <div className="flex items-center gap-1.5 sm:gap-3 shrink-0">
           <LanguageControl variant="auth" />
 
           <Link 
             to="/register"
-            className="text-xs font-black text-white bg-gradient-to-r from-[#FF5722] to-[#FF7043] hover:from-[#E64A19] hover:to-[#FF5722] px-3.5 py-1.5 sm:px-4 sm:py-2 rounded-xl transition-all flex items-center gap-1.5 shadow-md shadow-orange-500/20 active:scale-98"
+            className="text-xs font-black text-white bg-gradient-to-r from-[#FF5722] to-[#FF7043] hover:from-[#E64A19] hover:to-[#FF5722] px-2.5 py-1.5 sm:px-4 sm:py-2 rounded-xl transition-all flex items-center gap-1 shadow-md shadow-orange-500/20 active:scale-98 shrink-0 whitespace-nowrap"
+            title={txt.register_now}
           >
-            <span>{txt.register_now.replace('→', '').trim()}</span>
-            <ArrowRight weight="bold" className="text-sm" />
+            <span className="hidden sm:inline">{txt.register_now.replace('→', '').trim()}</span>
+            <span className="sm:hidden font-black text-[11px]">नोंदणी</span>
+            <ArrowRight weight="bold" className="text-xs sm:text-sm" />
           </Link>
         </div>
       </header>
