@@ -198,7 +198,7 @@ export const LanguageControl = ({ variant = 'desktop', onSelect }) => {
               key={item.code}
               type="button"
               onClick={() => triggerLanguageChange(item.code)}
-              className={`px-1.5 sm:px-2.5 py-1 rounded-lg text-xs font-bold transition-all flex items-center gap-1 cursor-pointer active:scale-95 shrink-0 ${
+              className={`px-1.5 sm:px-2.5 py-1 rounded-lg text-[11px] sm:text-xs font-bold transition-all flex items-center gap-1 cursor-pointer active:scale-95 shrink-0 ${
                 isSelected
                   ? 'bg-white text-[#FF5722] shadow-xs font-black ring-1 ring-black/5'
                   : 'text-slate-500 hover:text-slate-900 hover:bg-white/50'
@@ -206,10 +206,7 @@ export const LanguageControl = ({ variant = 'desktop', onSelect }) => {
               title={`Switch to ${item.nativeName}`}
             >
               <span className="text-xs leading-none">{item.flag}</span>
-              <span className="hidden md:inline">{item.nativeName}</span>
-              <span className="md:hidden text-[10px] font-black">
-                {item.code === 'mr' ? 'मरा' : item.code === 'hi' ? 'हिन' : 'EN'}
-              </span>
+              <span className="font-bold tracking-tight">{item.nativeName}</span>
             </button>
           );
         })}

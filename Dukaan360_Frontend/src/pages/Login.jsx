@@ -194,15 +194,15 @@ const Login = () => {
       ></div>
 
       {/* ================= FULL-WIDTH GLOBAL TOP NAVBAR ================= */}
-      <header className="relative z-20 w-full h-14 sm:h-16 px-3 sm:px-6 lg:px-8 bg-white/85 backdrop-blur-md border-b border-slate-200/80 flex items-center justify-between shrink-0 shadow-xs">
+      <header className="relative z-20 w-full h-14 sm:h-16 px-2 sm:px-6 lg:px-8 bg-white/85 backdrop-blur-md border-b border-slate-200/80 flex items-center justify-between shrink-0 shadow-xs">
         {/* Brand & Subtitle */}
-        <div className="flex items-center gap-2 sm:gap-3 shrink-0">
-          <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-gradient-to-tr from-[#FF5722] to-[#FFA726] flex items-center justify-center text-white shadow-md shadow-orange-500/25 shrink-0">
-            <Storefront weight="fill" className="text-xl sm:text-2xl" />
+        <div className="flex items-center gap-1.5 sm:gap-3 shrink-0">
+          <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-xl bg-gradient-to-tr from-[#FF5722] to-[#FFA726] flex items-center justify-center text-white shadow-md shadow-orange-500/25 shrink-0">
+            <Storefront weight="fill" className="text-lg sm:text-2xl" />
           </div>
           <div>
-            <div className="flex items-center gap-2">
-              <h1 className="text-base sm:text-lg font-black tracking-tight text-slate-900 leading-none">
+            <div className="flex items-center gap-1 sm:gap-2">
+              <h1 className="text-sm sm:text-lg font-black tracking-tight text-slate-900 leading-none">
                 {txt.brand_title}
               </h1>
               <span className="hidden sm:inline-flex items-center gap-1 text-[10px] font-black text-[#FF5722] bg-orange-50 border border-orange-200/80 px-2 py-0.5 rounded-full">
@@ -210,33 +210,33 @@ const Login = () => {
                 <span>{txt.brand_subtitle}</span>
               </span>
             </div>
-            <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider mt-0.5 sm:hidden">
+            <p className="text-[9px] font-bold text-slate-400 uppercase tracking-wider mt-0.5 sm:hidden">
               {txt.brand_subtitle}
             </p>
           </div>
         </div>
 
         {/* Action Controls: 3-Language Selector & Register Link */}
-        <div className="flex items-center gap-1.5 sm:gap-3 shrink-0">
+        <div className="flex items-center gap-1 sm:gap-3 shrink-0">
           <LanguageControl variant="auth" />
 
           <Link 
             to="/register"
-            className="text-xs font-black text-white bg-gradient-to-r from-[#FF5722] to-[#FF7043] hover:from-[#E64A19] hover:to-[#FF5722] px-2.5 py-1.5 sm:px-4 sm:py-2 rounded-xl transition-all flex items-center gap-1 shadow-md shadow-orange-500/20 active:scale-98 shrink-0 whitespace-nowrap"
+            className="text-xs font-black text-white bg-gradient-to-r from-[#FF5722] to-[#FF7043] hover:from-[#E64A19] hover:to-[#FF5722] px-2 py-1.5 sm:px-4 sm:py-2 rounded-xl transition-all flex items-center gap-1 shadow-md shadow-orange-500/20 active:scale-98 shrink-0 whitespace-nowrap"
             title={txt.register_now}
           >
-            <span className="hidden sm:inline">{txt.register_now.replace('→', '').trim()}</span>
-            <span className="sm:hidden font-black text-[11px]">+ नोंदणी</span>
+            <span className="hidden md:inline">{txt.register_now.replace('→', '').trim()}</span>
+            <span className="md:hidden font-black text-[11px]">नवीन नोंदणी</span>
             <ArrowRight weight="bold" className="text-xs sm:text-sm" />
           </Link>
         </div>
       </header>
 
       {/* ================= FULL-PAGE WORKSPACE ================= */}
-      <main className="relative z-10 flex-1 w-full max-w-[1720px] mx-auto p-3 sm:p-6 lg:p-6 flex flex-col lg:flex-row gap-5 items-center justify-center lg:items-stretch overflow-visible lg:overflow-hidden">
+      <main className="relative z-10 flex-1 w-full max-w-[1720px] mx-auto p-3 sm:p-5 lg:p-6 flex flex-col lg:flex-row gap-5 items-stretch overflow-visible lg:overflow-hidden">
         
-        {/* LEFT COLUMN: Executive Dark Slate-900 Showcase Panel (DESKTOP ONLY) */}
-        <div className="hidden lg:flex lg:w-[52%] bg-slate-900 rounded-2xl border border-slate-800 shadow-xl p-6 lg:p-8 text-white flex-col justify-between h-full overflow-hidden relative">
+        {/* LEFT COLUMN: Executive Dark Slate-900 Showcase Panel */}
+        <div className="flex w-full lg:w-[52%] bg-slate-900 rounded-2xl border border-slate-800 shadow-xl p-5 sm:p-6 lg:p-8 text-white flex-col justify-between shrink-0 relative overflow-hidden">
           <div className="absolute inset-0 opacity-10 bg-[radial-gradient(circle_at_2px_2px,white_1px,transparent_0)] bg-[length:24px_24px] pointer-events-none"></div>
 
           {/* Top: Headline & Tagline */}
@@ -256,7 +256,7 @@ const Login = () => {
           </div>
 
           {/* Middle: Dual-Row Marquee Ribbons & Live Stats */}
-          <div className="relative z-10 my-auto py-2 space-y-3">
+          <div className="relative z-10 my-4 lg:my-auto py-2 space-y-3">
             {/* Animated Marquee Ribbons */}
             <div className="relative overflow-hidden w-full space-y-2 select-none group">
               {/* Fade Gradient Edges */}
@@ -336,21 +336,17 @@ const Login = () => {
         </div>
 
         {/* RIGHT COLUMN: Modern White Login Form */}
-        <div className="w-full max-w-md lg:max-w-none lg:w-[48%] bg-white/95 backdrop-blur-xl rounded-2xl sm:rounded-3xl border border-slate-200/80 shadow-xl shadow-slate-200/50 p-6 sm:p-8 lg:p-10 flex flex-col justify-between my-auto lg:my-0 lg:h-full relative">
+        <div className="w-full lg:w-[48%] bg-white/95 backdrop-blur-xl rounded-2xl sm:rounded-3xl border border-slate-200/80 shadow-md p-5 sm:p-7 lg:p-9 flex flex-col justify-between shrink-0 relative">
           
-          <div className="w-full max-w-[440px] mx-auto my-auto flex flex-col justify-center space-y-4 sm:space-y-6">
+          <div className="w-full max-w-[440px] mx-auto my-auto flex flex-col justify-center space-y-4 sm:space-y-5">
             
             {/* Header Titles */}
-            <div className="space-y-1.5">
-              <div className="lg:hidden inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-orange-50 border border-orange-200 text-xs font-bold text-[#FF5722] mb-1">
-                <Sparkle weight="fill" className="text-xs" />
-                <span>Dukaan360 Kirana POS • Cloud 24/7</span>
-              </div>
+            <div>
               <h2 className="text-2xl sm:text-3xl font-black text-slate-800 tracking-tight flex items-center gap-2">
                 {txt.welcome_back} <span className="text-2xl">👋</span>
               </h2>
-              <div className="h-1.5 w-14 bg-gradient-to-r from-[#FF5722] to-[#FF8A65] rounded-full mt-1"></div>
-              <p className="text-slate-500 font-medium text-xs sm:text-sm pt-0.5">{txt.welcome_sub}</p>
+              <div className="h-1.5 w-14 bg-gradient-to-r from-[#FF5722] to-[#FF8A65] rounded-full mt-2"></div>
+              <p className="text-slate-500 font-medium mt-1.5 text-xs sm:text-sm">{txt.welcome_sub}</p>
             </div>
             
             {/* Error Banner */}
