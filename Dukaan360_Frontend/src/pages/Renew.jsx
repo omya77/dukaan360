@@ -189,7 +189,7 @@ const Renew = () => {
   };
 
   return (
-    <div className="h-screen w-full bg-[#F4F7FE] flex flex-col relative overflow-hidden font-sans select-none">
+    <div className="min-h-screen lg:h-screen w-full bg-[#F4F7FE] flex flex-col relative overflow-y-auto lg:overflow-hidden font-sans select-none">
       
       {/* ================= ANIMATED BACKGROUND SYSTEM ================= */}
       {/* 1. Fluid Ambient Blobs (Continuous sinusoidal motion) */}
@@ -212,10 +212,10 @@ const Renew = () => {
       ></div>
 
       {/* ================= FULL-WIDTH GLOBAL TOP NAVBAR ================= */}
-      <header className="relative z-20 w-full h-14 sm:h-16 px-4 sm:px-6 lg:px-8 bg-white/85 backdrop-blur-md border-b border-slate-200/80 flex items-center justify-between shrink-0 shadow-xs">
+      <header className="relative z-20 w-full h-14 sm:h-16 px-3 sm:px-6 lg:px-8 bg-white/85 backdrop-blur-md border-b border-slate-200/80 flex items-center justify-between shrink-0 shadow-xs">
         {/* Brand & Subtitle */}
-        <div className="flex items-center gap-3">
-          <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-gradient-to-tr from-[#FF5722] to-[#FFA726] flex items-center justify-center text-white shadow-md shadow-orange-500/25">
+        <div className="flex items-center gap-2 sm:gap-3 shrink-0">
+          <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-gradient-to-tr from-[#FF5722] to-[#FFA726] flex items-center justify-center text-white shadow-md shadow-orange-500/25 shrink-0">
             <Storefront weight="fill" className="text-xl sm:text-2xl" />
           </div>
           <div>
@@ -235,13 +235,13 @@ const Renew = () => {
         </div>
 
         {/* Action Controls: 3-Language Selector, FAQ Help, Back to Login */}
-        <div className="flex items-center gap-2 sm:gap-3">
+        <div className="flex items-center gap-1.5 sm:gap-3 shrink-0">
           <LanguageControl variant="auth" />
 
           <button 
             type="button"
             onClick={() => setShowFaqModal(true)}
-            className="text-xs font-bold text-slate-700 hover:text-[#FF5722] bg-slate-100 hover:bg-orange-50 px-3 py-1.5 rounded-xl transition flex items-center gap-1.5 cursor-pointer border border-slate-200/60 shadow-2xs"
+            className="text-xs sm:text-sm font-bold text-slate-700 hover:text-[#FF5722] bg-slate-100 hover:bg-orange-50 px-2.5 py-1.5 sm:px-3 sm:py-2 rounded-xl transition flex items-center gap-1.5 cursor-pointer border border-slate-200/60 shadow-2xs"
             title={txt.help_btn}
           >
             <Question weight="bold" className="text-sm text-[#FF5722]" />
@@ -250,19 +250,20 @@ const Renew = () => {
 
           <Link 
             to="/login"
-            className="text-xs font-bold text-slate-700 hover:text-slate-900 bg-slate-100 hover:bg-slate-200 px-3 py-1.5 rounded-xl transition flex items-center gap-1.5 border border-slate-200/60 shadow-2xs"
+            className="text-xs sm:text-sm font-bold text-slate-700 hover:text-slate-900 bg-slate-100 hover:bg-slate-200 px-3 py-1.5 sm:px-3.5 sm:py-2 rounded-xl transition flex items-center gap-1.5 border border-slate-200/60 shadow-2xs shrink-0 whitespace-nowrap"
           >
             <ArrowLeft weight="bold" className="text-sm" />
             <span className="hidden sm:inline">{txt.login_btn}</span>
+            <span className="sm:hidden font-bold">लॉगिन</span>
           </Link>
         </div>
       </header>
 
-      {/* ================= FULL-PAGE WORKSPACE (2 EQUILIBRIUM PANELS, 0 SCROLL) ================= */}
-      <main className="relative z-10 flex-1 w-full max-w-[1720px] mx-auto p-3 sm:p-4 lg:p-5 flex flex-col lg:flex-row gap-4 sm:gap-5 overflow-hidden">
+      {/* ================= FULL-PAGE WORKSPACE ================= */}
+      <main className="relative z-10 flex-1 w-full max-w-[1600px] mx-auto p-4 sm:p-6 lg:p-6 flex flex-col lg:flex-row gap-6 items-center lg:items-stretch overflow-visible lg:overflow-hidden">
         
         {/* LEFT COLUMN: Store Verification, Plans & Do's/Don'ts (58% Width) */}
-        <div className="w-full lg:w-[58%] bg-white/95 backdrop-blur-xl rounded-2xl border border-slate-200/80 shadow-md p-4 sm:p-5 flex flex-col justify-between h-full overflow-hidden">
+        <div className="w-full lg:w-[58%] bg-white/95 backdrop-blur-xl rounded-2xl sm:rounded-3xl border border-slate-200/80 shadow-xl shadow-slate-200/50 p-5 sm:p-7 flex flex-col justify-between my-auto lg:my-0 lg:h-full relative">
           
           <div className="space-y-2.5">
             {/* Trial Ended Alert Bar */}
@@ -402,56 +403,56 @@ const Renew = () => {
 
             {/* STEP 2: Subscription Plans Selector (Wide 4-Card Grid) */}
             <div>
-              <label className="block text-[11px] font-black text-slate-700 uppercase tracking-wider mb-1">
+              <label className="block text-xs sm:text-sm font-black text-slate-700 uppercase tracking-wider mb-2">
                 {txt.step2_title}
               </label>
 
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
                 {currentPlans.map(plan => {
                   const isSelected = selectedPlanId === plan.id;
                   return (
                     <div 
                       key={plan.id}
                       onClick={() => setSelectedPlanId(plan.id)}
-                      className={`relative p-2.5 rounded-xl border-2 cursor-pointer transition-all duration-200 flex flex-col justify-between ${
+                      className={`relative p-3 rounded-2xl border-2 cursor-pointer transition-all duration-200 flex flex-col justify-between ${
                         isSelected 
                           ? 'border-[#FF5722] bg-gradient-to-b from-orange-50/80 to-white shadow-md ring-2 ring-orange-500/20 scale-[1.02]' 
                           : 'border-slate-200 bg-white hover:border-slate-300 hover:bg-slate-50/60 shadow-2xs hover:shadow-xs'
                       }`}
                     >
                       {/* Top Badges */}
-                      <div className="flex items-center justify-between mb-1">
-                        <span className="text-[9px] font-black text-slate-400">
+                      <div className="flex items-center justify-between mb-1.5">
+                        <span className="text-[10px] font-black text-slate-400">
                           {plan.duration.split(' ')[0]}
                         </span>
                         {plan.popular ? (
-                          <span className="px-1.5 py-0.2 rounded-full bg-gradient-to-r from-[#FF5722] to-amber-500 text-white text-[8px] font-black tracking-wider uppercase shadow-2xs">
+                          <span className="px-2 py-0.5 rounded-full bg-gradient-to-r from-[#FF5722] to-amber-500 text-white text-[9px] font-black tracking-wider uppercase shadow-2xs">
                             {plan.tag}
                           </span>
                         ) : plan.bestValue ? (
-                          <span className="px-1.5 py-0.2 rounded-full bg-amber-500 text-slate-900 text-[8px] font-black tracking-wider uppercase shadow-2xs">
+                          <span className="px-2 py-0.5 rounded-full bg-amber-500 text-slate-900 text-[9px] font-black tracking-wider uppercase shadow-2xs">
                             {plan.tag}
                           </span>
                         ) : (
-                          <span className="text-[9px] text-emerald-700 font-extrabold">{plan.discount}</span>
+                          <span className="text-[10px] text-emerald-700 font-extrabold">{plan.discount}</span>
                         )}
                       </div>
 
                       {/* Name & Pricing */}
                       <div>
-                        <h4 className="font-black text-xs text-slate-900 leading-tight">
+                        <h4 className="font-black text-xs sm:text-sm text-slate-900 leading-tight">
                           {plan.name}
                         </h4>
-                        <div className="flex items-baseline gap-1 my-0.5">
-                          <span className="text-lg font-black text-slate-900">₹{plan.price}</span>
+                        <div className="flex items-baseline gap-1 my-1">
+                          <span className="text-xl sm:text-2xl font-black text-slate-900">₹{plan.price}</span>
                           {plan.original && (
-                            <span className="text-[10px] text-slate-400 font-bold line-through">₹{plan.original}</span>
+                            <span className="text-xs text-slate-400 font-bold line-through">₹{plan.original}</span>
                           )}
                         </div>
                       </div>
 
                       {/* Daily cost & selection indicator */}
-                      <div className="pt-1.5 border-t border-slate-100 flex items-center justify-between text-[9px]">
+                      <div className="pt-2 border-t border-slate-100 flex items-center justify-between text-[10px] sm:text-xs">
                         <span className="text-slate-500 font-semibold">{plan.perDay.split(' ')[0]}</span>
                         <span 
                           className={`w-4 h-4 rounded-full border-2 flex items-center justify-center font-black ${
@@ -523,10 +524,10 @@ const Renew = () => {
         </div>
 
         {/* RIGHT COLUMN: Official PhonePe QR & WhatsApp Action (42% Width, Slate 900) */}
-        <div className="w-full lg:w-[42%] bg-gradient-to-b from-slate-900 via-slate-900 to-slate-950 p-4 sm:p-5 text-white flex flex-col justify-between h-full relative overflow-hidden rounded-2xl border border-slate-800 shadow-xl">
+        <div className="w-full lg:w-[42%] bg-gradient-to-b from-slate-900 via-slate-900 to-slate-950 p-5 sm:p-6 text-white flex flex-col justify-between my-auto lg:my-0 lg:h-full relative overflow-hidden rounded-2xl sm:rounded-3xl border border-slate-800 shadow-xl">
           <div className="absolute inset-0 opacity-10 bg-[radial-gradient(circle_at_2px_2px,white_1px,transparent_0)] bg-[length:20px_20px] pointer-events-none"></div>
 
-          <div className="relative z-10 flex flex-col justify-between h-full">
+          <div className="relative z-10 flex flex-col justify-between h-full space-y-3">
             
             {/* Header */}
             <div className="flex items-center justify-between pb-2 border-b border-slate-800 mb-2 shrink-0">
@@ -546,15 +547,15 @@ const Renew = () => {
             </div>
 
             {/* Official PhonePe QR Box */}
-            <div className="bg-slate-800/80 p-2.5 rounded-2xl shadow-xl border border-slate-700/80 text-center max-w-[210px] mx-auto mb-2">
-              <div className="flex items-center justify-between mb-1 px-0.5">
+            <div className="bg-slate-800/80 p-3 rounded-2xl shadow-xl border border-slate-700/80 text-center max-w-[240px] mx-auto mb-2">
+              <div className="flex items-center justify-between mb-1.5 px-0.5">
                 <div className="flex items-center gap-1.5">
-                  <div className="w-4 h-4 rounded-full bg-[#5f259f] flex items-center justify-center text-white text-[9px] font-black">
+                  <div className="w-5 h-5 rounded-full bg-[#5f259f] flex items-center justify-center text-white text-[10px] font-black">
                     पे
                   </div>
-                  <span className="text-white text-xs font-black tracking-wide">PhonePe</span>
+                  <span className="text-white text-xs sm:text-sm font-black tracking-wide">PhonePe</span>
                 </div>
-                <span className="text-[8px] bg-purple-500/20 text-purple-300 font-bold px-1.5 py-0.2 rounded border border-purple-500/30">
+                <span className="text-[9px] bg-purple-500/20 text-purple-300 font-bold px-2 py-0.5 rounded border border-purple-500/30">
                   {txt.accepted_here}
                 </span>
               </div>
@@ -562,51 +563,51 @@ const Renew = () => {
               {/* Scannable PhonePe QR */}
               <div 
                 onClick={() => setShowQrModal(true)}
-                className="relative group rounded-xl overflow-hidden bg-black p-1 cursor-pointer border border-white/10 hover:border-purple-400/50 transition-all duration-200"
+                className="relative group rounded-xl overflow-hidden bg-black p-1.5 cursor-pointer border border-white/10 hover:border-purple-400/50 transition-all duration-200"
                 title={txt.click_to_enlarge}
               >
                 <img 
                   src="/phonepe-qr-square.png" 
                   alt="PhonePe UPI QR Code - Mr Omkar bandu Misal" 
-                  className="w-32 h-32 sm:w-36 sm:h-36 rounded-lg object-contain mx-auto transition-transform duration-200 group-hover:scale-102"
+                  className="w-36 h-36 sm:w-40 sm:h-40 rounded-lg object-contain mx-auto transition-transform duration-200 group-hover:scale-102"
                 />
-                <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white text-[10px] font-bold gap-1 rounded-lg">
+                <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white text-xs font-bold gap-1 rounded-lg">
                   <MagnifyingGlass weight="bold" />
                   <span>{txt.click_to_enlarge}</span>
                 </div>
               </div>
 
               {/* Merchant Name & Supported Apps */}
-              <div className="mt-1">
-                <p className="text-[10px] font-black text-slate-200 leading-tight">{txt.merchant_name}</p>
-                <div className="mt-1 flex items-center justify-center gap-1">
-                  <span className="text-[7px] font-black text-slate-300 bg-white/10 px-1 py-0.2 rounded">PhonePe</span>
-                  <span className="text-[7px] font-black text-slate-300 bg-white/10 px-1 py-0.2 rounded">GPay</span>
-                  <span className="text-[7px] font-black text-slate-300 bg-white/10 px-1 py-0.2 rounded">Paytm</span>
-                  <span className="text-[7px] font-black text-slate-300 bg-white/10 px-1 py-0.2 rounded">BHIM</span>
+              <div className="mt-1.5">
+                <p className="text-xs font-black text-slate-200 leading-tight">{txt.merchant_name}</p>
+                <div className="mt-1.5 flex items-center justify-center gap-1.5">
+                  <span className="text-[9px] font-black text-slate-300 bg-white/10 px-1.5 py-0.5 rounded">PhonePe</span>
+                  <span className="text-[9px] font-black text-slate-300 bg-white/10 px-1.5 py-0.5 rounded">GPay</span>
+                  <span className="text-[9px] font-black text-slate-300 bg-white/10 px-1.5 py-0.5 rounded">Paytm</span>
+                  <span className="text-[9px] font-black text-slate-300 bg-white/10 px-1.5 py-0.5 rounded">BHIM</span>
                 </div>
               </div>
             </div>
 
             {/* UPI ID Copy Bar */}
-            <div className="w-full bg-slate-800/90 border border-slate-700/80 rounded-xl px-3 py-2 flex items-center justify-between text-xs mb-2">
+            <div className="w-full h-12 bg-slate-800/90 border border-slate-700/80 rounded-xl px-3.5 flex items-center justify-between text-xs sm:text-sm mb-2">
               <div className="text-left font-mono">
-                <span className="text-[8px] text-slate-400 block font-sans font-bold">{txt.official_upi_label}</span>
-                <span className="font-black text-white text-xs">{ADMIN_UPI}</span>
+                <span className="text-[9px] text-slate-400 block font-sans font-bold">{txt.official_upi_label}</span>
+                <span className="font-black text-white text-xs sm:text-sm">{ADMIN_UPI}</span>
               </div>
               <button 
                 type="button"
                 onClick={handleCopyUpi}
-                className="flex items-center gap-1 bg-white/10 hover:bg-white/20 active:scale-95 text-[#FF8A65] px-2.5 py-1 rounded-lg font-bold text-[10px] transition cursor-pointer"
+                className="flex items-center gap-1 bg-white/10 hover:bg-white/20 active:scale-95 text-[#FF8A65] px-3 py-1.5 rounded-lg font-bold text-xs transition cursor-pointer"
               >
-                {copiedUpi ? <Check weight="bold" className="text-emerald-400" /> : <Copy weight="bold" />}
+                {copiedUpi ? <Check weight="bold" className="text-emerald-400 text-sm" /> : <Copy weight="bold" className="text-sm" />}
                 <span>{copiedUpi ? txt.copied_btn : txt.copy_btn}</span>
               </button>
             </div>
 
             {/* Verified Store Summary Badge */}
             {storeInfo ? (
-              <div className="bg-slate-800/70 border border-slate-700/60 rounded-xl px-3 py-1.5 text-[10px] mb-2 space-y-0.5">
+              <div className="bg-slate-800/70 border border-slate-700/60 rounded-xl px-3 py-2 text-xs mb-2 space-y-1">
                 <div className="flex justify-between items-center text-slate-300">
                   <span>{txt.store_name_lbl}</span>
                   <span className="font-bold text-white">{storeInfo.store_name} (#{storeInfo.store_id})</span>
@@ -617,7 +618,7 @@ const Renew = () => {
                 </div>
               </div>
             ) : (
-              <div className="bg-amber-500/10 border border-amber-500/20 rounded-xl p-1.5 text-[10px] text-amber-200 mb-2 text-center font-bold">
+              <div className="bg-amber-500/10 border border-amber-500/20 rounded-xl p-2 text-xs text-amber-200 mb-2 text-center font-bold">
                 {txt.select_store_warning}
               </div>
             )}
@@ -627,13 +628,13 @@ const Renew = () => {
               <button
                 type="button"
                 onClick={handleOpenWhatsApp}
-                className="w-full py-2.5 sm:py-3 bg-gradient-to-r from-[#25D366] to-[#20bd5a] hover:from-[#20bd5a] hover:to-[#1da850] active:scale-98 text-white font-black text-xs sm:text-sm rounded-xl shadow-lg shadow-green-500/25 transition flex items-center justify-center gap-2 cursor-pointer mb-1"
+                className="w-full h-12 sm:h-13 bg-gradient-to-r from-[#25D366] to-[#20bd5a] hover:from-[#20bd5a] hover:to-[#1da850] active:scale-98 text-white font-black text-xs sm:text-sm rounded-xl shadow-lg shadow-green-500/25 transition flex items-center justify-center gap-2 cursor-pointer mb-1"
               >
-                <WhatsappLogo weight="fill" className="text-xl" />
+                <WhatsappLogo weight="fill" className="text-2xl" />
                 <span>{txt.whatsapp_btn}</span>
               </button>
 
-              <p className="text-[9px] text-slate-400 text-center leading-tight">
+              <p className="text-[10px] text-slate-400 text-center leading-tight mt-1">
                 {txt.whatsapp_note}
               </p>
             </div>

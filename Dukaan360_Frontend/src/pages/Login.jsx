@@ -171,7 +171,7 @@ const Login = () => {
   };
 
   return (
-    <div className="h-screen w-full bg-[#F4F7FE] flex flex-col relative overflow-hidden font-sans select-none">
+    <div className="min-h-screen lg:h-screen w-full bg-[#F4F7FE] flex flex-col relative overflow-y-auto lg:overflow-hidden font-sans select-none">
       
       {/* ================= ANIMATED BACKGROUND SYSTEM ================= */}
       {/* 1. Fluid Ambient Blobs (Continuous sinusoidal motion) */}
@@ -194,10 +194,10 @@ const Login = () => {
       ></div>
 
       {/* ================= FULL-WIDTH GLOBAL TOP NAVBAR ================= */}
-      <header className="relative z-20 w-full h-14 sm:h-16 px-4 sm:px-6 lg:px-8 bg-white/85 backdrop-blur-md border-b border-slate-200/80 flex items-center justify-between shrink-0 shadow-xs">
+      <header className="relative z-20 w-full h-14 sm:h-16 px-3 sm:px-6 lg:px-8 bg-white/85 backdrop-blur-md border-b border-slate-200/80 flex items-center justify-between shrink-0 shadow-xs">
         {/* Brand & Subtitle */}
-        <div className="flex items-center gap-3">
-          <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-gradient-to-tr from-[#FF5722] to-[#FFA726] flex items-center justify-center text-white shadow-md shadow-orange-500/25">
+        <div className="flex items-center gap-2 sm:gap-3 shrink-0">
+          <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-gradient-to-tr from-[#FF5722] to-[#FFA726] flex items-center justify-center text-white shadow-md shadow-orange-500/25 shrink-0">
             <Storefront weight="fill" className="text-xl sm:text-2xl" />
           </div>
           <div>
@@ -226,17 +226,17 @@ const Login = () => {
             title={txt.register_now}
           >
             <span className="hidden sm:inline">{txt.register_now.replace('→', '').trim()}</span>
-            <span className="sm:hidden font-black text-[11px]">नोंदणी</span>
+            <span className="sm:hidden font-black text-[11px]">+ नोंदणी</span>
             <ArrowRight weight="bold" className="text-xs sm:text-sm" />
           </Link>
         </div>
       </header>
 
-      {/* ================= FULL-PAGE WORKSPACE (2 EQUILIBRIUM PANELS, 0 SCROLL) ================= */}
-      <main className="relative z-10 flex-1 w-full max-w-[1720px] mx-auto p-3 sm:p-4 lg:p-5 flex flex-col lg:flex-row gap-4 sm:gap-5 overflow-hidden">
+      {/* ================= FULL-PAGE WORKSPACE ================= */}
+      <main className="relative z-10 flex-1 w-full max-w-[1720px] mx-auto p-3 sm:p-6 lg:p-6 flex flex-col lg:flex-row gap-5 items-center justify-center lg:items-stretch overflow-visible lg:overflow-hidden">
         
-        {/* LEFT COLUMN: Executive Dark Slate-900 Showcase Panel (52% Width) */}
-        <div className="w-full lg:w-[52%] bg-slate-900 rounded-2xl border border-slate-800 shadow-xl p-5 sm:p-6 lg:p-8 text-white flex flex-col justify-between h-full overflow-hidden relative">
+        {/* LEFT COLUMN: Executive Dark Slate-900 Showcase Panel (DESKTOP ONLY) */}
+        <div className="hidden lg:flex lg:w-[52%] bg-slate-900 rounded-2xl border border-slate-800 shadow-xl p-6 lg:p-8 text-white flex-col justify-between h-full overflow-hidden relative">
           <div className="absolute inset-0 opacity-10 bg-[radial-gradient(circle_at_2px_2px,white_1px,transparent_0)] bg-[length:24px_24px] pointer-events-none"></div>
 
           {/* Top: Headline & Tagline */}
@@ -335,23 +335,27 @@ const Login = () => {
           </div>
         </div>
 
-        {/* RIGHT COLUMN: Crisp Frosted White Login Form (48% Width) */}
-        <div className="w-full lg:w-[48%] bg-white/95 backdrop-blur-xl rounded-2xl border border-slate-200/80 shadow-md p-5 sm:p-7 lg:p-9 flex flex-col justify-between h-full overflow-hidden relative">
+        {/* RIGHT COLUMN: Modern White Login Form */}
+        <div className="w-full max-w-md lg:max-w-none lg:w-[48%] bg-white/95 backdrop-blur-xl rounded-2xl sm:rounded-3xl border border-slate-200/80 shadow-xl shadow-slate-200/50 p-6 sm:p-8 lg:p-10 flex flex-col justify-between my-auto lg:my-0 lg:h-full relative">
           
-          <div className="w-full max-w-[440px] mx-auto my-auto flex flex-col justify-center space-y-4 sm:space-y-5">
+          <div className="w-full max-w-[440px] mx-auto my-auto flex flex-col justify-center space-y-4 sm:space-y-6">
             
             {/* Header Titles */}
-            <div>
+            <div className="space-y-1.5">
+              <div className="lg:hidden inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-orange-50 border border-orange-200 text-xs font-bold text-[#FF5722] mb-1">
+                <Sparkle weight="fill" className="text-xs" />
+                <span>Dukaan360 Kirana POS • Cloud 24/7</span>
+              </div>
               <h2 className="text-2xl sm:text-3xl font-black text-slate-800 tracking-tight flex items-center gap-2">
                 {txt.welcome_back} <span className="text-2xl">👋</span>
               </h2>
-              <div className="h-1.5 w-14 bg-gradient-to-r from-[#FF5722] to-[#FF8A65] rounded-full mt-2"></div>
-              <p className="text-slate-500 font-medium mt-1.5 text-xs sm:text-sm">{txt.welcome_sub}</p>
+              <div className="h-1.5 w-14 bg-gradient-to-r from-[#FF5722] to-[#FF8A65] rounded-full mt-1"></div>
+              <p className="text-slate-500 font-medium text-xs sm:text-sm pt-0.5">{txt.welcome_sub}</p>
             </div>
             
             {/* Error Banner */}
             {error && (
-              <div className={`p-3.5 sm:p-4 rounded-xl text-xs font-bold animate-in fade-in duration-150 ${
+              <div className={`p-3.5 sm:p-4 rounded-xl text-xs sm:text-sm font-bold animate-in fade-in duration-150 ${
                 isPendingApprovalError
                   ? 'bg-amber-50 border-2 border-amber-300 text-amber-950 shadow-xs'
                   : isExpiredError 
@@ -367,7 +371,7 @@ const Login = () => {
                       {isPendingApprovalError && (
                         <p className="font-black text-amber-900 text-sm mb-1">नोंदणी मंजुरी प्रलंबित (Pending Approval)</p>
                       )}
-                      <p className="leading-relaxed text-xs font-medium">{error}</p>
+                      <p className="leading-relaxed text-xs sm:text-sm font-medium">{error}</p>
                     </div>
 
                     {isPendingApprovalError && (
@@ -375,7 +379,7 @@ const Login = () => {
                         href={`https://wa.me/918262802961?text=${encodeURIComponent(`नमस्कार सर! 🙏\nमी Dukaan360 वर नोंदणी (@${username.trim().replace(/^@/, '')}) केली आहे.\nकृपया माझे खाते तपासून मंजूर (Approve) करा.`)}`}
                         target="_blank"
                         rel="noreferrer"
-                        className="inline-flex items-center gap-1.5 bg-emerald-600 hover:bg-emerald-700 text-white px-3 py-1.5 rounded-lg text-xs font-black shadow-xs transition"
+                        className="inline-flex items-center gap-1.5 bg-emerald-600 hover:bg-emerald-700 text-white px-3 py-1.5 rounded-lg text-xs sm:text-sm font-black shadow-xs transition"
                       >
                         <WhatsappLogo weight="fill" className="text-sm" /> ॲडमिनशी WhatsApp वर संपर्क करा
                       </a>
@@ -384,7 +388,7 @@ const Login = () => {
                     {isExpiredError && (
                       <Link 
                         to={`/renew?username=${username.trim().replace(/^@/, '')}`}
-                        className="inline-flex items-center gap-1.5 mt-2 bg-[#FF5722] hover:bg-[#E64A19] text-white px-3.5 py-1.5 rounded-xl text-xs font-black shadow-md shadow-orange-500/20 transition cursor-pointer"
+                        className="inline-flex items-center gap-1.5 mt-2 bg-[#FF5722] hover:bg-[#E64A19] text-white px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-black shadow-md shadow-orange-500/20 transition cursor-pointer"
                       >
                         <span>{txt.renew_btn_text}</span>
                       </Link>
@@ -395,16 +399,16 @@ const Login = () => {
             )}
             
             {/* Form */}
-            <form onSubmit={handleLogin} className="space-y-3.5 sm:space-y-4">
+            <form onSubmit={handleLogin} className="space-y-4">
               
               {/* 1. Username / Mobile Field */}
               <div>
-                <label className="block text-xs font-black text-slate-700 uppercase tracking-wider mb-1.5">
+                <label className="block text-xs sm:text-sm font-black text-slate-700 uppercase tracking-wider mb-1.5">
                   {txt.username_label}
                 </label>
                 <div className="relative group">
                   <div className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-[#FF5722] transition-colors flex items-center">
-                    <At weight="bold" className="text-lg" />
+                    <At weight="bold" className="text-xl" />
                   </div>
                   <input 
                     type="text" 
@@ -413,7 +417,7 @@ const Login = () => {
                     required
                     autoCapitalize="none"
                     autoCorrect="off"
-                    className="w-full h-11 sm:h-12 bg-slate-50/80 border-2 border-slate-200 rounded-xl pl-11 pr-4 font-bold font-mono text-slate-800 outline-none focus:bg-white focus:border-[#FF5722] focus:shadow-[0_0_0_4px_rgba(255,87,34,0.1)] transition-all placeholder:font-sans placeholder:font-normal placeholder:text-slate-400 text-xs sm:text-sm"
+                    className="w-full h-12 sm:h-13 bg-slate-50 border-2 border-slate-200 rounded-xl pl-11 pr-4 font-bold font-mono text-slate-800 outline-none focus:bg-white focus:border-[#FF5722] focus:shadow-[0_0_0_4px_rgba(255,87,34,0.12)] transition-all placeholder:font-sans placeholder:font-normal placeholder:text-slate-400 text-sm sm:text-base"
                     placeholder={txt.username_placeholder} 
                   />
                 </div>
@@ -422,13 +426,13 @@ const Login = () => {
               {/* 2. Password Field with Eye Toggle & Forgot Link */}
               <div>
                 <div className="flex items-center justify-between mb-1.5">
-                  <label className="block text-xs font-black text-slate-700 uppercase tracking-wider">
+                  <label className="block text-xs sm:text-sm font-black text-slate-700 uppercase tracking-wider">
                     {txt.password_label}
                   </label>
                   <button 
                     type="button"
                     onClick={openForgotModal}
-                    className="text-xs font-bold text-[#FF5722] hover:underline transition cursor-pointer"
+                    className="text-xs sm:text-sm font-bold text-[#FF5722] hover:underline transition cursor-pointer"
                   >
                     {txt.forgot_password}
                   </button>
@@ -436,25 +440,25 @@ const Login = () => {
 
                 <div className="relative group">
                   <div className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-[#FF5722] transition-colors flex items-center">
-                    <LockKey weight="bold" className="text-lg" />
+                    <LockKey weight="bold" className="text-xl" />
                   </div>
                   <input 
                     type={showPassword ? "text" : "password"} 
                     value={password}
                     onChange={e => setPassword(e.target.value)}
                     required
-                    className="w-full h-11 sm:h-12 bg-slate-50/80 border-2 border-slate-200 rounded-xl pl-11 pr-11 font-bold text-slate-800 outline-none focus:bg-white focus:border-[#FF5722] focus:shadow-[0_0_0_4px_rgba(255,87,34,0.1)] transition-all text-xs sm:text-sm placeholder:font-normal placeholder:text-slate-400"
+                    className="w-full h-12 sm:h-13 bg-slate-50 border-2 border-slate-200 rounded-xl pl-11 pr-11 font-bold text-slate-800 outline-none focus:bg-white focus:border-[#FF5722] focus:shadow-[0_0_0_4px_rgba(255,87,34,0.12)] transition-all text-sm sm:text-base placeholder:font-normal placeholder:text-slate-400"
                     placeholder={txt.password_placeholder}
                   />
                   <button 
                     type="button" 
                     onClick={() => setShowPassword(!showPassword)}
-                    className="absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-700 p-1 transition cursor-pointer"
+                    className="absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-700 p-1.5 transition cursor-pointer"
                   >
                     {showPassword ? (
-                      <EyeSlash weight="bold" className="text-lg text-[#FF5722]" />
+                      <EyeSlash weight="bold" className="text-xl text-[#FF5722]" />
                     ) : (
-                      <Eye weight="bold" className="text-lg" />
+                      <Eye weight="bold" className="text-xl" />
                     )}
                   </button>
                 </div>
@@ -464,25 +468,25 @@ const Login = () => {
               <button 
                 type="submit" 
                 disabled={loading}
-                className="w-full h-11 sm:h-12 bg-gradient-to-r from-[#FF5722] to-[#FF7043] hover:from-[#E64A19] hover:to-[#FF5722] text-white font-black rounded-xl transition-all shadow-[0_8px_20px_rgba(255,87,34,0.22)] active:scale-98 disabled:opacity-70 flex justify-center items-center gap-2 text-xs sm:text-sm cursor-pointer"
+                className="w-full h-12 sm:h-13 bg-gradient-to-r from-[#FF5722] to-[#FF7043] hover:from-[#E64A19] hover:to-[#FF5722] text-white font-black rounded-xl transition-all shadow-[0_8px_20px_rgba(255,87,34,0.22)] active:scale-98 disabled:opacity-70 flex justify-center items-center gap-2 text-sm sm:text-base cursor-pointer"
               >
                 {loading ? (
                   <>
-                    <CircleNotch className="animate-spin text-lg" />
+                    <CircleNotch className="animate-spin text-xl" />
                     <span>{txt.logging_in}</span>
                   </>
                 ) : (
                   <>
                     <span>{txt.login_btn}</span>
-                    <ArrowRight weight="bold" className="text-base" />
+                    <ArrowRight weight="bold" className="text-lg" />
                   </>
                 )}
               </button>
             </form>
             
             {/* New Store Registration Prompt */}
-            <div className="pt-2 text-center text-xs">
-              <p className="text-slate-500 font-medium">
+            <div className="pt-2 text-center text-xs sm:text-sm">
+              <p className="text-slate-600 font-medium">
                 {txt.new_store_prompt}{' '}
                 <Link to="/register" className="text-[#FF5722] font-black hover:underline underline-offset-4">
                   {txt.register_now}
@@ -492,17 +496,17 @@ const Login = () => {
           </div>
 
           {/* Bottom Security Footer */}
-          <div className="w-full pt-3 border-t border-slate-100 flex items-center justify-between text-[10px] text-slate-400 font-medium">
+          <div className="w-full pt-4 mt-4 border-t border-slate-100 flex items-center justify-between text-[11px] sm:text-xs text-slate-400 font-medium">
             <span className="flex items-center gap-1">
-              <ShieldCheck weight="fill" className="text-emerald-500 text-xs" />
-              <span>256-Bit SSL Secured</span>
+              <ShieldCheck weight="fill" className="text-emerald-500 text-sm" />
+              <span>256-Bit SSL</span>
             </span>
             <span className="text-slate-300">•</span>
-            <span>ऑटोमॅटिक डेटा सिंक</span>
+            <span>ऑटो डेटा सिंक</span>
             <span className="text-slate-300">•</span>
             <span className="flex items-center gap-1">
-              <CheckCircle weight="fill" className="text-blue-500 text-xs" />
-              <span>ISO 27001 क्लाउड</span>
+              <CheckCircle weight="fill" className="text-blue-500 text-sm" />
+              <span>ISO 27001</span>
             </span>
           </div>
 
@@ -549,18 +553,18 @@ const Login = () => {
             )}
 
             {forgotStep === 1 ? (
-              <form onSubmit={handleRequestOtp} className="space-y-3">
+              <form onSubmit={handleRequestOtp} className="space-y-4">
                 <div>
-                  <label className="text-xs font-bold text-slate-700 mb-1 block">{txt.username_label}</label>
+                  <label className="text-xs sm:text-sm font-bold text-slate-700 mb-1.5 block">{txt.username_label}</label>
                   <div className="relative">
-                    <At weight="bold" className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-lg" />
+                    <At weight="bold" className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-xl" />
                     <input 
                       type="text" 
                       required
                       value={forgotUsername} 
                       onChange={e => setForgotUsername(e.target.value.toLowerCase().replace(/\s+/g, '_'))}
                       placeholder={txt.username_placeholder}
-                      className="w-full h-10 border-2 border-slate-200 rounded-xl pl-9 pr-3 text-xs font-bold font-mono outline-none focus:border-[#FF5722]"
+                      className="w-full h-12 border-2 border-slate-200 rounded-xl pl-11 pr-3 text-sm font-bold font-mono outline-none focus:border-[#FF5722]"
                     />
                   </div>
                 </div>
@@ -568,11 +572,11 @@ const Login = () => {
                 <button 
                   type="submit" 
                   disabled={forgotLoading}
-                  className="w-full h-10 bg-[#FF5722] hover:bg-[#E64A19] text-white rounded-xl font-bold text-xs transition flex items-center justify-center gap-1.5 cursor-pointer disabled:opacity-60"
+                  className="w-full h-12 bg-[#FF5722] hover:bg-[#E64A19] text-white rounded-xl font-bold text-sm transition flex items-center justify-center gap-1.5 cursor-pointer disabled:opacity-60"
                 >
                   {forgotLoading ? (
                     <>
-                      <CircleNotch className="animate-spin text-sm" />
+                      <CircleNotch className="animate-spin text-base" />
                       <span>{txt.sending_otp}</span>
                     </>
                   ) : (
@@ -581,9 +585,9 @@ const Login = () => {
                 </button>
               </form>
             ) : (
-              <form onSubmit={handleResetPassword} className="space-y-3">
+              <form onSubmit={handleResetPassword} className="space-y-4">
                 <div>
-                  <label className="text-xs font-bold text-slate-700 mb-1 block">{txt.otp_label}</label>
+                  <label className="text-xs sm:text-sm font-bold text-slate-700 mb-1.5 block">{txt.otp_label}</label>
                   <input 
                     type="text" 
                     required
@@ -591,12 +595,12 @@ const Login = () => {
                     value={forgotOtp} 
                     onChange={e => setForgotOtp(e.target.value.replace(/\D/g, ''))}
                     placeholder={txt.otp_placeholder}
-                    className="w-full h-10 border-2 border-slate-200 rounded-xl px-3 text-center text-base font-black font-mono tracking-widest outline-none focus:border-[#FF5722]"
+                    className="w-full h-12 border-2 border-slate-200 rounded-xl px-3 text-center text-lg font-black font-mono tracking-widest outline-none focus:border-[#FF5722]"
                   />
                 </div>
 
                 <div>
-                  <label className="text-xs font-bold text-slate-700 mb-1 block">{txt.new_pass_label}</label>
+                  <label className="text-xs sm:text-sm font-bold text-slate-700 mb-1.5 block">{txt.new_pass_label}</label>
                   <div className="relative">
                     <input 
                       type={showForgotNewPassword ? "text" : "password"} 
@@ -605,14 +609,14 @@ const Login = () => {
                       value={forgotNewPassword} 
                       onChange={e => setForgotNewPassword(e.target.value)}
                       placeholder={txt.new_pass_placeholder}
-                      className="w-full h-10 border-2 border-slate-200 rounded-xl px-3 pr-9 text-xs font-medium outline-none focus:border-[#FF5722]"
+                      className="w-full h-12 border-2 border-slate-200 rounded-xl px-3.5 pr-11 text-sm font-medium outline-none focus:border-[#FF5722]"
                     />
                     <button 
                       type="button" 
                       onClick={() => setShowForgotNewPassword(!showForgotNewPassword)}
-                      className="absolute right-2.5 top-1/2 -translate-y-1/2 text-slate-400 p-1 cursor-pointer"
+                      className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 p-1 cursor-pointer"
                     >
-                      {showForgotNewPassword ? <EyeSlash weight="bold" className="text-sm text-[#FF5722]" /> : <Eye weight="bold" className="text-sm" />}
+                      {showForgotNewPassword ? <EyeSlash weight="bold" className="text-lg text-[#FF5722]" /> : <Eye weight="bold" className="text-lg" />}
                     </button>
                   </div>
                 </div>
@@ -620,11 +624,11 @@ const Login = () => {
                 <button 
                   type="submit" 
                   disabled={forgotLoading || !!forgotSuccess}
-                  className="w-full h-10 bg-[#FF5722] hover:bg-[#E64A19] text-white rounded-xl font-bold text-xs transition flex items-center justify-center gap-1.5 cursor-pointer disabled:opacity-60"
+                  className="w-full h-12 bg-[#FF5722] hover:bg-[#E64A19] text-white rounded-xl font-bold text-sm transition flex items-center justify-center gap-1.5 cursor-pointer disabled:opacity-60"
                 >
                   {forgotLoading ? (
                     <>
-                      <CircleNotch className="animate-spin text-sm" />
+                      <CircleNotch className="animate-spin text-base" />
                       <span>{txt.resetting_pass}</span>
                     </>
                   ) : (
@@ -635,7 +639,7 @@ const Login = () => {
                 <button 
                   type="button" 
                   onClick={() => { setForgotStep(1); setForgotError(''); }} 
-                  className="text-center text-xs font-bold text-slate-400 hover:text-slate-600 transition block w-full cursor-pointer"
+                  className="text-center text-xs sm:text-sm font-bold text-slate-400 hover:text-slate-600 transition block w-full cursor-pointer py-1"
                 >
                   {txt.back_to_username}
                 </button>

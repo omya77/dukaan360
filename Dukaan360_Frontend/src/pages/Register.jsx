@@ -111,7 +111,7 @@ const Register = () => {
   }
 
   return (
-    <div className="h-screen w-full bg-[#F4F7FE] flex flex-col relative overflow-hidden font-sans select-none">
+    <div className="min-h-screen lg:h-screen w-full bg-[#F4F7FE] flex flex-col relative overflow-y-auto lg:overflow-hidden font-sans select-none">
       
       {/* ================= ANIMATED BACKGROUND SYSTEM ================= */}
       {/* 1. Fluid Ambient Blobs (Continuous sinusoidal motion) */}
@@ -134,10 +134,10 @@ const Register = () => {
       ></div>
 
       {/* ================= FULL-WIDTH GLOBAL TOP NAVBAR ================= */}
-      <header className="relative z-20 w-full h-14 sm:h-16 px-4 sm:px-6 lg:px-8 bg-white/85 backdrop-blur-md border-b border-slate-200/80 flex items-center justify-between shrink-0 shadow-xs">
+      <header className="relative z-20 w-full h-14 sm:h-16 px-3 sm:px-6 lg:px-8 bg-white/85 backdrop-blur-md border-b border-slate-200/80 flex items-center justify-between shrink-0 shadow-xs">
         {/* Brand & Badge */}
-        <div className="flex items-center gap-3">
-          <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-gradient-to-tr from-[#FF5722] to-[#FFA726] flex items-center justify-center text-white shadow-md shadow-orange-500/25">
+        <div className="flex items-center gap-2 sm:gap-3 shrink-0">
+          <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-gradient-to-tr from-[#FF5722] to-[#FFA726] flex items-center justify-center text-white shadow-md shadow-orange-500/25 shrink-0">
             <Storefront weight="fill" className="text-xl sm:text-2xl" />
           </div>
           <div>
@@ -157,78 +157,83 @@ const Register = () => {
         </div>
 
         {/* Action Controls: 3-Language Selector & Back to Login */}
-        <div className="flex items-center gap-2 sm:gap-3">
+        <div className="flex items-center gap-2 sm:gap-3 shrink-0">
           <LanguageControl variant="auth" />
 
           <Link 
             to="/login"
-            className="text-xs font-bold text-slate-700 hover:text-slate-900 bg-slate-100 hover:bg-slate-200 px-3 py-1.5 sm:px-3.5 sm:py-2 rounded-xl transition flex items-center gap-1.5 border border-slate-200/60 shadow-2xs"
+            className="text-xs sm:text-sm font-bold text-slate-700 hover:text-slate-900 bg-slate-100 hover:bg-slate-200 px-3 py-1.5 sm:px-3.5 sm:py-2 rounded-xl transition flex items-center gap-1.5 border border-slate-200/60 shadow-2xs shrink-0 whitespace-nowrap"
           >
             <ArrowLeft weight="bold" className="text-sm" />
             <span className="hidden sm:inline">{txt.return_to_login}</span>
+            <span className="sm:hidden font-bold">लॉगिन</span>
           </Link>
         </div>
       </header>
 
-      {/* ================= FULL-PAGE WORKSPACE (2 EQUILIBRIUM PANELS, 0 SCROLL) ================= */}
-      <main className="relative z-10 flex-1 w-full max-w-[1720px] mx-auto p-3 sm:p-4 lg:p-5 flex flex-col lg:flex-row gap-4 sm:gap-5 overflow-hidden">
+      {/* ================= FULL-PAGE WORKSPACE ================= */}
+      <main className="relative z-10 flex-1 w-full max-w-[1600px] mx-auto p-4 sm:p-6 lg:p-6 flex flex-col lg:flex-row gap-6 items-center lg:items-stretch overflow-visible lg:overflow-hidden">
         
-        {/* LEFT COLUMN: Spacious Registration Form (56% Width) */}
-        <div className="w-full lg:w-[56%] bg-white/95 backdrop-blur-xl rounded-2xl border border-slate-200/80 shadow-md p-4 sm:p-5 lg:p-6 flex flex-col justify-between h-full overflow-hidden relative">
+        {/* LEFT COLUMN: Spacious Registration Form */}
+        <div className="w-full max-w-xl lg:max-w-none lg:w-[56%] bg-white/95 backdrop-blur-xl rounded-2xl sm:rounded-3xl border border-slate-200/80 shadow-xl shadow-slate-200/50 p-5 sm:p-7 lg:p-8 flex flex-col justify-between my-auto lg:my-0 lg:h-full relative">
           
           <div className="w-full max-w-[560px] mx-auto flex flex-col justify-between h-full">
             
             {/* Header Title */}
             <div>
+              <div className="lg:hidden inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-orange-50 border border-orange-200 text-xs font-bold text-[#FF5722] mb-1">
+                <Sparkle weight="fill" className="text-xs" />
+                <span>१ महिना मोफत ट्रायल • ₹0</span>
+              </div>
               <h2 className="text-xl sm:text-2xl font-black text-slate-800 tracking-tight flex items-center gap-2">
                 {txt.create_account} <span className="text-xl">🚀</span>
               </h2>
               <div className="h-1.5 w-14 bg-gradient-to-r from-[#FF5722] to-[#FF8A65] rounded-full mt-1.5"></div>
-              <p className="text-slate-500 font-medium mt-1 text-xs">{txt.right_desc}</p>
+              <p className="text-slate-500 font-medium mt-1 text-xs sm:text-sm">{txt.right_desc}</p>
             </div>
 
             {/* Error Banner */}
             {error && (
-              <div className="bg-red-50 border border-red-200 text-red-600 p-2.5 rounded-xl my-1 text-xs font-bold flex items-start gap-2 shadow-xs">
+              <div className="bg-red-50 border border-red-200 text-red-600 p-3 rounded-xl my-2 text-xs sm:text-sm font-bold flex items-start gap-2 shadow-xs">
                 <WarningCircle weight="fill" className="text-base shrink-0 mt-0.5" />
                 <p className="leading-snug">{error}</p>
               </div>
             )}
 
             {/* The Form */}
-            <form onSubmit={handleSubmit} className="space-y-2.5 sm:space-y-3 my-auto">
+            <form onSubmit={handleSubmit} className="space-y-3 sm:space-y-4 my-auto py-2">
               
               {/* Row 1: Store & Owner Name */}
-              <div className="grid grid-cols-2 gap-3 sm:gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
                 <div>
-                  <label className="block text-[11px] font-black text-slate-700 uppercase tracking-wider mb-1">
+                  <label className="block text-xs sm:text-sm font-black text-slate-700 uppercase tracking-wider mb-1">
                     {txt.store_name}
                   </label>
                   <div className="relative group">
-                    <Buildings className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-base sm:text-lg group-focus-within:text-[#FF5722] transition-colors" />
+                    <Buildings className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-lg group-focus-within:text-[#FF5722] transition-colors" />
                     <input 
                       required 
                       type="text" 
                       value={formData.store_name} 
                       onChange={e => setFormData({...formData, store_name: e.target.value})}
-                      className="w-full h-10 sm:h-10.5 bg-slate-50/70 border-2 border-slate-200 rounded-xl pl-9 pr-3 text-xs sm:text-sm font-bold text-slate-800 outline-none focus:bg-white focus:border-[#FF5722] focus:shadow-[0_0_0_4px_rgba(255,87,34,0.1)] transition-all placeholder:font-normal placeholder:text-slate-400"
+                      className="w-full h-12 bg-slate-50 border-2 border-slate-200 rounded-xl pl-10 pr-3 text-sm sm:text-base font-bold text-slate-800 outline-none focus:bg-white focus:border-[#FF5722] focus:shadow-[0_0_0_4px_rgba(255,87,34,0.12)] transition-all placeholder:font-normal placeholder:text-slate-400"
                       placeholder={txt.store_name_placeholder}
                     />
                   </div>
                 </div>
 
                 <div>
-                  <label className="block text-[11px] font-black text-slate-700 uppercase tracking-wider mb-1">
+                  <label className="block text-xs sm:text-sm font-black text-slate-700 uppercase tracking-wider mb-1">
                     {txt.owner_name}
                   </label>
                   <div className="relative group">
-                    <User className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-base sm:text-lg group-focus-within:text-[#FF5722] transition-colors" />
+                    <User className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-lg group-focus-within:text-[#FF5722] transition-colors" />
                     <input 
                       required 
                       type="text" 
                       value={formData.owner_name} 
                       onChange={e => setFormData({...formData, owner_name: e.target.value})}
-                      className="w-full h-10 sm:h-10.5 bg-slate-50/70 border-2 border-slate-200 rounded-xl pl-9 pr-3 text-xs sm:text-sm font-bold text-slate-800 outline-none focus:bg-white focus:border-[#FF5722] focus:shadow-[0_0_0_4px_rgba(255,87,34,0.1)] transition-all placeholder:font-normal placeholder:text-slate-400"
+                      className="w-full h-12 bg-slate-50 border-2 border-slate-200 rounded-xl pl-10 pr-3 text-sm sm:text-base font-bold text-slate-800 outline-none focus:bg-white focus:border-[#FF5722] focus:shadow-[0_0_0_4px_rgba(255,87,34,0.12)] transition-all placeholder:font-normal placeholder:text-slate-400"
                       placeholder={txt.owner_name_placeholder}
                     />
                   </div>
@@ -236,20 +241,20 @@ const Register = () => {
               </div>
 
               {/* Row 2: Mobile & Email */}
-              <div className="grid grid-cols-2 gap-3 sm:gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
                 <div>
-                  <label className="block text-[11px] font-black text-slate-700 uppercase tracking-wider mb-1">
+                  <label className="block text-xs sm:text-sm font-black text-slate-700 uppercase tracking-wider mb-1">
                     {txt.mobile}
                   </label>
                   <div className="relative group">
-                    <Phone className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-base sm:text-lg group-focus-within:text-[#FF5722] transition-colors" />
+                    <Phone className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-lg group-focus-within:text-[#FF5722] transition-colors" />
                     <input 
                       required 
                       type="tel" 
                       maxLength="10" 
                       value={formData.mobile} 
                       onChange={e => setFormData({...formData, mobile: e.target.value.replace(/\D/g, '')})}
-                      className="w-full h-10 sm:h-10.5 bg-slate-50/70 border-2 border-slate-200 rounded-xl pl-9 pr-3 text-xs sm:text-sm font-bold text-slate-800 outline-none focus:bg-white focus:border-[#FF5722] focus:shadow-[0_0_0_4px_rgba(255,87,34,0.1)] transition-all placeholder:font-normal placeholder:text-slate-400"
+                      className="w-full h-12 bg-slate-50 border-2 border-slate-200 rounded-xl pl-10 pr-3 text-sm sm:text-base font-bold text-slate-800 outline-none focus:bg-white focus:border-[#FF5722] focus:shadow-[0_0_0_4px_rgba(255,87,34,0.12)] transition-all placeholder:font-normal placeholder:text-slate-400"
                       placeholder={txt.mobile_placeholder}
                     />
                   </div>
@@ -257,19 +262,19 @@ const Register = () => {
 
                 <div>
                   <div className="flex items-center justify-between mb-1">
-                    <label className="block text-[11px] font-black text-slate-700 uppercase tracking-wider">
+                    <label className="block text-xs sm:text-sm font-black text-slate-700 uppercase tracking-wider">
                       {txt.email}
                     </label>
-                    <span className="text-[9px] text-[#FF5722] font-black">{txt.email_otp_badge}</span>
+                    <span className="text-[10px] text-[#FF5722] font-black">{txt.email_otp_badge}</span>
                   </div>
                   <div className="relative group">
-                    <EnvelopeSimple className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-base sm:text-lg group-focus-within:text-[#FF5722] transition-colors" />
+                    <EnvelopeSimple className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-lg group-focus-within:text-[#FF5722] transition-colors" />
                     <input 
                       required 
                       type="email" 
                       value={formData.email} 
                       onChange={e => setFormData({...formData, email: e.target.value.toLowerCase().trim()})}
-                      className="w-full h-10 sm:h-10.5 bg-slate-50/70 border-2 border-slate-200 rounded-xl pl-9 pr-3 text-xs sm:text-sm font-bold text-slate-800 outline-none focus:bg-white focus:border-[#FF5722] focus:shadow-[0_0_0_4px_rgba(255,87,34,0.1)] transition-all placeholder:font-normal placeholder:text-slate-400"
+                      className="w-full h-12 bg-slate-50 border-2 border-slate-200 rounded-xl pl-10 pr-3 text-sm sm:text-base font-bold text-slate-800 outline-none focus:bg-white focus:border-[#FF5722] focus:shadow-[0_0_0_4px_rgba(255,87,34,0.12)] transition-all placeholder:font-normal placeholder:text-slate-400"
                       placeholder={txt.email_placeholder}
                     />
                   </div>
@@ -277,19 +282,19 @@ const Register = () => {
               </div>
 
               {/* Row 3: Password & Subscription Plan (1 Month Free ₹0) */}
-              <div className="grid grid-cols-2 gap-3 sm:gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
                 <div>
-                  <label className="block text-[11px] font-black text-slate-700 uppercase tracking-wider mb-1">
+                  <label className="block text-xs sm:text-sm font-black text-slate-700 uppercase tracking-wider mb-1">
                     {txt.password}
                   </label>
                   <div className="relative group">
-                    <LockKey className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-base sm:text-lg group-focus-within:text-[#FF5722] transition-colors" />
+                    <LockKey className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-lg group-focus-within:text-[#FF5722] transition-colors" />
                     <input 
                       required 
                       type="password" 
                       value={formData.password} 
                       onChange={e => setFormData({...formData, password: e.target.value})}
-                      className="w-full h-10 sm:h-10.5 bg-slate-50/70 border-2 border-slate-200 rounded-xl pl-9 pr-3 text-xs sm:text-sm font-bold text-slate-800 outline-none focus:bg-white focus:border-[#FF5722] focus:shadow-[0_0_0_4px_rgba(255,87,34,0.1)] transition-all placeholder:font-normal placeholder:text-slate-400"
+                      className="w-full h-12 bg-slate-50 border-2 border-slate-200 rounded-xl pl-10 pr-3 text-sm sm:text-base font-bold text-slate-800 outline-none focus:bg-white focus:border-[#FF5722] focus:shadow-[0_0_0_4px_rgba(255,87,34,0.12)] transition-all placeholder:font-normal placeholder:text-slate-400"
                       placeholder={txt.password_placeholder}
                     />
                   </div>
@@ -297,21 +302,21 @@ const Register = () => {
 
                 <div>
                   <div className="flex items-center justify-between mb-1">
-                    <label className="block text-[11px] font-black text-slate-700 uppercase tracking-wider">
+                    <label className="block text-xs sm:text-sm font-black text-slate-700 uppercase tracking-wider">
                       {txt.plan_label}
                     </label>
-                    <span className="text-[9px] font-black text-emerald-600 bg-emerald-50 border border-emerald-200 px-1.5 py-0.2 rounded-full">
+                    <span className="text-[10px] font-black text-emerald-600 bg-emerald-50 border border-emerald-200 px-2 py-0.5 rounded-full">
                       {txt.free_tag}
                     </span>
                   </div>
-                  <div className="w-full h-10 sm:h-10.5 bg-orange-50/70 border-2 border-orange-200 rounded-xl px-2.5 flex items-center justify-between shadow-2xs">
-                    <div className="flex items-center gap-1.5 min-w-0">
-                      <span className="w-2 h-2 rounded-full bg-[#FF5722] animate-pulse shrink-0"></span>
-                      <span className="text-xs font-black text-slate-800 truncate">
+                  <div className="w-full h-12 bg-orange-50/70 border-2 border-orange-200 rounded-xl px-3 flex items-center justify-between shadow-2xs">
+                    <div className="flex items-center gap-2 min-w-0">
+                      <span className="w-2.5 h-2.5 rounded-full bg-[#FF5722] animate-pulse shrink-0"></span>
+                      <span className="text-xs sm:text-sm font-black text-slate-800 truncate">
                         {txt.free_plan_display}
                       </span>
                     </div>
-                    <span className="text-[10px] font-black text-[#FF5722] bg-white px-2 py-0.5 rounded border border-orange-200 shrink-0 shadow-2xs">
+                    <span className="text-xs font-black text-[#FF5722] bg-white px-2.5 py-1 rounded-md border border-orange-200 shrink-0 shadow-2xs">
                       {txt.free_price}
                     </span>
                   </div>
@@ -321,17 +326,17 @@ const Register = () => {
 
               {/* Row 4: Shop Address */}
               <div>
-                <label className="block text-[11px] font-black text-slate-700 uppercase tracking-wider mb-1">
+                <label className="block text-xs sm:text-sm font-black text-slate-700 uppercase tracking-wider mb-1">
                   {txt.address}
                 </label>
                 <div className="relative group">
-                  <MapPin className="absolute left-3 top-2.5 text-slate-400 text-base group-focus-within:text-[#FF5722] transition-colors" />
+                  <MapPin className="absolute left-3 top-3 text-slate-400 text-lg group-focus-within:text-[#FF5722] transition-colors" />
                   <textarea 
                     required 
                     rows="2" 
                     value={formData.address} 
                     onChange={e => setFormData({...formData, address: e.target.value})}
-                    className="w-full bg-slate-50/70 border-2 border-slate-200 rounded-xl pl-9 pr-3 py-1.5 text-xs sm:text-sm font-semibold text-slate-800 outline-none focus:bg-white focus:border-[#FF5722] focus:shadow-[0_0_0_4px_rgba(255,87,34,0.1)] transition-all resize-none placeholder:font-normal placeholder:text-slate-400 leading-relaxed"
+                    className="w-full bg-slate-50 border-2 border-slate-200 rounded-xl pl-10 pr-3 py-2 text-sm sm:text-base font-semibold text-slate-800 outline-none focus:bg-white focus:border-[#FF5722] focus:shadow-[0_0_0_4px_rgba(255,87,34,0.12)] transition-all resize-none placeholder:font-normal placeholder:text-slate-400 leading-relaxed"
                     placeholder={txt.address_placeholder}
                   ></textarea>
                 </div>
@@ -341,25 +346,25 @@ const Register = () => {
               <button 
                 type="submit" 
                 disabled={loading}
-                className="w-full h-11 sm:h-11.5 bg-gradient-to-r from-[#FF5722] to-[#FF7043] hover:from-[#E64A19] hover:to-[#FF5722] text-white font-black rounded-xl transition-all shadow-[0_8px_20px_rgba(255,87,34,0.22)] active:scale-98 disabled:opacity-70 flex justify-center items-center gap-2 text-xs sm:text-sm cursor-pointer"
+                className="w-full h-12 sm:h-13 bg-gradient-to-r from-[#FF5722] to-[#FF7043] hover:from-[#E64A19] hover:to-[#FF5722] text-white font-black rounded-xl transition-all shadow-[0_8px_20px_rgba(255,87,34,0.22)] active:scale-98 disabled:opacity-70 flex justify-center items-center gap-2 text-sm sm:text-base cursor-pointer"
               >
                 {loading ? (
                   <>
-                    <CircleNotch className="animate-spin text-base" />
+                    <CircleNotch className="animate-spin text-lg" />
                     <span>{txt.submitting}</span>
                   </>
                 ) : (
                   <>
                     <span>{txt.register_btn}</span>
-                    <ArrowRight weight="bold" className="text-base" />
+                    <ArrowRight weight="bold" className="text-lg" />
                   </>
                 )}
               </button>
             </form>
 
             {/* Bottom Footer & Login Link */}
-            <div className="pt-2 text-center text-xs">
-              <p className="text-slate-500 font-medium">
+            <div className="pt-2 text-center text-xs sm:text-sm">
+              <p className="text-slate-600 font-medium">
                 {txt.already_registered}{' '}
                 <Link to="/login" className="text-[#FF5722] font-black hover:underline underline-offset-4">
                   {txt.sign_in_instead}
@@ -371,8 +376,8 @@ const Register = () => {
 
         </div>
 
-        {/* RIGHT COLUMN: Executive Dark Slate-900 Perks & Guide (44% Width) */}
-        <div className="w-full lg:w-[44%] bg-slate-900 rounded-2xl border border-slate-800 shadow-xl p-4 sm:p-5 lg:p-6 text-white flex flex-col justify-between h-full overflow-hidden relative">
+        {/* RIGHT COLUMN: Executive Dark Slate-900 Perks & Guide (DESKTOP ONLY) */}
+        <div className="hidden lg:flex lg:w-[44%] bg-slate-900 rounded-2xl border border-slate-800 shadow-xl p-4 sm:p-5 lg:p-6 text-white flex-col justify-between h-full overflow-hidden relative">
           <div className="absolute inset-0 opacity-10 bg-[radial-gradient(circle_at_2px_2px,white_1px,transparent_0)] bg-[length:24px_24px] pointer-events-none"></div>
 
           {/* Top: Headline & ₹0 Badge */}
