@@ -34,11 +34,6 @@ const Login = () => {
   const { login, logout } = useAuth();
   const navigate = useNavigate();
 
-  // Purge any stale session when visiting login page
-  useEffect(() => {
-    logout();
-  }, []);
-
   const { language } = useLanguage();
   const txt = getAuthTranslations(language).login;
 
