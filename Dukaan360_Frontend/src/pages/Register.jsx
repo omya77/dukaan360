@@ -375,17 +375,17 @@ const Register = () => {
         </div>
 
         {/* RIGHT COLUMN: Executive Dark Slate-900 Perks & Guide (DESKTOP ONLY) */}
-        <div className="hidden lg:flex lg:w-[44%] bg-slate-900 rounded-2xl border border-slate-800 shadow-md p-4 sm:p-5 text-white flex-col justify-between lg:h-full relative overflow-hidden">
+        <div className="hidden lg:flex lg:w-[44%] bg-slate-900 rounded-2xl border border-slate-800 shadow-md p-5 text-white flex-col justify-between lg:h-full relative overflow-hidden">
           <div className="absolute inset-0 opacity-10 bg-[radial-gradient(circle_at_2px_2px,white_1px,transparent_0)] bg-[length:24px_24px] pointer-events-none"></div>
 
           {/* Top: Headline & ₹0 Badge */}
-          <div className="relative z-10 space-y-0.5">
+          <div className="relative z-10 space-y-1">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">
-                <h3 className="text-sm sm:text-base font-black text-white leading-tight">
+                <h3 className="text-base font-black text-white tracking-tight">
                   {txt.right_title}
                 </h3>
-                <span className="text-[10px] font-black text-[#FF5722] bg-[#FF5722]/15 border border-[#FF5722]/30 px-2 py-0.5 rounded-full">
+                <span className="text-[10px] font-black text-[#FF5722] bg-[#FF5722]/15 border border-[#FF5722]/30 px-2.5 py-0.5 rounded-full">
                   ₹0
                 </span>
               </div>
@@ -394,108 +394,101 @@ const Register = () => {
                 <span>{txt.right_badge}</span>
               </span>
             </div>
-            <p className="text-slate-400 font-medium text-[11px] leading-relaxed">
+            <p className="text-slate-400 font-medium text-xs leading-relaxed">
               {txt.right_desc}
             </p>
           </div>
 
           {/* Middle 1: Trial Features Grid (4 Perks) */}
-          <div className="relative z-10 bg-slate-800/60 border border-slate-700/60 rounded-xl p-2.5 my-auto">
-            <p className="text-[10px] font-black uppercase tracking-wider text-amber-400 mb-1.5 flex items-center gap-1">
+          <div className="relative z-10 bg-slate-800/40 border border-slate-700/50 rounded-xl p-3">
+            <p className="text-[10px] font-black uppercase tracking-wider text-amber-400 mb-2 flex items-center gap-1">
               <Lightning weight="fill" className="text-xs" />
               <span>{txt.trial_features_title}</span>
             </p>
-            <div className="grid grid-cols-2 gap-1.5">
+            <div className="grid grid-cols-2 gap-2">
               {txt.features?.map((f, idx) => (
-                <div key={idx} className="bg-slate-900/60 border border-slate-750 rounded-lg p-2 transition-all hover:border-slate-600">
+                <div key={idx} className="bg-slate-900/60 border border-slate-750/60 rounded-lg p-2.5 transition-all hover:border-slate-600">
                   <div className="flex items-center gap-1.5 mb-0.5">
-                    <span className="text-xs">{f.icon}</span>
-                    <span className="text-[10.5px] font-black text-slate-200 truncate">{f.title}</span>
+                    <span className="text-sm">{f.icon}</span>
+                    <span className="text-[11px] font-bold text-slate-200 truncate">{f.title}</span>
                   </div>
-                  <p className="text-[9.5px] text-slate-400 leading-tight line-clamp-1">{f.desc}</p>
+                  <p className="text-[10px] text-slate-400 leading-tight">{f.desc}</p>
                 </div>
               ))}
             </div>
           </div>
 
-          {/* Middle 2: 3-Step Guide (What to do after trial ends) */}
-          <div className="relative z-10 bg-slate-800/90 border border-slate-700/80 rounded-xl p-2.5 space-y-1.5">
-            <div className="flex items-center gap-1 text-orange-400 font-black text-[10.5px]">
-              <Sparkle weight="fill" className="text-xs shrink-0 animate-pulse" />
+          {/* Middle 2: 3-Point Guarantee / 30 Days Later (Clean & Uncluttered) */}
+          <div className="relative z-10 bg-slate-800/40 border border-slate-700/50 rounded-xl p-3 space-y-2">
+            <div className="flex items-center gap-1.5 text-orange-400 font-black text-[11px]">
+              <Sparkle weight="fill" className="text-xs shrink-0" />
               <span>{txt.after_trial_title}</span>
             </div>
 
-            <div className="space-y-1 text-[10px]">
-              <div className="flex items-start gap-1.5">
-                <div className="w-3.5 h-3.5 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-[9px] font-black shrink-0 mt-0.5">
-                  १
+            <div className="space-y-1.5">
+              <div className="flex items-start gap-2 text-[10.5px]">
+                <div className="w-4 h-4 rounded-full bg-emerald-500/15 text-emerald-400 flex items-center justify-center text-[10px] font-black shrink-0 mt-0.5">
+                  ✓
                 </div>
-                <div>
-                  <p className="font-bold text-slate-200 leading-tight">{txt.step1_title}</p>
-                  <p className="text-slate-400 text-[9px] leading-tight mt-0.5">
-                    {txt.step1_desc}
-                  </p>
+                <div className="leading-tight">
+                  <span className="font-bold text-slate-200">{txt.step1_title} — </span>
+                  <span className="text-slate-400">{txt.step1_desc}</span>
                 </div>
               </div>
 
-              <div className="flex items-start gap-1.5">
-                <div className="w-3.5 h-3.5 rounded-full bg-orange-500/20 text-orange-400 flex items-center justify-center text-[9px] font-black shrink-0 mt-0.5">
-                  २
+              <div className="flex items-start gap-2 text-[10.5px]">
+                <div className="w-4 h-4 rounded-full bg-orange-500/15 text-orange-400 flex items-center justify-center text-[10px] font-black shrink-0 mt-0.5">
+                  ✓
                 </div>
-                <div>
-                  <p className="font-bold text-slate-200 leading-tight">{txt.step2_title}</p>
-                  <p className="text-slate-400 text-[9px] leading-tight mt-0.5">
-                    {txt.step2_desc}
-                  </p>
+                <div className="leading-tight">
+                  <span className="font-bold text-slate-200">{txt.step2_title} — </span>
+                  <span className="text-slate-400">{txt.step2_desc}</span>
                 </div>
               </div>
 
-              <div className="flex items-start gap-1.5">
-                <div className="w-3.5 h-3.5 rounded-full bg-purple-500/20 text-purple-400 flex items-center justify-center text-[9px] font-black shrink-0 mt-0.5">
-                  ३
+              <div className="flex items-start gap-2 text-[10.5px]">
+                <div className="w-4 h-4 rounded-full bg-purple-500/15 text-purple-400 flex items-center justify-center text-[10px] font-black shrink-0 mt-0.5">
+                  ✓
                 </div>
-                <div>
-                  <p className="font-bold text-slate-200 leading-tight">{txt.step3_title}</p>
-                  <p className="text-slate-400 text-[9px] leading-tight mt-0.5">
-                    {txt.step3_desc}
-                  </p>
+                <div className="leading-tight">
+                  <span className="font-bold text-slate-200">{txt.step3_title} — </span>
+                  <span className="text-slate-400">{txt.step3_desc}</span>
                 </div>
               </div>
             </div>
           </div>
 
-          {/* Quick WhatsApp Support Help strip */}
-          <div className="relative z-10 bg-emerald-950/40 border border-emerald-800/50 rounded-xl px-2.5 py-1 flex items-center justify-between">
-            <div className="flex items-center gap-1.5 min-w-0">
-              <div className="w-4 h-4 rounded-md bg-emerald-500/20 text-emerald-400 flex items-center justify-center shrink-0">
-                <WhatsappLogo weight="fill" className="text-xs" />
+          {/* Footer: Support & Trust Points (Spacious & Integrated) */}
+          <div className="relative z-10 pt-2 border-t border-slate-800 space-y-2.5">
+            <div className="flex items-center justify-between text-[11px]">
+              <div className="flex items-center gap-2 text-slate-300">
+                <WhatsappLogo weight="fill" className="text-emerald-400 text-base shrink-0" />
+                <span className="text-slate-400 font-medium">{txt.support_text}</span>
               </div>
-              <p className="text-slate-300 font-medium text-[9.5px] truncate">{txt.support_text}</p>
+              <a 
+                href={`https://wa.me/91${txt.support_phone}?text=Hello%20Dukaan360%20Support`}
+                target="_blank"
+                rel="noreferrer"
+                className="font-bold text-emerald-400 hover:text-emerald-300 bg-emerald-500/10 hover:bg-emerald-500/20 px-2.5 py-1 rounded-lg border border-emerald-500/20 transition-all text-[11px]"
+              >
+                +{txt.support_phone} ↗
+              </a>
             </div>
-            <a 
-              href={`https://wa.me/91${txt.support_phone}?text=Hello%20Dukaan360%20Support`}
-              target="_blank"
-              rel="noreferrer"
-              className="text-[9.5px] font-black text-emerald-400 hover:text-emerald-300 bg-emerald-500/10 hover:bg-emerald-500/20 px-2 py-0.5 rounded-lg border border-emerald-500/30 transition-all shrink-0 ml-1.5"
-            >
-              +{txt.support_phone} ↗
-            </a>
-          </div>
 
-          {/* Bottom Trust Badges */}
-          <div className="relative z-10 pt-1.5 border-t border-slate-800 flex items-center justify-between text-[9px] text-slate-400 font-medium">
-            <span className="flex items-center gap-1">
-              <CheckCircle weight="fill" className="text-emerald-400 text-xs shrink-0" />
-              <span>{txt.badge_no_setup}</span>
-            </span>
-            <span className="flex items-center gap-1">
-              <ShieldCheck weight="fill" className="text-blue-400 text-xs shrink-0" />
-              <span>{txt.badge_cloud_safe}</span>
-            </span>
-            <span className="flex items-center gap-1">
-              <CheckCircle weight="fill" className="text-emerald-400 text-xs shrink-0" />
-              <span>{txt.badge_no_cc}</span>
-            </span>
+            <div className="flex items-center justify-between text-[10px] text-slate-400 font-medium pt-0.5">
+              <span className="flex items-center gap-1">
+                <CheckCircle weight="fill" className="text-emerald-400 text-xs shrink-0" />
+                <span>{txt.badge_no_setup}</span>
+              </span>
+              <span className="flex items-center gap-1">
+                <ShieldCheck weight="fill" className="text-blue-400 text-xs shrink-0" />
+                <span>{txt.badge_cloud_safe}</span>
+              </span>
+              <span className="flex items-center gap-1">
+                <CheckCircle weight="fill" className="text-emerald-400 text-xs shrink-0" />
+                <span>{txt.badge_no_cc}</span>
+              </span>
+            </div>
           </div>
 
         </div>
