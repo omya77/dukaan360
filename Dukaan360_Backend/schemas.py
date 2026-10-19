@@ -163,6 +163,21 @@ class AuditLogResponse(BaseModel):
     class Config:
         from_attributes = True
 
+class PurchaseOrderItem(BaseModel):
+    product_name: str
+    quantity: float
+    unit: str
+    est_rate: Optional[float] = 0.0
+
+class PurchaseOrderCreate(BaseModel):
+    supplier_name: Optional[str] = "Supplier"
+    supplier_mobile: Optional[str] = ""
+    items: List[PurchaseOrderItem]
+    notes: Optional[str] = ""
+
+class PinVerifyPayload(BaseModel):
+    pin: str
+
 
 # --- POS (BILLING) SCHEMAS ---
 class SaleItemCreate(BaseModel):
