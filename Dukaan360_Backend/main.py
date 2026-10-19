@@ -1777,6 +1777,7 @@ def create_staff(user: schemas.UserCreate, db: Session = Depends(get_db), curren
     db.commit()
     return {"message": f"Staff account @{clean_username} created successfully"}
 
+@api.get("/dashboard/summary/")
 @api.get("/dashboard/summary")
 def get_summary(db: Session = Depends(get_db), user: models.User = Depends(get_current_active_user)):
     today = datetime.now().date()
