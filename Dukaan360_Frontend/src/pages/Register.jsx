@@ -173,15 +173,15 @@ const Register = () => {
       <main className="relative z-10 flex-1 w-full max-w-[1500px] mx-auto p-3 sm:p-4 lg:py-3 lg:px-6 flex flex-col lg:flex-row gap-4 sm:gap-5 items-stretch lg:overflow-hidden">
         
         {/* LEFT COLUMN: Registration Form */}
-        <div className="w-full lg:w-[56%] bg-white/95 backdrop-blur-xl rounded-2xl sm:rounded-3xl border border-slate-200/80 shadow-md p-4 sm:p-5 lg:p-6 flex flex-col justify-between relative lg:overflow-y-auto">
+        <div className="w-full lg:w-[56%] bg-white/95 backdrop-blur-xl rounded-2xl sm:rounded-3xl border border-slate-200/80 shadow-md p-3.5 sm:p-5 flex flex-col justify-between relative lg:overflow-y-auto">
           
-          <div className="w-full max-w-[500px] mx-auto flex flex-col justify-between h-full">
+          <div className="w-full max-w-[540px] mx-auto flex flex-col justify-between h-full">
             
             {/* Header Title */}
             <div>
-              <div className="lg:hidden inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-orange-50 border border-orange-200 text-[10px] font-bold text-[#FF5722] mb-1">
-                <Sparkle weight="fill" className="text-xs" />
-                <span>१ महिना मोफत ट्रायल • ₹0</span>
+              <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-orange-50 border border-orange-200/80 text-[10px] sm:text-[10.5px] font-bold text-[#FF5722] mb-1">
+                <Sparkle weight="fill" className="text-xs text-[#FF5722]" />
+                <span>{txt.free_plan_display} • {txt.free_price} ({txt.free_tag})</span>
               </div>
               <h2 className="text-lg sm:text-xl font-black text-slate-800 tracking-tight flex items-center gap-1.5">
                 {txt.create_account} <span className="text-lg">🚀</span>
@@ -279,7 +279,7 @@ const Register = () => {
                 </div>
               </div>
 
-              {/* Row 3: Password & Subscription Plan (1 Month Free ₹0) */}
+              {/* Row 3: Password & Shop Address */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 sm:gap-3">
                 <div>
                   <label className="block text-[11px] font-bold text-slate-600 uppercase tracking-wider mb-1">
@@ -299,46 +299,24 @@ const Register = () => {
                 </div>
 
                 <div>
-                  <div className="flex items-center justify-between mb-1">
-                    <label className="block text-[11px] font-bold text-slate-600 uppercase tracking-wider">
-                      {txt.plan_label}
-                    </label>
-                    <span className="text-[10px] font-black text-emerald-600 bg-emerald-50 border border-emerald-200 px-1.5 py-0.2 rounded-full">
-                      {txt.free_tag}
-                    </span>
+                  <label className="block text-[11px] font-bold text-slate-600 uppercase tracking-wider mb-1">
+                    {txt.address}
+                  </label>
+                  <div className="relative group">
+                    <MapPin className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-base group-focus-within:text-[#FF5722] transition-colors" />
+                    <input 
+                      required 
+                      type="text" 
+                      value={formData.address} 
+                      onChange={e => setFormData({...formData, address: e.target.value})}
+                      className="w-full h-10 bg-slate-50 border border-slate-200 rounded-xl pl-9 pr-3 text-xs sm:text-sm font-semibold text-slate-800 outline-none focus:bg-white focus:border-[#FF5722] focus:ring-2 focus:ring-[#FF5722]/15 transition-all placeholder:font-normal placeholder:text-slate-400"
+                      placeholder={txt.address_placeholder}
+                    />
                   </div>
-                  <div className="w-full h-10 bg-orange-50/70 border border-orange-200 rounded-xl px-3 flex items-center justify-between shadow-2xs">
-                    <div className="flex items-center gap-1.5 min-w-0">
-                      <span className="w-2 h-2 rounded-full bg-[#FF5722] animate-pulse shrink-0"></span>
-                      <span className="text-xs font-black text-slate-800 truncate">
-                        {txt.free_plan_display}
-                      </span>
-                    </div>
-                    <span className="text-[11px] font-black text-[#FF5722] bg-white px-2 py-0.5 rounded-md border border-orange-200 shrink-0 shadow-2xs">
-                      {txt.free_price}
-                    </span>
-                  </div>
-                  <input type="hidden" name="plan_type" value="1 Month" />
                 </div>
               </div>
 
-              {/* Row 4: Shop Address */}
-              <div>
-                <label className="block text-[11px] font-bold text-slate-600 uppercase tracking-wider mb-1">
-                  {txt.address}
-                </label>
-                <div className="relative group">
-                  <MapPin className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-base group-focus-within:text-[#FF5722] transition-colors" />
-                  <input 
-                    required 
-                    type="text" 
-                    value={formData.address} 
-                    onChange={e => setFormData({...formData, address: e.target.value})}
-                    className="w-full h-10 bg-slate-50 border border-slate-200 rounded-xl pl-9 pr-3 text-xs sm:text-sm font-semibold text-slate-800 outline-none focus:bg-white focus:border-[#FF5722] focus:ring-2 focus:ring-[#FF5722]/15 transition-all placeholder:font-normal placeholder:text-slate-400"
-                    placeholder={txt.address_placeholder}
-                  />
-                </div>
-              </div>
+              <input type="hidden" name="plan_type" value="1 Month" />
 
               {/* Row 5: Submit Button */}
               <button 
