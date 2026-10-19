@@ -1,7 +1,29 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Header from '../components/Header';
-import { ChartLineUp, Users, Warning, CurrencyInr, Storefront, BookBookmark, Package, Printer, X, Receipt , Calculator, WhatsappLogo, CloudArrowDown, FileText } from '@phosphor-icons/react';
+import { 
+  ChartLineUp, 
+  Users, 
+  Warning, 
+  CurrencyInr, 
+  Storefront, 
+  BookBookmark, 
+  Package, 
+  Printer, 
+  X, 
+  Receipt, 
+  Calculator, 
+  WhatsappLogo, 
+  CloudArrowDown, 
+  FileText,
+  Sparkle,
+  Hourglass,
+  TrendUp,
+  ShieldCheck,
+  Lightning,
+  CheckCircle,
+  Eye
+} from '@phosphor-icons/react';
 import { Link } from 'react-router-dom';
 
 const Dashboard = () => {
@@ -13,6 +35,11 @@ const Dashboard = () => {
     total_inventory_value: 0,
     today_profit: 0
   });
+  const [valueRealized, setValueRealized] = useState(null);
+  const [dailyBriefing, setDailyBriefing] = useState(null);
+  const [deadStock, setDeadStock] = useState(null);
+  const [aiInsights, setAiInsights] = useState(null);
+
   const [loading, setLoading] = useState(true);
   const [showReorderModal, setShowReorderModal] = useState(false);
   const [lowStockItems, setLowStockItems] = useState([]);
@@ -155,17 +182,27 @@ const Dashboard = () => {
   };
 
   useEffect(() => {
-    const fetchSummary = async () => {
+    const fetchDashboardData = async () => {
       try {
-        const res = await axios.get('http://localhost:8000/dashboard/summary/');
-        setSummary(res.data);
+        const [sumRes, vrRes, dbRes, dsRes, aiRes] = await Promise.allSettled([
+          axios.get('http://localhost:8000/dashboard/summary/'),
+          axios.get('http://localhost:8000/dashboard/value-realized'),
+          axios.get('http://localhost:8000/dashboard/daily-briefing'),
+          axios.get('http://localhost:8000/dashboard/dead-stock'),
+          axios.get('http://localhost:8000/dashboard/ai-insights')
+        ]);
+        if (sumRes.status === 'fulfilled') setSummary(sumRes.value.data);
+        if (vrRes.status === 'fulfilled') setValueRealized(vrRes.value.data);
+        if (dbRes.status === 'fulfilled') setDailyBriefing(dbRes.value.data);
+        if (dsRes.status === 'fulfilled') setDeadStock(dsRes.value.data);
+        if (aiRes.status === 'fulfilled') setAiInsights(aiRes.value.data);
       } catch (err) {
-        console.error(err);
+        console.error("Dashboard fetch error:", err);
       } finally {
         setLoading(false);
       }
     };
-    fetchSummary();
+    fetchDashboardData();
   }, []);
 
   return (
@@ -202,6 +239,137 @@ const Dashboard = () => {
                 </Link>
               </div>
             </div>
+
+          {/* 1. VALUE REALIZED ROI BANNER */}
+          {valueRealized && (
+            <div className="mb-6 p-4 rounded-2xl bg-gradient-to-r from-emerald-600 via-teal-600 to-emerald-700 text-white shadow-lg shadow-emerald-500/20 relative overflow-hidden">
+              <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 relative z-10">
+                <div>
+                  <div className="flex flex-wrap items-center gap-2 mb-1.5">
+                    <span className="px-2.5 py-0.5 rounded-full bg-white/20 text-white text-[10px] font-black uppercase tracking-wider backdrop-blur-sm">
+                      💡 Dukaan360 व्हॅल्यू कॅल्क्युलेटर • {valueRealized.month_label}
+                    </span>
+                    <span className="px-2.5 py-0.5 rounded-full bg-amber-400 text-slate-900 text-[10px] font-black tracking-wider uppercase shadow-xs">
+                      {valueRealized.roi_multiplier}x थेट ROI
+                    </span>
+                  </div>
+                  <h2 className="text-base md:text-lg font-black text-white leading-tight">
+                    {valueRealized.headline}
+                  </h2>
+                  <p className="text-emerald-100 text-xs font-medium mt-0.5">
+                    {valueRealized.pitch}
+                  </p>
+                </div>
+
+                {/* 3 Value Pillars */}
+                <div className="flex flex-wrap items-center gap-2">
+                  <div className="bg-white/10 backdrop-blur-md border border-white/20 px-3 py-2 rounded-xl text-center min-w-[100px]">
+                    <p className="text-[10px] text-emerald-200 font-bold uppercase">उधारी वसुली</p>
+                    <p className="text-sm font-black text-white">₹{valueRealized.udhari_recovered?.toLocaleString()}</p>
+                  </div>
+                  <div className="bg-white/10 backdrop-blur-md border border-white/20 px-3 py-2 rounded-xl text-center min-w-[100px]">
+                    <p className="text-[10px] text-emerald-200 font-bold uppercase">Expiry नुकसान वाचले</p>
+                    <p className="text-sm font-black text-white">₹{valueRealized.expiry_loss_avoided?.toLocaleString()}</p>
+                  </div>
+                  <div className="bg-white/10 backdrop-blur-md border border-white/20 px-3 py-2 rounded-xl text-center min-w-[100px]">
+                    <p className="text-[10px] text-emerald-200 font-bold uppercase">Dead Stock वाचले</p>
+                    <p className="text-sm font-black text-white">₹{valueRealized.dead_stock_prevented?.toLocaleString()}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* 2. DAILY ASSISTANT: आज काय करायचं? */}
+          {dailyBriefing && (
+            <div className="mb-6 bg-white p-4 sm:p-5 rounded-2xl shadow-sm border border-slate-200">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-3 border-b border-slate-100 pb-3">
+                <div className="flex items-center gap-2.5">
+                  <div className="w-9 h-9 rounded-xl bg-orange-100 text-brand flex items-center justify-center font-bold text-lg shrink-0">
+                    ☀️
+                  </div>
+                  <div>
+                    <h3 className="text-sm sm:text-base font-black text-slate-800">आज काय करायचं? (Daily Action Assistant)</h3>
+                    <p className="text-xs text-slate-500 font-medium">दुकान उघडल्यावर तातडीने करायची कामे आणि आजचा अंदाज</p>
+                  </div>
+                </div>
+                <div className="flex flex-wrap items-center gap-2 text-xs">
+                  <span className="px-2.5 py-1 rounded-lg bg-green-50 text-green-700 font-bold border border-green-200">
+                    अंदाजे विक्री: ₹{dailyBriefing.expected_today_sales?.toLocaleString()}
+                  </span>
+                  <span className="px-2.5 py-1 rounded-lg bg-emerald-50 text-emerald-700 font-bold border border-emerald-200">
+                    कालचा नफा: ₹{dailyBriefing.yesterday_profit?.toLocaleString()}
+                  </span>
+                </div>
+              </div>
+
+              {/* Action items grid */}
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+                {/* Overdue Udhari Action */}
+                <div className="p-3.5 rounded-xl bg-red-50/70 border border-red-200/80 flex flex-col justify-between">
+                  <div>
+                    <div className="flex items-center justify-between mb-1">
+                      <span className="text-[10px] font-black uppercase text-red-600 bg-red-100 px-2 py-0.5 rounded-full">
+                        🔴 उधारी तातडीची वसुली
+                      </span>
+                      <span className="text-xs font-black text-red-700">{dailyBriefing.overdue_count} ग्राहक</span>
+                    </div>
+                    <p className="text-lg font-black text-red-800 my-1">
+                      ₹{dailyBriefing.overdue_total_amount?.toLocaleString()} <span className="text-xs font-semibold text-red-600">थकीत</span>
+                    </p>
+                    <p className="text-[11px] text-red-700 font-medium line-clamp-2">
+                      {dailyBriefing.overdue_top_customers?.slice(0, 2).map(c => `${c.name} (₹${c.amount})`).join(', ') || 'उधारी थकीत नाही'}
+                    </p>
+                  </div>
+                  <Link to="/khata" className="mt-3 text-center text-xs font-bold text-white bg-red-600 hover:bg-red-700 py-1.5 rounded-lg transition active:scale-95 shadow-xs">
+                    WhatsApp तगादा पाठवा →
+                  </Link>
+                </div>
+
+                {/* Low Stock Action */}
+                <div className="p-3.5 rounded-xl bg-amber-50/70 border border-amber-200/80 flex flex-col justify-between">
+                  <div>
+                    <div className="flex items-center justify-between mb-1">
+                      <span className="text-[10px] font-black uppercase text-amber-700 bg-amber-100 px-2 py-0.5 rounded-full">
+                        🟠 साठा संपत आला
+                      </span>
+                      <span className="text-xs font-black text-amber-800">{dailyBriefing.low_stock_count} वस्तू</span>
+                    </div>
+                    <p className="text-lg font-black text-amber-900 my-1">
+                      {dailyBriefing.low_stock_count} वस्तू संपत आल्या
+                    </p>
+                    <p className="text-[11px] text-amber-800 font-medium line-clamp-2">
+                      {dailyBriefing.low_stock_items?.slice(0, 3).map(i => i.product_name).join(', ') || 'साठा पुरेसा आहे'}
+                    </p>
+                  </div>
+                  <button onClick={handlePrintReorder} className="mt-3 text-center text-xs font-bold text-white bg-amber-600 hover:bg-amber-700 py-1.5 rounded-lg transition active:scale-95 shadow-xs cursor-pointer">
+                    खरेदी यादी प्रिंट करा →
+                  </button>
+                </div>
+
+                {/* Expiry Loss Action */}
+                <div className="p-3.5 rounded-xl bg-orange-50/70 border border-orange-200/80 flex flex-col justify-between">
+                  <div>
+                    <div className="flex items-center justify-between mb-1">
+                      <span className="text-[10px] font-black uppercase text-orange-700 bg-orange-100 px-2 py-0.5 rounded-full">
+                        🟡 Expiry जवळ आली
+                      </span>
+                      <span className="text-xs font-black text-orange-800">{dailyBriefing.near_expiry_count} वस्तू</span>
+                    </div>
+                    <p className="text-lg font-black text-orange-900 my-1">
+                      ₹{dailyBriefing.near_expiry_capital_risk?.toLocaleString()} <span className="text-xs font-semibold text-orange-700">भांडवल धोक्यात</span>
+                    </p>
+                    <p className="text-[11px] text-orange-800 font-medium line-clamp-2">
+                      पुढील ३० दिवसांत मुदत संपत आहे. ऑफर देऊन माल त्वरित मोकळा करा.
+                    </p>
+                  </div>
+                  <Link to="/inventory" className="mt-3 text-center text-xs font-bold text-white bg-orange-600 hover:bg-orange-700 py-1.5 rounded-lg transition active:scale-95 shadow-xs">
+                    स्टॉक तपासा व डिस्काउंट द्या →
+                  </Link>
+                </div>
+              </div>
+            </div>
+          )}
 
           {loading ? (
             <p className="text-center text-slate-400 mt-10">Loading Dashboard...</p>
@@ -287,6 +455,105 @@ const Dashboard = () => {
                 </div>
               </div>
               
+            </div>
+          )}
+
+          {/* 3. DEAD STOCK / SLOW MOVING CAPITAL TRACKER ("माल कुठे पैसा अडकवतोय ते दाखव") */}
+          {deadStock && (
+            <div className="mb-8 bg-white p-5 rounded-2xl shadow-sm border border-slate-200">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-3 border-b border-slate-100 pb-3">
+                <div className="flex items-center gap-2.5">
+                  <div className="w-9 h-9 rounded-xl bg-purple-100 text-purple-700 flex items-center justify-center font-bold text-lg shrink-0">
+                    ⚠️
+                  </div>
+                  <div>
+                    <h3 className="text-base font-black text-slate-800">माल कुठे पैसा अडकवतोय? (Dead Stock Tracker)</h3>
+                    <p className="text-xs text-slate-500 font-medium">{deadStock.headline}</p>
+                  </div>
+                </div>
+                <div className="flex items-center gap-2">
+                  <span className="text-xs font-black text-purple-800 bg-purple-50 px-3 py-1.5 rounded-xl border border-purple-200">
+                    अडकलेले भांडवल: ₹{deadStock.total_capital_locked?.toLocaleString()}
+                  </span>
+                </div>
+              </div>
+
+              {deadStock.items?.length === 0 ? (
+                <p className="text-center py-6 text-slate-400 font-bold text-xs">कोणताही Dead Stock नाही. सर्व साठा उत्तम फिरतोय!</p>
+              ) : (
+                <div className="overflow-x-auto">
+                  <table className="w-full text-left text-xs">
+                    <thead>
+                      <tr className="bg-slate-50 text-slate-600 font-bold uppercase tracking-wider text-[10px] border-b border-slate-200">
+                        <th className="py-2.5 px-3">वस्तूचे नाव</th>
+                        <th className="py-2.5 px-3">बॅच</th>
+                        <th className="py-2.5 px-3 text-center">शिल्लक स्टॉक</th>
+                        <th className="py-2.5 px-3 text-right">खरेदी किंमत</th>
+                        <th className="py-2.5 px-3 text-right">अडकलेले भांडवल</th>
+                        <th className="py-2.5 px-3">सुचवलेली कृती (Action)</th>
+                      </tr>
+                    </thead>
+                    <tbody className="divide-y divide-slate-100 font-medium text-slate-700">
+                      {deadStock.items.slice(0, 6).map((item, idx) => (
+                        <tr key={idx} className="hover:bg-slate-50/80 transition">
+                          <td className="py-2.5 px-3 font-bold text-slate-800">{item.product_name}</td>
+                          <td className="py-2.5 px-3 text-slate-500 font-mono text-[11px]">{item.batch_number}</td>
+                          <td className="py-2.5 px-3 text-center font-bold">{item.current_quantity} {item.unit}</td>
+                          <td className="py-2.5 px-3 text-right">₹{item.purchase_rate}</td>
+                          <td className="py-2.5 px-3 text-right font-black text-red-600">₹{item.capital_locked?.toLocaleString()}</td>
+                          <td className="py-2.5 px-3">
+                            <span className="px-2 py-0.5 rounded-md bg-amber-50 text-amber-800 border border-amber-200 text-[10px] font-bold inline-block">
+                              {item.suggested_action}
+                            </span>
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              )}
+            </div>
+          )}
+
+          {/* 4. AI BUSINESS INSIGHTS & PURCHASE SUGGESTIONS */}
+          {aiInsights && aiInsights.purchase_suggestions?.length > 0 && (
+            <div className="mb-8 bg-gradient-to-r from-blue-50/60 via-indigo-50/40 to-white p-5 rounded-2xl shadow-sm border border-blue-200">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-3 border-b border-blue-100 pb-3">
+                <div className="flex items-center gap-2.5">
+                  <div className="w-9 h-9 rounded-xl bg-blue-100 text-blue-600 flex items-center justify-center font-bold text-lg shrink-0">
+                    🧠
+                  </div>
+                  <div>
+                    <h3 className="text-base font-black text-slate-800">AI बिझनेस इनसाइट्स व खरेदी अंदाज (Purchase Suggestions)</h3>
+                    <p className="text-xs text-slate-500 font-medium">मागील विक्रीचा वेग पाहून ७ दिवसांत संपणाऱ्या मालाची आगाऊ सूचना</p>
+                  </div>
+                </div>
+                <span className="text-[10px] font-black uppercase text-blue-700 bg-blue-100 px-2.5 py-1 rounded-full self-start sm:self-auto">
+                  AI Predictive Analytics
+                </span>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+                {aiInsights.purchase_suggestions.slice(0, 3).map((item, idx) => (
+                  <div key={idx} className="bg-white p-3.5 rounded-xl border border-blue-100 shadow-2xs flex flex-col justify-between">
+                    <div>
+                      <div className="flex items-start justify-between gap-2 mb-1">
+                        <h4 className="font-bold text-xs text-slate-800">{item.product_name}</h4>
+                        <span className="text-[10px] font-black text-red-600 bg-red-50 px-2 py-0.5 rounded-md shrink-0 border border-red-100">
+                          {item.days_left} दिवसांत संपेल!
+                        </span>
+                      </div>
+                      <p className="text-[11px] text-slate-500 font-medium">
+                        रोजची विक्री: ~{item.daily_velocity} {item.unit} • शिल्लक: {item.current_stock} {item.unit}
+                      </p>
+                    </div>
+                    <div className="mt-3 pt-2 border-t border-slate-100 flex items-center justify-between text-xs">
+                      <span className="text-slate-700 font-bold">सुचवलेली ऑर्डर: <strong className="text-blue-600">{item.suggested_order_qty} {item.unit}</strong></span>
+                      <span className="text-slate-500 text-[10px] font-semibold">खर्च: ~₹{item.est_cost}</span>
+                    </div>
+                  </div>
+                ))}
+              </div>
             </div>
           )}
 

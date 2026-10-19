@@ -139,12 +139,58 @@ export const AUTH_TRANSLATIONS = {
       change_store: "बदला ✕",
       search_error: "या नावाने दुकान सापडले नाही. अचूक नाव किंवा मोबाईल नंबर टाका.",
 
-      step2_title: "पायरी २: सबस्क्रिप्शन प्लॅन निवडा (Choose Plan)",
+      step2_title: "पायरी २: व्हॅल्यू सबस्क्रिप्शन प्लॅन निवडा (Choose Plan)",
       plans: [
-        { id: '1 Month', name: '१ महिना', sub: '1 Month', tag: 'मासिक', price: 399, original: 499, discount: '२०% सूट', duration: '३० दिवस वैधता', perDay: '₹१३ / दिवस' },
-        { id: '3 Months', name: '३ महिने', sub: '3 Months', tag: 'सर्वात लोकप्रिय 🔥', price: 999, original: 1197, discount: '₹२०० बचत', duration: '९० दिवस वैधता', perDay: '₹११ / दिवस (₹३३३/महिना)', popular: true },
-        { id: '6 Months', name: '६ महिने', sub: '6 Months', tag: 'व्हॅल्यू पॅक 🌟', price: 1799, original: 2394, discount: '₹६०० बचत', duration: '१८० दिवस वैधता', perDay: '₹१० / दिवस (₹२९९/महिना)' },
-        { id: '1 Year', name: '१ वर्ष', sub: '1 Year Pro', tag: '५०% बचत 👑', price: 2999, original: 4788, discount: '₹१,८०० बचत', duration: '३६५ दिवस अखंड', perDay: '₹८ / दिवस (₹२४९/महिना)', bestValue: true }
+        { 
+          id: 'Starter', 
+          name: '🥉 Starter', 
+          sub: 'Billing + Stock + Udhari', 
+          tag: 'सुरुवात', 
+          price: 399, 
+          original: 499, 
+          discount: '२०% सूट', 
+          duration: '३० दिवस वैधता', 
+          perDay: '₹१३ / दिवस',
+          features: 'बारकोड बिलिंग + स्टॉक + बेसिक उधारी'
+        },
+        { 
+          id: 'Business', 
+          name: '🥈 Business', 
+          sub: 'नफा व उधारी वसुली', 
+          tag: 'सर्वात लोकप्रिय 🔥', 
+          price: 799, 
+          original: 999, 
+          discount: '₹२०० बचत', 
+          duration: '३० दिवस वैधता', 
+          perDay: '₹२६ / दिवस', 
+          popular: true,
+          features: 'सर्व Starter + WhatsApp बिल + खर्च व नफा + Expiry अलर्ट + रिपोर्ट्स'
+        },
+        { 
+          id: 'Pro', 
+          name: '🥇 Dukaan360 Pro', 
+          sub: 'Smart Assistant', 
+          tag: 'संपूर्ण नियंत्रण 👑', 
+          price: 1299, 
+          original: 1699, 
+          discount: '₹४०० बचत', 
+          duration: '३० दिवस वैधता', 
+          perDay: '₹४३ / दिवस',
+          features: 'सर्व Business + कर्मचारी ट्रॅकिंग + लॉयल्टी सिस्टीम + AI इनसाइट्स + क्लाउड बॅकअप'
+        },
+        { 
+          id: 'Business Annual', 
+          name: '🌟 Business वार्षिक', 
+          sub: '२ महिने मोफत!', 
+          tag: '२ महिने मोफत 🎁', 
+          price: 7990, 
+          original: 9588, 
+          discount: '₹१,६०० बचत', 
+          duration: '३६५ दिवस अखंड', 
+          perDay: '₹२१ / दिवस (₹६६५/महिना)', 
+          bestValue: true,
+          features: 'सर्व Business फीचर्स वर्षभर + २ महिने मोफत'
+        }
       ],
 
       guide_title: "पेमेंट मार्गदर्शक: काय करावे व काय करू नये (Do's & Don'ts)",
@@ -334,12 +380,58 @@ export const AUTH_TRANSLATIONS = {
       change_store: "बदलें ✕",
       search_error: "इस नाम से दुकान नहीं मिली। कृपया सही नाम या मोबाइल नंबर दर्ज करें।",
 
-      step2_title: "चरण 2: सब्सक्रिप्शन प्लान चुनें (Choose Plan)",
+      step2_title: "चरण 2: वैल्यू सब्सक्रिप्शन प्लान चुनें (Choose Plan)",
       plans: [
-        { id: '1 Month', name: '1 महीना', sub: '1 Month', tag: 'मासिक', price: 399, original: 499, discount: '20% छूट', duration: '30 दिन वैधता', perDay: '₹13 / दिन' },
-        { id: '3 Months', name: '3 महीने', sub: '3 Months', tag: 'सबसे लोकप्रिय 🔥', price: 999, original: 1197, discount: '₹200 बचत', duration: '90 दिन वैधता', perDay: '₹11 / दिन (₹333/महीना)', popular: true },
-        { id: '6 Months', name: '6 महीने', sub: '6 Months', tag: 'वैल्यू पैक 🌟', price: 1799, original: 2394, discount: '₹600 बचत', duration: '180 दिन वैधता', perDay: '₹10 / दिन (₹299/महीना)' },
-        { id: '1 Year', name: '1 वर्ष', sub: '1 Year Pro', tag: '50% बचत 👑', price: 2999, original: 4788, discount: '₹1,800 बचत', duration: '365 दिन अखंड', perDay: '₹8 / दिन (₹249/महीना)', bestValue: true }
+        { 
+          id: 'Starter', 
+          name: '🥉 Starter', 
+          sub: 'Billing + Stock + Udhari', 
+          tag: 'शुरुआत', 
+          price: 399, 
+          original: 499, 
+          discount: '20% छूट', 
+          duration: '30 दिन वैधता', 
+          perDay: '₹13 / दिन',
+          features: 'बारकोड बिलिंग + स्टॉक + बेसिक उधारी'
+        },
+        { 
+          id: 'Business', 
+          name: '🥈 Business', 
+          sub: 'मुनाफा व उधारी वसूली', 
+          tag: 'सबसे लोकप्रिय 🔥', 
+          price: 799, 
+          original: 999, 
+          discount: '₹200 बचत', 
+          duration: '30 दिन वैधता', 
+          perDay: '₹26 / दिन', 
+          popular: true,
+          features: 'सभी Starter + WhatsApp बिल + खर्च व मुनाफा + Expiry अलर्ट + रिपोर्ट्स'
+        },
+        { 
+          id: 'Pro', 
+          name: '🥇 Dukaan360 Pro', 
+          sub: 'Smart Assistant', 
+          tag: 'संपूर्ण नियंत्रण 👑', 
+          price: 1299, 
+          original: 1699, 
+          discount: '₹400 बचत', 
+          duration: '30 दिन वैधता', 
+          perDay: '₹43 / दिन',
+          features: 'सभी Business + कर्मचारी ट्रैकिंग + लॉयल्टी सिस्टम + AI इनसाइट्स + क्लाउड बैकअप'
+        },
+        { 
+          id: 'Business Annual', 
+          name: '🌟 Business वार्षिक', 
+          sub: '2 महीने मुफ्त!', 
+          tag: '2 महीने मुफ्त 🎁', 
+          price: 7990, 
+          original: 9588, 
+          discount: '₹1,600 बचत', 
+          duration: '365 दिन अखंड', 
+          perDay: '₹21 / दिन (₹665/महीना)', 
+          bestValue: true,
+          features: 'सभी Business फीचर्स पूरे साल + 2 महीने मुफ्त'
+        }
       ],
 
       guide_title: "पेमेंट गाइड: क्या करें और क्या न करें (Do's & Don'ts)",
@@ -529,12 +621,58 @@ export const AUTH_TRANSLATIONS = {
       change_store: "Change ✕",
       search_error: "No store found with this name. Please enter exact store name or mobile.",
 
-      step2_title: "Step 2: Choose Subscription Plan",
+      step2_title: "Step 2: Choose Value Subscription Plan",
       plans: [
-        { id: '1 Month', name: '1 Month', sub: '1 Month', tag: 'Monthly', price: 399, original: 499, discount: '20% OFF', duration: '30 Days Validity', perDay: '₹13 / day' },
-        { id: '3 Months', name: '3 Months', sub: '3 Months', tag: 'Most Popular 🔥', price: 999, original: 1197, discount: 'Save ₹200', duration: '90 Days Validity', perDay: '₹11 / day (₹333/mo)', popular: true },
-        { id: '6 Months', name: '6 Months', sub: '6 Months', tag: 'Value Pack 🌟', price: 1799, original: 2394, discount: 'Save ₹600', duration: '180 Days Validity', perDay: '₹10 / day (₹299/mo)' },
-        { id: '1 Year', name: '1 Year', sub: '1 Year Pro', tag: '50% OFF 👑', price: 2999, original: 4788, discount: 'Save ₹1,800', duration: '365 Days Uninterrupted', perDay: '₹8 / day (₹249/mo)', bestValue: true }
+        { 
+          id: 'Starter', 
+          name: '🥉 Starter', 
+          sub: 'Billing + Stock + Udhari', 
+          tag: 'Starter', 
+          price: 399, 
+          original: 499, 
+          discount: '20% OFF', 
+          duration: '30 Days Validity', 
+          perDay: '₹13 / day',
+          features: 'Barcode Billing + Stock + Basic Khata'
+        },
+        { 
+          id: 'Business', 
+          name: '🥈 Business', 
+          sub: 'Profit & Recovery', 
+          tag: 'Most Popular 🔥', 
+          price: 799, 
+          original: 999, 
+          discount: 'Save ₹200', 
+          duration: '30 Days Validity', 
+          perDay: '₹26 / day', 
+          popular: true,
+          features: 'All Starter + WhatsApp Bills + Expense & Profit + Expiry Alerts + Reports'
+        },
+        { 
+          id: 'Pro', 
+          name: '🥇 Dukaan360 Pro', 
+          sub: 'Smart Assistant', 
+          tag: 'Full Control 👑', 
+          price: 1299, 
+          original: 1699, 
+          discount: 'Save ₹400', 
+          duration: '30 Days Validity', 
+          perDay: '₹43 / day',
+          features: 'All Business + Staff Audit Logs + Loyalty System + AI Insights + Cloud Backup'
+        },
+        { 
+          id: 'Business Annual', 
+          name: '🌟 Business Annual', 
+          sub: '2 Months Free!', 
+          tag: '2 Months Free 🎁', 
+          price: 7990, 
+          original: 9588, 
+          discount: 'Save ₹1,600', 
+          duration: '365 Days Uninterrupted', 
+          perDay: '₹21 / day (₹665/mo)', 
+          bestValue: true,
+          features: 'All Business features full year + 2 months free'
+        }
       ],
 
       guide_title: "Payment Guide: Do's and Don'ts",

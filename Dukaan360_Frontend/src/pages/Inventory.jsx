@@ -16,7 +16,10 @@ import {
   Tag, 
   Barcode, 
   Folders, 
-  Image as ImageIcon 
+  Image as ImageIcon,
+  ShieldCheck,
+  ListBullets,
+  ArrowsClockwise
 } from '@phosphor-icons/react';
 import { useLanguage } from '../contexts/LanguageContext';
 
@@ -35,6 +38,21 @@ const Inventory = () => {
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [addQty, setAddQty] = useState('');
   const [costPrice, setCostPrice] = useState('');
+
+  // Stock Adjustment & Theft/Leakage Tracking Modal
+  const [showAdjustmentModal, setShowAdjustmentModal] = useState(false);
+  const [adjustProductId, setAdjustProductId] = useState('');
+  const [adjustBatchId, setAdjustBatchId] = useState('');
+  const [adjustType, setAdjustType] = useState('REDUCE');
+  const [adjustQty, setAdjustQty] = useState('');
+  const [adjustReason, setAdjustReason] = useState('Damage (खराब / फुटलेला माल)');
+  const [adjustNotes, setAdjustNotes] = useState('');
+  const [adjustSubmitting, setAdjustSubmitting] = useState(false);
+
+  // Audit Trail Logs Modal
+  const [showAuditModal, setShowAuditModal] = useState(false);
+  const [auditLogs, setAuditLogs] = useState([]);
+  const [loadingAudits, setLoadingAudits] = useState(false);
 
   // Stock History Modal
   const [showHistoryModal, setShowHistoryModal] = useState(false);
@@ -217,6 +235,67 @@ const Inventory = () => {
       console.error("Failed to load history", err);
     } finally {
       setHistoryLoading(false);
+    }
+  };
+
+  const openAuditLogsModal = () => {
+    setShowAuditModal(true);
+    fetchAuditLogs();
+  };
+
+  const fetchAuditLogs = async () => {
+    setLoadingAudits(true);
+    try {
+      const res = await axios.get('http://localhost:8000/inventory/audit-logs');
+      setAuditLogs(res.data);
+    } catch (err) {
+      console.error("Failed to load audit logs:", err);
+    } finally {
+      setLoadingAudits(false);
+    }
+  };
+
+  const openAdjustmentModal = (prod = null) => {
+    if (prod) {
+      setAdjustProductId(String(prod.id));
+      const prodBatches = batches.filter(b => b.product_id === prod.id && b.current_quantity > 0);
+      setAdjustBatchId(prodBatches.length > 0 ? String(prodBatches[0].id) : '');
+    } else if (products.length > 0) {
+      setAdjustProductId(String(products[0].id));
+      const prodBatches = batches.filter(b => b.product_id === products[0].id);
+      setAdjustBatchId(prodBatches.length > 0 ? String(prodBatches[0].id) : '');
+    }
+    setAdjustQty('');
+    setAdjustNotes('');
+    setAdjustType('REDUCE');
+    setShowAdjustmentModal(true);
+  };
+
+  const handleAdjustStock = async (e) => {
+    e.preventDefault();
+    if (!adjustBatchId || !adjustQty || parseFloat(adjustQty) <= 0) {
+      alert("कृपया योग्य बॅच व प्रमाण प्रविष्ट करा");
+      return;
+    }
+    setAdjustSubmitting(true);
+    try {
+      await axios.post('http://localhost:8000/inventory/adjust-stock', {
+        product_id: parseInt(adjustProductId),
+        batch_id: parseInt(adjustBatchId),
+        adjustment_type: adjustType,
+        quantity: parseFloat(adjustQty),
+        reason: adjustReason,
+        notes: adjustNotes
+      });
+      alert('स्टॉक अड्जस्टमेंट यशस्वीरीत्या नोंदवले व ऑडिट लॉग सुरक्षित ठेवला!');
+      setShowAdjustmentModal(false);
+      setAdjustQty('');
+      setAdjustNotes('');
+      fetchInventory();
+    } catch (err) {
+      alert("अड्जस्टमेंट अयशस्वी: " + (err.response?.data?.detail || err.message));
+    } finally {
+      setAdjustSubmitting(false);
     }
   };
 
@@ -410,6 +489,24 @@ const Inventory = () => {
                 </button>
               )}
             </div>
+
+            <button 
+              onClick={() => openAdjustmentModal()}
+              className="bg-amber-50 hover:bg-amber-100 border border-amber-200 text-amber-800 px-3 py-2 rounded-xl text-xs font-bold shadow-sm transition whitespace-nowrap flex items-center gap-1.5 shrink-0"
+              title="स्टॉक अड्जस्टमेंट (Damage, Theft, Expiry नोंदी)"
+            >
+              <ShieldCheck weight="bold" className="text-amber-600 text-sm" />
+              <span>स्टॉक अड्जस्टमेंट</span>
+            </button>
+
+            <button 
+              onClick={openAuditLogsModal}
+              className="bg-slate-100 hover:bg-slate-200 border border-slate-200 text-slate-700 px-3 py-2 rounded-xl text-xs font-bold shadow-sm transition whitespace-nowrap flex items-center gap-1.5 shrink-0"
+              title="ऑडिट हिस्ट्री व कर्मचाऱ्यांच्या नोंदी"
+            >
+              <ListBullets weight="bold" className="text-slate-600 text-sm" />
+              <span className="hidden sm:inline">ऑडिट लॉग्स</span>
+            </button>
 
             <button 
               onClick={handleAddCategory}
@@ -793,6 +890,218 @@ const Inventory = () => {
                 {isEditing ? t('save_changes') : t('create_product')}
               </button>
             </form>
+          </div>
+        </div>
+      )}
+
+      {/* STOCK ADJUSTMENT MODAL (DAMAGE / THEFT / AUDIT) */}
+      {showAdjustmentModal && (
+        <div className="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-3 sm:p-4">
+          <div className="bg-white rounded-2xl w-full max-w-md shadow-2xl border border-slate-100 flex flex-col overflow-hidden max-h-[90vh]">
+            <div className="p-4 border-b border-slate-100 flex justify-between items-center bg-amber-50/50">
+              <div className="flex items-center gap-2">
+                <div className="w-8 h-8 rounded-lg bg-amber-100 text-amber-700 flex items-center justify-center font-bold">
+                  <ShieldCheck weight="fill" className="text-xl" />
+                </div>
+                <div>
+                  <h3 className="font-bold text-slate-800 text-sm">स्टॉक अड्जस्टमेंट (Stock Audit)</h3>
+                  <p className="text-[10px] text-slate-500 font-medium">चोरी, गळती किंवा नुकसानीची नोंद ठेवा</p>
+                </div>
+              </div>
+              <button onClick={() => setShowAdjustmentModal(false)} className="text-slate-400 hover:text-red-500 transition">
+                <X weight="bold" className="text-lg" />
+              </button>
+            </div>
+
+            <form onSubmit={handleAdjustStock} className="p-5 flex flex-col gap-3.5 overflow-y-auto">
+              <div>
+                <label className="block text-[11px] font-bold text-slate-500 uppercase mb-1">वस्तू निवडा (Select Product)</label>
+                <select 
+                  value={adjustProductId} 
+                  onChange={e => {
+                    setAdjustProductId(e.target.value);
+                    const prodBatches = batches.filter(b => b.product_id === parseInt(e.target.value) && b.current_quantity > 0);
+                    setAdjustBatchId(prodBatches.length > 0 ? String(prodBatches[0].id) : '');
+                  }}
+                  className="w-full h-10 border border-slate-200 rounded-xl px-3 font-bold text-xs bg-white focus:border-brand focus:outline-none"
+                  required
+                >
+                  {products.map(p => (
+                    <option key={p.id} value={p.id}>{p.name} ({p.stock} {p.unit})</option>
+                  ))}
+                </select>
+              </div>
+
+              <div>
+                <label className="block text-[11px] font-bold text-slate-500 uppercase mb-1">बॅच निवडा (Select Batch)</label>
+                <select 
+                  value={adjustBatchId} 
+                  onChange={e => setAdjustBatchId(e.target.value)}
+                  className="w-full h-10 border border-slate-200 rounded-xl px-3 font-bold text-xs bg-white focus:border-brand focus:outline-none"
+                  required
+                >
+                  <option value="">-- बॅच निवडा --</option>
+                  {batches
+                    .filter(b => b.product_id === parseInt(adjustProductId))
+                    .map(b => (
+                      <option key={b.id} value={b.id}>
+                        {b.batch_number} (शिल्लक: {b.current_quantity})
+                      </option>
+                    ))}
+                </select>
+              </div>
+
+              <div>
+                <label className="block text-[11px] font-bold text-slate-500 uppercase mb-1">अड्जस्टमेंट प्रकार (Type)</label>
+                <div className="grid grid-cols-2 gap-2">
+                  <button 
+                    type="button" 
+                    onClick={() => setAdjustType('REDUCE')}
+                    className={`py-2 rounded-xl text-xs font-bold border-2 transition ${adjustType === 'REDUCE' ? 'border-red-500 bg-red-50 text-red-700' : 'border-slate-200 text-slate-600'}`}
+                  >
+                    - कमी करा (Reduce)
+                  </button>
+                  <button 
+                    type="button" 
+                    onClick={() => setAdjustType('ADD')}
+                    className={`py-2 rounded-xl text-xs font-bold border-2 transition ${adjustType === 'ADD' ? 'border-green-500 bg-green-50 text-green-700' : 'border-slate-200 text-slate-600'}`}
+                  >
+                    + वाढवा (Add)
+                  </button>
+                </div>
+              </div>
+
+              <div className="grid grid-cols-2 gap-3">
+                <div>
+                  <label className="block text-[11px] font-bold text-slate-500 uppercase mb-1">प्रमाण (Quantity)</label>
+                  <input 
+                    type="number" 
+                    step="any" 
+                    min="0.01" 
+                    required 
+                    placeholder="उदा. 2"
+                    value={adjustQty} 
+                    onChange={e => setAdjustQty(e.target.value)}
+                    className="w-full h-10 border border-slate-200 rounded-xl px-3 font-bold text-xs focus:border-brand focus:outline-none"
+                  />
+                </div>
+                <div>
+                  <label className="block text-[11px] font-bold text-slate-500 uppercase mb-1">कारण (Reason)</label>
+                  <select 
+                    value={adjustReason} 
+                    onChange={e => setAdjustReason(e.target.value)}
+                    className="w-full h-10 border border-slate-200 rounded-xl px-2.5 font-bold text-xs bg-white focus:border-brand focus:outline-none"
+                  >
+                    <option value="Damage (खराब / फुटलेला माल)">Damage (फुटलेला / खराब)</option>
+                    <option value="Missing / Theft (गहाळ / चोरी)">Missing / Theft (चोरी / गहाळ)</option>
+                    <option value="Personal Use (घरगुती वापर)">Personal Use (घरगुती वापर)</option>
+                    <option value="Count Error (मोजणीतील चूक)">Count Error (मोजणी चूक)</option>
+                    <option value="Expired (मुदत संपलेला माल)">Expired (Expiry संपली)</option>
+                  </select>
+                </div>
+              </div>
+
+              <div>
+                <label className="block text-[11px] font-bold text-slate-500 uppercase mb-1">टीप / स्पष्टीकरण (Notes - Optional)</label>
+                <input 
+                  type="text" 
+                  placeholder="उदा. संध्याकाळी मोजणी करताना कमी आढळले..."
+                  value={adjustNotes} 
+                  onChange={e => setAdjustNotes(e.target.value)}
+                  className="w-full h-10 border border-slate-200 rounded-xl px-3 font-medium text-xs focus:border-brand focus:outline-none"
+                />
+              </div>
+
+              <button 
+                type="submit" 
+                disabled={adjustSubmitting}
+                className="w-full h-11 bg-amber-600 hover:bg-amber-700 text-white font-bold text-xs rounded-xl transition shadow-md shadow-amber-600/30 mt-2 disabled:opacity-50"
+              >
+                {adjustSubmitting ? 'नोंद होत आहे...' : 'अड्जस्टमेंट नोंदवा व Audit Log सेव्ह करा'}
+              </button>
+            </form>
+          </div>
+        </div>
+      )}
+
+      {/* AUDIT TRAIL LOGS MODAL */}
+      {showAuditModal && (
+        <div className="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-3 sm:p-4">
+          <div className="bg-white rounded-2xl w-full max-w-3xl shadow-2xl border border-slate-100 flex flex-col overflow-hidden max-h-[85vh]">
+            <div className="p-4 border-b border-slate-100 flex justify-between items-center bg-slate-50">
+              <div className="flex items-center gap-2">
+                <div className="w-8 h-8 rounded-lg bg-slate-200 text-slate-700 flex items-center justify-center font-bold">
+                  <ListBullets weight="bold" className="text-xl" />
+                </div>
+                <div>
+                  <h3 className="font-bold text-slate-800 text-sm">ऑडिट हिस्ट्री व कर्मचारी लॉग्स (Audit Trail)</h3>
+                  <p className="text-[10px] text-slate-500 font-medium">स्टॉक बदल, बिलिंग आणि उधारीच्या सर्व नोंदी</p>
+                </div>
+              </div>
+              <div className="flex items-center gap-2">
+                <button 
+                  onClick={fetchAuditLogs} 
+                  className="p-1.5 rounded-lg bg-white border border-slate-200 text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition"
+                  title="रिफ्रेश करा"
+                >
+                  <ArrowsClockwise weight="bold" className={`text-base ${loadingAudits ? 'animate-spin' : ''}`} />
+                </button>
+                <button onClick={() => setShowAuditModal(false)} className="text-slate-400 hover:text-red-500 transition">
+                  <X weight="bold" className="text-lg" />
+                </button>
+              </div>
+            </div>
+
+            <div className="p-4 overflow-y-auto flex-1">
+              {loadingAudits ? (
+                <div className="text-center py-10 text-slate-400 text-xs font-bold">लॉग्स लोड होत आहेत...</div>
+              ) : auditLogs.length === 0 ? (
+                <div className="text-center py-10 text-slate-400 text-xs font-bold">कोणतेही ऑडिट रेकॉर्ड्स उपलब्ध नाहीत.</div>
+              ) : (
+                <div className="overflow-x-auto">
+                  <table className="w-full text-left text-xs">
+                    <thead>
+                      <tr className="bg-slate-100 text-slate-600 uppercase text-[10px] font-bold border-b border-slate-200">
+                        <th className="py-2.5 px-3">तारीख व वेळ</th>
+                        <th className="py-2.5 px-3">वापरकर्ता</th>
+                        <th className="py-2.5 px-3">कृती (Action)</th>
+                        <th className="py-2.5 px-3">वस्तू / संदर्भ</th>
+                        <th className="py-2.5 px-3">तपशील (Details)</th>
+                      </tr>
+                    </thead>
+                    <tbody className="divide-y divide-slate-100 font-medium text-slate-700">
+                      {auditLogs.map((log) => (
+                        <tr key={log.id} className="hover:bg-slate-50 transition">
+                          <td className="py-2.5 px-3 text-slate-500 whitespace-nowrap text-[11px]">
+                            {new Date(log.timestamp).toLocaleDateString('en-IN', { day: '2-digit', month: 'short' })}{' '}
+                            {new Date(log.timestamp).toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit' })}
+                          </td>
+                          <td className="py-2.5 px-3 font-bold text-slate-800 whitespace-nowrap">
+                            {log.user_name || 'System'}
+                          </td>
+                          <td className="py-2.5 px-3">
+                            <span className={`px-2 py-0.5 rounded text-[10px] font-bold whitespace-nowrap ${
+                              log.action_type === 'STOCK_ADJUSTMENT' ? 'bg-amber-100 text-amber-800' :
+                              log.action_type === 'BILL_CREATED' ? 'bg-green-100 text-green-800' :
+                              log.action_type === 'PAYMENT_RECEIVED' ? 'bg-blue-100 text-blue-800' :
+                              'bg-purple-100 text-purple-800'
+                            }`}>
+                              {log.action_type}
+                            </span>
+                          </td>
+                          <td className="py-2.5 px-3 font-semibold text-slate-800 max-w-[150px] truncate">
+                            {log.entity_name || '-'}
+                          </td>
+                          <td className="py-2.5 px-3 text-slate-600 max-w-[280px]">
+                            {log.details || '-'}
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              )}
+            </div>
           </div>
         </div>
       )}

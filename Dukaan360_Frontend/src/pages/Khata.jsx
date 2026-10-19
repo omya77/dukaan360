@@ -83,18 +83,27 @@ const Khata = () => {
     }
   };
 
-  const handleWhatsAppReminder = () => {
-    if (!selectedCustomer) return;
-    const dateStr = new Date().toLocaleDateString('mr-IN', { day: '2-digit', month: 'short', year: 'numeric' });
-    let msg = `📅 *DUKAAN360 Reminder*\n\n`;
-    msg += `नमस्कार *${selectedCustomer.name}* दादा/ताई,\n`;
-    msg += `आज ${dateStr} तारीख आहे. तुमच्या खात्यावर *₹${selectedCustomer.current_due.toFixed(2)}* बाकी आहेत.\n\n`;
-    msg += `कृपया लवकर दुकानात येऊन पैसे जमा करावेत. 🙏\n\n`;
-    msg += `धन्यवाद!\n*Dukaan360 Retail*`;
-    
-    const encodedMsg = encodeURIComponent(msg);
-    const waUrl = `https://wa.me/91${selectedCustomer.mobile}?text=${encodedMsg}`;
-    window.open(waUrl, '_blank');
+  const handleWhatsAppReminder = async (customer = null) => {
+    const target = customer || selectedCustomer;
+    if (!target) return;
+    try {
+      const res = await axios.post(`http://localhost:8000/khata/send-reminder/${target.id}`);
+      if (res.data?.whatsapp_url) {
+        window.open(res.data.whatsapp_url, '_blank');
+      }
+      fetchCustomers();
+    } catch (err) {
+      const upiLink = `upi://pay?pa=8262802961@upi&pn=Dukaan360&am=${target.current_due}&cu=INR`;
+      const dateStr = new Date().toLocaleDateString('mr-IN', { day: '2-digit', month: 'short', year: 'numeric' });
+      let msg = `📅 *DUKAAN360 उधारी स्मरणपत्र*\n\n`;
+      msg += `नमस्कार *${target.name}* जी,\n`;
+      msg += `आज ${dateStr} रोजी तुमच्या खात्यावर *₹${target.current_due.toFixed(2)}* बाकी आहेत.\n\n`;
+      msg += `थेट UPI ने पेमेंट करण्यासाठी येथे क्लिक करा:\n${upiLink}\n\n`;
+      msg += `किंवा दुकानात येऊन जमा करावे.\nधन्यवाद! 🙏`;
+      const encodedMsg = encodeURIComponent(msg);
+      const waUrl = `https://wa.me/91${target.mobile}?text=${encodedMsg}`;
+      window.open(waUrl, '_blank');
+    }
   };
 
   const filteredCustomers = customers.filter(c => 
@@ -166,21 +175,47 @@ const Khata = () => {
               <p className="text-center text-slate-400 text-sm mt-4">{t('no_customers_found')}</p>
             ) : (
               filteredCustomers.map(cust => (
-                <button
+                <div
                   key={cust.id}
                   onClick={() => setSelectedCustomer(cust)}
-                  className={`w-full text-left px-4 py-2 rounded-xl transition flex justify-between items-center ${selectedCustomer?.id === cust.id ? 'bg-brand text-white shadow-md shadow-brand/20' : 'hover:bg-slate-50 border border-transparent hover:border-slate-200'}`}
+                  className={`w-full text-left px-3.5 py-2.5 rounded-xl transition flex justify-between items-center cursor-pointer ${selectedCustomer?.id === cust.id ? 'bg-brand text-white shadow-md shadow-brand/20' : 'hover:bg-slate-50 border border-slate-100'}`}
                 >
-                  <div>
-                    <h4 className={`font-bold text-[13px] break-words leading-snug ${selectedCustomer?.id === cust.id ? 'text-white' : 'text-slate-700'}`}>{cust.name}</h4>
+                  <div className="min-w-0 pr-2">
+                    <div className="flex items-center gap-1.5">
+                      <h4 className={`font-bold text-[13px] truncate ${selectedCustomer?.id === cust.id ? 'text-white' : 'text-slate-800'}`}>{cust.name}</h4>
+                      {(cust.loyalty_points || 0) > 0 && (
+                        <span className={`text-[9px] font-black px-1.5 py-0.2 rounded ${selectedCustomer?.id === cust.id ? 'bg-white/20 text-white' : 'bg-amber-100 text-amber-800'}`}>
+                          ⭐ {Math.round(cust.loyalty_points)}
+                        </span>
+                      )}
+                    </div>
                     <p className={`text-[10px] ${selectedCustomer?.id === cust.id ? 'text-brandLight' : 'text-slate-400'}`}>{cust.mobile}</p>
                   </div>
-                  <div className="text-right">
-                    <p className={`font-bold text-[13px] ${selectedCustomer?.id === cust.id ? 'text-white' : cust.current_due > 0 ? 'text-red-500' : 'text-green-500'}`}>
-                      ₹{cust.current_due.toFixed(2)}
-                    </p>
+                  <div className="text-right shrink-0 flex items-center gap-2">
+                    <div>
+                      <p className={`font-black text-[13px] leading-tight ${selectedCustomer?.id === cust.id ? 'text-white' : cust.current_due > 0 ? 'text-red-500' : 'text-green-500'}`}>
+                        ₹{cust.current_due.toFixed(2)}
+                      </p>
+                      {cust.current_due > 0 && (
+                        <span className={`text-[9px] font-bold ${selectedCustomer?.id === cust.id ? 'text-white/80' : 'text-red-400'}`}>
+                          बाकी
+                        </span>
+                      )}
+                    </div>
+                    {cust.current_due > 0 && (
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handleWhatsAppReminder(cust);
+                        }}
+                        className={`p-1.5 rounded-lg transition active:scale-90 ${selectedCustomer?.id === cust.id ? 'bg-white/20 hover:bg-white/30 text-white' : 'bg-green-100 hover:bg-green-200 text-green-700'}`}
+                        title="थेट WhatsApp Reminder पाठवा"
+                      >
+                        <WhatsappLogo weight="fill" className="text-base" />
+                      </button>
+                    )}
                   </div>
-                </button>
+                </div>
               ))
             )}
           </div>

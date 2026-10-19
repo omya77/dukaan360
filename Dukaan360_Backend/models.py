@@ -134,6 +134,8 @@ class Customer(Base):
     mobile = Column(String, index=True) # Cannot be globally unique anymore!
     opening_balance = Column(Float, default=0.0)
     current_due = Column(Float, default=0.0)
+    loyalty_points = Column(Float, default=0.0)
+    last_reminder_sent = Column(DateTime, nullable=True)
     
     ledger = relationship("CustomerLedger", back_populates="customer")
 
@@ -170,6 +172,10 @@ class SaleInvoice(Base):
     discount = Column(Float, default=0.0)
     tax = Column(Float, default=0.0)
     grand_total = Column(Float, default=0.0)
+    
+    loyalty_points_earned = Column(Float, default=0.0)
+    loyalty_points_redeemed = Column(Float, default=0.0)
+    loyalty_discount_amount = Column(Float, default=0.0)
     
     is_void = Column(Boolean, default=False)
     timestamp = Column(DateTime, default=datetime.now)
@@ -223,3 +229,16 @@ class Expense(Base):
     description = Column(String)
     amount = Column(Float, nullable=False)
     timestamp = Column(DateTime, default=datetime.now)
+
+# --- 8. AUDIT LOG (EMPLOYEE & STOCK THEFT/LEAKAGE TRACKING) ---
+class AuditLog(Base):
+    __tablename__ = 'audit_logs'
+    id = Column(Integer, primary_key=True, index=True)
+    store_id = Column(Integer, ForeignKey('stores.id'), nullable=False)
+    user_id = Column(Integer, ForeignKey('users.id'), nullable=True)
+    user_name = Column(String, nullable=True)
+    action_type = Column(String, nullable=False) # BILL_CREATED, BILL_VOIDED, STOCK_ADJUSTMENT, PRICE_CHANGE, PAYMENT_RECEIVED
+    entity_name = Column(String, nullable=True)
+    details = Column(String, nullable=True)
+    timestamp = Column(DateTime, default=datetime.now)
+

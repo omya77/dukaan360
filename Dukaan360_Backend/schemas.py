@@ -135,6 +135,7 @@ class CustomerResponse(CustomerBase):
     id: int
     current_due: float
     is_khata: Optional[bool] = False
+    loyalty_points: Optional[float] = 0.0
 
     class Config:
         from_attributes = True
@@ -142,6 +143,25 @@ class CustomerResponse(CustomerBase):
 class CustomerPaymentCreate(BaseModel):
     amount: float
     method: str
+
+class StockAdjustmentPayload(BaseModel):
+    product_id: int
+    batch_id: int
+    adjustment_type: str # "REDUCE" or "ADD"
+    quantity: float
+    reason: str # "Damage", "Missing / Theft", "Personal Use", "Count Error", "Expired"
+    notes: Optional[str] = ""
+
+class AuditLogResponse(BaseModel):
+    id: int
+    user_name: Optional[str]
+    action_type: str
+    entity_name: Optional[str]
+    details: Optional[str]
+    timestamp: datetime
+
+    class Config:
+        from_attributes = True
 
 
 # --- POS (BILLING) SCHEMAS ---
@@ -161,6 +181,8 @@ class SaleInvoiceCreate(BaseModel):
     payments: List[SalePaymentCreate]
     discount: float = 0.0
     tax: float = 0.0
+    loyalty_points_redeemed: float = 0.0
+    loyalty_discount_amount: float = 0.0
 
 class SaleItemResponse(BaseModel):
     id: int
@@ -191,6 +213,9 @@ class SaleInvoiceResponse(BaseModel):
     discount: float
     tax: float
     grand_total: float
+    loyalty_points_earned: Optional[float] = 0.0
+    loyalty_points_redeemed: Optional[float] = 0.0
+    loyalty_discount_amount: Optional[float] = 0.0
     is_void: bool
     timestamp: datetime
     items: List[SaleItemResponse] = []

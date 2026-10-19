@@ -174,15 +174,18 @@ function POS() {
     setCartItems(prev => prev.map(item => item.id === id ? { ...item, quantity: val } : item));
   };
 
-  const handleCheckoutInitiate = (paymentMethod) => {
+  const [pendingLoyaltyInfo, setPendingLoyaltyInfo] = useState({ loyaltyPointsRedeemed: 0, loyaltyDiscount: 0 });
+
+  const handleCheckoutInitiate = (paymentMethod, loyaltyInfo = {}) => {
     if (cartItems.length === 0) {
       alert(t('cart_empty'));
       return;
     }
+    setPendingLoyaltyInfo(loyaltyInfo);
 
     if (paymentMethod === 'Credit') {
       if (selectedCustomerId) {
-        processCheckout('Credit', selectedCustomerId);
+        processCheckout('Credit', selectedCustomerId, loyaltyInfo);
       } else {
         setPendingCheckoutMethod('Credit');
         setIsCustomerModalOpen(true);
@@ -190,7 +193,7 @@ function POS() {
     } else if (paymentMethod === 'UPI') {
       setIsUpiModalOpen(true);
     } else {
-      processCheckout(paymentMethod, selectedCustomerId);
+      processCheckout(paymentMethod, selectedCustomerId, loyaltyInfo);
     }
   };
 
@@ -205,7 +208,7 @@ function POS() {
       });
       setCustomers(prev => [...prev, res.data]);
       if (pendingCheckoutMethod) {
-        processCheckout(pendingCheckoutMethod, res.data.id);
+        processCheckout(pendingCheckoutMethod, res.data.id, pendingLoyaltyInfo);
       } else {
         setSelectedCustomerId(res.data.id);
         setIsCustomerModalOpen(false);
@@ -219,10 +222,12 @@ function POS() {
     }
   };
 
-  const processCheckout = async (paymentMethod, customerId) => {
+  const processCheckout = async (paymentMethod, customerId, loyaltyInfo = {}) => {
     const subtotal = cartItems.reduce((sum, item) => sum + (item.price * item.quantity), 0);
     const tax = 0; // 0% tax for now
-    const grand_total = subtotal + tax;
+    const discountAmount = loyaltyInfo.loyaltyDiscount || pendingLoyaltyInfo.loyaltyDiscount || 0;
+    const pointsRedeemed = loyaltyInfo.loyaltyPointsRedeemed || pendingLoyaltyInfo.loyaltyPointsRedeemed || 0;
+    const grand_total = Math.max(0, subtotal - discountAmount + tax);
 
     const payload = {
       store_id: 1,
@@ -230,6 +235,8 @@ function POS() {
       customer_id: customerId, 
       discount: 0,
       tax: tax,
+      loyalty_points_redeemed: pointsRedeemed,
+      loyalty_discount_amount: discountAmount,
       items: cartItems.map(item => ({
         product_id: item.id,
         batch_id: item.batch_id || item.id, 
@@ -253,6 +260,8 @@ function POS() {
         subtotal: subtotal,
         tax: tax,
         grand_total: grand_total,
+        discount_amount: discountAmount,
+        loyalty_points_earned: response.data.loyalty_points_earned || 0,
         payment_method: paymentMethod,
         items: [...cartItems],
         customer_name: cust ? cust.name : null,
@@ -260,6 +269,7 @@ function POS() {
       });
       
       setCartItems([]);
+      setPendingLoyaltyInfo({ loyaltyPointsRedeemed: 0, loyaltyDiscount: 0 });
       setIsMobileCartOpen(false);
       setIsCustomerModalOpen(false);
       fetchData();

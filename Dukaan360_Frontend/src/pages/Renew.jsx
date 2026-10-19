@@ -43,8 +43,8 @@ const Renew = () => {
   const [loadingSearch, setLoadingSearch] = useState(false);
   const [searchError, setSearchError] = useState('');
   
-  // Selected Plan state (Default to 3 Months)
-  const [selectedPlanId, setSelectedPlanId] = useState('3 Months');
+  // Selected Plan state (Default to Business)
+  const [selectedPlanId, setSelectedPlanId] = useState('Business');
   const selectedPlan = currentPlans.find(p => p.id === selectedPlanId) || currentPlans[1];
 
   const [copiedUpi, setCopiedUpi] = useState(false);
@@ -403,9 +403,28 @@ const Renew = () => {
 
             {/* STEP 2: Subscription Plans Selector (Wide 4-Card Grid) */}
             <div>
-              <label className="block text-xs sm:text-sm font-black text-slate-700 uppercase tracking-wider mb-2">
-                {txt.step2_title}
-              </label>
+              <div className="flex items-center justify-between mb-2">
+                <label className="block text-xs sm:text-sm font-black text-slate-700 uppercase tracking-wider">
+                  {txt.step2_title}
+                </label>
+                <span className="text-[10px] font-black text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200">
+                  ⚡ 10x+ ROI Investment
+                </span>
+              </div>
+
+              {/* ROI Callout */}
+              <div className="mb-3 p-2.5 rounded-xl bg-gradient-to-r from-emerald-50 via-amber-50 to-orange-50 border border-emerald-200/80 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 shadow-2xs">
+                <div className="flex items-center gap-2">
+                  <span className="text-lg">💰</span>
+                  <div>
+                    <p className="text-xs font-black text-slate-800 leading-tight">हा खर्च नाही, तर थेट दुकानाची गुंतवणूक (Investment) आहे!</p>
+                    <p className="text-[10px] text-slate-600 font-medium mt-0.5">महिन्याला फक्त ₹७९९ च्या बदल्यात उधारी वसुली, Expiry नुकसान व चोरी/गळती थांबवून ₹८,३५०+ ची बचत होते.</p>
+                  </div>
+                </div>
+                <span className="px-2 py-0.5 rounded-full bg-emerald-600 text-white font-black text-[9px] tracking-wider shrink-0 shadow-2xs">
+                  १०x+ परतावा
+                </span>
+              </div>
 
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
                 {currentPlans.map(plan => {
@@ -449,6 +468,11 @@ const Renew = () => {
                             <span className="text-xs text-slate-400 font-bold line-through">₹{plan.original}</span>
                           )}
                         </div>
+                        {plan.features && (
+                          <p className="text-[9px] font-medium text-slate-500 line-clamp-2 leading-tight mb-2">
+                            {plan.features}
+                          </p>
+                        )}
                       </div>
 
                       {/* Daily cost & selection indicator */}
