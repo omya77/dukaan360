@@ -507,7 +507,7 @@ const Login = () => {
               {/* Minimal Clean Security Line (No cluttered badges!) */}
               <div className="pt-2.5 mt-2 border-t border-slate-100 text-center text-[11px] text-slate-400 font-medium flex items-center justify-center gap-1.5">
                 <ShieldCheck weight="fill" className="text-emerald-500 text-xs" />
-                <span>२५६-बिट बँक-ग्रेड डेटा सुरक्षेसह १००% क्लाउड बॅकअप</span>
+                <span>{txt.security_badge_text || '२५६-बिट बँक-ग्रेड डेटा सुरक्षेसह १००% क्लाउड बॅकअप'}</span>
               </div>
 
             </div>

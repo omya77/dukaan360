@@ -84,7 +84,8 @@ export const AUTH_TRANSLATIONS = {
       ],
       stat_stores: "५००+ दुकाने",
       stat_speed: "०.२ सेकंदात बिल",
-      stat_rating: "४.९/५ रेटिंग"
+      stat_rating: "४.९/५ रेटिंग",
+      security_badge_text: "२५६-बिट बँक-ग्रेड डेटा सुरक्षेसह १००% क्लाउड बॅकअप"
     },
 
     // ================= REGISTER PAGE =================
@@ -172,7 +173,9 @@ export const AUTH_TRANSLATIONS = {
       // Success View
       success_title: "नोंदणी अर्ज यशस्वीरीत्या पाठवला!",
       success_desc: "तुमची स्टोअर नोंदणी ॲडमिन मंजुरीच्या प्रतीक्षेत आहे. पडताळणी पूर्ण होताच तुमचे खाते लवकरच सक्रिय केले जाईल.",
-      return_to_login: "लॉगिन वर परत जा"
+      return_to_login: "लॉगिन वर परत जा",
+      wa_notify_admin: "सुपर ॲडमिनला WhatsApp वर सूचना पाठवा",
+      security_badge_text: "२५६-बिट बँक-ग्रेड डेटा सुरक्षेसह १००% क्लाउड बॅकअप"
     },
 
     // ================= RENEW PAGE =================
@@ -381,7 +384,8 @@ export const AUTH_TRANSLATIONS = {
       ],
       stat_stores: "500+ दुकानें",
       stat_speed: "0.2 सेकंड में बिल",
-      stat_rating: "4.9/5 रेटिंग"
+      stat_rating: "4.9/5 रेटिंग",
+      security_badge_text: "256-बिट बैंक-ग्रेड डेटा सुरक्षा के साथ 100% क्लाउड बैकअप"
     },
 
     // ================= REGISTER PAGE =================
@@ -469,7 +473,9 @@ export const AUTH_TRANSLATIONS = {
       // Success View
       success_title: "पंजीकरण आवेदन सफलतापूर्वक भेजा गया!",
       success_desc: "आपकी दुकान का पंजीकरण एडमिन मंज़ूरी की प्रतीक्षा में है। सत्यापन पूर्ण होते ही खाता सक्रिय कर दिया जाएगा।",
-      return_to_login: "लॉगिन पर वापस जाएं"
+      return_to_login: "लॉगिन पर वापस जाएं",
+      wa_notify_admin: "सुपर एडमिन को WhatsApp पर सूचना भेजें",
+      security_badge_text: "256-बिट बैंक-ग्रेड डेटा सुरक्षा के साथ 100% क्लाउड बैकअप"
     },
 
     // ================= RENEW PAGE =================
@@ -678,7 +684,8 @@ export const AUTH_TRANSLATIONS = {
       ],
       stat_stores: "500+ Stores",
       stat_speed: "0.2s Fast Billing",
-      stat_rating: "4.9/5 Rating"
+      stat_rating: "4.9/5 Rating",
+      security_badge_text: "100% Cloud Backup with 256-Bit Bank-Grade Security"
     },
 
     // ================= REGISTER PAGE =================
@@ -766,7 +773,9 @@ export const AUTH_TRANSLATIONS = {
       // Success View
       success_title: "Application Sent!",
       success_desc: "Your store registration is pending approval. Admin will verify your request and activate your account shortly.",
-      return_to_login: "Return to Login"
+      return_to_login: "Return to Login",
+      wa_notify_admin: "Notify Super Admin on WhatsApp",
+      security_badge_text: "100% Cloud Backup with 256-Bit Bank-Grade Security"
     },
 
     // ================= RENEW PAGE =================

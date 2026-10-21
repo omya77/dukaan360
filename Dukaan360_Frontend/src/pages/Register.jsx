@@ -93,7 +93,7 @@ const Register = () => {
               className="inline-flex items-center justify-center gap-2 w-full mb-2 bg-emerald-600 hover:bg-emerald-700 text-white font-black rounded-xl py-2.5 shadow-md shadow-emerald-600/20 transition-all text-xs cursor-pointer"
             >
               <WhatsappLogo weight="fill" className="text-base" />
-              <span>सुपर ॲडमिनला WhatsApp वर सूचना पाठवा</span>
+              <span>{txt.wa_notify_admin || 'सुपर ॲडमिनला WhatsApp वर सूचना पाठवा'}</span>
             </a>
             <Link 
               to="/login" 
@@ -495,7 +495,7 @@ const Register = () => {
               {/* Security Badges */}
               <div className="pt-2 mt-1 border-t border-slate-100 text-center text-[11px] text-slate-400 font-medium flex items-center justify-center gap-1.5">
                 <ShieldCheck weight="fill" className="text-emerald-500 text-xs" />
-                <span>२५६-बिट बँक-ग्रेड डेटा सुरक्षेसह १००% क्लाउड बॅकअप</span>
+                <span>{txt.security_badge_text || '२५६-बिट बँक-ग्रेड डेटा सुरक्षेसह १००% क्लाउड बॅकअप'}</span>
               </div>
 
             </div>
