@@ -2029,22 +2029,17 @@ def get_value_realized(db: Session = Depends(get_db), user: models.User = Depend
         models.CustomerLedger.timestamp >= first_of_month
     ).all()
     udhari_recovered = sum(p.amount for p in payments)
-    if udhari_recovered == 0:
-        total_dues = sum(c.current_due for c in db.query(models.Customer).filter(models.Customer.store_id == user.store_id).all())
-        udhari_recovered = round(total_dues * 0.45, 2) if total_dues > 0 else 4850.0
 
     # 2. Expiry loss avoided (Value of stock alerted in time)
     batches = db.query(models.StockBatch).filter(models.StockBatch.store_id == user.store_id).all()
     expiry_loss_avoided = sum(b.current_quantity * b.purchase_rate for b in batches if b.expiry_date and b.current_quantity > 0 and (b.expiry_date - datetime.now()).days <= 45)
-    if expiry_loss_avoided == 0:
-        expiry_loss_avoided = 1200.0
 
     # 3. Dead stock / Over-purchase avoided
-    dead_stock_prevented = 2300.0
+    dead_stock_prevented = 0.0
     
     total_benefit = round(udhari_recovered + expiry_loss_avoided + dead_stock_prevented, 2)
     plan_cost = 799.0
-    multiplier = round(total_benefit / plan_cost, 1)
+    multiplier = round(total_benefit / plan_cost, 1) if plan_cost > 0 else 0.0
 
     return {
         "currency": "₹",
@@ -2055,8 +2050,8 @@ def get_value_realized(db: Session = Depends(get_db), user: models.User = Depend
         "total_benefit": total_benefit,
         "subscription_cost": plan_cost,
         "roi_multiplier": multiplier,
-        "headline": f"या महिन्यात Dukaan360 मुळे दुकानाचे अंदाजे ₹{round(total_benefit):,} वाचले आणि वसूल झाले!",
-        "pitch": f"दरमहा फक्त ₹{int(plan_cost)} च्या बदल्यात ₹{round(total_benefit):,} चा थेट परतावा (ROI: {multiplier}x)"
+        "headline": f"या महिन्यात Dukaan360 मुळे दुकानाचे ₹{round(total_benefit):,} वाचले आणि वसूल झाले!",
+        "pitch": f"दरमहा फक्त ₹{int(plan_cost)} च्या बदल्यात ₹{round(total_benefit):,} चा थेट परतावा"
     }
 
 @api.get("/dashboard/dead-stock")
@@ -2097,29 +2092,12 @@ def get_dead_stock(db: Session = Depends(get_db), user: models.User = Depends(ge
                 "suggested_action": "10% डिस्काउंट ऑफर देऊन काढा किंवा combo पॅक बनवा"
             })
 
-    # If demo/empty, provide sample realistic item so store owner sees the power immediately
-    if len(dead_stock_items) == 0:
-        dead_stock_items.append({
-            "batch_id": 9999,
-            "product_id": 9999,
-            "product_name": "प्रीमियम बासमती राईस 5kg बॅग",
-            "batch_number": "B-SLOW-01",
-            "current_quantity": 8,
-            "unit": "पॅक",
-            "purchase_rate": 450.0,
-            "selling_price": 540.0,
-            "capital_locked": 3600.0,
-            "days_idle": 60,
-            "suggested_action": "सध्या 5% डिस्काउंट देऊन स्टॉक क्लिअर करा"
-        })
-        total_capital_locked = 3600.0
-
     dead_stock_items.sort(key=lambda x: x["capital_locked"], reverse=True)
     
     return {
         "total_capital_locked": round(total_capital_locked, 2),
         "dead_stock_count": len(dead_stock_items),
-        "headline": f"⚠️ ₹{round(total_capital_locked):,} चा माल 60 दिवसांपासून slow-moving आहे आणि भांडवल अडकले आहे.",
+        "headline": f"⚠️ ₹{round(total_capital_locked):,} चा माल 60 दिवसांपासून slow-moving आहे आणि भांडवल अडकले आहे." if total_capital_locked > 0 else "सर्व साठा उत्तम फिरतोय!",
         "items": dead_stock_items[:15]
     }
 
@@ -2391,23 +2369,22 @@ def get_business_health(db: Session = Depends(get_db), user: models.User = Depen
     profit_diff = round(today_profit - yesterday_profit, 2)
 
     # 2. Score Calculation (out of 100)
-    score = 87 # Benchmark high-performing retail score
     batches = db.query(models.StockBatch).filter(models.StockBatch.store_id == user.store_id).all()
     total_batches = len(batches)
     low_stock_count = sum(1 for b in batches if b.current_quantity <= 5)
-    healthy_stock_pct = round(((total_batches - low_stock_count) / max(1, total_batches)) * 100, 1)
+    healthy_stock_pct = round(((total_batches - low_stock_count) / max(1, total_batches)) * 100, 1) if total_batches > 0 else 100.0
 
-    # Dead stock calculation
-    dead_stock_amount = 3600.0
+    score = 100 if total_batches == 0 else int(healthy_stock_pct)
+    dead_stock_amount = 0.0
 
     return {
         "health_score": score,
-        "health_status": "उत्कृष्ट (Excellent)",
-        "sales_growth": "+12%",
-        "profit_growth": "+8%",
-        "udhari_change": "-5%",
+        "health_status": "सक्रिय स्टोअर (Active Store)" if total_batches == 0 else ("उत्कृष्ट (Excellent)" if score >= 80 else "लक्ष देण्याची गरज"),
+        "sales_growth": "0%",
+        "profit_growth": "0%",
+        "udhari_change": "0%",
         "dead_stock_amount": dead_stock_amount,
-        "stock_health_pct": healthy_stock_pct or 91.0,
+        "stock_health_pct": healthy_stock_pct,
         "today_breakdown": {
             "today_sales": round(today_sales, 2),
             "today_expenses": round(today_expenses, 2),
@@ -2419,19 +2396,19 @@ def get_business_health(db: Session = Depends(get_db), user: models.User = Depen
             "headline": f"कालपेक्षा आज ₹{abs(profit_diff):,.0f} {'जास्त नफा 🚀' if profit_diff >= 0 else 'कमी नफा'}"
         },
         "this_month_vs_last_month": {
-            "sales_trend": "+14.2%",
-            "profit_trend": "+11.5%",
-            "udhari_trend": "-8.0%",
-            "this_month_sales": 480000.0,
-            "last_month_sales": 420000.0
+            "sales_trend": "0%",
+            "profit_trend": "0%",
+            "udhari_trend": "0%",
+            "this_month_sales": round(today_sales, 2),
+            "last_month_sales": 0.0
         },
         "monthly_achievement": {
-            "title": f"{datetime.now().strftime('%B')} Achievement 🎉",
-            "target_sales": 500000,
-            "badge": "₹5,00,000 विक्री लक्ष्य साध्य!",
-            "best_seller": "Fortune Sunlite Oil 1L",
-            "best_day": "शनिवार (विक्री ₹२८,४५०)",
-            "growth": "+14.2%"
+            "title": f"{datetime.now().strftime('%B')} चे उद्दिष्ट",
+            "target_sales": 100000,
+            "badge": "नवीन सुरुवात! पहिली विक्री नोंदवा 🚀",
+            "best_seller": "-",
+            "best_day": "-",
+            "growth": "0%"
         }
     }
 
@@ -2459,11 +2436,11 @@ def get_where_is_my_money(db: Session = Depends(get_db), user: models.User = Dep
             elif pmt.method == models.PaymentMethodEnum.UPI:
                 upi_sales += pmt.amount
                 
-    cash_in_hand = round(cash_sales + 15000.0, 2) # Sales + standard cash float
-    upi_in_bank = round(upi_sales + 25000.0, 2)  # Bank settlement balance
+    cash_in_hand = round(cash_sales, 2)
+    upi_in_bank = round(upi_sales, 2)
     
     suppliers = db.query(models.Supplier).filter(models.Supplier.store_id == user.store_id).all()
-    supplier_payable = sum(s.current_due for s in suppliers) if suppliers else 24000.0
+    supplier_payable = sum(s.current_due for s in suppliers) if suppliers else 0.0
     
     total_capital = round(inventory_val + customer_udhari + cash_in_hand + upi_in_bank, 2)
     
