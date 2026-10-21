@@ -22,7 +22,8 @@ import {
   Lightning,
   CircleNotch,
   Package,
-  ChartLineUp
+  ChartLineUp,
+  TrendUp
 } from '@phosphor-icons/react';
 
 const Register = () => {
@@ -62,10 +63,12 @@ const Register = () => {
   // Success Confirmation Screen
   if (success) {
     return (
-      <div className="h-screen w-full bg-gradient-to-br from-[#FFF5F2] via-[#F8FAFC] to-[#F1F5F9] flex flex-col overflow-hidden font-sans select-none">
-        <header className="w-full h-13 sm:h-14 px-4 sm:px-8 bg-white/80 backdrop-blur-md border-b border-orange-100/70 flex items-center justify-between shrink-0 shadow-2xs z-20">
+      <div className="h-screen w-full bg-[#FAF5F0] flex flex-col justify-between overflow-hidden font-sans select-none relative">
+        <div className="absolute -top-[20%] -left-[10%] w-[550px] h-[550px] bg-gradient-to-tr from-[#FF5722]/20 via-[#FFA726]/15 to-rose-400/10 rounded-full blur-[110px] pointer-events-none"></div>
+
+        <header className="relative z-20 w-full h-13 px-4 sm:px-8 bg-white/70 backdrop-blur-xl border-b border-orange-200/50 flex items-center justify-between shrink-0 shadow-2xs">
           <div className="flex items-center gap-2.5">
-            <div className="w-8.5 h-8.5 rounded-xl bg-gradient-to-tr from-[#FF5722] to-[#FFA726] flex items-center justify-center text-white shadow-md shadow-orange-500/25">
+            <div className="w-8.5 h-8.5 rounded-xl bg-gradient-to-tr from-[#FF5722] via-[#FF6E40] to-[#FFA726] flex items-center justify-center text-white shadow-md shadow-orange-500/30">
               <Storefront weight="fill" className="text-xl" />
             </div>
             <h1 className="text-lg font-black tracking-tight text-slate-900 leading-none">Dukaan360</h1>
@@ -73,8 +76,8 @@ const Register = () => {
           <LanguageControl variant="auth" />
         </header>
 
-        <main className="flex-1 flex items-center justify-center p-4">
-          <div className="bg-white rounded-3xl shadow-xl border border-orange-100 max-w-md w-full p-6 sm:p-7 text-center animate-in zoom-in-95 duration-200">
+        <main className="relative z-10 flex-1 flex items-center justify-center p-4">
+          <div className="bg-white/95 backdrop-blur-2xl rounded-3xl shadow-xl border border-orange-100 max-w-md w-full p-6 sm:p-7 text-center animate-in zoom-in-95 duration-200">
             <div className="w-13 h-13 bg-emerald-50 text-emerald-500 rounded-2xl flex items-center justify-center mx-auto mb-3 shadow-inner border border-emerald-100">
               <CheckCircle weight="fill" className="text-3xl" />
             </div>
@@ -105,20 +108,38 @@ const Register = () => {
   }
 
   return (
-    <div className="h-screen w-full bg-gradient-to-br from-[#FFF5F2] via-[#F8FAFC] to-[#F1F5F9] flex flex-col overflow-hidden font-sans select-none">
+    <div className="h-screen w-full bg-[#FAF5F0] relative flex flex-col justify-between overflow-hidden font-sans select-none">
       
-      {/* ================= TOP GLOBAL NAVBAR ================= */}
-      <header className="w-full h-13 sm:h-14 px-4 sm:px-8 bg-white/80 backdrop-blur-md border-b border-orange-100/70 flex items-center justify-between shrink-0 shadow-2xs z-20">
+      {/* ================= HIGH-LEVEL AURORA GLOW SYSTEM ================= */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden z-0">
+        <div className="absolute -top-[20%] -left-[10%] w-[550px] h-[550px] bg-gradient-to-tr from-[#FF5722]/20 via-[#FFA726]/15 to-rose-400/10 rounded-full blur-[110px]"></div>
+        <div className="absolute -bottom-[20%] -right-[10%] w-[600px] h-[600px] bg-gradient-to-tr from-amber-400/15 via-[#FF7043]/15 to-orange-500/10 rounded-full blur-[120px]"></div>
+        <div className="absolute top-[30%] left-[35%] w-[450px] h-[450px] bg-gradient-to-tr from-orange-400/10 via-rose-300/10 to-transparent rounded-full blur-[90px]"></div>
+      </div>
+
+      {/* Subtle Micro-Grid */}
+      <div 
+        className="absolute inset-0 pointer-events-none z-0 opacity-25"
+        style={{
+          backgroundImage: 'radial-gradient(#EA580C 1px, transparent 1px)',
+          backgroundSize: '24px 24px',
+          maskImage: 'radial-gradient(ellipse at center, rgba(0,0,0,0.8) 30%, transparent 80%)'
+        }}
+      ></div>
+
+      {/* ================= TOP BRAND NAVBAR ================= */}
+      <header className="relative z-20 w-full h-13 px-4 sm:px-8 bg-white/70 backdrop-blur-xl border-b border-orange-200/50 flex items-center justify-between shrink-0 shadow-[0_2px_15px_rgba(255,87,34,0.04)]">
         <div className="flex items-center gap-2.5">
-          <div className="w-8.5 h-8.5 rounded-xl bg-gradient-to-tr from-[#FF5722] to-[#FFA726] flex items-center justify-center text-white shadow-md shadow-orange-500/25 shrink-0">
+          <div className="w-8.5 h-8.5 rounded-xl bg-gradient-to-tr from-[#FF5722] via-[#FF6E40] to-[#FFA726] flex items-center justify-center text-white shadow-md shadow-orange-500/30 ring-2 ring-white/80">
             <Storefront weight="fill" className="text-xl" />
           </div>
           <div className="flex items-center gap-2">
             <h1 className="text-lg font-black tracking-tight text-slate-900 leading-none">
               Dukaan360
             </h1>
-            <span className="hidden sm:inline-flex text-[10px] font-black text-emerald-700 bg-emerald-50 border border-emerald-200/80 px-2 py-0.5 rounded-full">
-              {txt.right_badge}
+            <span className="hidden sm:inline-flex items-center gap-1 text-[10px] font-black text-emerald-700 bg-emerald-50 border border-emerald-200/80 px-2 py-0.5 rounded-full shadow-2xs">
+              <Sparkle weight="fill" className="text-[10px]" />
+              <span>{txt.right_badge}</span>
             </span>
           </div>
         </div>
@@ -128,7 +149,7 @@ const Register = () => {
 
           <Link 
             to="/login" 
-            className="text-xs font-bold text-slate-700 hover:text-slate-900 bg-white hover:bg-slate-100 px-3 py-1.5 rounded-xl transition flex items-center gap-1.5 border border-slate-200/80 shadow-2xs shrink-0 whitespace-nowrap"
+            className="text-xs font-bold text-slate-700 hover:text-slate-900 bg-white/90 hover:bg-white px-3 py-1.5 rounded-xl transition flex items-center gap-1.5 border border-slate-200/80 shadow-2xs shrink-0 whitespace-nowrap"
           >
             <ArrowLeft weight="bold" className="text-xs" />
             <span className="hidden sm:inline">{txt.return_to_login}</span>
@@ -137,23 +158,23 @@ const Register = () => {
         </div>
       </header>
 
-      {/* ================= MAIN BALANCED WORKSPACE (NO SCROLLING) ================= */}
-      <main className="flex-1 w-full max-w-[1060px] mx-auto px-4 py-2 sm:py-3 flex items-center justify-center overflow-hidden">
+      {/* ================= MAIN HIGH-LEVEL WORKSPACE (ZERO SCROLLING) ================= */}
+      <main className="relative z-10 flex-1 w-full max-w-[1080px] mx-auto px-4 py-2 sm:py-3 flex items-center justify-center overflow-hidden">
         
-        {/* DUAL-PANE BRAND SUITE CARD */}
-        <div className="w-full bg-white/95 backdrop-blur-xl rounded-3xl border border-orange-100/80 shadow-[0_15px_45px_-10px_rgba(255,87,34,0.1),0_2px_10px_rgba(0,0,0,0.03)] overflow-hidden flex flex-col lg:flex-row my-auto max-h-[520px]">
+        {/* MASTER HIGH-LEVEL GLASS SUITE */}
+        <div className="w-full bg-white/85 backdrop-blur-2xl rounded-[28px] border border-white/90 shadow-[0_20px_50px_-10px_rgba(255,87,34,0.14),0_0_0_1px_rgba(255,255,255,0.9)] overflow-hidden flex flex-col lg:flex-row my-auto max-h-[515px]">
           
-          {/* ================= LEFT PANE: Warm Trial Perks Showcase (42%) ================= */}
-          <div className="hidden lg:flex lg:w-[42%] bg-gradient-to-br from-[#FFF0ED] via-[#FFF8F6] to-[#FFF0ED] p-5 sm:p-6 flex-col justify-between border-r border-orange-100/70 select-none relative overflow-hidden">
+          {/* ================= LEFT PANE: High-Level Trial Perks Simulator (42%) ================= */}
+          <div className="hidden lg:flex lg:w-[42%] bg-gradient-to-br from-[#FFF2EE] via-[#FFF9F7] to-[#FFEFEA] p-5 sm:p-6 flex-col justify-between border-r border-orange-200/60 select-none relative overflow-hidden">
             
-            {/* Top: Trial Headline & ₹0 Badge */}
+            {/* Top: Trial Headline & Glowing Badge */}
             <div className="space-y-1">
               <div className="flex items-center justify-between">
-                <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-white border border-orange-200/80 text-[10.5px] font-black text-[#FF5722] shadow-2xs">
+                <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-white/90 border border-orange-200 text-[10.5px] font-black text-[#FF5722] shadow-xs">
                   <Sparkle weight="fill" className="text-xs text-[#FF5722]" />
                   <span>३० दिवस ऑल-इन-वन मोफत</span>
                 </div>
-                <span className="text-[10px] font-black text-emerald-700 bg-emerald-100/80 border border-emerald-200 px-2 py-0.5 rounded-full">
+                <span className="text-[10px] font-black text-emerald-700 bg-emerald-100/90 border border-emerald-200 px-2 py-0.5 rounded-full">
                   ₹० शुल्क
                 </span>
               </div>
@@ -166,43 +187,51 @@ const Register = () => {
               </p>
             </div>
 
-            {/* 4 Feature Pills Grid */}
-            <div className="grid grid-cols-2 gap-2 my-2">
-              <div className="bg-white/80 border border-orange-100 rounded-xl p-2 shadow-2xs">
+            {/* Middle: 4 High-Tech Feature Simulator Pills */}
+            <div className="grid grid-cols-2 gap-2 my-1.5">
+              <div className="bg-white/90 border border-orange-100 rounded-xl p-2 shadow-2xs hover:shadow-xs transition">
                 <div className="flex items-center gap-1.5 mb-0.5">
-                  <Lightning weight="fill" className="text-[#FF5722] text-sm shrink-0" />
-                  <span className="text-[11px] font-bold text-slate-800">१-क्लिक बिलिंग</span>
+                  <div className="w-5 h-5 rounded-md bg-orange-100 text-[#FF5722] flex items-center justify-center text-xs">
+                    <Lightning weight="fill" />
+                  </div>
+                  <span className="text-[11px] font-black text-slate-800">१-क्लिक बिलिंग</span>
                 </div>
-                <p className="text-[9.5px] text-slate-500 leading-tight">बारकोड व थर्मल प्रिंट</p>
+                <p className="text-[9.5px] text-slate-500 leading-tight">५ सेकंदात प्रिंट</p>
               </div>
 
-              <div className="bg-white/80 border border-orange-100 rounded-xl p-2 shadow-2xs">
+              <div className="bg-white/90 border border-orange-100 rounded-xl p-2 shadow-2xs hover:shadow-xs transition">
                 <div className="flex items-center gap-1.5 mb-0.5">
-                  <WhatsappLogo weight="fill" className="text-emerald-600 text-sm shrink-0" />
-                  <span className="text-[11px] font-bold text-slate-800">WhatsApp बिल</span>
+                  <div className="w-5 h-5 rounded-md bg-emerald-100 text-emerald-600 flex items-center justify-center text-xs">
+                    <WhatsappLogo weight="fill" />
+                  </div>
+                  <span className="text-[11px] font-black text-slate-800">WhatsApp बिल</span>
                 </div>
-                <p className="text-[9.5px] text-slate-500 leading-tight">थेट ग्राहकाला मेसेज</p>
+                <p className="text-[9.5px] text-slate-500 leading-tight">कागद खर्च ₹०</p>
               </div>
 
-              <div className="bg-white/80 border border-orange-100 rounded-xl p-2 shadow-2xs">
+              <div className="bg-white/90 border border-orange-100 rounded-xl p-2 shadow-2xs hover:shadow-xs transition">
                 <div className="flex items-center gap-1.5 mb-0.5">
-                  <Package weight="fill" className="text-blue-600 text-sm shrink-0" />
-                  <span className="text-[11px] font-bold text-slate-800">स्टॉक मॅनेजमेंट</span>
+                  <div className="w-5 h-5 rounded-md bg-blue-100 text-blue-600 flex items-center justify-center text-xs">
+                    <Package weight="fill" />
+                  </div>
+                  <span className="text-[11px] font-black text-slate-800">स्टॉक अलर्ट</span>
                 </div>
-                <p className="text-[9.5px] text-slate-500 leading-tight">कमी स्टॉक अलर्ट</p>
+                <p className="text-[9.5px] text-slate-500 leading-tight">कमी माल सूचना</p>
               </div>
 
-              <div className="bg-white/80 border border-orange-100 rounded-xl p-2 shadow-2xs">
+              <div className="bg-white/90 border border-orange-100 rounded-xl p-2 shadow-2xs hover:shadow-xs transition">
                 <div className="flex items-center gap-1.5 mb-0.5">
-                  <ChartLineUp weight="fill" className="text-purple-600 text-sm shrink-0" />
-                  <span className="text-[11px] font-bold text-slate-800">दैनिक नफा</span>
+                  <div className="w-5 h-5 rounded-md bg-purple-100 text-purple-600 flex items-center justify-center text-xs">
+                    <ChartLineUp weight="fill" />
+                  </div>
+                  <span className="text-[11px] font-black text-slate-800">दैनिक नफा</span>
                 </div>
-                <p className="text-[9.5px] text-slate-500 leading-tight">एकूण कमाई हिशोब</p>
+                <p className="text-[9.5px] text-slate-500 leading-tight">रोजची एकूण कमाई</p>
               </div>
             </div>
 
             {/* 3-Point Guarantee (After Trial) */}
-            <div className="bg-white/90 border border-orange-150/70 rounded-xl p-2.5 space-y-1 shadow-2xs">
+            <div className="bg-white/95 border border-orange-150 rounded-xl p-2.5 space-y-1 shadow-2xs">
               <div className="flex items-center gap-1 text-[#FF5722] font-black text-[10.5px]">
                 <Sparkle weight="fill" className="text-xs" />
                 <span>{txt.after_trial_title}</span>
@@ -224,7 +253,7 @@ const Register = () => {
             </div>
 
             {/* Direct WhatsApp Founder Support Strip */}
-            <div className="pt-2 border-t border-orange-100/80 flex items-center justify-between text-[10.5px]">
+            <div className="pt-2 border-t border-orange-200/70 flex items-center justify-between text-[10.5px]">
               <div className="flex items-center gap-1.5 text-slate-600 font-medium">
                 <WhatsappLogo weight="fill" className="text-emerald-600 text-base shrink-0" />
                 <span>{txt.support_text}</span>
@@ -242,13 +271,13 @@ const Register = () => {
           </div>
 
           {/* ================= RIGHT PANE: Modern Registration Canvas (58%) ================= */}
-          <div className="w-full lg:w-[58%] p-5 sm:p-6 xl:p-7 flex flex-col justify-between relative bg-white">
+          <div className="w-full lg:w-[58%] p-5 sm:p-6 xl:p-7 flex flex-col justify-between relative bg-white/90">
             
-            <div className="w-full max-w-[480px] mx-auto space-y-2.5 my-auto">
+            <div className="w-full max-w-[470px] mx-auto space-y-2.5 my-auto">
               
               {/* Header Title */}
               <div>
-                <div className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-orange-50 border border-orange-200 text-[10px] font-black text-[#FF5722] mb-1">
+                <div className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-orange-50 border border-orange-200 text-[10px] font-black text-[#FF5722] mb-1 shadow-2xs">
                   <Sparkle weight="fill" className="text-xs text-[#FF5722]" />
                   <span>३० दिवस मोफत Pro ॲक्सेस • ₹० शुल्क</span>
                 </div>
@@ -284,7 +313,7 @@ const Register = () => {
                         type="text" 
                         value={formData.store_name} 
                         onChange={e => setFormData({...formData, store_name: e.target.value})}
-                        className="w-full h-9.5 bg-slate-50/70 hover:bg-slate-50 border border-slate-200 rounded-xl pl-8.5 pr-2.5 text-xs font-semibold text-slate-800 outline-none focus:bg-white focus:border-[#FF5722] focus:ring-3 focus:ring-[#FF5722]/15 transition-all placeholder:font-normal placeholder:text-slate-400"
+                        className="w-full h-9.5 bg-slate-50/80 hover:bg-slate-50 border border-slate-200 rounded-xl pl-8.5 pr-2.5 text-xs font-semibold text-slate-800 outline-none focus:bg-white focus:border-[#FF5722] focus:ring-4 focus:ring-orange-500/15 transition-all placeholder:font-normal placeholder:text-slate-400 shadow-2xs"
                         placeholder={txt.store_name_placeholder}
                       />
                     </div>
@@ -301,7 +330,7 @@ const Register = () => {
                         type="text" 
                         value={formData.owner_name} 
                         onChange={e => setFormData({...formData, owner_name: e.target.value})}
-                        className="w-full h-9.5 bg-slate-50/70 hover:bg-slate-50 border border-slate-200 rounded-xl pl-8.5 pr-2.5 text-xs font-semibold text-slate-800 outline-none focus:bg-white focus:border-[#FF5722] focus:ring-3 focus:ring-[#FF5722]/15 transition-all placeholder:font-normal placeholder:text-slate-400"
+                        className="w-full h-9.5 bg-slate-50/80 hover:bg-slate-50 border border-slate-200 rounded-xl pl-8.5 pr-2.5 text-xs font-semibold text-slate-800 outline-none focus:bg-white focus:border-[#FF5722] focus:ring-4 focus:ring-orange-500/15 transition-all placeholder:font-normal placeholder:text-slate-400 shadow-2xs"
                         placeholder={txt.owner_name_placeholder}
                       />
                     </div>
@@ -322,7 +351,7 @@ const Register = () => {
                         maxLength="10" 
                         value={formData.mobile} 
                         onChange={e => setFormData({...formData, mobile: e.target.value.replace(/\D/g, '')})}
-                        className="w-full h-9.5 bg-slate-50/70 hover:bg-slate-50 border border-slate-200 rounded-xl pl-8.5 pr-2.5 text-xs font-semibold text-slate-800 outline-none focus:bg-white focus:border-[#FF5722] focus:ring-3 focus:ring-[#FF5722]/15 transition-all placeholder:font-normal placeholder:text-slate-400"
+                        className="w-full h-9.5 bg-slate-50/80 hover:bg-slate-50 border border-slate-200 rounded-xl pl-8.5 pr-2.5 text-xs font-semibold text-slate-800 outline-none focus:bg-white focus:border-[#FF5722] focus:ring-4 focus:ring-orange-500/15 transition-all placeholder:font-normal placeholder:text-slate-400 shadow-2xs"
                         placeholder={txt.mobile_placeholder}
                       />
                     </div>
@@ -342,7 +371,7 @@ const Register = () => {
                         type="email" 
                         value={formData.email} 
                         onChange={e => setFormData({...formData, email: e.target.value.toLowerCase().trim()})}
-                        className="w-full h-9.5 bg-slate-50/70 hover:bg-slate-50 border border-slate-200 rounded-xl pl-8.5 pr-2.5 text-xs font-semibold text-slate-800 outline-none focus:bg-white focus:border-[#FF5722] focus:ring-3 focus:ring-[#FF5722]/15 transition-all placeholder:font-normal placeholder:text-slate-400"
+                        className="w-full h-9.5 bg-slate-50/80 hover:bg-slate-50 border border-slate-200 rounded-xl pl-8.5 pr-2.5 text-xs font-semibold text-slate-800 outline-none focus:bg-white focus:border-[#FF5722] focus:ring-4 focus:ring-orange-500/15 transition-all placeholder:font-normal placeholder:text-slate-400 shadow-2xs"
                         placeholder={txt.email_placeholder}
                       />
                     </div>
@@ -362,7 +391,7 @@ const Register = () => {
                         type="password" 
                         value={formData.password} 
                         onChange={e => setFormData({...formData, password: e.target.value})}
-                        className="w-full h-9.5 bg-slate-50/70 hover:bg-slate-50 border border-slate-200 rounded-xl pl-8.5 pr-2.5 text-xs font-semibold text-slate-800 outline-none focus:bg-white focus:border-[#FF5722] focus:ring-3 focus:ring-[#FF5722]/15 transition-all placeholder:font-normal placeholder:text-slate-400"
+                        className="w-full h-9.5 bg-slate-50/80 hover:bg-slate-50 border border-slate-200 rounded-xl pl-8.5 pr-2.5 text-xs font-semibold text-slate-800 outline-none focus:bg-white focus:border-[#FF5722] focus:ring-4 focus:ring-orange-500/15 transition-all placeholder:font-normal placeholder:text-slate-400 shadow-2xs"
                         placeholder={txt.password_placeholder}
                       />
                     </div>
@@ -379,7 +408,7 @@ const Register = () => {
                         type="text" 
                         value={formData.address} 
                         onChange={e => setFormData({...formData, address: e.target.value})}
-                        className="w-full h-9.5 bg-slate-50/70 hover:bg-slate-50 border border-slate-200 rounded-xl pl-8.5 pr-2.5 text-xs font-semibold text-slate-800 outline-none focus:bg-white focus:border-[#FF5722] focus:ring-3 focus:ring-[#FF5722]/15 transition-all placeholder:font-normal placeholder:text-slate-400"
+                        className="w-full h-9.5 bg-slate-50/80 hover:bg-slate-50 border border-slate-200 rounded-xl pl-8.5 pr-2.5 text-xs font-semibold text-slate-800 outline-none focus:bg-white focus:border-[#FF5722] focus:ring-4 focus:ring-orange-500/15 transition-all placeholder:font-normal placeholder:text-slate-400 shadow-2xs"
                         placeholder={txt.address_placeholder}
                       />
                     </div>
@@ -400,11 +429,11 @@ const Register = () => {
                   <input type="hidden" name="plan_type" value="1 Month" />
                 </div>
 
-                {/* Submit Button */}
+                {/* High-Level Shimmer Submit Button */}
                 <button 
                   type="submit" 
                   disabled={loading}
-                  className="w-full h-10 bg-gradient-to-r from-[#FF5722] via-[#FF6E40] to-[#FF8A65] hover:from-[#E64A19] hover:to-[#FF5722] text-white font-black rounded-xl transition-all duration-200 shadow-md shadow-orange-500/25 active:scale-[0.99] disabled:opacity-70 flex justify-center items-center gap-2 text-xs sm:text-sm cursor-pointer mt-0.5"
+                  className="w-full h-10.5 bg-gradient-to-r from-[#FF5722] via-[#FF6E40] to-[#FFA726] hover:from-[#E64A19] hover:to-[#FF5722] text-white font-black rounded-xl transition-all duration-200 shadow-md shadow-orange-500/30 hover:shadow-lg hover:shadow-orange-500/40 active:scale-[0.99] disabled:opacity-70 flex justify-center items-center gap-2 text-xs sm:text-sm cursor-pointer mt-0.5"
                 >
                   {loading ? (
                     <>

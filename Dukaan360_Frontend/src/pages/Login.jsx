@@ -23,7 +23,10 @@ import {
   Lightning,
   Package,
   Receipt,
-  ChartLineUp
+  ChartLineUp,
+  TrendUp,
+  SealCheck,
+  Check
 } from '@phosphor-icons/react';
 
 const Login = () => {
@@ -40,7 +43,7 @@ const Login = () => {
   const { language } = useLanguage();
   const txt = getAuthTranslations(language).login;
 
-  // Forgot Password State (Email OTP)
+  // Forgot Password State
   const [showForgotModal, setShowForgotModal] = useState(false);
   const [forgotStep, setForgotStep] = useState(1);
   const [forgotUsername, setForgotUsername] = useState('');
@@ -165,30 +168,50 @@ const Login = () => {
   };
 
   return (
-    <div className="h-screen w-full bg-gradient-to-br from-[#FFF5F2] via-[#F8FAFC] to-[#F1F5F9] flex flex-col overflow-hidden font-sans select-none">
+    <div className="h-screen w-full bg-[#FAF5F0] relative flex flex-col justify-between overflow-hidden font-sans select-none">
       
-      {/* ================= TOP GLOBAL NAVBAR ================= */}
-      <header className="w-full h-13 sm:h-14 px-4 sm:px-8 bg-white/80 backdrop-blur-md border-b border-orange-100/70 flex items-center justify-between shrink-0 shadow-2xs z-20">
+      {/* ================= HIGH-LEVEL AURORA GLOW SYSTEM ================= */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden z-0">
+        <div className="absolute -top-[20%] -left-[10%] w-[550px] h-[550px] bg-gradient-to-tr from-[#FF5722]/20 via-[#FFA726]/15 to-rose-400/10 rounded-full blur-[110px]"></div>
+        <div className="absolute -bottom-[20%] -right-[10%] w-[600px] h-[600px] bg-gradient-to-tr from-amber-400/15 via-[#FF7043]/15 to-orange-500/10 rounded-full blur-[120px]"></div>
+        <div className="absolute top-[30%] left-[35%] w-[450px] h-[450px] bg-gradient-to-tr from-orange-400/10 via-rose-300/10 to-transparent rounded-full blur-[90px]"></div>
+      </div>
+
+      {/* Subtle Micro-Grid */}
+      <div 
+        className="absolute inset-0 pointer-events-none z-0 opacity-25"
+        style={{
+          backgroundImage: 'radial-gradient(#EA580C 1px, transparent 1px)',
+          backgroundSize: '24px 24px',
+          maskImage: 'radial-gradient(ellipse at center, rgba(0,0,0,0.8) 30%, transparent 80%)'
+        }}
+      ></div>
+
+      {/* ================= TOP BRAND NAVBAR ================= */}
+      <header className="relative z-20 w-full h-13 px-4 sm:px-8 bg-white/70 backdrop-blur-xl border-b border-orange-200/50 flex items-center justify-between shrink-0 shadow-[0_2px_15px_rgba(255,87,34,0.04)]">
+        {/* Brand Logo & Pill */}
         <div className="flex items-center gap-2.5">
-          <div className="w-8.5 h-8.5 rounded-xl bg-gradient-to-tr from-[#FF5722] to-[#FFA726] flex items-center justify-center text-white shadow-md shadow-orange-500/25 shrink-0">
+          <div className="w-8.5 h-8.5 rounded-xl bg-gradient-to-tr from-[#FF5722] via-[#FF6E40] to-[#FFA726] flex items-center justify-center text-white shadow-md shadow-orange-500/30 ring-2 ring-white/80">
             <Storefront weight="fill" className="text-xl" />
           </div>
           <div className="flex items-center gap-2">
             <h1 className="text-lg font-black tracking-tight text-slate-900 leading-none">
               {txt.brand_title}
             </h1>
-            <span className="hidden sm:inline-flex text-[10px] font-black text-[#FF5722] bg-orange-50 border border-orange-200/80 px-2 py-0.5 rounded-full">
-              {txt.brand_subtitle}
+            <span className="hidden sm:inline-flex items-center gap-1 text-[10px] font-black text-[#FF5722] bg-orange-50/90 border border-orange-200/80 px-2 py-0.5 rounded-full shadow-2xs">
+              <Sparkle weight="fill" className="text-[10px]" />
+              <span>{txt.brand_subtitle}</span>
             </span>
           </div>
         </div>
 
+        {/* Action Controls */}
         <div className="flex items-center gap-2.5">
           <LanguageControl variant="auth" />
 
           <Link 
             to="/register"
-            className="text-xs font-black text-white bg-gradient-to-r from-[#FF5722] to-[#FF7043] hover:from-[#E64A19] hover:to-[#FF5722] px-3.5 py-1.5 rounded-xl transition-all flex items-center gap-1.5 shadow-md shadow-orange-500/20 active:scale-98 shrink-0 whitespace-nowrap"
+            className="text-xs font-black text-white bg-gradient-to-r from-[#FF5722] via-[#FF6E40] to-[#FFA726] hover:from-[#E64A19] hover:to-[#FF5722] px-3.5 py-1.5 rounded-xl transition-all flex items-center gap-1.5 shadow-md shadow-orange-500/25 active:scale-98 shrink-0 whitespace-nowrap"
           >
             <span>{txt.register_now.replace('→', '').trim()}</span>
             <ArrowRight weight="bold" className="text-xs" />
@@ -196,99 +219,116 @@ const Login = () => {
         </div>
       </header>
 
-      {/* ================= MAIN BALANCED WORKSPACE (NO SCROLLING) ================= */}
-      <main className="flex-1 w-full max-w-[1040px] mx-auto px-4 py-2 sm:py-4 flex items-center justify-center overflow-hidden">
+      {/* ================= MAIN HIGH-LEVEL WORKSPACE (ZERO SCROLLING) ================= */}
+      <main className="relative z-10 flex-1 w-full max-w-[1080px] mx-auto px-4 py-2 sm:py-3 flex items-center justify-center overflow-hidden">
         
-        {/* DUAL-PANE BRAND SUITE CARD */}
-        <div className="w-full bg-white/95 backdrop-blur-xl rounded-3xl border border-orange-100/80 shadow-[0_15px_45px_-10px_rgba(255,87,34,0.1),0_2px_10px_rgba(0,0,0,0.03)] overflow-hidden flex flex-col lg:flex-row my-auto max-h-[510px]">
+        {/* MASTER HIGH-LEVEL GLASS SUITE */}
+        <div className="w-full bg-white/85 backdrop-blur-2xl rounded-[28px] border border-white/90 shadow-[0_20px_50px_-10px_rgba(255,87,34,0.14),0_0_0_1px_rgba(255,255,255,0.9)] overflow-hidden flex flex-col lg:flex-row my-auto max-h-[515px]">
           
-          {/* ================= LEFT PANE: Warm Branded Feature Showcase (46%) ================= */}
-          <div className="hidden lg:flex lg:w-[46%] bg-gradient-to-br from-[#FFF0ED] via-[#FFF8F6] to-[#FFF0ED] p-6 xl:p-7 flex-col justify-between border-r border-orange-100/70 select-none relative overflow-hidden">
+          {/* ================= LEFT PANE: High-Level Live POS Hologram Showcase (48%) ================= */}
+          <div className="hidden lg:flex lg:w-[48%] bg-gradient-to-br from-[#FFF2EE] via-[#FFF9F7] to-[#FFEFEA] p-6 xl:p-7 flex-col justify-between border-r border-orange-200/60 select-none relative overflow-hidden">
             
-            {/* Top Brand Tag & Pitch */}
+            {/* Top: Headline & Smart Pill */}
             <div className="space-y-1.5">
-              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white border border-orange-200/80 text-[11px] font-black text-[#FF5722] shadow-2xs">
+              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/90 border border-orange-200 text-[11px] font-black text-[#FF5722] shadow-xs">
                 <Sparkle weight="fill" className="text-xs text-[#FF5722]" />
-                <span>Smart Kirana & Retail POS</span>
+                <span>Next-Gen Cloud POS Architecture</span>
               </div>
 
-              <h2 className="text-xl font-black text-slate-900 tracking-tight leading-snug">
+              <h2 className="text-xl xl:text-[22px] font-black text-slate-900 tracking-tight leading-snug">
                 {txt.brand_quote_1} <br />
-                <span className="text-[#FF5722]">{txt.brand_quote_highlight}</span>
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FF5722] via-[#FF6E40] to-[#E64A19]">
+                  {txt.brand_quote_highlight}
+                </span>
               </h2>
-              <p className="text-slate-500 text-xs font-medium leading-relaxed">
-                {txt.brand_subquote}
-              </p>
             </div>
 
-            {/* 4 Feature Cards (Clean Warm Glass Pills) */}
-            <div className="grid grid-cols-2 gap-2.5 my-3">
-              <div className="bg-white/80 hover:bg-white border border-orange-100 rounded-xl p-2.5 shadow-2xs transition">
-                <div className="flex items-center gap-1.5 mb-1">
-                  <div className="w-6 h-6 rounded-lg bg-orange-100 text-[#FF5722] flex items-center justify-center text-xs shrink-0">
-                    <Lightning weight="fill" />
-                  </div>
-                  <span className="text-xs font-bold text-slate-800">१-क्लिक बिलिंग</span>
-                </div>
-                <p className="text-[10px] text-slate-500 leading-tight">बारकोड व थर्मल प्रिंट</p>
+            {/* Middle: Live Interactive POS Simulator Card (High Level Wow Factor!) */}
+            <div className="relative my-2">
+              
+              {/* Floating Top Widget: Live Profit */}
+              <div className="absolute -top-3.5 right-3 z-20 bg-gradient-to-r from-emerald-600 to-teal-600 text-white px-3 py-1 rounded-full text-[10.5px] font-black shadow-md flex items-center gap-1.5 animate-bounce-subtle">
+                <TrendUp weight="bold" className="text-xs" />
+                <span>आजचा नफा: +₹३,८४०</span>
               </div>
 
-              <div className="bg-white/80 hover:bg-white border border-orange-100 rounded-xl p-2.5 shadow-2xs transition">
-                <div className="flex items-center gap-1.5 mb-1">
-                  <div className="w-6 h-6 rounded-lg bg-emerald-100 text-emerald-600 flex items-center justify-center text-xs shrink-0">
-                    <WhatsappLogo weight="fill" />
+              {/* The Live Receipt Simulator Container */}
+              <div className="bg-white/95 rounded-2xl border border-orange-200/80 shadow-md p-3.5 space-y-2">
+                <div className="flex items-center justify-between pb-1.5 border-b border-dashed border-slate-200">
+                  <div className="flex items-center gap-2">
+                    <div className="w-5 h-5 rounded-md bg-orange-100 text-[#FF5722] flex items-center justify-center text-xs font-black">
+                      <Receipt weight="bold" />
+                    </div>
+                    <span className="text-xs font-black text-slate-800">श्री गणेश किराणा स्टोअर्स</span>
                   </div>
-                  <span className="text-xs font-bold text-slate-800">WhatsApp बिल</span>
+                  <span className="text-[10px] font-black text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200">
+                    ● Live POS
+                  </span>
                 </div>
-                <p className="text-[10px] text-slate-500 leading-tight">थेट ग्राहकाला मेसेज</p>
+
+                {/* 3 Live Items */}
+                <div className="space-y-1 text-[11px] font-medium text-slate-700">
+                  <div className="flex justify-between items-center">
+                    <span className="flex items-center gap-1">1x साखर (Sugar 1kg)</span>
+                    <span className="font-bold text-slate-900">₹४२.००</span>
+                  </div>
+                  <div className="flex justify-between items-center">
+                    <span className="flex items-center gap-1">1x Fortune Oil 1L</span>
+                    <span className="font-bold text-slate-900">₹११५.००</span>
+                  </div>
+                  <div className="flex justify-between items-center">
+                    <span className="flex items-center gap-1">2x Parle-G Gold</span>
+                    <span className="font-bold text-slate-900">₹२०.००</span>
+                  </div>
+                </div>
+
+                {/* Total & Instant WhatsApp Strip */}
+                <div className="pt-1.5 border-t border-slate-100 flex items-center justify-between">
+                  <div>
+                    <span className="text-[10px] text-slate-400 font-bold block">एकूण बिल (Total)</span>
+                    <span className="text-base font-black text-slate-900 leading-none">₹१७७.००</span>
+                  </div>
+                  <div className="flex items-center gap-1 bg-emerald-50 border border-emerald-200 text-emerald-700 text-[10px] font-black px-2.5 py-1 rounded-lg shadow-2xs">
+                    <WhatsappLogo weight="fill" className="text-xs text-emerald-600" />
+                    <span>WhatsApp बिल पाठवले ✓</span>
+                  </div>
+                </div>
               </div>
 
-              <div className="bg-white/80 hover:bg-white border border-orange-100 rounded-xl p-2.5 shadow-2xs transition">
-                <div className="flex items-center gap-1.5 mb-1">
-                  <div className="w-6 h-6 rounded-lg bg-blue-100 text-blue-600 flex items-center justify-center text-xs shrink-0">
-                    <Package weight="fill" />
-                  </div>
-                  <span className="text-xs font-bold text-slate-800">स्टॉक अलर्ट</span>
-                </div>
-                <p className="text-[10px] text-slate-500 leading-tight">कमी स्टॉक सूचना</p>
-              </div>
-
-              <div className="bg-white/80 hover:bg-white border border-orange-100 rounded-xl p-2.5 shadow-2xs transition">
-                <div className="flex items-center gap-1.5 mb-1">
-                  <div className="w-6 h-6 rounded-lg bg-purple-100 text-purple-600 flex items-center justify-center text-xs shrink-0">
-                    <ChartLineUp weight="fill" />
-                  </div>
-                  <span className="text-xs font-bold text-slate-800">नफा अहवाल</span>
-                </div>
-                <p className="text-[10px] text-slate-500 leading-tight">रोजची एकूण कमाई</p>
+              {/* Floating Bottom Left Badge: Speed */}
+              <div className="absolute -bottom-2 left-2 z-20 bg-white border border-orange-200 px-2.5 py-0.5 rounded-full text-[10px] font-black text-slate-800 shadow-sm flex items-center gap-1">
+                <Lightning weight="fill" className="text-[#FF5722]" />
+                <span>०.२ सेकंदात बिल तयार</span>
               </div>
             </div>
 
-            {/* Bottom: Live Stats Strip */}
-            <div className="pt-2.5 border-t border-orange-100/80 flex items-center justify-between text-[11px] text-slate-600 font-bold">
-              <span className="flex items-center gap-1 text-slate-800">
-                <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-                <span>{txt.stat_stores}</span>
-              </span>
-              <span>•</span>
-              <span className="text-[#FF5722]">{txt.stat_speed}</span>
-              <span>•</span>
-              <span className="text-amber-600">⭐ {txt.stat_rating}</span>
+            {/* Bottom: 500+ Storeowners Social Proof & Live Cloud */}
+            <div className="pt-2 border-t border-orange-200/70 flex items-center justify-between text-[11px]">
+              <div className="flex items-center gap-2">
+                <div className="flex -space-x-2">
+                  <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=60&h=60&fit=crop" alt="User 1" className="w-6 h-6 rounded-full border-2 border-white object-cover shadow-2xs" />
+                  <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=60&h=60&fit=crop" alt="User 2" className="w-6 h-6 rounded-full border-2 border-white object-cover shadow-2xs" />
+                  <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=60&h=60&fit=crop" alt="User 3" className="w-6 h-6 rounded-full border-2 border-white object-cover shadow-2xs" />
+                </div>
+                <span className="font-bold text-slate-700">{txt.trusted_stores}</span>
+              </div>
+
+              <span className="text-amber-600 font-black">⭐ ४.९/५ रेटिंग</span>
             </div>
 
           </div>
 
-          {/* ================= RIGHT PANE: Modern Login Canvas (54%) ================= */}
-          <div className="w-full lg:w-[54%] p-6 sm:p-7 xl:p-8 flex flex-col justify-between relative bg-white">
+          {/* ================= RIGHT PANE: Ultra-High-End Login Canvas (52%) ================= */}
+          <div className="w-full lg:w-[52%] p-6 sm:p-7 xl:p-8 flex flex-col justify-between relative bg-white/90">
             
-            <div className="w-full max-w-[370px] mx-auto my-auto space-y-3.5">
+            <div className="w-full max-w-[360px] mx-auto my-auto space-y-3.5">
               
-              {/* Heading */}
+              {/* Header Titles */}
               <div>
-                <h2 className="text-xl sm:text-2xl font-black text-slate-900 tracking-tight flex items-center gap-2">
-                  {txt.welcome_back} <span className="text-xl">👋</span>
+                <h2 className="text-2xl font-black text-slate-900 tracking-tight flex items-center gap-2">
+                  {txt.welcome_back} <span className="text-2xl">👋</span>
                 </h2>
-                <div className="h-1 w-10 bg-gradient-to-r from-[#FF5722] to-[#FFA726] rounded-full mt-1.5"></div>
+                <div className="h-1 w-12 bg-gradient-to-r from-[#FF5722] via-[#FF6E40] to-[#FFA726] rounded-full mt-1.5"></div>
                 <p className="text-slate-500 font-medium mt-1 text-xs leading-relaxed">
                   {txt.welcome_sub}
                 </p>
@@ -308,12 +348,7 @@ const Login = () => {
                       isPendingApprovalError ? 'text-amber-600 animate-pulse' : isExpiredError ? 'text-[#FF5722]' : 'text-red-500'
                     }`} />
                     <div className="flex-1 space-y-1">
-                      <div>
-                        {isPendingApprovalError && (
-                          <p className="font-black text-amber-900 text-xs mb-0.5">नोंदणी मंजुरी प्रलंबित</p>
-                        )}
-                        <p className="leading-tight text-xs font-medium">{error}</p>
-                      </div>
+                      <p className="leading-tight text-xs font-medium">{error}</p>
 
                       {isPendingApprovalError && (
                         <a
@@ -356,7 +391,7 @@ const Login = () => {
                       required
                       autoCapitalize="none"
                       autoCorrect="off"
-                      className="w-full h-10 bg-slate-50/70 hover:bg-slate-50 border border-slate-200 rounded-xl pl-9.5 pr-3 font-semibold font-mono text-slate-800 outline-none focus:bg-white focus:border-[#FF5722] focus:ring-3 focus:ring-[#FF5722]/15 transition-all text-xs sm:text-sm placeholder:font-sans placeholder:font-normal placeholder:text-slate-400"
+                      className="w-full h-10.5 bg-slate-50/80 hover:bg-slate-50 border border-slate-200 rounded-xl pl-10 pr-3 font-semibold font-mono text-slate-800 outline-none focus:bg-white focus:border-[#FF5722] focus:ring-4 focus:ring-orange-500/15 transition-all text-xs sm:text-sm placeholder:font-sans placeholder:font-normal placeholder:text-slate-400 shadow-2xs"
                       placeholder={txt.username_placeholder} 
                     />
                   </div>
@@ -384,7 +419,7 @@ const Login = () => {
                       value={password}
                       onChange={e => setPassword(e.target.value)}
                       required
-                      className="w-full h-10 bg-slate-50/70 hover:bg-slate-50 border border-slate-200 rounded-xl pl-9.5 pr-10 font-semibold text-slate-800 outline-none focus:bg-white focus:border-[#FF5722] focus:ring-3 focus:ring-[#FF5722]/15 transition-all text-xs sm:text-sm placeholder:font-normal placeholder:text-slate-400"
+                      className="w-full h-10.5 bg-slate-50/80 hover:bg-slate-50 border border-slate-200 rounded-xl pl-10 pr-10 font-semibold text-slate-800 outline-none focus:bg-white focus:border-[#FF5722] focus:ring-4 focus:ring-orange-500/15 transition-all text-xs sm:text-sm placeholder:font-normal placeholder:text-slate-400 shadow-2xs"
                       placeholder={txt.password_placeholder}
                     />
                     <button 
@@ -401,11 +436,11 @@ const Login = () => {
                   </div>
                 </div>
 
-                {/* Submit Button */}
+                {/* High-Level Shimmer Button */}
                 <button 
                   type="submit" 
                   disabled={loading}
-                  className="w-full h-10.5 bg-gradient-to-r from-[#FF5722] via-[#FF6E40] to-[#FF8A65] hover:from-[#E64A19] hover:to-[#FF5722] text-white font-black rounded-xl transition-all duration-200 shadow-md shadow-orange-500/25 active:scale-[0.99] disabled:opacity-70 flex justify-center items-center gap-2 text-xs sm:text-sm cursor-pointer mt-1"
+                  className="w-full h-11 bg-gradient-to-r from-[#FF5722] via-[#FF6E40] to-[#FFA726] hover:from-[#E64A19] hover:to-[#FF5722] text-white font-black rounded-xl transition-all duration-200 shadow-md shadow-orange-500/30 hover:shadow-lg hover:shadow-orange-500/40 active:scale-[0.99] disabled:opacity-70 flex justify-center items-center gap-2 text-xs sm:text-sm cursor-pointer mt-1"
                 >
                   {loading ? (
                     <>
@@ -588,6 +623,17 @@ const Login = () => {
           </div>
         </div>
       )}
+
+      {/* Floating subtle animation keyframe */}
+      <style>{`
+        @keyframes bounce-subtle {
+          0%, 100% { transform: translateY(0); }
+          50% { transform: translateY(-4px); }
+        }
+        .animate-bounce-subtle {
+          animation: bounce-subtle 3s ease-in-out infinite;
+        }
+      `}</style>
 
     </div>
   );
