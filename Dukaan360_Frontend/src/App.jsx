@@ -17,7 +17,6 @@ const OwnerRoute = ({ children }) => {
   if (loading) return null;
   if (!token) return <Navigate to="/login" replace />;
   if (user?.store_status === 'Expired') return <Navigate to={`/renew?username=${user?.username || ''}`} replace />;
-  if (user?.role === 'Cashier') return <Navigate to="/pos" replace />;
   return children;
 };
 

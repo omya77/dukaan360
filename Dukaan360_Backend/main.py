@@ -2595,7 +2595,7 @@ if os.path.exists(STATIC_DIR):
     async def serve_frontend_spa(full_path: str):
         clean_path = full_path.strip("/")
         # Known React SPA routes
-        if clean_path in ("", "admin", "login", "pos", "inventory", "history", "register", "renew", "dashboard"):
+        if clean_path in ("", "admin", "login", "pos", "inventory", "khata", "history", "register", "renew", "dashboard"):
             index_file = os.path.join(STATIC_DIR, "index.html")
             if os.path.exists(index_file):
                 return FileResponse(index_file, headers=INDEX_HEADERS)

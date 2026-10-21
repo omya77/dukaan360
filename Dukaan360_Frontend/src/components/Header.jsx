@@ -288,8 +288,9 @@ const Header = ({ onMenuClick, searchTerm, onSearch }) => {
           {user?.role !== 'Cashier' && (
             <Link 
               to="/dashboard" 
-              className={`px-3 py-1.5 rounded-lg text-xs font-black transition flex items-center gap-1.5 ${
-                location.pathname === '/dashboard' ? 'bg-white text-brand shadow-sm' : 'text-slate-500 hover:text-slate-700'
+              onClick={(e) => { e.preventDefault(); navigate('/dashboard'); }}
+              className={`cursor-pointer px-3.5 py-1.5 rounded-lg text-xs font-black transition flex items-center gap-1.5 select-none ${
+                location.pathname === '/dashboard' ? 'bg-white text-brand shadow-sm' : 'text-slate-500 hover:text-slate-800'
               }`}
             >
               <ChartLineUp weight={location.pathname === '/dashboard' ? "fill" : "bold"} /> {t('dashboard') || 'डॅशबोर्ड'}
@@ -298,8 +299,9 @@ const Header = ({ onMenuClick, searchTerm, onSearch }) => {
 
           <Link 
             to="/pos" 
-            className={`px-3.5 py-1.5 rounded-lg text-xs font-black transition flex items-center gap-1.5 ${
-              location.pathname === '/pos' ? 'bg-white text-brand shadow-sm' : 'text-slate-500 hover:text-slate-700'
+            onClick={(e) => { e.preventDefault(); navigate('/pos'); }}
+            className={`cursor-pointer px-3.5 py-1.5 rounded-lg text-xs font-black transition flex items-center gap-1.5 select-none ${
+              location.pathname === '/pos' ? 'bg-white text-brand shadow-sm' : 'text-slate-500 hover:text-slate-800'
             }`}
           >
             <Storefront weight={location.pathname === '/pos' ? "fill" : "bold"} /> {t('pos')}
@@ -309,16 +311,18 @@ const Header = ({ onMenuClick, searchTerm, onSearch }) => {
             <>
               <Link 
                 to="/inventory" 
-                className={`px-3.5 py-1.5 rounded-lg text-xs font-black transition flex items-center gap-1.5 ${
-                  location.pathname === '/inventory' ? 'bg-white text-brand shadow-sm' : 'text-slate-500 hover:text-slate-700'
+                onClick={(e) => { e.preventDefault(); navigate('/inventory'); }}
+                className={`cursor-pointer px-3.5 py-1.5 rounded-lg text-xs font-black transition flex items-center gap-1.5 select-none ${
+                  location.pathname === '/inventory' ? 'bg-white text-brand shadow-sm' : 'text-slate-500 hover:text-slate-800'
                 }`}
               >
                 <Package weight={location.pathname === '/inventory' ? "fill" : "bold"} /> {t('stock')}
               </Link>
               <Link 
                 to="/khata" 
-                className={`px-3.5 py-1.5 rounded-lg text-xs font-black transition flex items-center gap-1.5 ${
-                  location.pathname === '/khata' ? 'bg-white text-brand shadow-sm' : 'text-slate-500 hover:text-slate-700'
+                onClick={(e) => { e.preventDefault(); navigate('/khata'); }}
+                className={`cursor-pointer px-3.5 py-1.5 rounded-lg text-xs font-black transition flex items-center gap-1.5 select-none ${
+                  location.pathname === '/khata' ? 'bg-white text-brand shadow-sm' : 'text-slate-500 hover:text-slate-800'
                 }`}
               >
                 <BookBookmark weight={location.pathname === '/khata' ? "fill" : "bold"} /> {t('khata')}
@@ -328,8 +332,9 @@ const Header = ({ onMenuClick, searchTerm, onSearch }) => {
 
           <Link 
             to="/history" 
-            className={`px-3.5 py-1.5 rounded-lg text-xs font-black transition flex items-center gap-1.5 ${
-              location.pathname === '/history' ? 'bg-white text-brand shadow-sm' : 'text-slate-500 hover:text-slate-700'
+            onClick={(e) => { e.preventDefault(); navigate('/history'); }}
+            className={`cursor-pointer px-3.5 py-1.5 rounded-lg text-xs font-black transition flex items-center gap-1.5 select-none ${
+              location.pathname === '/history' ? 'bg-white text-brand shadow-sm' : 'text-slate-500 hover:text-slate-800'
             }`}
           >
             <ClockCounterClockwise weight={location.pathname === '/history' ? "bold" : "bold"} /> {t('history')}
@@ -542,10 +547,23 @@ const Header = ({ onMenuClick, searchTerm, onSearch }) => {
 
         {/* Navigation Links */}
         <nav className="mt-5 flex flex-col gap-1.5">
+          {user?.role !== 'Cashier' && (
+            <Link 
+              to="/dashboard" 
+              onClick={(e) => { e.preventDefault(); setIsMobileMenuOpen(false); navigate('/dashboard'); }}
+              className={`flex items-center gap-3 px-3.5 py-2.5 rounded-xl font-bold text-sm transition cursor-pointer ${
+                location.pathname === '/dashboard' ? 'bg-brand text-white shadow-md shadow-brand/20' : 'text-slate-600 hover:bg-slate-100'
+              }`}
+            >
+              <ChartLineUp weight="fill" className="text-lg" />
+              <span>{t('dashboard') || 'डॅशबोर्ड'}</span>
+            </Link>
+          )}
+
           <Link 
             to="/pos" 
-            onClick={() => setIsMobileMenuOpen(false)}
-            className={`flex items-center gap-3 px-3.5 py-2.5 rounded-xl font-bold text-sm transition ${
+            onClick={(e) => { e.preventDefault(); setIsMobileMenuOpen(false); navigate('/pos'); }}
+            className={`flex items-center gap-3 px-3.5 py-2.5 rounded-xl font-bold text-sm transition cursor-pointer ${
               location.pathname === '/pos' ? 'bg-brand text-white shadow-md shadow-brand/20' : 'text-slate-600 hover:bg-slate-100'
             }`}
           >
@@ -557,8 +575,8 @@ const Header = ({ onMenuClick, searchTerm, onSearch }) => {
             <>
               <Link 
                 to="/inventory" 
-                onClick={() => setIsMobileMenuOpen(false)}
-                className={`flex items-center gap-3 px-3.5 py-2.5 rounded-xl font-bold text-sm transition ${
+                onClick={(e) => { e.preventDefault(); setIsMobileMenuOpen(false); navigate('/inventory'); }}
+                className={`flex items-center gap-3 px-3.5 py-2.5 rounded-xl font-bold text-sm transition cursor-pointer ${
                   location.pathname === '/inventory' ? 'bg-brand text-white shadow-md shadow-brand/20' : 'text-slate-600 hover:bg-slate-100'
                 }`}
               >
@@ -568,8 +586,8 @@ const Header = ({ onMenuClick, searchTerm, onSearch }) => {
 
               <Link 
                 to="/khata" 
-                onClick={() => setIsMobileMenuOpen(false)}
-                className={`flex items-center gap-3 px-3.5 py-2.5 rounded-xl font-bold text-sm transition ${
+                onClick={(e) => { e.preventDefault(); setIsMobileMenuOpen(false); navigate('/khata'); }}
+                className={`flex items-center gap-3 px-3.5 py-2.5 rounded-xl font-bold text-sm transition cursor-pointer ${
                   location.pathname === '/khata' ? 'bg-brand text-white shadow-md shadow-brand/20' : 'text-slate-600 hover:bg-slate-100'
                 }`}
               >
@@ -581,8 +599,8 @@ const Header = ({ onMenuClick, searchTerm, onSearch }) => {
 
           <Link 
             to="/history" 
-            onClick={() => setIsMobileMenuOpen(false)}
-            className={`flex items-center gap-3 px-3.5 py-2.5 rounded-xl font-bold text-sm transition ${
+            onClick={(e) => { e.preventDefault(); setIsMobileMenuOpen(false); navigate('/history'); }}
+            className={`flex items-center gap-3 px-3.5 py-2.5 rounded-xl font-bold text-sm transition cursor-pointer ${
               location.pathname === '/history' ? 'bg-brand text-white shadow-md shadow-brand/20' : 'text-slate-600 hover:bg-slate-100'
             }`}
           >
