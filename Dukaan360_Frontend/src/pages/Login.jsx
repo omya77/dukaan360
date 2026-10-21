@@ -80,7 +80,7 @@ const Login = () => {
       if (res.data.role === 'SuperAdmin') {
         navigate('/admin');
       } else {
-        navigate('/dashboard');
+        navigate('/pos');
       }
     } catch (err) {
       logout();

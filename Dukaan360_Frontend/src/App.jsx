@@ -62,7 +62,7 @@ function App() {
             <Route path="/admin" element={<AdminRoute><Admin /></AdminRoute>} />
 
             {/* Tenant Routes */}
-            <Route path="/" element={<Navigate to="/dashboard" replace />} />
+            <Route path="/" element={<Navigate to="/pos" replace />} />
             <Route path="/dashboard" element={<OwnerRoute><Dashboard /></OwnerRoute>} />
             <Route path="/pos" element={<PrivateRoute><POS /></PrivateRoute>} />
             <Route path="/khata" element={<OwnerRoute><Khata /></OwnerRoute>} />

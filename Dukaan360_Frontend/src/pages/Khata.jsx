@@ -28,10 +28,6 @@ const Khata = () => {
   const [festMsg, setFestMsg] = useState('🙏 सस्नेह नमस्कार!\n\nदिवाळीच्या तुम्हाला आणि तुमच्या परिवाराला हार्दिक शुभेच्छा! ✨\n\nआपले नम्र,\n*Dukaan360 Retail*');
   const [bulkIndex, setBulkIndex] = useState(0);
 
-  // Customer 360 State
-  const [customer360, setCustomer360] = useState(null);
-  const [loading360, setLoading360] = useState(false);
-
   const fetchCustomers = async () => {
     try {
       const response = await axios.get('http://localhost:8000/customers/');
@@ -50,21 +46,6 @@ const Khata = () => {
   useEffect(() => {
     fetchCustomers();
   }, []);
-
-  useEffect(() => {
-    if (selectedCustomer?.id) {
-      setLoading360(true);
-      axios.get(`http://localhost:8000/customers/${selectedCustomer.id}/360`)
-        .then(res => setCustomer360(res.data))
-        .catch(err => {
-          console.error("Failed to load customer 360 data:", err);
-          setCustomer360(null);
-        })
-        .finally(() => setLoading360(false));
-    } else {
-      setCustomer360(null);
-    }
-  }, [selectedCustomer]);
 
   const handleAddCustomer = async (e) => {
     e.preventDefault();
@@ -102,27 +83,18 @@ const Khata = () => {
     }
   };
 
-  const handleWhatsAppReminder = async (customer = null) => {
-    const target = customer || selectedCustomer;
-    if (!target) return;
-    try {
-      const res = await axios.post(`http://localhost:8000/khata/send-reminder/${target.id}`);
-      if (res.data?.whatsapp_url) {
-        window.open(res.data.whatsapp_url, '_blank');
-      }
-      fetchCustomers();
-    } catch (err) {
-      const upiLink = `upi://pay?pa=8262802961@upi&pn=Dukaan360&am=${target.current_due}&cu=INR`;
-      const dateStr = new Date().toLocaleDateString('mr-IN', { day: '2-digit', month: 'short', year: 'numeric' });
-      let msg = `📅 *DUKAAN360 उधारी स्मरणपत्र*\n\n`;
-      msg += `नमस्कार *${target.name}* जी,\n`;
-      msg += `आज ${dateStr} रोजी तुमच्या खात्यावर *₹${target.current_due.toFixed(2)}* बाकी आहेत.\n\n`;
-      msg += `थेट UPI ने पेमेंट करण्यासाठी येथे क्लिक करा:\n${upiLink}\n\n`;
-      msg += `किंवा दुकानात येऊन जमा करावे.\nधन्यवाद! 🙏`;
-      const encodedMsg = encodeURIComponent(msg);
-      const waUrl = `https://wa.me/91${target.mobile}?text=${encodedMsg}`;
-      window.open(waUrl, '_blank');
-    }
+  const handleWhatsAppReminder = () => {
+    if (!selectedCustomer) return;
+    const dateStr = new Date().toLocaleDateString('mr-IN', { day: '2-digit', month: 'short', year: 'numeric' });
+    let msg = `📅 *DUKAAN360 Reminder*\n\n`;
+    msg += `नमस्कार *${selectedCustomer.name}* दादा/ताई,\n`;
+    msg += `आज ${dateStr} तारीख आहे. तुमच्या खात्यावर *₹${selectedCustomer.current_due.toFixed(2)}* बाकी आहेत.\n\n`;
+    msg += `कृपया लवकर दुकानात येऊन पैसे जमा करावेत. 🙏\n\n`;
+    msg += `धन्यवाद!\n*Dukaan360 Retail*`;
+    
+    const encodedMsg = encodeURIComponent(msg);
+    const waUrl = `https://wa.me/91${selectedCustomer.mobile}?text=${encodedMsg}`;
+    window.open(waUrl, '_blank');
   };
 
   const filteredCustomers = customers.filter(c => 
@@ -194,47 +166,21 @@ const Khata = () => {
               <p className="text-center text-slate-400 text-sm mt-4">{t('no_customers_found')}</p>
             ) : (
               filteredCustomers.map(cust => (
-                <div
+                <button
                   key={cust.id}
                   onClick={() => setSelectedCustomer(cust)}
-                  className={`w-full text-left px-3.5 py-2.5 rounded-xl transition flex justify-between items-center cursor-pointer ${selectedCustomer?.id === cust.id ? 'bg-brand text-white shadow-md shadow-brand/20' : 'hover:bg-slate-50 border border-slate-100'}`}
+                  className={`w-full text-left px-4 py-2 rounded-xl transition flex justify-between items-center ${selectedCustomer?.id === cust.id ? 'bg-brand text-white shadow-md shadow-brand/20' : 'hover:bg-slate-50 border border-transparent hover:border-slate-200'}`}
                 >
-                  <div className="min-w-0 pr-2">
-                    <div className="flex items-center gap-1.5">
-                      <h4 className={`font-bold text-[13px] truncate ${selectedCustomer?.id === cust.id ? 'text-white' : 'text-slate-800'}`}>{cust.name}</h4>
-                      {(cust.loyalty_points || 0) > 0 && (
-                        <span className={`text-[9px] font-black px-1.5 py-0.2 rounded ${selectedCustomer?.id === cust.id ? 'bg-white/20 text-white' : 'bg-amber-100 text-amber-800'}`}>
-                          ⭐ {Math.round(cust.loyalty_points)}
-                        </span>
-                      )}
-                    </div>
+                  <div>
+                    <h4 className={`font-bold text-[13px] break-words leading-snug ${selectedCustomer?.id === cust.id ? 'text-white' : 'text-slate-700'}`}>{cust.name}</h4>
                     <p className={`text-[10px] ${selectedCustomer?.id === cust.id ? 'text-brandLight' : 'text-slate-400'}`}>{cust.mobile}</p>
                   </div>
-                  <div className="text-right shrink-0 flex items-center gap-2">
-                    <div>
-                      <p className={`font-black text-[13px] leading-tight ${selectedCustomer?.id === cust.id ? 'text-white' : cust.current_due > 0 ? 'text-red-500' : 'text-green-500'}`}>
-                        ₹{cust.current_due.toFixed(2)}
-                      </p>
-                      {cust.current_due > 0 && (
-                        <span className={`text-[9px] font-bold ${selectedCustomer?.id === cust.id ? 'text-white/80' : 'text-red-400'}`}>
-                          बाकी
-                        </span>
-                      )}
-                    </div>
-                    {cust.current_due > 0 && (
-                      <button
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          handleWhatsAppReminder(cust);
-                        }}
-                        className={`p-1.5 rounded-lg transition active:scale-90 ${selectedCustomer?.id === cust.id ? 'bg-white/20 hover:bg-white/30 text-white' : 'bg-green-100 hover:bg-green-200 text-green-700'}`}
-                        title="थेट WhatsApp Reminder पाठवा"
-                      >
-                        <WhatsappLogo weight="fill" className="text-base" />
-                      </button>
-                    )}
+                  <div className="text-right">
+                    <p className={`font-bold text-[13px] ${selectedCustomer?.id === cust.id ? 'text-white' : cust.current_due > 0 ? 'text-red-500' : 'text-green-500'}`}>
+                      ₹{cust.current_due.toFixed(2)}
+                    </p>
                   </div>
-                </div>
+                </button>
               ))
             )}
           </div>
@@ -286,85 +232,8 @@ const Khata = () => {
 
               {/* Ledger Content */}
               <div className="flex-1 overflow-y-auto p-4 lg:p-6 bg-slate-50/50">
-                <div className="max-w-2xl mx-auto space-y-4">
+                <div className="max-w-2xl mx-auto space-y-6">
                   
-                  {/* Customer 360° Profile & Automatic Offers */}
-                  {customer360 && (
-                    <div className="bg-white rounded-2xl p-4 sm:p-5 border border-slate-200 shadow-sm space-y-4">
-                      {/* Header & Badges */}
-                      <div className="flex flex-wrap items-center justify-between gap-2 border-b border-slate-100 pb-3">
-                        <div className="flex items-center gap-2">
-                          <span className="w-8 h-8 rounded-xl bg-indigo-100 text-indigo-600 flex items-center justify-center font-bold text-sm">
-                            👥
-                          </span>
-                          <div>
-                            <h3 className="font-black text-sm text-slate-800">Customer 360° Profile</h3>
-                            <p className="text-[11px] text-slate-400 font-medium">खरेदी इतिहास व ग्राहक संबंध विश्लेषण</p>
-                          </div>
-                        </div>
-                        <div className="flex flex-wrap items-center gap-1.5">
-                          {customer360.badges?.map((badge, bIdx) => (
-                            <span key={bIdx} className="px-2 py-0.5 rounded-full text-[10px] font-black bg-slate-100 text-slate-700 border border-slate-200">
-                              {badge}
-                            </span>
-                          ))}
-                        </div>
-                      </div>
-
-                      {/* 4 Lifetime Stats */}
-                      <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
-                        <div className="bg-slate-50 p-2.5 rounded-xl border border-slate-100">
-                          <p className="text-[10px] font-bold text-slate-400 uppercase">एकूण खरेदी (Purchases)</p>
-                          <p className="text-base font-black text-slate-800 mt-0.5">₹{customer360.total_purchases?.toLocaleString()}</p>
-                        </div>
-                        <div className="bg-slate-50 p-2.5 rounded-xl border border-slate-100">
-                          <p className="text-[10px] font-bold text-slate-400 uppercase">एकूण भेटी (Visits)</p>
-                          <p className="text-base font-black text-slate-800 mt-0.5">{customer360.total_visits} वेळा</p>
-                        </div>
-                        <div className="bg-slate-50 p-2.5 rounded-xl border border-slate-100">
-                          <p className="text-[10px] font-bold text-slate-400 uppercase">सरासरी बिल (Avg Bill)</p>
-                          <p className="text-base font-black text-slate-800 mt-0.5">₹{customer360.average_bill?.toLocaleString()}</p>
-                        </div>
-                        <div className="bg-amber-50/70 p-2.5 rounded-xl border border-amber-100">
-                          <p className="text-[10px] font-bold text-amber-700 uppercase">Loyalty Points</p>
-                          <p className="text-base font-black text-amber-800 mt-0.5">⭐ {Math.round(customer360.loyalty_points || 0)}</p>
-                        </div>
-                      </div>
-
-                      {/* Re-engagement WhatsApp Offer Suggestion */}
-                      <div className="p-3.5 rounded-xl bg-gradient-to-r from-emerald-50 via-teal-50 to-emerald-50/70 border border-emerald-200 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
-                        <div>
-                          <div className="flex items-center gap-1.5 mb-0.5">
-                            <span className="text-[10px] font-black text-emerald-800 uppercase bg-emerald-100 px-2 py-0.5 rounded-full">
-                              🎁 Automatic Customer Offer
-                            </span>
-                            <span className="text-[11px] font-bold text-slate-500">
-                              शेवटची भेट: {customer360.last_visit_date} ({customer360.days_since_last_visit} दिवसांपूर्वी)
-                            </span>
-                          </div>
-                          <p className="text-xs font-bold text-emerald-950">
-                            {customer360.days_since_last_visit >= 10 
-                              ? `${customer360.name} ${customer360.days_since_last_visit} दिवसांपासून आलेले नाहीत. विशेष ₹५० सूट पाठवून पुन्हा आणा.`
-                              : `ग्राहकाला पुढील खरेदीवर ₹५० डिस्काउंट देऊन लॉयल्टी वाढवा.`}
-                          </p>
-                        </div>
-
-                        <button
-                          onClick={() => {
-                            if (customer360.whatsapp_offer_url) {
-                              window.open(customer360.whatsapp_offer_url, '_blank');
-                            } else {
-                              alert("या ग्राहकाचा मोबाईल नंबर उपलब्ध नाही.");
-                            }
-                          }}
-                          className="px-3.5 py-2 bg-[#25D366] hover:bg-[#128C7E] text-white rounded-xl font-bold text-xs flex items-center gap-1.5 shadow-sm transition active:scale-95 shrink-0 cursor-pointer"
-                        >
-                          <WhatsappLogo weight="fill" className="text-base" /> WhatsApp Offer पाठवा
-                        </button>
-                      </div>
-                    </div>
-                  )}
-
                   {/* Total Due Card */}
                   <div className={`p-5 lg:p-6 rounded-2xl shadow-sm border flex items-center justify-between ${selectedCustomer.current_due > 0 ? 'bg-white border-red-100' : 'bg-white border-green-100'}`}>
                     <div>

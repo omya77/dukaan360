@@ -23,6 +23,7 @@ import {
   CircleNotch,
   ShieldCheck,
   IdentificationBadge,
+  ChartLineUp,
   EnvelopeSimple
 } from '@phosphor-icons/react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
@@ -284,6 +285,17 @@ const Header = ({ onMenuClick, searchTerm, onSearch }) => {
       {/* Desktop Navigation Tabs (Centered & Balanced Layout) */}
       <nav className="hidden lg:flex flex-1 justify-center items-center px-4">
         <div className="flex items-center bg-slate-100/80 p-1 rounded-xl border border-slate-200 gap-1">
+          {user?.role !== 'Cashier' && (
+            <Link 
+              to="/dashboard" 
+              className={`px-3 py-1.5 rounded-lg text-xs font-black transition flex items-center gap-1.5 ${
+                location.pathname === '/dashboard' ? 'bg-white text-brand shadow-sm' : 'text-slate-500 hover:text-slate-700'
+              }`}
+            >
+              <ChartLineUp weight={location.pathname === '/dashboard' ? "fill" : "bold"} /> {t('dashboard') || 'डॅशबोर्ड'}
+            </Link>
+          )}
+
           <Link 
             to="/pos" 
             className={`px-3.5 py-1.5 rounded-lg text-xs font-black transition flex items-center gap-1.5 ${
@@ -350,8 +362,36 @@ const Header = ({ onMenuClick, searchTerm, onSearch }) => {
         </button>
       </div>
       
-      {/* Right (Desktop Only) - Notifications & Profile */}
-      <div className="hidden lg:flex items-center gap-3 shrink-0">
+      {/* Right (Desktop Only) - Direct Language Selector, Notifications & Profile */}
+      <div className="hidden lg:flex items-center gap-2.5 shrink-0">
+
+        {/* Direct Desktop Language Switcher */}
+        <div className="flex items-center bg-slate-100/90 p-1 rounded-xl border border-slate-200 gap-1 text-[11px] font-bold">
+          <button
+            onClick={() => setLanguage('mr')}
+            className={`px-2.5 py-1 rounded-lg transition flex items-center gap-1 cursor-pointer ${
+              language === 'mr' ? 'bg-white text-brand shadow-xs font-black' : 'text-slate-500 hover:text-slate-800'
+            }`}
+          >
+            🚩 मराठी
+          </button>
+          <button
+            onClick={() => setLanguage('hi')}
+            className={`px-2.5 py-1 rounded-lg transition flex items-center gap-1 cursor-pointer ${
+              language === 'hi' ? 'bg-white text-brand shadow-xs font-black' : 'text-slate-500 hover:text-slate-800'
+            }`}
+          >
+            🇮🇳 हिंदी
+          </button>
+          <button
+            onClick={() => setLanguage('en')}
+            className={`px-2.5 py-1 rounded-lg transition flex items-center gap-1 cursor-pointer ${
+              language === 'en' ? 'bg-white text-brand shadow-xs font-black' : 'text-slate-500 hover:text-slate-800'
+            }`}
+          >
+            🇬🇧 English
+          </button>
+        </div>
         
         {/* Desktop Notifications Bell */}
         <div className="relative notif-container">

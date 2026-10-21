@@ -11,19 +11,12 @@ const Cart = ({ cartItems, isMobileOpen, toggleMobileCart, updateQuantity, setEx
   };
 
   const [selectedMethod, setSelectedMethod] = useState('Cash');
-  const [redeemPoints, setRedeemPoints] = useState(false);
-
-  const selectedCust = customers.find(c => c.id === selectedCustomerId);
-  const custPoints = selectedCust ? (selectedCust.loyalty_points || 0) : 0;
-  const canRedeem = custPoints >= 50;
-  const discountAmount = redeemPoints && canRedeem ? (custPoints >= 100 ? 50 : Math.round(custPoints * 0.5)) : 0;
-  const pointsToRedeem = redeemPoints && canRedeem ? (custPoints >= 100 ? 100 : custPoints) : 0;
-
   const subtotal = cartItems.reduce((sum, item) => sum + (item.price * (parseFloat(item.quantity) || 0)), 0);
   const tax = 0; // 0% Tax for now
-  const total = Math.max(0, subtotal - discountAmount + tax);
+  const total = subtotal + tax;
   const totalItems = cartItems.reduce((sum, item) => sum + (parseFloat(item.quantity) || 0), 0);
 
+  const selectedCust = customers.find(c => c.id === selectedCustomerId);
   const isLimitExceeded = selectedCust && (selectedCust.current_due + total > 5000);
 
   return (
@@ -123,46 +116,10 @@ const Cart = ({ cartItems, isMobileOpen, toggleMobileCart, updateQuantity, setEx
 
         {/* Bottom Payment Dashboard */}
         <div className="bg-slate-50 p-3 lg:p-4 rounded-t-2xl border-t border-slate-200 shrink-0">
-          
-          {/* Customer Loyalty Box */}
-          {selectedCust && (
-            <div className="mb-2.5 p-2 rounded-xl bg-amber-50/90 border border-amber-200 text-xs">
-              <div className="flex items-center justify-between">
-                <span className="font-bold text-amber-900 flex items-center gap-1">
-                  🎁 Loyalty Points: <strong>{Math.round(custPoints)}</strong>
-                </span>
-                {canRedeem && (
-                  <label className="flex items-center gap-1 cursor-pointer font-bold text-amber-800 text-[11px]">
-                    <input 
-                      type="checkbox" 
-                      checked={redeemPoints} 
-                      onChange={e => setRedeemPoints(e.target.checked)} 
-                      className="rounded text-brand focus:ring-brand"
-                    />
-                    <span>₹{custPoints >= 100 ? 50 : Math.round(custPoints * 0.5)} सूट</span>
-                  </label>
-                )}
-              </div>
-              {custPoints < 100 && (
-                <p className="text-[10px] text-amber-700 font-medium mt-0.5">
-                  आणखी ₹{Math.max(0, Math.round((100 - custPoints) * 20))} खरेदीवर ₹५० सूट!
-                </p>
-              )}
-            </div>
-          )}
-
           <div className="flex justify-between text-[11px] lg:text-xs mb-1 text-slate-500 font-medium">
             <span>{t('subtotal')}</span>
             <span className="text-slate-800">₹{subtotal.toFixed(2)}</span>
           </div>
-
-          {discountAmount > 0 && (
-            <div className="flex justify-between text-[11px] lg:text-xs mb-1 text-emerald-600 font-bold">
-              <span>🎁 Loyalty डिस्काउंट</span>
-              <span>-₹{discountAmount.toFixed(2)}</span>
-            </div>
-          )}
-
           <div className="flex justify-between text-[11px] lg:text-xs mb-2 text-slate-500 font-medium">
             <span>{t('tax')} (0%)</span>
             <span className="text-slate-800">₹{tax.toFixed(2)}</span>
@@ -230,7 +187,7 @@ const Cart = ({ cartItems, isMobileOpen, toggleMobileCart, updateQuantity, setEx
           </div>
           
           <button 
-            onClick={() => onCheckout(selectedMethod, { loyaltyPointsRedeemed: pointsToRedeem, loyaltyDiscount: discountAmount })} 
+            onClick={() => onCheckout(selectedMethod)} 
             className="w-full h-10 lg:h-10 bg-brand hover:bg-brandHover text-white rounded-lg font-bold text-[13px] lg:text-sm shadow-[0_2px_10px_rgba(255,87,34,0.3)] transition-all flex items-center justify-center gap-1.5 transform active:scale-95"
           >
             {selectedMethod === 'Cash' ? t('checkout_cash') : selectedMethod === 'UPI' ? t('checkout_upi') : t('checkout_khata')}

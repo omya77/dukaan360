@@ -5,7 +5,7 @@ import Sidebar from '../components/Sidebar';
 import ProductCard from '../components/ProductCard';
 import Cart from '../components/Cart';
 import ReceiptModal from '../components/ReceiptModal';
-import { Faders, MagnifyingGlass, X, Warning, WifiHigh, WifiSlash, LockKey, CheckCircle } from '@phosphor-icons/react';
+import { Faders, MagnifyingGlass, X } from '@phosphor-icons/react';
 import { useLanguage } from '../contexts/LanguageContext';
 
 // Fallback images matching category logic
@@ -37,27 +37,6 @@ function POS() {
   const [newCustMobile, setNewCustMobile] = useState('');
   const [isUpiModalOpen, setIsUpiModalOpen] = useState(false);
 
-  // Profit Margin Guard & Owner PIN State
-  const [showMarginGuardModal, setShowMarginGuardModal] = useState(false);
-  const [lossItems, setLossItems] = useState([]);
-  const [pendingCheckoutArgs, setPendingCheckoutArgs] = useState(null);
-
-  const [showPinModal, setShowPinModal] = useState(false);
-  const [enteredPin, setEnteredPin] = useState('');
-  const [pinAction, setPinAction] = useState(null);
-
-  // Offline POS State
-  const [isOnline, setIsOnline] = useState(navigator.onLine);
-  const [offlineBillsCount, setOfflineBillsCount] = useState(() => {
-    try {
-      const q = JSON.parse(localStorage.getItem('dukaan360_offline_bills') || '[]');
-      return q.length;
-    } catch (e) {
-      return 0;
-    }
-  });
-  const [isSyncing, setIsSyncing] = useState(false);
-
   // Fetch from Backend API
   const fetchData = async () => {
     try {
@@ -84,7 +63,6 @@ function POS() {
           name: p.name,
           price: p.selling_price,
           mrp: p.mrp,
-          cost_price: availableBatch ? availableBatch.purchase_rate : (p.purchase_price || (p.selling_price * 0.82)),
           size: p.unit,
           stock: totalStock,
           batch_id: availableBatch ? availableBatch.id : p.id, // Better batch resolution
@@ -100,46 +78,8 @@ function POS() {
     }
   };
 
-  const syncOfflineBills = async () => {
-    const queue = JSON.parse(localStorage.getItem('dukaan360_offline_bills') || '[]');
-    if (queue.length === 0) return;
-    setIsSyncing(true);
-    let synced = 0;
-    const remaining = [];
-    for (const bill of queue) {
-      try {
-        await axios.post('http://localhost:8000/pos/bill/', bill);
-        synced++;
-      } catch (err) {
-        console.error("Failed to sync offline bill:", err);
-        remaining.push(bill);
-      }
-    }
-    localStorage.setItem('dukaan360_offline_bills', JSON.stringify(remaining));
-    setOfflineBillsCount(remaining.length);
-    setIsSyncing(false);
-    if (synced > 0) {
-      alert(`🎉 ${synced} ऑफलाइन बिलांची क्लाउडवर यशस्वी नोंद झाली!`);
-      fetchData();
-    }
-  };
-
   useEffect(() => {
     fetchData();
-
-    const handleOnline = () => {
-      setIsOnline(true);
-      syncOfflineBills();
-    };
-    const handleOffline = () => {
-      setIsOnline(false);
-    };
-    window.addEventListener('online', handleOnline);
-    window.addEventListener('offline', handleOffline);
-    return () => {
-      window.removeEventListener('online', handleOnline);
-      window.removeEventListener('offline', handleOffline);
-    };
   }, []);
 
   // --- BARCODE SCANNER INTEGRATION ---
@@ -234,41 +174,15 @@ function POS() {
     setCartItems(prev => prev.map(item => item.id === id ? { ...item, quantity: val } : item));
   };
 
-  const [pendingLoyaltyInfo, setPendingLoyaltyInfo] = useState({ loyaltyPointsRedeemed: 0, loyaltyDiscount: 0 });
-
-  const handleCheckoutInitiate = (paymentMethod, loyaltyInfo = {}) => {
+  const handleCheckoutInitiate = (paymentMethod) => {
     if (cartItems.length === 0) {
       alert(t('cart_empty'));
       return;
     }
 
-    // Profit Margin Guard Check (तोटा संरक्षण)
-    const losing = cartItems.filter(item => {
-      const cost = item.cost_price || 0;
-      return cost > 0 && item.price < cost;
-    });
-
-    if (losing.length > 0) {
-      setLossItems(losing.map(item => ({
-        name: item.name,
-        price: item.price,
-        cost_price: item.cost_price,
-        loss: Math.round((item.cost_price - item.price) * (item.quantity || 1))
-      })));
-      setPendingCheckoutArgs({ paymentMethod, loyaltyInfo });
-      setShowMarginGuardModal(true);
-      return;
-    }
-
-    proceedWithCheckout(paymentMethod, loyaltyInfo);
-  };
-
-  const proceedWithCheckout = (paymentMethod, loyaltyInfo = {}) => {
-    setPendingLoyaltyInfo(loyaltyInfo);
-
     if (paymentMethod === 'Credit') {
       if (selectedCustomerId) {
-        processCheckout('Credit', selectedCustomerId, loyaltyInfo);
+        processCheckout('Credit', selectedCustomerId);
       } else {
         setPendingCheckoutMethod('Credit');
         setIsCustomerModalOpen(true);
@@ -276,31 +190,7 @@ function POS() {
     } else if (paymentMethod === 'UPI') {
       setIsUpiModalOpen(true);
     } else {
-      processCheckout(paymentMethod, selectedCustomerId, loyaltyInfo);
-    }
-  };
-
-  const handleVerifyPin = async (e) => {
-    e.preventDefault();
-    try {
-      await axios.post('http://localhost:8000/pos/owner-pin-verify', { pin: enteredPin });
-      setShowPinModal(false);
-      setEnteredPin('');
-      if (pinAction) {
-        pinAction();
-        setPinAction(null);
-      }
-    } catch (err) {
-      if (enteredPin === "1234") {
-        setShowPinModal(false);
-        setEnteredPin('');
-        if (pinAction) {
-          pinAction();
-          setPinAction(null);
-        }
-      } else {
-        alert("अवैध Owner PIN (Invalid PIN)");
-      }
+      processCheckout(paymentMethod, selectedCustomerId);
     }
   };
 
@@ -315,7 +205,7 @@ function POS() {
       });
       setCustomers(prev => [...prev, res.data]);
       if (pendingCheckoutMethod) {
-        processCheckout(pendingCheckoutMethod, res.data.id, pendingLoyaltyInfo);
+        processCheckout(pendingCheckoutMethod, res.data.id);
       } else {
         setSelectedCustomerId(res.data.id);
         setIsCustomerModalOpen(false);
@@ -329,12 +219,10 @@ function POS() {
     }
   };
 
-  const processCheckout = async (paymentMethod, customerId, loyaltyInfo = {}) => {
+  const processCheckout = async (paymentMethod, customerId) => {
     const subtotal = cartItems.reduce((sum, item) => sum + (item.price * item.quantity), 0);
     const tax = 0; // 0% tax for now
-    const discountAmount = loyaltyInfo.loyaltyDiscount || pendingLoyaltyInfo.loyaltyDiscount || 0;
-    const pointsRedeemed = loyaltyInfo.loyaltyPointsRedeemed || pendingLoyaltyInfo.loyaltyPointsRedeemed || 0;
-    const grand_total = Math.max(0, subtotal - discountAmount + tax);
+    const grand_total = subtotal + tax;
 
     const payload = {
       store_id: 1,
@@ -342,8 +230,6 @@ function POS() {
       customer_id: customerId, 
       discount: 0,
       tax: tax,
-      loyalty_points_redeemed: pointsRedeemed,
-      loyalty_discount_amount: discountAmount,
       items: cartItems.map(item => ({
         product_id: item.id,
         batch_id: item.batch_id || item.id, 
@@ -358,49 +244,15 @@ function POS() {
       ]
     };
 
-    const cust = selectedCustomerId ? customers.find(c => c.id === selectedCustomerId) : null;
-
-    // Check Offline POS Mode
-    if (!navigator.onLine) {
-      const offlineInvNumber = `OFF-${Date.now().toString().slice(-6)}`;
-      const offlineInvoice = {
-        invoice_number: offlineInvNumber,
-        subtotal: subtotal,
-        tax: tax,
-        grand_total: grand_total,
-        discount_amount: discountAmount,
-        loyalty_points_earned: Math.round(grand_total / 100),
-        payment_method: paymentMethod,
-        items: [...cartItems],
-        customer_name: cust ? cust.name : null,
-        customer_mobile: cust ? cust.mobile : null,
-        is_offline: true
-      };
-
-      const queue = JSON.parse(localStorage.getItem('dukaan360_offline_bills') || '[]');
-      queue.push(payload);
-      localStorage.setItem('dukaan360_offline_bills', JSON.stringify(queue));
-      setOfflineBillsCount(queue.length);
-
-      setCompletedInvoice(offlineInvoice);
-      setCartItems([]);
-      setPendingLoyaltyInfo({ loyaltyPointsRedeemed: 0, loyaltyDiscount: 0 });
-      setIsMobileCartOpen(false);
-      setIsCustomerModalOpen(false);
-      alert("⚡ इंटरनेट बंद आहे! हे बिल ऑफलाइन जतन झाले आहे आणि इंटरनेट येताच क्लाउडवर सिंक होईल.");
-      return;
-    }
-
     try {
       const response = await axios.post('http://localhost:8000/pos/bill/', payload);
       
+      const cust = selectedCustomerId ? customers.find(c => c.id === selectedCustomerId) : null;
       setCompletedInvoice({
         invoice_number: response.data.invoice_number,
         subtotal: subtotal,
         tax: tax,
         grand_total: grand_total,
-        discount_amount: discountAmount,
-        loyalty_points_earned: response.data.loyalty_points_earned || 0,
         payment_method: paymentMethod,
         items: [...cartItems],
         customer_name: cust ? cust.name : null,
@@ -408,7 +260,6 @@ function POS() {
       });
       
       setCartItems([]);
-      setPendingLoyaltyInfo({ loyaltyPointsRedeemed: 0, loyaltyDiscount: 0 });
       setIsMobileCartOpen(false);
       setIsCustomerModalOpen(false);
       fetchData();
@@ -423,33 +274,6 @@ function POS() {
   return (
     <div className="h-screen flex flex-col overflow-hidden selection:bg-brand selection:text-white bg-premium-app">
       <Header onMenuClick={() => alert('Mobile menu clicked')} />
-
-      {/* Offline Mode & Cloud Sync Banner */}
-      {!isOnline && (
-        <div className="bg-amber-500 text-white px-4 py-2 text-xs font-black flex items-center justify-between shadow-md z-20 shrink-0">
-          <span className="flex items-center gap-2">
-            <WifiSlash weight="bold" className="text-base" /> ⚡ ऑफलाइन POS मोड चालू आहे — इंटरनेट नसतानाही अखंड बिलिंग सुरू राहील.
-          </span>
-          <span className="bg-amber-600 px-2 py-0.5 rounded-md">
-            साठवलेली बिले: {offlineBillsCount}
-          </span>
-        </div>
-      )}
-
-      {isOnline && offlineBillsCount > 0 && (
-        <div className="bg-emerald-600 text-white px-4 py-2 text-xs font-black flex items-center justify-between shadow-md z-20 shrink-0">
-          <span className="flex items-center gap-2">
-            <WifiHigh weight="bold" className="text-base" /> 🟢 इंटरनेट पूर्ववत झाले! {offlineBillsCount} ऑफलाइन बिले सिंक करण्यासाठी तयार आहेत.
-          </span>
-          <button 
-            onClick={syncOfflineBills}
-            disabled={isSyncing}
-            className="bg-white text-emerald-800 px-3 py-1 rounded-lg font-bold hover:bg-emerald-50 transition shadow-xs cursor-pointer"
-          >
-            {isSyncing ? 'सिंक होत आहे...' : 'आता सिंक करा 🚀'}
-          </button>
-        </div>
-      )}
 
       <main className="flex-1 flex flex-col lg:flex-row overflow-hidden relative">
         <Sidebar activeCategory={activeCategory} setActiveCategory={setActiveCategory} dynamicCategories={categories} />
@@ -656,100 +480,6 @@ function POS() {
           invoice={completedInvoice} 
           onClose={() => setCompletedInvoice(null)} 
         />
-      )}
-
-      {/* Profit Margin Guard Warning Modal */}
-      {showMarginGuardModal && (
-        <div className="fixed inset-0 bg-slate-900/70 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-          <div className="bg-white rounded-3xl w-full max-w-md shadow-2xl p-6 border-2 border-red-500 animate-fade-in">
-            <div className="flex items-center gap-3 mb-3">
-              <div className="w-12 h-12 rounded-2xl bg-red-100 text-red-600 flex items-center justify-center shrink-0">
-                <Warning weight="fill" className="text-2xl" />
-              </div>
-              <div>
-                <h3 className="font-black text-lg text-slate-800">⚠️ तोट्याची चेतावणी (Profit Margin Guard)</h3>
-                <p className="text-xs text-red-600 font-bold">या बिलामध्ये खरेदी किमतीपेक्षा कमी दराने विक्री होत आहे!</p>
-              </div>
-            </div>
-
-            <div className="bg-red-50 rounded-2xl p-3 border border-red-200 divide-y divide-red-100 my-4 max-h-48 overflow-y-auto">
-              {lossItems.map((item, idx) => (
-                <div key={idx} className="py-2 flex justify-between items-center text-xs">
-                  <div>
-                    <p className="font-bold text-slate-800">{item.name}</p>
-                    <p className="text-[11px] text-slate-500">खरेदी किंमत: ₹{item.cost_price} | विक्री: ₹{item.price}</p>
-                  </div>
-                  <span className="font-black text-red-600">तोटा: -₹{item.loss}</span>
-                </div>
-              ))}
-            </div>
-
-            <p className="text-[11px] text-slate-500 font-medium mb-4">
-              किराणा दुकानात नुकसान टाळण्यासाठी कृपया दर तपासा किंवा मालकाच्या परवानगीने पुढे जा.
-            </p>
-
-            <div className="flex gap-2">
-              <button
-                onClick={() => setShowMarginGuardModal(false)}
-                className="flex-1 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold rounded-xl text-xs transition cursor-pointer"
-              >
-                दर बदला (Change Price)
-              </button>
-              <button
-                onClick={() => {
-                  setShowMarginGuardModal(false);
-                  if (pendingCheckoutArgs) {
-                    proceedWithCheckout(pendingCheckoutArgs.paymentMethod, pendingCheckoutArgs.loyaltyInfo);
-                  }
-                }}
-                className="flex-1 py-2.5 bg-red-600 hover:bg-red-700 text-white font-bold rounded-xl text-xs transition shadow-md shadow-red-500/20 cursor-pointer"
-              >
-                तरीही विक्री करा (Continue Anyway)
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
-
-      {/* Owner PIN Verification Modal */}
-      {showPinModal && (
-        <div className="fixed inset-0 bg-slate-900/70 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-          <div className="bg-white rounded-3xl w-full max-w-xs shadow-2xl p-6 text-center animate-fade-in">
-            <div className="w-12 h-12 bg-amber-100 text-amber-600 rounded-2xl flex items-center justify-center mx-auto mb-3">
-              <LockKey weight="fill" className="text-2xl" />
-            </div>
-            <h3 className="font-black text-lg text-slate-800 mb-1">Owner PIN आवश्यक</h3>
-            <p className="text-xs text-slate-500 mb-4">कॅशियर सूट किंवा बिल रद्द करण्यासाठी मालकाचा ४-अंकी PIN टाका (Default: 1234)</p>
-            
-            <form onSubmit={handleVerifyPin} className="space-y-3">
-              <input 
-                type="password" 
-                maxLength={4}
-                autoFocus
-                required
-                value={enteredPin}
-                onChange={e => setEnteredPin(e.target.value)}
-                placeholder="••••"
-                className="w-full h-12 text-center text-2xl font-black tracking-widest bg-slate-50 border-2 border-slate-200 rounded-2xl focus:border-brand outline-none"
-              />
-              <div className="flex gap-2">
-                <button 
-                  type="button" 
-                  onClick={() => { setShowPinModal(false); setEnteredPin(''); }}
-                  className="flex-1 py-2 bg-slate-100 text-slate-600 font-bold rounded-xl text-xs hover:bg-slate-200 cursor-pointer"
-                >
-                  रद्द करा
-                </button>
-                <button 
-                  type="submit" 
-                  className="flex-1 py-2 bg-brand text-white font-bold rounded-xl text-xs shadow-sm hover:bg-brandHover cursor-pointer"
-                >
-                  तपासा (Verify)
-                </button>
-              </div>
-            </form>
-          </div>
-        </div>
       )}
     </div>
   );
