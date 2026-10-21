@@ -19,6 +19,21 @@ export const AUTH_TRANSLATIONS = {
       side_card3_title: "दैनिक नफा व लाईव्ह स्टॉक गार्ड",
       side_card3_desc: "आज किती कमाई झाली? आणि कोणता माल संपत आलाय याचे लगेच अलर्ट",
       
+      // Floating Outer Widgets (Wide Screens)
+      float_live_pos: "लाईव्ह POS",
+      float_bill_title: "किराणा बिल #1084",
+      float_bill_items: "२x साखर, १x अमूल बटर",
+      float_bill_total: "₹240",
+      float_bill_speed: "✓ ०.२ सेकंदात थर्मल प्रिंट",
+      float_profit_title: "आजचा निव्वळ नफा",
+      float_profit_val: "+₹3,850",
+      float_profit_sub: "कालपेक्षा १२% ↗",
+      float_udhari_title: "उधारी वसुली",
+      float_udhari_desc: "₹1,250 WhatsApp द्वारे जमा",
+      float_udhari_badge: "थेट UPI द्वारे खात्यात जमा ✓",
+      float_cloud_title: "२५६-बिट डेटा सुरक्षा",
+      float_cloud_desc: "१००% ऑटो क्लाउड बॅकअप",
+      
       trusted_stores: "५००+ दुकानांचा विश्वास",
       welcome_back: "पुन्हा स्वागत आहे",
       welcome_sub: "दुकानात प्रवेश करण्यासाठी युझरनेम किंवा मोबाईल नंबर टाका.",
@@ -113,6 +128,21 @@ export const AUTH_TRANSLATIONS = {
       side_card3_desc: "कोणत्याही मोबाईल किंवा लॅपटॉपवर सोपे बारकोड बिलिंग व संपूर्ण खातेवही",
       
       form_badge: "✨ ३० दिवस मोफत Pro ॲक्सेस • ₹० शुल्क",
+
+      // Floating Outer Widgets (Wide Screens)
+      float_trial_badge: "३० दिवस मोफत",
+      float_trial_title: "सर्व Pro फीचर्स अनलॉक",
+      float_trial_items: "₹० शुल्क • क्रेडिट कार्ड नाही",
+      float_trial_total: "मोफत",
+      float_trial_speed: "✓ ५ मिनिटांत दुकान सुरू",
+      float_printer_title: "सर्व प्रिंटर सपोर्ट",
+      float_printer_val: "२ व ३ इंच",
+      float_printer_sub: "थर्मल व USB 🖨️",
+      float_recovery_title: "जलद उधारी वसुली",
+      float_recovery_desc: "WhatsApp वर थेट पेमेंट लिंक",
+      float_recovery_badge: "अडकलेले पैसे वेळेवर वसूल ✓",
+      float_setup_title: "फाउंडर थेट सहकार्य",
+      float_setup_desc: "ऑनबोर्डिंग व मोफत ट्रेनिंग",
 
       // Right Side Box: Trial details
       right_brand_sub: "किराणा व रिटेल POS",
@@ -286,6 +316,21 @@ export const AUTH_TRANSLATIONS = {
       side_card3_title: "दैनिक मुनाफ़ा व लाइव स्टॉक गार्ड",
       side_card3_desc: "आज कितनी कमाई हुई? और कौन सा माल खत्म होने वाला है इसका अलर्ट",
       
+      // Floating Outer Widgets (Wide Screens)
+      float_live_pos: "लाइव POS",
+      float_bill_title: "किराना बिल #1084",
+      float_bill_items: "2x चीनी, 1x अमूल मक्खन",
+      float_bill_total: "₹240",
+      float_bill_speed: "✓ 0.2 सेकंड में प्रिंट",
+      float_profit_title: "आज का शुद्ध मुनाफा",
+      float_profit_val: "+₹3,850",
+      float_profit_sub: "कल से 12% अधिक ↗",
+      float_udhari_title: "उधारी वसूली",
+      float_udhari_desc: "₹1,250 WhatsApp द्वारा प्राप्त",
+      float_udhari_badge: "UPI से सीधे बैंक खाते में ✓",
+      float_cloud_title: "256-बिट डेटा सुरक्षा",
+      float_cloud_desc: "100% ऑटो क्लाउड बैकअप",
+      
       trusted_stores: "500+ से अधिक दुकानों का भरोसा",
       welcome_back: "वापसी पर स्वागत है",
       welcome_sub: "दुकान में प्रवेश करने के लिए यूज़रनेम या मोबाइल नंबर दर्ज करें।",
@@ -380,6 +425,21 @@ export const AUTH_TRANSLATIONS = {
       side_card3_desc: "किसी भी मोबाइल या कंप्यूटर पर सरल बारकोड बिलिंग व पक्की खाता बही",
       
       form_badge: "✨ 30 दिन मुफ़्त Pro एक्सेस • ₹0 शुल्क",
+
+      // Floating Outer Widgets (Wide Screens)
+      float_trial_badge: "30 दिन मुफ़्त",
+      float_trial_title: "सभी Pro फीचर्स अनलॉक",
+      float_trial_items: "₹0 शुल्क • क्रेडिट कार्ड नहीं",
+      float_trial_total: "मुफ़्त",
+      float_trial_speed: "✓ 5 मिनट में दुकान शुरू",
+      float_printer_title: "सभी प्रिंटर सपोर्ट",
+      float_printer_val: "2 व 3 इंच",
+      float_printer_sub: "थर्मल व USB 🖨️",
+      float_recovery_title: "तेज़ उधारी वसूली",
+      float_recovery_desc: "WhatsApp पर सीधा पेमेंट लिंक",
+      float_recovery_badge: "अटका पैसा समय पर वसूल ✓",
+      float_setup_title: "फाउंडर सीधा सहयोग",
+      float_setup_desc: "ऑनबोर्डिंग व मुफ्त ट्रेनिंग",
 
       // Right Side Box: Trial details
       right_brand_sub: "किराना और रिटेल POS",
@@ -553,6 +613,21 @@ export const AUTH_TRANSLATIONS = {
       side_card3_title: "Daily Profit & Live Stock Guard",
       side_card3_desc: "Instant profit calculations and low inventory shortage alerts",
       
+      // Floating Outer Widgets (Wide Screens)
+      float_live_pos: "Live POS",
+      float_bill_title: "Retail Bill #1084",
+      float_bill_items: "2x Sugar, 1x Amul Butter",
+      float_bill_total: "₹240",
+      float_bill_speed: "✓ 0.2s Thermal Print",
+      float_profit_title: "Today's Net Profit",
+      float_profit_val: "+₹3,850",
+      float_profit_sub: "12% up vs yesterday ↗",
+      float_udhari_title: "Due Recovery",
+      float_udhari_desc: "₹1,250 received via WhatsApp",
+      float_udhari_badge: "Direct UPI Deposit into Bank ✓",
+      float_cloud_title: "256-Bit Cloud Security",
+      float_cloud_desc: "100% Automatic Cloud Backup",
+      
       trusted_stores: "500+ stores trust Dukaan360",
       welcome_back: "Welcome Back",
       welcome_sub: "Enter your username or mobile number to access your store.",
@@ -647,6 +722,21 @@ export const AUTH_TRANSLATIONS = {
       side_card3_desc: "Runs smoothly on any phone or PC with barcode scanning and instant ledger",
       
       form_badge: "✨ 30 Days Free Pro Access • ₹0 Fee",
+
+      // Floating Outer Widgets (Wide Screens)
+      float_trial_badge: "30 Days Free",
+      float_trial_title: "All Pro Features Unlocked",
+      float_trial_items: "₹0 Fee • No Credit Card",
+      float_trial_total: "Free",
+      float_trial_speed: "✓ Setup Store in 5 Mins",
+      float_printer_title: "All Printer Support",
+      float_printer_val: "2 & 3 Inch",
+      float_printer_sub: "Thermal & USB 🖨️",
+      float_recovery_title: "Fast Due Recovery",
+      float_recovery_desc: "Direct WhatsApp payment links",
+      float_recovery_badge: "Recover blocked cash on time ✓",
+      float_setup_title: "Founder Onboarding",
+      float_setup_desc: "Direct support & free training",
 
       // Right Side Box: Trial details
       right_brand_sub: "Kirana & Retail POS",

@@ -163,8 +163,70 @@ const Register = () => {
         </div>
       </header>
 
+      {/* ================= DESKTOP WIDE OUTER FLOATING WIDGETS (min-[1480px]:flex) ================= */}
+      {/* Left Outer Floating Glass Cards */}
+      <aside className="hidden min-[1480px]:flex flex-col gap-3.5 fixed left-6 2xl:left-12 top-1/2 -translate-y-1/2 z-20 pointer-events-none select-none w-52 animate-float-slow">
+        <div className="bg-white/85 backdrop-blur-xl border border-orange-200/80 p-3.5 rounded-2xl shadow-[0_12px_30px_-8px_rgba(255,87,34,0.14)] space-y-2">
+          <div className="flex items-center justify-between">
+            <span className="flex items-center gap-1.5 text-[10px] font-black text-[#FF5722] bg-orange-50 px-2 py-0.5 rounded-full border border-orange-200/60">
+              <Sparkle weight="fill" className="text-xs" />
+              <span>{txt.float_trial_badge}</span>
+            </span>
+            <span className="text-[10px] font-bold text-emerald-600 font-black">{txt.float_trial_total}</span>
+          </div>
+          <div className="text-xs font-black text-slate-800 leading-tight">
+            🎁 {txt.float_trial_title}
+          </div>
+          <div className="text-[10.5px] text-slate-500 font-medium">
+            {txt.float_trial_items}
+          </div>
+          <div className="text-[10px] text-emerald-600 font-bold flex items-center gap-1 pt-1 border-t border-slate-100">
+            <span>{txt.float_trial_speed}</span>
+          </div>
+        </div>
+
+        <div className="bg-white/80 backdrop-blur-md border border-slate-200/80 p-3 rounded-2xl shadow-xs flex items-center gap-3">
+          <div className="w-8.5 h-8.5 rounded-xl bg-orange-50 text-[#FF5722] flex items-center justify-center font-black text-base shrink-0 border border-orange-200/60">
+            🖨️
+          </div>
+          <div>
+            <div className="text-[11px] font-black text-slate-800">{txt.float_printer_title}</div>
+            <div className="text-xs font-black text-slate-700">{txt.float_printer_val} <span className="text-[9.5px] text-slate-400 font-semibold">{txt.float_printer_sub}</span></div>
+          </div>
+        </div>
+      </aside>
+
+      {/* Right Outer Floating Glass Cards */}
+      <aside className="hidden min-[1480px]:flex flex-col gap-3.5 fixed right-6 2xl:right-12 top-1/2 -translate-y-1/2 z-20 pointer-events-none select-none w-52 animate-float-slow-reverse">
+        <div className="bg-white/85 backdrop-blur-xl border border-emerald-200/80 p-3.5 rounded-2xl shadow-[0_12px_30px_-8px_rgba(16,185,129,0.14)] space-y-2">
+          <div className="flex items-center justify-between">
+            <span className="flex items-center gap-1.5 text-[10px] font-black text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200/60">
+              <WhatsappLogo weight="fill" className="text-xs" />
+              <span>{txt.float_recovery_title}</span>
+            </span>
+            <span className="text-[10px] font-bold text-slate-400">AUTO</span>
+          </div>
+          <div className="text-xs font-black text-slate-800 leading-tight">
+            💰 {txt.float_recovery_desc}
+          </div>
+          <div className="text-[10px] text-emerald-600 font-bold">
+            {txt.float_recovery_badge}
+          </div>
+        </div>
+
+        <div className="bg-white/80 backdrop-blur-md border border-slate-200/80 p-3 rounded-2xl shadow-xs flex items-center gap-3">
+          <div className="w-8.5 h-8.5 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center font-black text-base shrink-0 border border-blue-200/60">
+            ⚡
+          </div>
+          <div>
+            <div className="text-[11px] font-black text-slate-800">{txt.float_setup_title}</div>
+            <div className="text-[9.5px] text-slate-500">{txt.float_setup_desc}</div>
+          </div>
+        </div>
+      </aside>
+
       {/* ================= MAIN BALANCED WORKSPACE (ZERO SCROLLING, ZERO GARDI) ================= */}
-      <main className="relative z-10 flex-1 w-full max-w-[1040px] mx-auto px-4 py-2 flex items-center justify-center overflow-hidden">
+      <main className="relative z-10 flex-1 w-full max-w-[1040px] xl:max-w-[1080px] mx-auto px-4 py-2 flex items-center justify-center overflow-hidden">
         
         {/* CLEAN 2-COLUMN SUITE (SPACIOUS & UNCLUTTERED) */}
         <div className="w-full grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-center my-auto max-h-[500px]">
