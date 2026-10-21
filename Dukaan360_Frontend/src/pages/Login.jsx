@@ -171,351 +171,332 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen lg:h-screen w-full bg-[#F3F6FC] flex flex-col relative overflow-y-auto lg:overflow-hidden font-sans select-none">
+    <div className="h-screen w-full bg-[#F8FAFC] flex flex-col lg:flex-row overflow-hidden font-sans select-none">
       
-      {/* ================= ANIMATED MODERN AMBIENT BACKGROUND ================= */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
-        <div className="absolute -top-[10%] -left-[6%] w-[500px] sm:w-[600px] h-[500px] sm:h-[600px] bg-gradient-to-tr from-[#FF5722]/20 via-[#FF8A65]/15 to-amber-400/15 rounded-full blur-[100px] animate-blob-1"></div>
-        <div className="absolute -bottom-[12%] -right-[6%] w-[520px] sm:w-[650px] h-[520px] sm:h-[650px] bg-gradient-to-tr from-indigo-600/15 via-blue-500/15 to-purple-500/10 rounded-full blur-[110px] animate-blob-2"></div>
-        <div className="absolute top-[25%] -right-[5%] w-[400px] sm:w-[480px] h-[400px] sm:h-[480px] bg-gradient-to-tr from-cyan-400/15 via-sky-500/10 to-blue-500/10 rounded-full blur-[90px] animate-blob-3"></div>
-      </div>
+      {/* ================= LEFT COLUMN: Executive Dark Showcase (44% on Desktop) ================= */}
+      <div className="hidden lg:flex lg:w-[44%] xl:w-[42%] bg-gradient-to-br from-[#0A0E1A] via-[#0F172A] to-[#1E1B4B] p-8 xl:p-12 text-white flex-col justify-between relative overflow-hidden border-r border-slate-800/80 shrink-0 select-none">
+        
+        {/* Ambient Glow & Dot Grid */}
+        <div className="absolute inset-0 opacity-15 bg-[radial-gradient(circle_at_2px_2px,white_1px,transparent_0)] bg-[length:24px_24px] pointer-events-none"></div>
+        <div className="absolute -top-20 -right-20 w-72 h-72 bg-[#FF5722]/15 rounded-full blur-[100px] pointer-events-none"></div>
+        <div className="absolute -bottom-20 -left-20 w-80 h-80 bg-indigo-600/20 rounded-full blur-[110px] pointer-events-none"></div>
 
-      {/* Tech Dot Grid Overlay */}
-      <div 
-        className="absolute inset-0 pointer-events-none z-0 opacity-30 animate-grid-pan"
-        style={{
-          backgroundImage: 'radial-gradient(#64748B 1.2px, transparent 1.2px)',
-          backgroundSize: '24px 24px',
-          maskImage: 'radial-gradient(ellipse at center, rgba(0,0,0,0.85) 20%, transparent 75%)',
-          WebkitMaskImage: 'radial-gradient(ellipse at center, rgba(0,0,0,0.85) 20%, transparent 75%)'
-        }}
-      ></div>
-
-      {/* ================= GLOBAL TOP NAVBAR ================= */}
-      <header className="relative z-20 w-full h-14 px-3 sm:px-6 lg:px-8 bg-white/80 backdrop-blur-md border-b border-slate-200/70 flex items-center justify-between shrink-0 shadow-xs">
-        {/* Brand & Subtitle */}
-        <div className="flex items-center gap-2.5 shrink-0">
-          <div className="w-8.5 h-8.5 rounded-xl bg-gradient-to-tr from-[#FF5722] to-[#FFA726] flex items-center justify-center text-white shadow-md shadow-orange-500/25 shrink-0">
-            <Storefront weight="fill" className="text-lg sm:text-xl" />
+        {/* Top: Brand Logo */}
+        <div className="relative z-10 flex items-center gap-3">
+          <div className="w-10 h-10 rounded-2xl bg-gradient-to-tr from-[#FF5722] to-[#FFA726] flex items-center justify-center text-white shadow-lg shadow-orange-500/30 shrink-0">
+            <Storefront weight="fill" className="text-2xl" />
           </div>
           <div>
-            <div className="flex items-center gap-1.5 sm:gap-2">
-              <h1 className="text-base sm:text-lg font-black tracking-tight text-slate-900 leading-none">
+            <div className="flex items-center gap-2">
+              <h1 className="text-xl font-black tracking-tight text-white leading-none">
                 {txt.brand_title}
               </h1>
-              <span className="hidden sm:inline-flex items-center gap-1 text-[10px] font-black text-[#FF5722] bg-orange-50 border border-orange-200/80 px-2 py-0.5 rounded-full">
-                <Sparkle weight="fill" className="text-xs" />
-                <span>{txt.brand_subtitle}</span>
+              <span className="text-[10px] font-black text-orange-400 bg-orange-500/10 border border-orange-500/20 px-2 py-0.5 rounded-full">
+                {txt.brand_subtitle}
               </span>
             </div>
-            <p className="text-[9px] font-bold text-slate-400 uppercase tracking-wider mt-0.5 sm:hidden">
-              {txt.brand_subtitle}
+            <p className="text-[11px] font-semibold text-slate-400 mt-1">
+              Cloud POS & Retail Suite
             </p>
           </div>
         </div>
 
-        {/* Action Controls: 3-Language Selector & Register Link */}
-        <div className="flex items-center gap-1.5 sm:gap-2.5 shrink-0">
-          <LanguageControl variant="auth" />
-
-          <Link 
-            to="/register"
-            className="text-xs font-black text-white bg-gradient-to-r from-[#FF5722] to-[#FF7043] hover:from-[#E64A19] hover:to-[#FF5722] px-3.5 py-1.5 rounded-xl transition-all flex items-center gap-1.5 shadow-md shadow-orange-500/20 active:scale-98 shrink-0 whitespace-nowrap"
-            title={txt.register_now}
-          >
-            <span className="hidden md:inline">{txt.register_now.replace('→', '').trim()}</span>
-            <span className="md:hidden font-black text-[11px]">नवीन नोंदणी</span>
-            <ArrowRight weight="bold" className="text-xs" />
-          </Link>
-        </div>
-      </header>
-
-      {/* ================= MAIN BALANCED WORKSPACE ================= */}
-      <main className="relative z-10 flex-1 w-full max-w-[1240px] mx-auto p-3 sm:p-5 lg:p-6 flex items-center justify-center">
-        
-        {/* UNIFIED LUXURY SPLIT-PANEL BENTO CONTAINER */}
-        <div className="w-full max-w-[980px] bg-white rounded-[26px] sm:rounded-[30px] border border-slate-200/80 shadow-[0_20px_60px_-15px_rgba(15,23,42,0.12),0_0_0_1px_rgba(255,255,255,0.8)] overflow-hidden flex flex-col lg:flex-row my-auto">
-          
-          {/* ================= LEFT COLUMN: Executive Dark Showcase (48%) ================= */}
-          <div className="hidden lg:flex lg:w-[48%] bg-gradient-to-br from-[#0B0F19] via-[#0F172A] to-[#1E1B4B] p-6 sm:p-7 text-white flex-col justify-between shrink-0 relative overflow-hidden border-r border-slate-800/80">
-            {/* Ambient Background Grid Pattern */}
-            <div className="absolute inset-0 opacity-10 bg-[radial-gradient(circle_at_2px_2px,white_1px,transparent_0)] bg-[length:22px_22px] pointer-events-none"></div>
-            <div className="absolute -top-16 -right-16 w-48 h-48 bg-orange-500/15 rounded-full blur-3xl pointer-events-none"></div>
-            <div className="absolute -bottom-16 -left-16 w-48 h-48 bg-indigo-500/20 rounded-full blur-3xl pointer-events-none"></div>
-
-            {/* Top: Headline & Tagline */}
-            <div className="relative z-10 space-y-1.5">
-              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-[11px] font-bold text-orange-400 backdrop-blur-xs shadow-2xs">
-                <Sparkle weight="fill" className="text-xs text-orange-400" />
-                <span>Dukaan360 Cloud POS System</span>
-              </div>
-              
-              <h2 className="text-xl sm:text-2xl font-black leading-snug text-white tracking-tight">
-                {txt.brand_quote_1} <br />
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FF5722] via-[#FF7043] to-amber-400">{txt.brand_quote_highlight}</span>
-              </h2>
-              <p className="text-slate-300 font-medium text-xs leading-relaxed max-w-sm">
-                {txt.brand_subquote}
-              </p>
+        {/* Middle: Brand Pitch, Animated Marquee Ribbons, Live Stats */}
+        <div className="relative z-10 my-auto py-6 space-y-6">
+          <div className="space-y-2">
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-xs font-bold text-orange-400 backdrop-blur-xs">
+              <Sparkle weight="fill" className="text-xs text-orange-400" />
+              <span>Smart Kirana & Retail Operating System</span>
             </div>
+            
+            <h2 className="text-2xl xl:text-3xl font-black leading-tight text-white tracking-tight">
+              {txt.brand_quote_1} <br />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FF5722] via-[#FF7043] to-amber-400">
+                {txt.brand_quote_highlight}
+              </span>
+            </h2>
+            <p className="text-slate-300 font-medium text-xs xl:text-sm leading-relaxed max-w-md">
+              {txt.brand_subquote}
+            </p>
+          </div>
 
-            {/* Middle: Dual-Row Marquee Ribbons & Live Stats */}
-            <div className="relative z-10 my-3 py-1 space-y-3">
-              {/* Animated Marquee Ribbons */}
-              <div className="relative overflow-hidden w-full space-y-2 select-none group">
-                <div className="absolute left-0 top-0 bottom-0 w-8 bg-gradient-to-r from-slate-900 to-transparent z-10 pointer-events-none"></div>
-                <div className="absolute right-0 top-0 bottom-0 w-8 bg-gradient-to-l from-slate-900 to-transparent z-10 pointer-events-none"></div>
+          {/* Dual Row Marquee Ribbons */}
+          <div className="relative overflow-hidden w-full space-y-2.5 select-none py-1">
+            <div className="absolute left-0 top-0 bottom-0 w-8 bg-gradient-to-r from-[#0B0F19] to-transparent z-10 pointer-events-none"></div>
+            <div className="absolute right-0 top-0 bottom-0 w-8 bg-gradient-to-l from-[#0B0F19] to-transparent z-10 pointer-events-none"></div>
 
-                {/* Row 1: Left */}
-                <div className="overflow-hidden">
-                  <div className="flex gap-2 animate-marquee-left">
-                    {txt.marquee_row1.concat(txt.marquee_row1).map((item, idx) => (
-                      <div 
-                        key={idx}
-                        className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 text-[11px] font-bold text-slate-200 transition-colors shrink-0 shadow-xs backdrop-blur-xs"
-                      >
-                        <span className="text-xs">{item.icon}</span>
-                        <span className="tracking-tight">{item.text}</span>
-                      </div>
-                    ))}
+            {/* Row 1 */}
+            <div className="overflow-hidden">
+              <div className="flex gap-2.5 animate-marquee-left">
+                {txt.marquee_row1.concat(txt.marquee_row1).map((item, idx) => (
+                  <div 
+                    key={idx}
+                    className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/[0.06] hover:bg-white/10 border border-white/10 text-xs font-bold text-slate-200 transition-colors shrink-0 backdrop-blur-xs"
+                  >
+                    <span>{item.icon}</span>
+                    <span>{item.text}</span>
                   </div>
-                </div>
-
-                {/* Row 2: Right */}
-                <div className="overflow-hidden">
-                  <div className="flex gap-2 animate-marquee-right">
-                    {txt.marquee_row2.concat(txt.marquee_row2).map((item, idx) => (
-                      <div 
-                        key={idx}
-                        className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 text-[11px] font-bold text-slate-200 transition-colors shrink-0 shadow-xs backdrop-blur-xs"
-                      >
-                        <span className="text-xs">{item.icon}</span>
-                        <span className="tracking-tight">{item.text}</span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
-
-              {/* Live Stats Grid */}
-              <div className="grid grid-cols-3 gap-2.5 text-center">
-                <div className="bg-white/5 hover:bg-white/8 border border-white/10 rounded-xl py-2 px-2 backdrop-blur-xs transition shadow-2xs">
-                  <p className="text-xs sm:text-sm font-black text-white">{txt.stat_stores}</p>
-                  <p className="text-[10px] text-slate-400 font-medium mt-0.5">सक्रिय वापरकर्ते</p>
-                </div>
-                <div className="bg-white/5 hover:bg-white/8 border border-white/10 rounded-xl py-2 px-2 backdrop-blur-xs transition shadow-2xs">
-                  <p className="text-xs sm:text-sm font-black text-[#FF8A65]">{txt.stat_speed}</p>
-                  <p className="text-[10px] text-slate-400 font-medium mt-0.5">जलद बिलिंग</p>
-                </div>
-                <div className="bg-white/5 hover:bg-white/8 border border-white/10 rounded-xl py-2 px-2 backdrop-blur-xs transition shadow-2xs">
-                  <p className="text-xs sm:text-sm font-black text-amber-300">{txt.stat_rating}</p>
-                  <p className="text-[10px] text-slate-400 font-medium mt-0.5">विश्वसनीय रेटिंग</p>
-                </div>
+                ))}
               </div>
             </div>
 
-            {/* Bottom: Trusted Users Strip & Live Cloud Indicator */}
-            <div className="relative z-10 pt-2.5 border-t border-white/10 flex items-center justify-between">
-              <div className="flex items-center gap-2">
-                <div className="flex -space-x-1.5">
-                  <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=70&h=70&fit=crop&crop=faces" alt="User 1" className="w-6 h-6 rounded-full border border-slate-900 object-cover" />
-                  <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=70&h=70&fit=crop&crop=faces" alt="User 2" className="w-6 h-6 rounded-full border border-slate-900 object-cover" />
-                  <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=70&h=70&fit=crop&crop=faces" alt="User 3" className="w-6 h-6 rounded-full border border-slate-900 object-cover" />
-                </div>
-                <p className="text-[11px] font-bold text-slate-300">{txt.trusted_stores}</p>
-              </div>
-              
-              <div className="flex items-center gap-2">
-                <span className="hidden sm:inline-flex items-center gap-1 text-[10.5px] text-slate-400">
-                  <ShieldCheck weight="fill" className="text-xs text-blue-400" />
-                  <span>256-Bit SSL</span>
-                </span>
-                <span className="flex items-center gap-1.5 text-[10px] text-emerald-400 font-bold bg-emerald-500/10 border border-emerald-500/20 px-2.5 py-0.5 rounded-full">
-                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
-                  <span>Live Cloud</span>
-                </span>
+            {/* Row 2 */}
+            <div className="overflow-hidden">
+              <div className="flex gap-2.5 animate-marquee-right">
+                {txt.marquee_row2.concat(txt.marquee_row2).map((item, idx) => (
+                  <div 
+                    key={idx}
+                    className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/[0.06] hover:bg-white/10 border border-white/10 text-xs font-bold text-slate-200 transition-colors shrink-0 backdrop-blur-xs"
+                  >
+                    <span>{item.icon}</span>
+                    <span>{item.text}</span>
+                  </div>
+                ))}
               </div>
             </div>
           </div>
 
-          {/* ================= RIGHT COLUMN: Modern White Login Form (52%) ================= */}
-          <div className="w-full lg:w-[52%] p-5 sm:p-7 lg:p-8 flex flex-col justify-between shrink-0 relative">
-            
-            <div className="w-full max-w-[380px] mx-auto space-y-3.5 my-auto">
-              
-              {/* Header Titles */}
-              <div>
-                <h2 className="text-xl sm:text-2xl font-black text-slate-900 tracking-tight flex items-center gap-2">
-                  {txt.welcome_back} <span className="text-xl">👋</span>
-                </h2>
-                <div className="h-1 w-10 bg-gradient-to-r from-[#FF5722] via-[#FF8A65] to-amber-400 rounded-full mt-1.5"></div>
-                <p className="text-slate-500 font-medium mt-1 text-xs leading-relaxed">{txt.welcome_sub}</p>
+          {/* 3 Live Stats Cards */}
+          <div className="grid grid-cols-3 gap-3 text-center">
+            <div className="bg-white/[0.04] border border-white/10 rounded-2xl py-3 px-2 backdrop-blur-xs">
+              <p className="text-base font-black text-white">{txt.stat_stores}</p>
+              <p className="text-[10px] text-slate-400 font-medium mt-0.5">सक्रिय वापरकर्ते</p>
+            </div>
+            <div className="bg-white/[0.04] border border-white/10 rounded-2xl py-3 px-2 backdrop-blur-xs">
+              <p className="text-base font-black text-[#FF8A65]">{txt.stat_speed}</p>
+              <p className="text-[10px] text-slate-400 font-medium mt-0.5">जलद बिलिंग</p>
+            </div>
+            <div className="bg-white/[0.04] border border-white/10 rounded-2xl py-3 px-2 backdrop-blur-xs">
+              <p className="text-base font-black text-amber-300">{txt.stat_rating}</p>
+              <p className="text-[10px] text-slate-400 font-medium mt-0.5">विश्वसनीय रेटिंग</p>
+            </div>
+          </div>
+        </div>
+
+        {/* Bottom: Trusted Users Strip & Live Cloud */}
+        <div className="relative z-10 pt-4 border-t border-white/10 flex items-center justify-between">
+          <div className="flex items-center gap-2.5">
+            <div className="flex -space-x-2">
+              <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=70&h=70&fit=crop&crop=faces" alt="Merchant 1" className="w-7 h-7 rounded-full border-2 border-slate-900 object-cover" />
+              <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=70&h=70&fit=crop&crop=faces" alt="Merchant 2" className="w-7 h-7 rounded-full border-2 border-slate-900 object-cover" />
+              <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=70&h=70&fit=crop&crop=faces" alt="Merchant 3" className="w-7 h-7 rounded-full border-2 border-slate-900 object-cover" />
+            </div>
+            <p className="text-xs font-bold text-slate-300">{txt.trusted_stores}</p>
+          </div>
+          
+          <div className="flex items-center gap-2">
+            <span className="flex items-center gap-1.5 text-xs text-emerald-400 font-bold bg-emerald-500/10 border border-emerald-500/20 px-3 py-1 rounded-full">
+              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+              <span>Live Cloud</span>
+            </span>
+          </div>
+        </div>
+
+      </div>
+
+      {/* ================= RIGHT COLUMN: Modern Crisp Login Workspace (56% on Desktop) ================= */}
+      <div className="flex-1 bg-[#F8FAFC] flex flex-col justify-between p-5 sm:p-8 lg:p-10 xl:p-12 overflow-y-auto relative">
+        
+        {/* Top Bar: Mobile Brand Header & Language Switcher / Register Button */}
+        <div className="w-full flex items-center justify-between shrink-0 mb-auto pb-4">
+          {/* Mobile Only Brand */}
+          <div className="lg:hidden flex items-center gap-2">
+            <div className="w-8.5 h-8.5 rounded-xl bg-gradient-to-tr from-[#FF5722] to-[#FFA726] flex items-center justify-center text-white shadow-md shadow-orange-500/25">
+              <Storefront weight="fill" className="text-lg" />
+            </div>
+            <span className="text-lg font-black tracking-tight text-slate-900">Dukaan360</span>
+          </div>
+
+          {/* Action Controls: 3-Language Selector & Register Button */}
+          <div className="flex items-center gap-2.5 ml-auto">
+            <LanguageControl variant="auth" />
+
+            <Link 
+              to="/register"
+              className="text-xs font-black text-white bg-gradient-to-r from-[#FF5722] to-[#FF7043] hover:from-[#E64A19] hover:to-[#FF5722] px-3.5 py-1.5 rounded-xl transition-all flex items-center gap-1.5 shadow-md shadow-orange-500/20 active:scale-98 shrink-0 whitespace-nowrap"
+              title={txt.register_now}
+            >
+              <span className="hidden sm:inline">{txt.register_now.replace('→', '').trim()}</span>
+              <span className="sm:hidden font-black">नोंदणी</span>
+              <ArrowRight weight="bold" className="text-xs" />
+            </Link>
+          </div>
+        </div>
+
+        {/* Center: Focused Login Form Canvas */}
+        <div className="w-full max-w-[410px] mx-auto my-auto py-4 sm:py-6">
+          
+          {/* Header Titles */}
+          <div className="mb-5 sm:mb-6">
+            <h2 className="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight flex items-center gap-2">
+              {txt.welcome_back} <span className="text-2xl sm:text-3xl">👋</span>
+            </h2>
+            <div className="h-1 w-12 bg-gradient-to-r from-[#FF5722] via-[#FF8A65] to-amber-400 rounded-full mt-2"></div>
+            <p className="text-slate-500 font-medium mt-2 text-xs sm:text-sm leading-relaxed">
+              {txt.welcome_sub}
+            </p>
+          </div>
+          
+          {/* Error Banner */}
+          {error && (
+            <div className={`p-3 rounded-xl text-xs font-bold mb-4 animate-in fade-in duration-150 ${
+              isPendingApprovalError
+                ? 'bg-amber-50 border border-amber-300 text-amber-950 shadow-xs'
+                : isExpiredError 
+                  ? 'bg-orange-50 border border-orange-200 text-orange-950 shadow-sm'
+                  : 'bg-red-50 border border-red-200 text-red-600'
+            }`}>
+              <div className="flex items-start gap-2.5">
+                <WarningCircle weight="fill" className={`text-lg shrink-0 mt-0.5 ${
+                  isPendingApprovalError ? 'text-amber-600 animate-pulse' : isExpiredError ? 'text-[#FF5722]' : 'text-red-500'
+                }`} />
+                <div className="flex-1 space-y-1.5">
+                  <div>
+                    {isPendingApprovalError && (
+                      <p className="font-black text-amber-900 text-xs mb-0.5">नोंदणी मंजुरी प्रलंबित (Pending Approval)</p>
+                    )}
+                    <p className="leading-tight text-xs font-medium">{error}</p>
+                  </div>
+
+                  {isPendingApprovalError && (
+                    <a
+                      href={`https://wa.me/918262802961?text=${encodeURIComponent(`नमस्कार सर! 🙏\nमी Dukaan360 वर नोंदणी (@${username.trim().replace(/^@/, '')}) केली आहे.\nकृपया माझे खाते तपासून मंजूर (Approve) करा.`)}`}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="inline-flex items-center gap-1.5 bg-emerald-600 hover:bg-emerald-700 text-white px-3 py-1.5 rounded-lg text-xs font-black shadow-xs transition"
+                    >
+                      <WhatsappLogo weight="fill" className="text-sm" /> WhatsApp संपर्क
+                    </a>
+                  )}
+
+                  {isExpiredError && (
+                    <Link 
+                      to={`/renew?username=${username.trim().replace(/^@/, '')}`}
+                      className="inline-flex items-center gap-1 mt-1 bg-[#FF5722] hover:bg-[#E64A19] text-white px-3 py-1.5 rounded-xl text-xs font-black shadow-xs transition cursor-pointer"
+                    >
+                      <span>{txt.renew_btn_text}</span>
+                    </Link>
+                  )}
+                </div>
               </div>
-              
-              {/* Error Banner */}
-              {error && (
-                <div className={`p-2.5 rounded-xl text-xs font-bold animate-in fade-in duration-150 ${
-                  isPendingApprovalError
-                    ? 'bg-amber-50 border border-amber-300 text-amber-950 shadow-xs'
-                    : isExpiredError 
-                      ? 'bg-orange-50 border border-orange-200 text-orange-950 shadow-sm'
-                      : 'bg-red-50 border border-red-200 text-red-600'
-                }`}>
-                  <div className="flex items-start gap-2">
-                    <WarningCircle weight="fill" className={`text-base shrink-0 mt-0.5 ${
-                      isPendingApprovalError ? 'text-amber-600 animate-pulse' : isExpiredError ? 'text-[#FF5722]' : 'text-red-500'
-                    }`} />
-                    <div className="flex-1 space-y-1.5">
-                      <div>
-                        {isPendingApprovalError && (
-                          <p className="font-black text-amber-900 text-xs mb-0.5">नोंदणी मंजुरी प्रलंबित (Pending Approval)</p>
-                        )}
-                        <p className="leading-tight text-xs font-medium">{error}</p>
-                      </div>
-
-                      {isPendingApprovalError && (
-                        <a
-                          href={`https://wa.me/918262802961?text=${encodeURIComponent(`नमस्कार सर! 🙏\nमी Dukaan360 वर नोंदणी (@${username.trim().replace(/^@/, '')}) केली आहे.\nकृपया माझे खाते तपासून मंजूर (Approve) करा.`)}`}
-                          target="_blank"
-                          rel="noreferrer"
-                          className="inline-flex items-center gap-1 bg-emerald-600 hover:bg-emerald-700 text-white px-2.5 py-1 rounded-lg text-xs font-black shadow-xs transition"
-                        >
-                          <WhatsappLogo weight="fill" className="text-xs" /> WhatsApp संपर्क
-                        </a>
-                      )}
-
-                      {isExpiredError && (
-                        <Link 
-                          to={`/renew?username=${username.trim().replace(/^@/, '')}`}
-                          className="inline-flex items-center gap-1 mt-1 bg-[#FF5722] hover:bg-[#E64A19] text-white px-3 py-1 rounded-xl text-xs font-black shadow-xs transition cursor-pointer"
-                        >
-                          <span>{txt.renew_btn_text}</span>
-                        </Link>
-                      )}
-                    </div>
-                  </div>
+            </div>
+          )}
+          
+          {/* Form */}
+          <form onSubmit={handleLogin} className="space-y-4">
+            
+            {/* 1. Username / Mobile Field */}
+            <div>
+              <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
+                {txt.username_label}
+              </label>
+              <div className="relative group">
+                <div className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-[#FF5722] transition-colors duration-200 flex items-center pointer-events-none">
+                  <At weight="bold" className="text-lg" />
                 </div>
-              )}
-              
-              {/* Form */}
-              <form onSubmit={handleLogin} className="space-y-3">
-                
-                {/* 1. Username / Mobile Field */}
-                <div>
-                  <label className="block text-[11px] font-bold text-slate-700 uppercase tracking-wider mb-1">
-                    {txt.username_label}
-                  </label>
-                  <div className="relative group">
-                    <div className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-[#FF5722] transition-colors duration-200 flex items-center pointer-events-none">
-                      <At weight="bold" className="text-base" />
-                    </div>
-                    <input 
-                      type="text" 
-                      value={username}
-                      onChange={e => setUsername(e.target.value.toLowerCase().replace(/\s+/g, '_'))}
-                      required
-                      autoCapitalize="none"
-                      autoCorrect="off"
-                      className="w-full h-10.5 bg-slate-50/70 hover:bg-slate-50 border border-slate-200 rounded-xl pl-10 pr-3.5 font-semibold font-mono text-slate-800 outline-none focus:bg-white focus:border-[#FF5722] focus:ring-3 focus:ring-[#FF5722]/15 transition-all duration-200 placeholder:font-sans placeholder:font-normal placeholder:text-slate-400 text-xs sm:text-sm"
-                      placeholder={txt.username_placeholder} 
-                    />
-                  </div>
-                </div>
-                
-                {/* 2. Password Field with Eye Toggle & Forgot Link */}
-                <div>
-                  <div className="flex items-center justify-between mb-1">
-                    <label className="block text-[11px] font-bold text-slate-700 uppercase tracking-wider">
-                      {txt.password_label}
-                    </label>
-                    <button 
-                      type="button"
-                      onClick={openForgotModal}
-                      className="text-[11px] font-bold text-[#FF5722] hover:text-[#E64A19] hover:underline transition cursor-pointer"
-                    >
-                      {txt.forgot_password}
-                    </button>
-                  </div>
-
-                  <div className="relative group">
-                    <div className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-[#FF5722] transition-colors duration-200 flex items-center pointer-events-none">
-                      <LockKey weight="bold" className="text-base" />
-                    </div>
-                    <input 
-                      type={showPassword ? "text" : "password"} 
-                      value={password}
-                      onChange={e => setPassword(e.target.value)}
-                      required
-                      className="w-full h-10.5 bg-slate-50/70 hover:bg-slate-50 border border-slate-200 rounded-xl pl-10 pr-10 font-semibold text-slate-800 outline-none focus:bg-white focus:border-[#FF5722] focus:ring-3 focus:ring-[#FF5722]/15 transition-all duration-200 text-xs sm:text-sm placeholder:font-normal placeholder:text-slate-400"
-                      placeholder={txt.password_placeholder}
-                    />
-                    <button 
-                      type="button" 
-                      onClick={() => setShowPassword(!showPassword)}
-                      className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-700 p-1 rounded-md transition cursor-pointer"
-                    >
-                      {showPassword ? (
-                        <EyeSlash weight="bold" className="text-base text-[#FF5722]" />
-                      ) : (
-                        <Eye weight="bold" className="text-base" />
-                      )}
-                    </button>
-                  </div>
-                </div>
-                
-                {/* Submit Button */}
+                <input 
+                  type="text" 
+                  value={username}
+                  onChange={e => setUsername(e.target.value.toLowerCase().replace(/\s+/g, '_'))}
+                  required
+                  autoCapitalize="none"
+                  autoCorrect="off"
+                  className="w-full h-11.5 bg-white border border-slate-250 hover:border-slate-350 rounded-xl pl-10.5 pr-4 font-semibold font-mono text-slate-800 outline-none focus:border-[#FF5722] focus:ring-4 focus:ring-[#FF5722]/10 transition-all duration-200 placeholder:font-sans placeholder:font-normal placeholder:text-slate-400 text-sm shadow-2xs"
+                  placeholder={txt.username_placeholder} 
+                />
+              </div>
+            </div>
+            
+            {/* 2. Password Field with Eye Toggle & Forgot Link */}
+            <div>
+              <div className="flex items-center justify-between mb-1.5">
+                <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider">
+                  {txt.password_label}
+                </label>
                 <button 
-                  type="submit" 
-                  disabled={loading}
-                  className="w-full h-11 bg-gradient-to-r from-[#FF5722] via-[#FF6E40] to-[#FF8A65] hover:from-[#E64A19] hover:to-[#FF5722] text-white font-black rounded-xl transition-all duration-200 shadow-[0_6px_20px_rgba(255,87,34,0.3)] hover:shadow-[0_8px_25px_rgba(255,87,34,0.42)] active:scale-[0.99] disabled:opacity-70 flex justify-center items-center gap-2 text-xs sm:text-sm cursor-pointer mt-1"
+                  type="button"
+                  onClick={openForgotModal}
+                  className="text-xs font-bold text-[#FF5722] hover:text-[#E64A19] hover:underline transition cursor-pointer"
                 >
-                  {loading ? (
-                    <>
-                      <CircleNotch className="animate-spin text-base" />
-                      <span>{txt.logging_in}</span>
-                    </>
+                  {txt.forgot_password}
+                </button>
+              </div>
+
+              <div className="relative group">
+                <div className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-[#FF5722] transition-colors duration-200 flex items-center pointer-events-none">
+                  <LockKey weight="bold" className="text-lg" />
+                </div>
+                <input 
+                  type={showPassword ? "text" : "password"} 
+                  value={password}
+                  onChange={e => setPassword(e.target.value)}
+                  required
+                  className="w-full h-11.5 bg-white border border-slate-250 hover:border-slate-350 rounded-xl pl-10.5 pr-11 font-semibold text-slate-800 outline-none focus:border-[#FF5722] focus:ring-4 focus:ring-[#FF5722]/10 transition-all duration-200 text-sm placeholder:font-normal placeholder:text-slate-400 shadow-2xs"
+                  placeholder={txt.password_placeholder}
+                />
+                <button 
+                  type="button" 
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-700 p-1 rounded-md transition cursor-pointer"
+                >
+                  {showPassword ? (
+                    <EyeSlash weight="bold" className="text-lg text-[#FF5722]" />
                   ) : (
-                    <>
-                      <span>{txt.login_btn.replace('→', '').trim()}</span>
-                      <ArrowRight weight="bold" className="text-base" />
-                    </>
+                    <Eye weight="bold" className="text-lg" />
                   )}
                 </button>
-              </form>
-              
-              {/* New Store Registration Prompt */}
-              <div className="pt-1 text-center text-xs">
-                <p className="text-slate-600 font-medium">
-                  {txt.new_store_prompt}{' '}
-                  <Link to="/register" className="text-[#FF5722] font-black hover:text-[#E64A19] hover:underline underline-offset-4 ml-1 transition">
-                    {txt.register_now}
-                  </Link>
-                </p>
               </div>
             </div>
-
-            {/* Bottom Security Footer */}
-            <div className="w-full pt-2.5 border-t border-slate-100 flex items-center justify-between text-[10px] text-slate-400 font-medium">
-              <span className="flex items-center gap-1">
-                <ShieldCheck weight="fill" className="text-emerald-500 text-xs" />
-                <span>256-Bit SSL</span>
-              </span>
-              <span className="text-slate-300">•</span>
-              <span>ऑटो डेटा सिंक</span>
-              <span className="text-slate-300">•</span>
-              <span className="flex items-center gap-1">
-                <CheckCircle weight="fill" className="text-blue-500 text-xs" />
-                <span>ISO 27001</span>
-              </span>
-            </div>
-
+            
+            {/* Submit Button */}
+            <button 
+              type="submit" 
+              disabled={loading}
+              className="w-full h-11.5 bg-gradient-to-r from-[#FF5722] via-[#FF6E40] to-[#FF8A65] hover:from-[#E64A19] hover:to-[#FF5722] text-white font-black rounded-xl transition-all duration-200 shadow-[0_6px_20px_rgba(255,87,34,0.32)] hover:shadow-[0_8px_25px_rgba(255,87,34,0.45)] active:scale-[0.99] disabled:opacity-70 flex justify-center items-center gap-2 text-sm cursor-pointer mt-2"
+            >
+              {loading ? (
+                <>
+                  <CircleNotch className="animate-spin text-lg" />
+                  <span>{txt.logging_in}</span>
+                </>
+              ) : (
+                <>
+                  <span>{txt.login_btn.replace('→', '').trim()}</span>
+                  <ArrowRight weight="bold" className="text-base" />
+                </>
+              )}
+            </button>
+          </form>
+          
+          {/* New Store Registration Prompt */}
+          <div className="pt-4 text-center text-xs sm:text-sm">
+            <p className="text-slate-600 font-medium">
+              {txt.new_store_prompt}{' '}
+              <Link to="/register" className="text-[#FF5722] font-black hover:text-[#E64A19] hover:underline underline-offset-4 ml-1 transition">
+                {txt.register_now}
+              </Link>
+            </p>
           </div>
-
         </div>
 
-      </main>
+        {/* Bottom Security Footer */}
+        <div className="w-full max-w-[410px] mx-auto pt-4 border-t border-slate-200/80 flex items-center justify-between text-xs text-slate-400 font-medium shrink-0 mt-auto">
+          <span className="flex items-center gap-1.5">
+            <ShieldCheck weight="fill" className="text-emerald-500 text-sm" />
+            <span>256-Bit SSL</span>
+          </span>
+          <span className="text-slate-300">•</span>
+          <span>ऑटो डेटा सिंक</span>
+          <span className="text-slate-300">•</span>
+          <span className="flex items-center gap-1.5">
+            <CheckCircle weight="fill" className="text-blue-500 text-sm" />
+            <span>ISO 27001</span>
+          </span>
+        </div>
 
-      {/* Forgot Password Modal */}
+      </div>
+
+      {/* ================= FORGOT PASSWORD MODAL ================= */}
       {showForgotModal && (
         <div className="fixed inset-0 bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-4 z-50 animate-in fade-in duration-200">
           <div className="bg-white rounded-3xl max-w-sm w-full p-6 shadow-2xl border border-slate-100 relative animate-in zoom-in-95 duration-200">
@@ -651,7 +632,7 @@ const Login = () => {
         </div>
       )}
 
-      {/* CSS Keyframes for Infinite Smooth Marquee & Fluid Blobs */}
+      {/* Infinite Smooth Marquee Keyframes */}
       <style>{`
         @keyframes marquee-left {
           0% { transform: translateX(0%); }
@@ -664,41 +645,16 @@ const Login = () => {
         .animate-marquee-left {
           display: flex;
           width: max-content;
-          animation: marquee-left 22s linear infinite;
+          animation: marquee-left 24s linear infinite;
         }
         .animate-marquee-right {
           display: flex;
           width: max-content;
-          animation: marquee-right 24s linear infinite;
+          animation: marquee-right 26s linear infinite;
         }
         .animate-marquee-left:hover, .animate-marquee-right:hover {
           animation-play-state: paused;
         }
-
-        /* Continuous Fluid Aurora Blobs */
-        @keyframes blob-float-1 {
-          0%, 100% { transform: translate(0px, 0px) scale(1) rotate(0deg); }
-          33% { transform: translate(50px, -40px) scale(1.08) rotate(5deg); }
-          66% { transform: translate(-35px, 35px) scale(0.94) rotate(-4deg); }
-        }
-        @keyframes blob-float-2 {
-          0%, 100% { transform: translate(0px, 0px) scale(1) rotate(0deg); }
-          33% { transform: translate(-50px, 50px) scale(1.08) rotate(-5deg); }
-          66% { transform: translate(40px, -35px) scale(0.92) rotate(4deg); }
-        }
-        @keyframes blob-float-3 {
-          0%, 100% { transform: translate(0px, 0px) scale(1); }
-          50% { transform: translate(45px, 35px) scale(1.1); }
-        }
-        .animate-blob-1 { animation: blob-float-1 18s ease-in-out infinite; will-change: transform; }
-        .animate-blob-2 { animation: blob-float-2 22s ease-in-out infinite; will-change: transform; }
-        .animate-blob-3 { animation: blob-float-3 16s ease-in-out infinite; will-change: transform; }
-
-        @keyframes grid-drift {
-          0% { background-position: 0px 0px; }
-          100% { background-position: 48px 48px; }
-        }
-        .animate-grid-pan { animation: grid-drift 26s linear infinite; }
       `}</style>
 
     </div>
