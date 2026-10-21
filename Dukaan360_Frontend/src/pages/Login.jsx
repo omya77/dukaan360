@@ -167,40 +167,34 @@ const Login = () => {
   return (
     <div className="h-screen w-full bg-[#FAF5F0] relative flex flex-col justify-between overflow-hidden font-sans select-none">
       
-      {/* ================= 1. SOFT AMBIENT SUNSET LIGHTING ================= */}
+      {/* ================= 1. SOFT AMBIENT SUNSET LIGHTING WITH BREATHING ANIMATION ================= */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden z-0">
-        {/* Central Warm Radial Glow */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[720px] h-[720px] bg-gradient-to-tr from-amber-400/18 via-[#FF7043]/12 to-transparent rounded-full blur-[130px]"></div>
+        {/* Central Warm Radial Glow (Breathing Pulse) */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[720px] h-[720px] bg-gradient-to-tr from-amber-400/20 via-[#FF7043]/14 to-transparent rounded-full blur-[130px] animate-ambient-breathe"></div>
         {/* Corner Accents */}
         <div className="absolute -top-[12%] -left-[8%] w-[480px] h-[480px] bg-gradient-to-tr from-[#FF5722]/15 via-[#FFA726]/12 to-rose-400/8 rounded-full blur-[100px]"></div>
         <div className="absolute -bottom-[12%] -right-[8%] w-[520px] h-[520px] bg-gradient-to-tr from-amber-400/15 via-[#FF7043]/12 to-orange-500/8 rounded-full blur-[110px]"></div>
       </div>
 
-      {/* ================= 2. LEFT 3D PERSPECTIVE GLASS PLANE ================= */}
+      {/* ================= 2. LEFT 3D PERSPECTIVE GLASS PLANE (SLOW LEVITATING FLOAT) ================= */}
       <div 
-        className="absolute -left-16 top-1/2 -translate-y-1/2 w-[460px] 2xl:w-[520px] h-[520px] 2xl:h-[580px] pointer-events-none z-0 hidden lg:block opacity-75"
-        style={{
-          transform: 'perspective(1200px) rotateY(26deg) rotateX(-6deg) skewY(-3deg)',
-          transformOrigin: 'left center'
-        }}
+        className="absolute -left-16 top-1/2 -translate-y-1/2 w-[460px] 2xl:w-[520px] h-[520px] 2xl:h-[580px] pointer-events-none z-0 hidden lg:block opacity-75 animate-glass-float"
+        style={{ transformOrigin: 'left center' }}
       >
         <div className="w-full h-full rounded-[44px] bg-gradient-to-br from-white/70 via-white/20 to-orange-100/30 backdrop-blur-xl border-2 border-white/80 shadow-[0_30px_90px_-20px_rgba(255,112,67,0.22)] relative overflow-hidden">
           {/* Internal Specular Highlight */}
           <div className="absolute top-0 left-0 right-0 h-36 bg-gradient-to-b from-white/50 to-transparent"></div>
           {/* Subtle warm internal glow corner */}
           <div className="absolute -bottom-10 -right-10 w-52 h-52 rounded-full bg-gradient-to-tr from-amber-400/25 to-orange-500/15 blur-2xl"></div>
-          <div className="absolute top-16 left-12 w-2 h-2 rounded-full bg-amber-300/60 blur-[1px]"></div>
-          <div className="absolute bottom-24 right-20 w-3 h-3 rounded-full bg-orange-300/40 blur-[2px]"></div>
+          <div className="absolute top-16 left-12 w-2.5 h-2.5 rounded-full bg-amber-300/70 blur-[1px] animate-pulse"></div>
+          <div className="absolute bottom-24 right-20 w-3 h-3 rounded-full bg-orange-300/50 blur-[2px] animate-pulse" style={{ animationDelay: '1s' }}></div>
         </div>
       </div>
 
-      {/* ================= 3. RIGHT 3D PERSPECTIVE GLOWING WIREFRAME GRID ================= */}
+      {/* ================= 3. RIGHT 3D PERSPECTIVE GLOWING WIREFRAME GRID (SLOW LEVITATING FLOAT) ================= */}
       <div 
-        className="absolute -right-12 top-1/2 -translate-y-1/2 w-[480px] 2xl:w-[540px] h-[520px] 2xl:h-[580px] pointer-events-none z-0 hidden lg:block opacity-70"
-        style={{
-          transform: 'perspective(1100px) rotateY(-24deg) rotateX(10deg) skewY(2deg)',
-          transformOrigin: 'right center'
-        }}
+        className="absolute -right-12 top-1/2 -translate-y-1/2 w-[480px] 2xl:w-[540px] h-[520px] 2xl:h-[580px] pointer-events-none z-0 hidden lg:block opacity-70 animate-grid-float"
+        style={{ transformOrigin: 'right center' }}
       >
         <svg className="w-full h-full" viewBox="0 0 500 500" fill="none">
           <defs>
@@ -211,7 +205,7 @@ const Login = () => {
             </linearGradient>
             <radialGradient id="sunGlowLogin" cx="50%" cy="50%" r="50%">
               <stop offset="0%" stopColor="#FFA726" stopOpacity="0.3" />
-              <stop offset="100%" stopColor="#FFA726" stopOpacity="0" />
+              <stop offset="100%" stopColor="#FFA726" stopOpacity="0.5" />
             </radialGradient>
           </defs>
           <circle cx="250" cy="250" r="230" fill="url(#sunGlowLogin)" />
@@ -249,20 +243,20 @@ const Login = () => {
           )}
         </svg>
 
-        {/* 4-Point Golden Sparkle Stars */}
-        <div className="absolute top-10 left-12 text-amber-400 text-lg animate-pulse">✦</div>
-        <div className="absolute top-28 right-12 text-orange-400 text-2xl animate-pulse delay-300">✦</div>
-        <div className="absolute bottom-16 left-24 text-amber-300 text-sm animate-pulse delay-700">✦</div>
-        <div className="absolute bottom-28 right-16 text-[#FF5722] text-xl animate-pulse delay-500">✦</div>
+        {/* 4-Point Golden Sparkle Stars with Twinkle Animation */}
+        <div className="absolute top-10 left-12 text-amber-400 text-lg animate-twinkle" style={{ animationDelay: '0s' }}>✦</div>
+        <div className="absolute top-28 right-12 text-orange-400 text-2xl animate-twinkle" style={{ animationDelay: '0.8s' }}>✦</div>
+        <div className="absolute bottom-16 left-24 text-amber-300 text-sm animate-twinkle" style={{ animationDelay: '1.6s' }}>✦</div>
+        <div className="absolute bottom-28 right-16 text-[#FF5722] text-xl animate-twinkle" style={{ animationDelay: '2.4s' }}>✦</div>
       </div>
 
       {/* ================= 4. FLOATING TOP ISLAND NAVBAR ================= */}
       <header className="relative z-30 w-full max-w-[1100px] 2xl:max-w-[1180px] mx-auto pt-2.5 sm:pt-3 px-4 shrink-0 transition-all">
-        <div className="w-full h-12 px-4 bg-white/85 backdrop-blur-xl border border-white/90 rounded-2xl flex items-center justify-between shadow-2xs">
+        <div className="w-full h-12 px-4 bg-white/85 backdrop-blur-xl border border-white/90 rounded-2xl flex items-center justify-between shadow-2xs hover:shadow-sm transition-all duration-300">
           
           {/* Brand Logo & Free Trial Badge */}
           <div className="flex items-center gap-2.5">
-            <div className="w-8 h-8 rounded-xl bg-gradient-to-tr from-[#FF5722] via-[#FF6E40] to-[#FFA726] flex items-center justify-center text-white shadow-sm shadow-orange-500/25 shrink-0">
+            <div className="w-8 h-8 rounded-xl bg-gradient-to-tr from-[#FF5722] via-[#FF6E40] to-[#FFA726] flex items-center justify-center text-white shadow-sm shadow-orange-500/25 shrink-0 hover:rotate-6 transition-transform duration-300">
               <Storefront weight="fill" className="text-lg" />
             </div>
             <div className="flex items-center gap-2">
@@ -270,7 +264,7 @@ const Login = () => {
                 Dukaan<span className="text-[#FF5722]">360</span>
               </h1>
               <span className="inline-flex items-center gap-1 text-[10.5px] font-black text-emerald-700 bg-emerald-50 border border-emerald-200/80 px-2.5 py-0.5 rounded-full shadow-2xs">
-                <Sparkle weight="fill" className="text-[10px]" />
+                <Sparkle weight="fill" className="text-[10px] text-emerald-500 animate-pulse" />
                 <span>+ 30 दिवस मोफत</span>
               </span>
             </div>
@@ -282,11 +276,11 @@ const Login = () => {
 
             <Link 
               to="/register"
-              className="text-xs font-bold text-white bg-gradient-to-r from-[#FF5722] via-[#FF6E40] to-[#FFA726] hover:from-[#E64A19] hover:to-[#FF5722] px-3.5 py-1.5 rounded-xl transition-all flex items-center gap-1 shadow-sm shadow-orange-500/25 active:scale-95 shrink-0 whitespace-nowrap"
+              className="group text-xs font-bold text-white bg-gradient-to-r from-[#FF5722] via-[#FF6E40] to-[#FFA726] hover:from-[#E64A19] hover:to-[#FF5722] px-3.5 py-1.5 rounded-xl transition-all flex items-center gap-1 shadow-sm shadow-orange-500/25 active:scale-95 shrink-0 whitespace-nowrap"
             >
               <span className="hidden sm:inline">{txt.register_now.replace('→', '').trim()}</span>
               <span className="sm:hidden font-bold">{txt.nav_register_short || 'Register'}</span>
-              <ArrowRight weight="bold" className="text-xs" />
+              <ArrowRight weight="bold" className="text-xs group-hover:translate-x-1 transition-transform" />
             </Link>
           </div>
         </div>
@@ -304,7 +298,7 @@ const Login = () => {
             {/* Top Pill Badge & Headline */}
             <div className="space-y-1.5">
               <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-gradient-to-r from-amber-500/10 via-orange-500/15 to-amber-500/10 border border-orange-300/60 text-[10.5px] font-black text-[#E65100] shadow-2xs">
-                <Sparkle weight="fill" className="text-xs text-[#FF5722]" />
+                <Sparkle weight="fill" className="text-xs text-[#FF5722] animate-pulse" />
                 <span>{txt.side_badge}</span>
               </div>
 
@@ -319,24 +313,24 @@ const Login = () => {
               </p>
             </div>
 
-            {/* 3 Rich Feature Cards with 3D Illustrations */}
+            {/* 3 Rich Feature Cards with 3D Illustrations & Micro-Animations */}
             <div className="space-y-2.5">
               
               {/* Card 1: Fast Billing */}
-              <div className="bg-white/85 hover:bg-white border border-orange-100/90 rounded-2xl p-2.5 sm:p-3 flex items-center justify-between gap-3 shadow-2xs transition group">
+              <div className="bg-white/85 hover:bg-white border border-orange-100/90 hover:border-orange-300 rounded-2xl p-2.5 sm:p-3 flex items-center justify-between gap-3 shadow-2xs hover:shadow-md hover:-translate-y-0.5 transition-all duration-300 group cursor-default">
                 <div className="flex items-center gap-3 min-w-0">
-                  <div className="w-9 h-9 rounded-xl bg-orange-50 text-[#FF5722] flex items-center justify-center text-lg font-black shrink-0 border border-orange-200/60 shadow-inner">
+                  <div className="w-9 h-9 rounded-xl bg-orange-50 text-[#FF5722] flex items-center justify-center text-lg font-black shrink-0 border border-orange-200/60 shadow-inner group-hover:scale-105 transition-transform duration-300">
                     <Lightning weight="fill" />
                   </div>
                   <div className="min-w-0">
-                    <h4 className="text-xs font-black text-slate-800 tracking-tight truncate">{txt.side_card1_title}</h4>
+                    <h4 className="text-xs font-black text-slate-800 tracking-tight truncate group-hover:text-orange-700 transition-colors">{txt.side_card1_title}</h4>
                     <p className="text-[10px] text-slate-500 font-medium truncate">{txt.side_card1_desc}</p>
                   </div>
                 </div>
 
                 {/* 3D Tilted Digital Document / Thermal Receipt */}
                 <div className="relative shrink-0 w-11 h-12 select-none ml-2">
-                  <div className="w-10 h-10.5 bg-slate-800 rounded-[9px] p-1.5 shadow-md border border-slate-600/80 rotate-[5deg] flex flex-col justify-between overflow-hidden">
+                  <div className="w-10 h-10.5 bg-slate-800 rounded-[9px] p-1.5 shadow-md border border-slate-600/80 animate-mini-receipt flex flex-col justify-between overflow-hidden group-hover:scale-105 transition-transform">
                     <div className="flex items-center gap-1">
                       <div className="w-1.5 h-1.5 rounded-full bg-emerald-400"></div>
                       <div className="w-4 h-0.5 bg-white/80 rounded-full"></div>
@@ -348,27 +342,27 @@ const Login = () => {
                     </div>
                     <div className="w-full h-0.5 bg-emerald-400/60 rounded-full"></div>
                   </div>
-                  <div className="absolute -left-1.5 -top-1 w-4.5 h-4.5 rounded-full bg-gradient-to-tr from-emerald-500 to-teal-400 text-white flex items-center justify-center shadow-lg ring-2 ring-white text-[9px] font-black">
+                  <div className="absolute -left-1.5 -top-1 w-4.5 h-4.5 rounded-full bg-gradient-to-tr from-emerald-500 to-teal-400 text-white flex items-center justify-center shadow-lg ring-2 ring-white text-[9px] font-black animate-pulse">
                     ✓
                   </div>
                 </div>
               </div>
 
               {/* Card 2: WhatsApp Recovery */}
-              <div className="bg-white/85 hover:bg-white border border-emerald-100/90 rounded-2xl p-2.5 sm:p-3 flex items-center justify-between gap-3 shadow-2xs transition group">
+              <div className="bg-white/85 hover:bg-white border border-emerald-100/90 hover:border-emerald-300 rounded-2xl p-2.5 sm:p-3 flex items-center justify-between gap-3 shadow-2xs hover:shadow-md hover:-translate-y-0.5 transition-all duration-300 group cursor-default">
                 <div className="flex items-center gap-3 min-w-0">
-                  <div className="w-9 h-9 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center text-lg font-black shrink-0 border border-emerald-200/60 shadow-inner">
+                  <div className="w-9 h-9 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center text-lg font-black shrink-0 border border-emerald-200/60 shadow-inner group-hover:scale-105 transition-transform duration-300">
                     <WhatsappLogo weight="fill" />
                   </div>
                   <div className="min-w-0">
-                    <h4 className="text-xs font-black text-slate-800 tracking-tight truncate">{txt.side_card2_title}</h4>
+                    <h4 className="text-xs font-black text-slate-800 tracking-tight truncate group-hover:text-emerald-700 transition-colors">{txt.side_card2_title}</h4>
                     <p className="text-[10px] text-slate-500 font-medium truncate">{txt.side_card2_desc}</p>
                   </div>
                 </div>
 
                 {/* 3D Tilted Smartphone with Invoice & WhatsApp Badge */}
                 <div className="relative shrink-0 w-11 h-13 select-none ml-2">
-                  <div className="w-9.5 h-12 bg-slate-900 rounded-[9px] p-1 shadow-md border border-slate-700/80 rotate-[7deg] flex flex-col justify-between overflow-hidden">
+                  <div className="w-9.5 h-12 bg-slate-900 rounded-[9px] p-1 shadow-md border border-slate-700/80 animate-mini-phone flex flex-col justify-between overflow-hidden group-hover:scale-105 transition-transform">
                     <div className="bg-emerald-500/90 rounded-[3px] px-1 py-0.5 flex items-center justify-between">
                       <span className="text-[5.5px] font-black text-white tracking-wider">INVOICE</span>
                       <span className="w-1 h-1 rounded-full bg-white"></span>
@@ -383,39 +377,39 @@ const Login = () => {
                       <span className="text-[5px] text-white/70">PAID ✓</span>
                     </div>
                   </div>
-                  <div className="absolute -left-1.5 -top-1 w-5 h-5 rounded-full bg-gradient-to-tr from-emerald-500 to-green-400 text-white flex items-center justify-center shadow-lg ring-2 ring-white text-[11px]">
+                  <div className="absolute -left-1.5 -top-1 w-5 h-5 rounded-full bg-gradient-to-tr from-emerald-500 to-green-400 text-white flex items-center justify-center shadow-lg ring-2 ring-white text-[11px] animate-pulse">
                     <WhatsappLogo weight="fill" />
                   </div>
                 </div>
               </div>
 
               {/* Card 3: Live Stock & Profit Guard */}
-              <div className="bg-white/85 hover:bg-white border border-blue-100/90 rounded-2xl p-2.5 sm:p-3 flex items-center justify-between gap-3 shadow-2xs transition group">
+              <div className="bg-white/85 hover:bg-white border border-blue-100/90 hover:border-blue-300 rounded-2xl p-2.5 sm:p-3 flex items-center justify-between gap-3 shadow-2xs hover:shadow-md hover:-translate-y-0.5 transition-all duration-300 group cursor-default">
                 <div className="flex items-center gap-3 min-w-0">
-                  <div className="w-9 h-9 rounded-xl bg-purple-50 text-purple-600 flex items-center justify-center text-lg font-black shrink-0 border border-purple-200/60 shadow-inner">
+                  <div className="w-9 h-9 rounded-xl bg-purple-50 text-purple-600 flex items-center justify-center text-lg font-black shrink-0 border border-purple-200/60 shadow-inner group-hover:scale-105 transition-transform duration-300">
                     <ChartLineUp weight="fill" />
                   </div>
                   <div className="min-w-0">
-                    <h4 className="text-xs font-black text-slate-800 tracking-tight truncate">{txt.side_card3_title}</h4>
+                    <h4 className="text-xs font-black text-slate-800 tracking-tight truncate group-hover:text-purple-700 transition-colors">{txt.side_card3_title}</h4>
                     <p className="text-[10px] text-slate-500 font-medium truncate">{txt.side_card3_desc}</p>
                   </div>
                 </div>
 
-                {/* 3D Tilted Analytics Dashboard Card with Candlestick Bars */}
+                {/* 3D Tilted Analytics Dashboard Card with Live Dynamic Candlestick Bars */}
                 <div className="relative shrink-0 w-12 h-12 select-none ml-2">
-                  <div className="w-11 h-10.5 bg-slate-900 rounded-[9px] p-1.5 shadow-md border border-slate-700/80 -rotate-[6deg] flex flex-col justify-between overflow-hidden">
+                  <div className="w-11 h-10.5 bg-slate-900 rounded-[9px] p-1.5 shadow-md border border-slate-700/80 animate-mini-chart flex flex-col justify-between overflow-hidden group-hover:scale-105 transition-transform">
                     <div className="flex items-center justify-between text-[5.5px] text-slate-400 font-bold">
                       <span>PROFIT</span>
                       <span className="text-emerald-400 font-extrabold">+18%</span>
                     </div>
                     <div className="flex items-end gap-1 h-4 pt-0.5 px-0.5">
-                      <div className="w-1.5 h-2 bg-emerald-400 rounded-t-xs"></div>
-                      <div className="w-1.5 h-3.5 bg-cyan-400 rounded-t-xs"></div>
-                      <div className="w-1.5 h-2.5 bg-amber-400 rounded-t-xs"></div>
-                      <div className="w-1.5 h-4 bg-emerald-500 rounded-t-xs animate-pulse"></div>
+                      <div className="w-1.5 bg-emerald-400 rounded-t-xs animate-bar-1"></div>
+                      <div className="w-1.5 bg-cyan-400 rounded-t-xs animate-bar-2"></div>
+                      <div className="w-1.5 bg-amber-400 rounded-t-xs animate-bar-3"></div>
+                      <div className="w-1.5 bg-emerald-500 rounded-t-xs animate-bar-4"></div>
                     </div>
                   </div>
-                  <div className="absolute -right-1 -top-1 w-4.5 h-4.5 rounded-full bg-gradient-to-tr from-emerald-500 to-green-400 text-white flex items-center justify-center shadow-lg ring-2 ring-white text-[9px] font-black">
+                  <div className="absolute -right-1 -top-1 w-4.5 h-4.5 rounded-full bg-gradient-to-tr from-emerald-500 to-green-400 text-white flex items-center justify-center shadow-lg ring-2 ring-white text-[9px] font-black animate-pulse">
                     ↑
                   </div>
                 </div>
@@ -440,24 +434,25 @@ const Login = () => {
           {/* ================= RIGHT COLUMN: Luxury Double-Bordered Login Card (6 Cols) ================= */}
           <div className="col-span-1 lg:col-span-6 w-full max-w-[420px] mx-auto">
             
-            {/* Outer Luxury Double-Border Frame */}
-            <div className="relative p-[5px] rounded-[34px] bg-gradient-to-br from-amber-400/90 via-orange-400/80 to-emerald-400/70 shadow-[0_25px_60px_-15px_rgba(255,87,34,0.22),0_10px_20px_-5px_rgba(0,0,0,0.05)]">
+            {/* Outer Luxury Double-Border Frame with Breathing Glow Pulse Animation */}
+            <div className="relative p-[5px] rounded-[34px] bg-gradient-to-br from-amber-400/90 via-orange-400/80 to-emerald-400/70 animate-card-glow transition-all">
               
               {/* Inner Card Container */}
               <div className="relative bg-white/95 backdrop-blur-2xl rounded-[30px] p-6 sm:p-7 border border-white/90 flex flex-col justify-between">
                 
-                {/* 4-Point Golden Sparkle Accents */}
-                <span className="absolute top-4 right-5 text-amber-400/80 text-base pointer-events-none select-none">✦</span>
-                <span className="absolute top-7 right-8 text-orange-400/70 text-xs pointer-events-none select-none">✦</span>
+                {/* 4-Point Golden Sparkle Accents with Twinkle Animations */}
+                <span className="absolute top-4 right-5 text-amber-400 text-base pointer-events-none select-none animate-twinkle" style={{ animationDelay: '0.4s' }}>✦</span>
+                <span className="absolute top-7 right-8 text-orange-400 text-xs pointer-events-none select-none animate-twinkle" style={{ animationDelay: '1.4s' }}>✦</span>
 
                 {/* Header Title & Badge */}
                 <div className="mb-3">
                   <div className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-orange-50 border border-orange-200/80 text-[10px] font-black text-[#FF5722] mb-1.5 shadow-2xs">
-                    <Sparkle weight="fill" className="text-xs text-[#FF5722]" />
+                    <Sparkle weight="fill" className="text-xs text-[#FF5722] animate-pulse" />
                     <span>✨ दुकानात प्रवेश करा • POS Login</span>
                   </div>
                   <h2 className="text-2xl font-black text-slate-900 tracking-tight leading-tight flex items-center gap-2">
-                    {txt.welcome_back} <span className="text-2xl">🏪</span>
+                    <span>{txt.welcome_back}</span>
+                    <span className="text-2xl hover:scale-125 transition-transform duration-300 inline-block cursor-default">🏪</span>
                   </h2>
                   <p className="text-slate-500 font-medium text-xs mt-1 leading-snug">
                     {txt.welcome_sub}
@@ -466,7 +461,7 @@ const Login = () => {
 
                 {/* Error Banner */}
                 {error && (
-                  <div className={`p-2.5 rounded-xl text-xs font-bold mb-3 animate-in fade-in duration-150 ${
+                  <div className={`p-2.5 rounded-xl text-xs font-bold mb-3 animate-in fade-in zoom-in-95 duration-200 ${
                     isPendingApprovalError
                       ? 'bg-amber-50 border border-amber-300 text-amber-950 shadow-xs'
                       : isExpiredError 
@@ -485,7 +480,7 @@ const Login = () => {
                             href={`https://wa.me/918262802961?text=${encodeURIComponent(`नमस्कार सर! 🙏\nमी Dukaan360 वर नोंदणी (@${username.trim().replace(/^@/, '')}) केली आहे.\nकृपया माझे खाते तपासून मंजूर (Approve) करा.`)}`}
                             target="_blank"
                             rel="noreferrer"
-                            className="inline-flex items-center gap-1 bg-emerald-600 hover:bg-emerald-700 text-white px-2.5 py-1 rounded-lg text-xs font-black shadow-xs transition"
+                            className="inline-flex items-center gap-1 bg-emerald-600 hover:bg-emerald-700 text-white px-2.5 py-1 rounded-lg text-xs font-black shadow-xs transition active:scale-95"
                           >
                             <WhatsappLogo weight="fill" className="text-xs" /> WhatsApp संपर्क
                           </a>
@@ -494,7 +489,7 @@ const Login = () => {
                         {isExpiredError && (
                           <Link 
                             to={`/renew?username=${username.trim().replace(/^@/, '')}`}
-                            className="inline-flex items-center gap-1 mt-1 bg-[#FF5722] hover:bg-[#E64A19] text-white px-2.5 py-1 rounded-lg text-xs font-black shadow-xs transition cursor-pointer"
+                            className="inline-flex items-center gap-1 mt-1 bg-[#FF5722] hover:bg-[#E64A19] text-white px-2.5 py-1 rounded-lg text-xs font-black shadow-xs transition cursor-pointer active:scale-95"
                           >
                             <span>{txt.renew_btn_text}</span>
                           </Link>
@@ -566,12 +561,15 @@ const Login = () => {
                     </div>
                   </div>
 
-                  {/* Submit Button */}
+                  {/* Submit Button with Shimmer Sweep & Arrow Hover Animation */}
                   <button 
                     type="submit" 
                     disabled={loading}
-                    className="w-full h-10.5 bg-gradient-to-r from-[#FF5722] via-[#FF6E40] to-[#FFA726] hover:from-[#E64A19] hover:to-[#FF5722] text-white font-black rounded-xl transition-all duration-200 shadow-md shadow-orange-500/30 hover:shadow-lg hover:shadow-orange-500/40 active:scale-[0.99] disabled:opacity-70 flex justify-center items-center gap-2 text-xs sm:text-sm cursor-pointer mt-1"
+                    className="relative overflow-hidden group w-full h-10.5 bg-gradient-to-r from-[#FF5722] via-[#FF6E40] to-[#FFA726] hover:from-[#E64A19] hover:to-[#FF5722] text-white font-black rounded-xl transition-all duration-300 shadow-md shadow-orange-500/30 hover:shadow-lg hover:shadow-orange-500/45 active:scale-[0.99] disabled:opacity-70 flex justify-center items-center gap-2 text-xs sm:text-sm cursor-pointer mt-1"
                   >
+                    {/* Shimmer sweep effect */}
+                    <div className="absolute inset-0 w-1/2 h-full bg-gradient-to-r from-transparent via-white/20 to-transparent pointer-events-none animate-shimmer"></div>
+
                     {loading ? (
                       <>
                         <CircleNotch className="animate-spin text-base" />
@@ -580,7 +578,7 @@ const Login = () => {
                     ) : (
                       <>
                         <span>{txt.login_btn.replace('→', '').trim()}</span>
-                        <ArrowRight weight="bold" className="text-sm" />
+                        <ArrowRight weight="bold" className="text-sm group-hover:translate-x-1 transition-transform duration-200" />
                       </>
                     )}
                   </button>
@@ -669,7 +667,7 @@ const Login = () => {
                 <button 
                   type="submit" 
                   disabled={forgotLoading}
-                  className="w-full h-10.5 bg-[#FF5722] hover:bg-[#E64A19] text-white rounded-xl font-bold text-xs sm:text-sm transition flex items-center justify-center gap-1.5 cursor-pointer disabled:opacity-60"
+                  className="w-full h-10.5 bg-[#FF5722] hover:bg-[#E64A19] text-white rounded-xl font-bold text-xs sm:text-sm transition flex items-center justify-center gap-1.5 cursor-pointer disabled:opacity-60 active:scale-95"
                 >
                   {forgotLoading ? (
                     <>
@@ -721,7 +719,7 @@ const Login = () => {
                 <button 
                   type="submit" 
                   disabled={forgotLoading || !!forgotSuccess}
-                  className="w-full h-10.5 bg-[#FF5722] hover:bg-[#E64A19] text-white rounded-xl font-bold text-xs sm:text-sm transition flex items-center justify-center gap-1.5 cursor-pointer disabled:opacity-60"
+                  className="w-full h-10.5 bg-[#FF5722] hover:bg-[#E64A19] text-white rounded-xl font-bold text-xs sm:text-sm transition flex items-center justify-center gap-1.5 cursor-pointer disabled:opacity-60 active:scale-95"
                 >
                   {forgotLoading ? (
                     <>

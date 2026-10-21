@@ -9,8 +9,8 @@ import {
   User, 
   Phone, 
   LockKey, 
-  Eye,
-  EyeSlash,
+  Eye, 
+  EyeSlash, 
   CheckCircle, 
   WarningCircle, 
   ArrowRight, 
@@ -92,7 +92,7 @@ const Register = () => {
               href={`https://wa.me/918262802961?text=${encodeURIComponent(`नमस्कार ओंकार सर, मी Dukaan360 वर नवीन दुकानाची नोंदणी केली आहे.\nदुकानाचे नाव: ${formData.store_name}\nमालकाचे नाव: ${formData.owner_name}\nमोबाईल: ${formData.mobile}\nपत्ता: ${formData.address || 'N/A'}\n\nकृपया माझे खाते ॲप्रूव्ह (Approve) करा. धन्यवाद!`)}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-2 w-full mb-2 bg-emerald-600 hover:bg-emerald-700 text-white font-black rounded-xl py-2.5 shadow-md shadow-emerald-600/20 transition-all text-xs cursor-pointer"
+              className="inline-flex items-center justify-center gap-2 w-full mb-2 bg-emerald-600 hover:bg-emerald-700 text-white font-black rounded-xl py-2.5 shadow-md shadow-emerald-600/20 transition-all text-xs cursor-pointer active:scale-98"
             >
               <WhatsappLogo weight="fill" className="text-base" />
               <span>{txt.wa_notify_admin || 'सुपर ॲडमिनला WhatsApp वर सूचना पाठवा'}</span>
@@ -113,40 +113,34 @@ const Register = () => {
   return (
     <div className="h-screen w-full bg-[#FAF5F0] relative flex flex-col justify-between overflow-hidden font-sans select-none">
       
-      {/* ================= 1. SOFT AMBIENT SUNSET LIGHTING ================= */}
+      {/* ================= 1. SOFT AMBIENT SUNSET LIGHTING WITH BREATHING ANIMATION ================= */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden z-0">
-        {/* Central Warm Radial Glow */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[720px] h-[720px] bg-gradient-to-tr from-amber-400/18 via-[#FF7043]/12 to-transparent rounded-full blur-[130px]"></div>
+        {/* Central Warm Radial Glow (Breathing Pulse) */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[720px] h-[720px] bg-gradient-to-tr from-amber-400/20 via-[#FF7043]/14 to-transparent rounded-full blur-[130px] animate-ambient-breathe"></div>
         {/* Corner Accents */}
         <div className="absolute -top-[12%] -left-[8%] w-[480px] h-[480px] bg-gradient-to-tr from-[#FF5722]/15 via-[#FFA726]/12 to-rose-400/8 rounded-full blur-[100px]"></div>
         <div className="absolute -bottom-[12%] -right-[8%] w-[520px] h-[520px] bg-gradient-to-tr from-amber-400/15 via-[#FF7043]/12 to-orange-500/8 rounded-full blur-[110px]"></div>
       </div>
 
-      {/* ================= 2. LEFT 3D PERSPECTIVE GLASS PLANE ================= */}
+      {/* ================= 2. LEFT 3D PERSPECTIVE GLASS PLANE (SLOW LEVITATING FLOAT) ================= */}
       <div 
-        className="absolute -left-16 top-1/2 -translate-y-1/2 w-[460px] 2xl:w-[520px] h-[520px] 2xl:h-[580px] pointer-events-none z-0 hidden lg:block opacity-75"
-        style={{
-          transform: 'perspective(1200px) rotateY(26deg) rotateX(-6deg) skewY(-3deg)',
-          transformOrigin: 'left center'
-        }}
+        className="absolute -left-16 top-1/2 -translate-y-1/2 w-[460px] 2xl:w-[520px] h-[520px] 2xl:h-[580px] pointer-events-none z-0 hidden lg:block opacity-75 animate-glass-float"
+        style={{ transformOrigin: 'left center' }}
       >
         <div className="w-full h-full rounded-[44px] bg-gradient-to-br from-white/70 via-white/20 to-orange-100/30 backdrop-blur-xl border-2 border-white/80 shadow-[0_30px_90px_-20px_rgba(255,112,67,0.22)] relative overflow-hidden">
           {/* Internal Specular Highlight */}
           <div className="absolute top-0 left-0 right-0 h-36 bg-gradient-to-b from-white/50 to-transparent"></div>
           {/* Subtle warm internal glow corner */}
           <div className="absolute -bottom-10 -right-10 w-52 h-52 rounded-full bg-gradient-to-tr from-amber-400/25 to-orange-500/15 blur-2xl"></div>
-          <div className="absolute top-16 left-12 w-2 h-2 rounded-full bg-amber-300/60 blur-[1px]"></div>
-          <div className="absolute bottom-24 right-20 w-3 h-3 rounded-full bg-orange-300/40 blur-[2px]"></div>
+          <div className="absolute top-16 left-12 w-2.5 h-2.5 rounded-full bg-amber-300/70 blur-[1px] animate-pulse"></div>
+          <div className="absolute bottom-24 right-20 w-3 h-3 rounded-full bg-orange-300/50 blur-[2px] animate-pulse" style={{ animationDelay: '1s' }}></div>
         </div>
       </div>
 
-      {/* ================= 3. RIGHT 3D PERSPECTIVE GLOWING WIREFRAME GRID ================= */}
+      {/* ================= 3. RIGHT 3D PERSPECTIVE GLOWING WIREFRAME GRID (SLOW LEVITATING FLOAT) ================= */}
       <div 
-        className="absolute -right-12 top-1/2 -translate-y-1/2 w-[480px] 2xl:w-[540px] h-[520px] 2xl:h-[580px] pointer-events-none z-0 hidden lg:block opacity-70"
-        style={{
-          transform: 'perspective(1100px) rotateY(-24deg) rotateX(10deg) skewY(2deg)',
-          transformOrigin: 'right center'
-        }}
+        className="absolute -right-12 top-1/2 -translate-y-1/2 w-[480px] 2xl:w-[540px] h-[520px] 2xl:h-[580px] pointer-events-none z-0 hidden lg:block opacity-70 animate-grid-float"
+        style={{ transformOrigin: 'right center' }}
       >
         <svg className="w-full h-full" viewBox="0 0 500 500" fill="none">
           <defs>
@@ -195,20 +189,20 @@ const Register = () => {
           )}
         </svg>
 
-        {/* 4-Point Golden Sparkle Stars */}
-        <div className="absolute top-10 left-12 text-amber-400 text-lg animate-pulse">✦</div>
-        <div className="absolute top-28 right-12 text-orange-400 text-2xl animate-pulse delay-300">✦</div>
-        <div className="absolute bottom-16 left-24 text-amber-300 text-sm animate-pulse delay-700">✦</div>
-        <div className="absolute bottom-28 right-16 text-[#FF5722] text-xl animate-pulse delay-500">✦</div>
+        {/* 4-Point Golden Sparkle Stars with Staggered Twinkle Animation */}
+        <div className="absolute top-10 left-12 text-amber-400 text-lg animate-twinkle" style={{ animationDelay: '0s' }}>✦</div>
+        <div className="absolute top-28 right-12 text-orange-400 text-2xl animate-twinkle" style={{ animationDelay: '0.8s' }}>✦</div>
+        <div className="absolute bottom-16 left-24 text-amber-300 text-sm animate-twinkle" style={{ animationDelay: '1.6s' }}>✦</div>
+        <div className="absolute bottom-28 right-16 text-[#FF5722] text-xl animate-twinkle" style={{ animationDelay: '2.4s' }}>✦</div>
       </div>
 
       {/* ================= 4. FLOATING TOP ISLAND NAVBAR ================= */}
       <header className="relative z-30 w-full max-w-[1100px] 2xl:max-w-[1180px] mx-auto pt-2.5 sm:pt-3 px-4 shrink-0 transition-all">
-        <div className="w-full h-12 px-4 bg-white/85 backdrop-blur-xl border border-white/90 rounded-2xl flex items-center justify-between shadow-2xs">
+        <div className="w-full h-12 px-4 bg-white/85 backdrop-blur-xl border border-white/90 rounded-2xl flex items-center justify-between shadow-2xs hover:shadow-sm transition-all duration-300">
           
           {/* Brand Logo & Free Trial Badge */}
           <div className="flex items-center gap-2.5">
-            <div className="w-8 h-8 rounded-xl bg-gradient-to-tr from-[#FF5722] via-[#FF6E40] to-[#FFA726] flex items-center justify-center text-white shadow-sm shadow-orange-500/25 shrink-0">
+            <div className="w-8 h-8 rounded-xl bg-gradient-to-tr from-[#FF5722] via-[#FF6E40] to-[#FFA726] flex items-center justify-center text-white shadow-sm shadow-orange-500/25 shrink-0 hover:rotate-6 transition-transform duration-300">
               <Storefront weight="fill" className="text-lg" />
             </div>
             <div className="flex items-center gap-2">
@@ -216,7 +210,7 @@ const Register = () => {
                 Dukaan<span className="text-[#FF5722]">360</span>
               </h1>
               <span className="inline-flex items-center gap-1 text-[10.5px] font-black text-emerald-700 bg-emerald-50 border border-emerald-200/80 px-2.5 py-0.5 rounded-full shadow-2xs">
-                <Sparkle weight="fill" className="text-[10px]" />
+                <Sparkle weight="fill" className="text-[10px] text-emerald-500 animate-pulse" />
                 <span>+ 30 दिवस मोफत</span>
               </span>
             </div>
@@ -228,9 +222,9 @@ const Register = () => {
 
             <Link 
               to="/login" 
-              className="text-xs font-bold text-slate-800 hover:text-[#FF5722] bg-white hover:bg-orange-50/70 px-3.5 py-1.5 rounded-xl transition-all flex items-center gap-1.5 border border-slate-200/80 hover:border-orange-300 shadow-2xs shrink-0 whitespace-nowrap active:scale-95"
+              className="group text-xs font-bold text-slate-800 hover:text-[#FF5722] bg-white hover:bg-orange-50/70 px-3.5 py-1.5 rounded-xl transition-all flex items-center gap-1.5 border border-slate-200/80 hover:border-orange-300 shadow-2xs shrink-0 whitespace-nowrap active:scale-95"
             >
-              <ArrowLeft weight="bold" className="text-xs text-[#FF5722]" />
+              <ArrowLeft weight="bold" className="text-xs text-[#FF5722] group-hover:-translate-x-0.5 transition-transform" />
               <span className="hidden sm:inline">{txt.return_to_login}</span>
               <span className="sm:hidden font-bold">{txt.nav_login_short || txt.return_to_login}</span>
             </Link>
@@ -250,7 +244,7 @@ const Register = () => {
             {/* Top Pill Badge & Headline */}
             <div className="space-y-1.5">
               <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-gradient-to-r from-amber-500/10 via-orange-500/15 to-amber-500/10 border border-orange-300/60 text-[10.5px] font-black text-[#E65100] shadow-2xs">
-                <Sparkle weight="fill" className="text-xs text-[#FF5722]" />
+                <Sparkle weight="fill" className="text-xs text-[#FF5722] animate-pulse" />
                 <span>{txt.side_badge}</span>
               </div>
 
@@ -265,24 +259,24 @@ const Register = () => {
               </p>
             </div>
 
-            {/* 3 Rich Feature Cards with 3D Illustrations */}
+            {/* 3 Rich Feature Cards with 3D Illustrations & Micro-Animations */}
             <div className="space-y-2.5">
               
               {/* Card 1: WhatsApp Udhari Recovery Billing */}
-              <div className="bg-white/85 hover:bg-white border border-emerald-100/90 rounded-2xl p-2.5 sm:p-3 flex items-center justify-between gap-3 shadow-2xs transition group">
+              <div className="bg-white/85 hover:bg-white border border-emerald-100/90 hover:border-emerald-300 rounded-2xl p-2.5 sm:p-3 flex items-center justify-between gap-3 shadow-2xs hover:shadow-md hover:-translate-y-0.5 transition-all duration-300 group cursor-default">
                 <div className="flex items-center gap-3 min-w-0">
-                  <div className="w-9 h-9 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center text-lg font-black shrink-0 border border-emerald-200/60 shadow-inner">
+                  <div className="w-9 h-9 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center text-lg font-black shrink-0 border border-emerald-200/60 shadow-inner group-hover:scale-105 transition-transform duration-300">
                     <WhatsappLogo weight="fill" />
                   </div>
                   <div className="min-w-0">
-                    <h4 className="text-xs font-black text-slate-800 tracking-tight truncate">{txt.side_card1_title}</h4>
+                    <h4 className="text-xs font-black text-slate-800 tracking-tight truncate group-hover:text-emerald-700 transition-colors">{txt.side_card1_title}</h4>
                     <p className="text-[10px] text-slate-500 font-medium truncate">{txt.side_card1_desc}</p>
                   </div>
                 </div>
 
-                {/* 3D Tilted Smartphone with Invoice & WhatsApp Badge */}
+                {/* 3D Tilted Smartphone with Invoice & WhatsApp Badge (Float Animation) */}
                 <div className="relative shrink-0 w-11 h-13 select-none ml-2">
-                  <div className="w-9.5 h-12 bg-slate-900 rounded-[9px] p-1 shadow-md border border-slate-700/80 rotate-[7deg] flex flex-col justify-between overflow-hidden">
+                  <div className="w-9.5 h-12 bg-slate-900 rounded-[9px] p-1 shadow-md border border-slate-700/80 animate-mini-phone flex flex-col justify-between overflow-hidden group-hover:scale-105 transition-transform">
                     <div className="bg-emerald-500/90 rounded-[3px] px-1 py-0.5 flex items-center justify-between">
                       <span className="text-[5.5px] font-black text-white tracking-wider">INVOICE</span>
                       <span className="w-1 h-1 rounded-full bg-white"></span>
@@ -298,60 +292,60 @@ const Register = () => {
                     </div>
                   </div>
                   {/* Floating WhatsApp Badge */}
-                  <div className="absolute -left-1.5 -top-1 w-5 h-5 rounded-full bg-gradient-to-tr from-emerald-500 to-green-400 text-white flex items-center justify-center shadow-lg ring-2 ring-white text-[11px]">
+                  <div className="absolute -left-1.5 -top-1 w-5 h-5 rounded-full bg-gradient-to-tr from-emerald-500 to-green-400 text-white flex items-center justify-center shadow-lg ring-2 ring-white text-[11px] animate-pulse">
                     <WhatsappLogo weight="fill" />
                   </div>
                 </div>
               </div>
 
               {/* Card 2: Dead Stock & Blocked Cash Tracker */}
-              <div className="bg-white/85 hover:bg-white border border-blue-100/90 rounded-2xl p-2.5 sm:p-3 flex items-center justify-between gap-3 shadow-2xs transition group">
+              <div className="bg-white/85 hover:bg-white border border-blue-100/90 hover:border-blue-300 rounded-2xl p-2.5 sm:p-3 flex items-center justify-between gap-3 shadow-2xs hover:shadow-md hover:-translate-y-0.5 transition-all duration-300 group cursor-default">
                 <div className="flex items-center gap-3 min-w-0">
-                  <div className="w-9 h-9 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center text-lg font-black shrink-0 border border-blue-200/60 shadow-inner">
+                  <div className="w-9 h-9 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center text-lg font-black shrink-0 border border-blue-200/60 shadow-inner group-hover:scale-105 transition-transform duration-300">
                     <Package weight="fill" />
                   </div>
                   <div className="min-w-0">
-                    <h4 className="text-xs font-black text-slate-800 tracking-tight truncate">{txt.side_card2_title}</h4>
+                    <h4 className="text-xs font-black text-slate-800 tracking-tight truncate group-hover:text-blue-700 transition-colors">{txt.side_card2_title}</h4>
                     <p className="text-[10px] text-slate-500 font-medium truncate">{txt.side_card2_desc}</p>
                   </div>
                 </div>
 
-                {/* 3D Tilted Analytics Dashboard Card with Candlestick Bars */}
+                {/* 3D Tilted Analytics Dashboard Card with Live Dynamic Candlestick Bars */}
                 <div className="relative shrink-0 w-12 h-12 select-none ml-2">
-                  <div className="w-11 h-10.5 bg-slate-900 rounded-[9px] p-1.5 shadow-md border border-slate-700/80 -rotate-[6deg] flex flex-col justify-between overflow-hidden">
+                  <div className="w-11 h-10.5 bg-slate-900 rounded-[9px] p-1.5 shadow-md border border-slate-700/80 animate-mini-chart flex flex-col justify-between overflow-hidden group-hover:scale-105 transition-transform">
                     <div className="flex items-center justify-between text-[5.5px] text-slate-400 font-bold">
                       <span>STOCK</span>
                       <span className="text-rose-400 font-extrabold">-58d</span>
                     </div>
                     <div className="flex items-end gap-1 h-4 pt-0.5 px-0.5">
-                      <div className="w-1.5 h-2 bg-emerald-400 rounded-t-xs"></div>
-                      <div className="w-1.5 h-3.5 bg-cyan-400 rounded-t-xs"></div>
-                      <div className="w-1.5 h-1.5 bg-amber-400 rounded-t-xs"></div>
-                      <div className="w-1.5 h-4 bg-rose-500 rounded-t-xs animate-pulse"></div>
+                      <div className="w-1.5 bg-emerald-400 rounded-t-xs animate-bar-1"></div>
+                      <div className="w-1.5 bg-cyan-400 rounded-t-xs animate-bar-2"></div>
+                      <div className="w-1.5 bg-amber-400 rounded-t-xs animate-bar-3"></div>
+                      <div className="w-1.5 bg-rose-500 rounded-t-xs animate-bar-4"></div>
                     </div>
                   </div>
-                  {/* Floating Warning Badge */}
-                  <div className="absolute -right-1 -top-1 w-4.5 h-4.5 rounded-full bg-gradient-to-tr from-rose-500 to-red-400 text-white flex items-center justify-center shadow-lg ring-2 ring-white text-[9px] font-black">
+                  {/* Floating Pulsing Warning Badge */}
+                  <div className="absolute -right-1 -top-1 w-4.5 h-4.5 rounded-full bg-gradient-to-tr from-rose-500 to-red-400 text-white flex items-center justify-center shadow-lg ring-2 ring-white text-[9px] font-black animate-pulse-warning">
                     !
                   </div>
                 </div>
               </div>
 
               {/* Card 3: 100% Paper & Time Savings */}
-              <div className="bg-white/85 hover:bg-white border border-orange-100/90 rounded-2xl p-2.5 sm:p-3 flex items-center justify-between gap-3 shadow-2xs transition group">
+              <div className="bg-white/85 hover:bg-white border border-orange-100/90 hover:border-orange-300 rounded-2xl p-2.5 sm:p-3 flex items-center justify-between gap-3 shadow-2xs hover:shadow-md hover:-translate-y-0.5 transition-all duration-300 group cursor-default">
                 <div className="flex items-center gap-3 min-w-0">
-                  <div className="w-9 h-9 rounded-xl bg-orange-50 text-[#FF5722] flex items-center justify-center text-lg font-black shrink-0 border border-orange-200/60 shadow-inner">
+                  <div className="w-9 h-9 rounded-xl bg-orange-50 text-[#FF5722] flex items-center justify-center text-lg font-black shrink-0 border border-orange-200/60 shadow-inner group-hover:scale-105 transition-transform duration-300">
                     <Lightning weight="fill" />
                   </div>
                   <div className="min-w-0">
-                    <h4 className="text-xs font-black text-slate-800 tracking-tight truncate">{txt.side_card3_title}</h4>
+                    <h4 className="text-xs font-black text-slate-800 tracking-tight truncate group-hover:text-orange-700 transition-colors">{txt.side_card3_title}</h4>
                     <p className="text-[10px] text-slate-500 font-medium truncate">{txt.side_card3_desc}</p>
                   </div>
                 </div>
 
                 {/* 3D Tilted Digital Document / Thermal Receipt */}
                 <div className="relative shrink-0 w-11 h-12 select-none ml-2">
-                  <div className="w-10 h-10.5 bg-slate-800 rounded-[9px] p-1.5 shadow-md border border-slate-600/80 rotate-[5deg] flex flex-col justify-between overflow-hidden">
+                  <div className="w-10 h-10.5 bg-slate-800 rounded-[9px] p-1.5 shadow-md border border-slate-600/80 animate-mini-receipt flex flex-col justify-between overflow-hidden group-hover:scale-105 transition-transform">
                     <div className="flex items-center gap-1">
                       <div className="w-1.5 h-1.5 rounded-full bg-emerald-400"></div>
                       <div className="w-4 h-0.5 bg-white/80 rounded-full"></div>
@@ -364,7 +358,7 @@ const Register = () => {
                     <div className="w-full h-0.5 bg-emerald-400/60 rounded-full"></div>
                   </div>
                   {/* Floating Green Checkmark Badge */}
-                  <div className="absolute -left-1.5 -top-1 w-4.5 h-4.5 rounded-full bg-gradient-to-tr from-emerald-500 to-teal-400 text-white flex items-center justify-center shadow-lg ring-2 ring-white text-[9px] font-black">
+                  <div className="absolute -left-1.5 -top-1 w-4.5 h-4.5 rounded-full bg-gradient-to-tr from-emerald-500 to-teal-400 text-white flex items-center justify-center shadow-lg ring-2 ring-white text-[9px] font-black animate-pulse">
                     ✓
                   </div>
                 </div>
@@ -375,14 +369,14 @@ const Register = () => {
             {/* Direct WhatsApp Founder Support Strip */}
             <div className="pt-1.5 flex items-center justify-between text-xs text-slate-600 border-t border-orange-200/50">
               <div className="flex items-center gap-1.5 text-slate-700 font-medium text-[11px]">
-                <WhatsappLogo weight="fill" className="text-emerald-600 text-base shrink-0" />
+                <WhatsappLogo weight="fill" className="text-emerald-600 text-base shrink-0 animate-bounce" style={{ animationDuration: '2.5s' }} />
                 <span>{txt.support_text}</span>
               </div>
               <a 
                 href={`https://wa.me/91${txt.support_phone}?text=Hello%20Dukaan360%20Support`}
                 target="_blank"
                 rel="noreferrer"
-                className="font-black text-emerald-600 hover:text-emerald-700 bg-white border border-emerald-200/80 px-2.5 py-1 rounded-xl shadow-2xs transition-all text-[11px]"
+                className="font-black text-emerald-600 hover:text-emerald-700 bg-white border border-emerald-200/80 px-2.5 py-1 rounded-xl shadow-2xs hover:shadow-sm transition-all text-[11px] active:scale-95"
               >
                 +{txt.support_phone} ↗
               </a>
@@ -393,24 +387,25 @@ const Register = () => {
           {/* ================= RIGHT COLUMN: Luxury Double-Bordered Registration Card (7 Cols) ================= */}
           <div className="col-span-1 lg:col-span-7 w-full max-w-[470px] mx-auto">
             
-            {/* Outer Luxury Double-Border Frame */}
-            <div className="relative p-[5px] rounded-[34px] bg-gradient-to-br from-amber-400/90 via-orange-400/80 to-emerald-400/70 shadow-[0_25px_60px_-15px_rgba(255,87,34,0.22),0_10px_20px_-5px_rgba(0,0,0,0.05)]">
+            {/* Outer Luxury Double-Border Frame with Breathing Glow Pulse Animation */}
+            <div className="relative p-[5px] rounded-[34px] bg-gradient-to-br from-amber-400/90 via-orange-400/80 to-emerald-400/70 animate-card-glow transition-all">
               
               {/* Inner Card Container */}
               <div className="relative bg-white/95 backdrop-blur-2xl rounded-[30px] p-5 sm:p-5.5 border border-white/90 flex flex-col justify-between">
                 
-                {/* 4-Point Golden Sparkle Accents */}
-                <span className="absolute top-4 right-5 text-amber-400/80 text-base pointer-events-none select-none">✦</span>
-                <span className="absolute top-7 right-8 text-orange-400/70 text-xs pointer-events-none select-none">✦</span>
+                {/* 4-Point Golden Sparkle Accents with Twinkle Animations */}
+                <span className="absolute top-4 right-5 text-amber-400 text-base pointer-events-none select-none animate-twinkle" style={{ animationDelay: '0.3s' }}>✦</span>
+                <span className="absolute top-7 right-8 text-orange-400 text-xs pointer-events-none select-none animate-twinkle" style={{ animationDelay: '1.2s' }}>✦</span>
 
                 {/* Header Title & Badge */}
                 <div className="mb-2">
                   <div className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-orange-50 border border-orange-200/80 text-[10px] font-black text-[#FF5722] mb-1 shadow-2xs">
-                    <Sparkle weight="fill" className="text-xs text-[#FF5722]" />
+                    <Sparkle weight="fill" className="text-xs text-[#FF5722] animate-pulse" />
                     <span>{txt.form_badge}</span>
                   </div>
                   <h2 className="text-xl sm:text-2xl font-black text-slate-900 tracking-tight leading-tight flex items-center gap-1.5">
-                    {txt.create_account} <span className="text-xl">🚀</span>
+                    <span>{txt.create_account}</span>
+                    <span className="text-xl animate-rocket">🚀</span>
                   </h2>
                   <p className="text-slate-500 font-medium text-xs mt-0.5 leading-snug">
                     {txt.right_desc}
@@ -419,7 +414,7 @@ const Register = () => {
 
                 {/* Error Banner */}
                 {error && (
-                  <div className="bg-red-50 border border-red-200 text-red-600 p-2 rounded-xl text-xs font-bold mb-2 flex items-start gap-1.5 shadow-xs animate-in fade-in">
+                  <div className="bg-red-50 border border-red-200 text-red-600 p-2 rounded-xl text-xs font-bold mb-2 flex items-start gap-1.5 shadow-xs animate-in fade-in zoom-in-95 duration-200">
                     <WarningCircle weight="fill" className="text-sm shrink-0 mt-0.5" />
                     <p className="leading-snug">{error}</p>
                   </div>
@@ -569,12 +564,15 @@ const Register = () => {
                     <input type="hidden" name="plan_type" value="1 Month" />
                   </div>
 
-                  {/* Submit Button */}
+                  {/* Submit Button with Shimmer Sweep and Arrow Hover Animation */}
                   <button 
                     type="submit" 
                     disabled={loading}
-                    className="w-full h-10 bg-gradient-to-r from-[#FF5722] via-[#FF6E40] to-[#FFA726] hover:from-[#E64A19] hover:to-[#FF5722] text-white font-black rounded-xl transition-all duration-200 shadow-md shadow-orange-500/30 hover:shadow-lg hover:shadow-orange-500/40 active:scale-[0.99] disabled:opacity-70 flex justify-center items-center gap-2 text-xs sm:text-sm cursor-pointer mt-1"
+                    className="relative overflow-hidden group w-full h-10 bg-gradient-to-r from-[#FF5722] via-[#FF6E40] to-[#FFA726] hover:from-[#E64A19] hover:to-[#FF5722] text-white font-black rounded-xl transition-all duration-300 shadow-md shadow-orange-500/30 hover:shadow-lg hover:shadow-orange-500/45 active:scale-[0.99] disabled:opacity-70 flex justify-center items-center gap-2 text-xs sm:text-sm cursor-pointer mt-1"
                   >
+                    {/* Shimmer sweep effect */}
+                    <div className="absolute inset-0 w-1/2 h-full bg-gradient-to-r from-transparent via-white/20 to-transparent pointer-events-none animate-shimmer"></div>
+
                     {loading ? (
                       <>
                         <CircleNotch className="animate-spin text-base" />
@@ -583,7 +581,7 @@ const Register = () => {
                     ) : (
                       <>
                         <span>{txt.register_btn.replace('→', '').trim()}</span>
-                        <ArrowRight weight="bold" className="text-sm" />
+                        <ArrowRight weight="bold" className="text-sm group-hover:translate-x-1 transition-transform duration-200" />
                       </>
                     )}
                   </button>
