@@ -233,22 +233,22 @@ const Login = () => {
       </header>
 
       {/* ================= FULL-PAGE WORKSPACE ================= */}
-      <main className="relative z-10 flex-1 w-full max-w-[1500px] mx-auto p-3 sm:p-4 lg:py-3.5 lg:px-6 flex flex-col lg:flex-row gap-4 sm:gap-5 items-stretch lg:overflow-hidden">
+      <main className="relative z-10 flex-1 w-full max-w-[1440px] mx-auto p-3 sm:p-4 lg:py-4 lg:px-6 flex flex-col lg:flex-row gap-4 sm:gap-6 items-stretch lg:items-center justify-center">
         
-        {/* LEFT COLUMN: Executive Dark Slate-900 Showcase Panel */}
-        <div className="flex w-full lg:w-[52%] bg-slate-900 rounded-2xl border border-slate-800 shadow-md p-4 sm:p-5 text-white flex-col justify-between shrink-0 relative overflow-hidden lg:h-full">
+        {/* LEFT COLUMN: Executive Dark Slate-900 Showcase Panel (DESKTOP ONLY) */}
+        <div className="hidden lg:flex lg:w-[52%] bg-gradient-to-b from-slate-900 via-slate-900 to-slate-950 rounded-2xl sm:rounded-3xl border border-slate-800/90 shadow-2xl p-5 sm:p-6 text-white flex-col justify-between shrink-0 relative overflow-hidden lg:h-full">
           <div className="absolute inset-0 opacity-10 bg-[radial-gradient(circle_at_2px_2px,white_1px,transparent_0)] bg-[length:24px_24px] pointer-events-none"></div>
 
           {/* Top: Headline & Tagline */}
           <div className="relative z-10 space-y-1">
-            <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-white/5 border border-white/10 text-[11px] font-bold text-orange-400 backdrop-blur-xs">
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-[11px] font-bold text-orange-400 backdrop-blur-xs shadow-2xs">
               <Sparkle weight="fill" className="text-xs text-orange-400" />
               <span>Dukaan360 Cloud POS System</span>
             </div>
             
-            <h2 className="text-lg sm:text-2xl font-black leading-snug text-white">
+            <h2 className="text-xl sm:text-2xl lg:text-[26px] font-black leading-snug text-white tracking-tight">
               {txt.brand_quote_1} <br />
-              <span className="text-[#FF5722]">{txt.brand_quote_highlight}</span>
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FF5722] via-[#FF7043] to-amber-400">{txt.brand_quote_highlight}</span>
             </h2>
             <p className="text-slate-300 font-medium text-xs leading-relaxed max-w-lg">
               {txt.brand_subquote}
@@ -256,19 +256,19 @@ const Login = () => {
           </div>
 
           {/* Middle: Dual-Row Marquee Ribbons & Live Stats */}
-          <div className="relative z-10 my-3 lg:my-auto py-1 space-y-2.5">
+          <div className="relative z-10 my-3 lg:my-auto py-1 space-y-3">
             {/* Animated Marquee Ribbons */}
-            <div className="relative overflow-hidden w-full space-y-1.5 select-none group">
+            <div className="relative overflow-hidden w-full space-y-2 select-none group">
               <div className="absolute left-0 top-0 bottom-0 w-8 bg-gradient-to-r from-slate-900 to-transparent z-10 pointer-events-none"></div>
               <div className="absolute right-0 top-0 bottom-0 w-8 bg-gradient-to-l from-slate-900 to-transparent z-10 pointer-events-none"></div>
 
               {/* Row 1: Left */}
               <div className="overflow-hidden">
-                <div className="flex gap-1.5 animate-marquee-left">
+                <div className="flex gap-2 animate-marquee-left">
                   {txt.marquee_row1.concat(txt.marquee_row1).map((item, idx) => (
                     <div 
                       key={idx}
-                      className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 text-[11px] font-bold text-slate-200 transition-colors shrink-0 shadow-xs backdrop-blur-xs"
+                      className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 text-[11px] font-bold text-slate-200 transition-colors shrink-0 shadow-xs backdrop-blur-xs"
                     >
                       <span className="text-xs">{item.icon}</span>
                       <span className="tracking-tight">{item.text}</span>
@@ -279,11 +279,11 @@ const Login = () => {
 
               {/* Row 2: Right */}
               <div className="overflow-hidden">
-                <div className="flex gap-1.5 animate-marquee-right">
+                <div className="flex gap-2 animate-marquee-right">
                   {txt.marquee_row2.concat(txt.marquee_row2).map((item, idx) => (
                     <div 
                       key={idx}
-                      className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 text-[11px] font-bold text-slate-200 transition-colors shrink-0 shadow-xs backdrop-blur-xs"
+                      className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 text-[11px] font-bold text-slate-200 transition-colors shrink-0 shadow-xs backdrop-blur-xs"
                     >
                       <span className="text-xs">{item.icon}</span>
                       <span className="tracking-tight">{item.text}</span>
@@ -294,24 +294,24 @@ const Login = () => {
             </div>
 
             {/* Live Stats Grid */}
-            <div className="grid grid-cols-3 gap-2 text-center">
-              <div className="bg-white/5 hover:bg-white/8 border border-white/10 rounded-xl py-2 px-1.5 backdrop-blur-xs transition">
+            <div className="grid grid-cols-3 gap-2.5 text-center">
+              <div className="bg-white/5 hover:bg-white/8 border border-white/10 rounded-xl py-2.5 px-2 backdrop-blur-xs transition shadow-2xs">
                 <p className="text-xs sm:text-sm font-black text-white">{txt.stat_stores}</p>
-                <p className="text-[9.5px] text-slate-400 font-medium mt-0.5">सक्रिय वापरकर्ते</p>
+                <p className="text-[10px] text-slate-400 font-medium mt-0.5">सक्रिय वापरकर्ते</p>
               </div>
-              <div className="bg-white/5 hover:bg-white/8 border border-white/10 rounded-xl py-2 px-1.5 backdrop-blur-xs transition">
+              <div className="bg-white/5 hover:bg-white/8 border border-white/10 rounded-xl py-2.5 px-2 backdrop-blur-xs transition shadow-2xs">
                 <p className="text-xs sm:text-sm font-black text-[#FF8A65]">{txt.stat_speed}</p>
-                <p className="text-[9.5px] text-slate-400 font-medium mt-0.5">जलद बिलिंग</p>
+                <p className="text-[10px] text-slate-400 font-medium mt-0.5">जलद बिलिंग</p>
               </div>
-              <div className="bg-white/5 hover:bg-white/8 border border-white/10 rounded-xl py-2 px-1.5 backdrop-blur-xs transition">
+              <div className="bg-white/5 hover:bg-white/8 border border-white/10 rounded-xl py-2.5 px-2 backdrop-blur-xs transition shadow-2xs">
                 <p className="text-xs sm:text-sm font-black text-amber-300">{txt.stat_rating}</p>
-                <p className="text-[9.5px] text-slate-400 font-medium mt-0.5">विश्वसनीय रेटिंग</p>
+                <p className="text-[10px] text-slate-400 font-medium mt-0.5">विश्वसनीय रेटिंग</p>
               </div>
             </div>
           </div>
 
           {/* Bottom: Trusted Users Strip & Live Cloud Indicator */}
-          <div className="relative z-10 pt-2 border-t border-slate-800 flex items-center justify-between">
+          <div className="relative z-10 pt-2.5 border-t border-slate-800/80 flex items-center justify-between">
             <div className="flex items-center gap-2">
               <div className="flex -space-x-1.5">
                 <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=70&h=70&fit=crop&crop=faces" alt="User 1" className="w-6 h-6 rounded-full border border-slate-900 object-cover" />
@@ -322,11 +322,11 @@ const Login = () => {
             </div>
             
             <div className="flex items-center gap-2">
-              <span className="hidden sm:inline-flex items-center gap-1 text-[10px] text-slate-400">
+              <span className="hidden sm:inline-flex items-center gap-1 text-[10.5px] text-slate-400">
                 <ShieldCheck weight="fill" className="text-xs text-blue-400" />
                 <span>256-Bit SSL</span>
               </span>
-              <span className="flex items-center gap-1 text-[9.5px] text-emerald-400 font-bold bg-emerald-500/10 border border-emerald-500/20 px-2 py-0.5 rounded-full">
+              <span className="flex items-center gap-1.5 text-[10px] text-emerald-400 font-bold bg-emerald-500/10 border border-emerald-500/20 px-2.5 py-0.5 rounded-full">
                 <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
                 <span>Live Cloud</span>
               </span>
@@ -335,17 +335,17 @@ const Login = () => {
         </div>
 
         {/* RIGHT COLUMN: Modern White Login Form */}
-        <div className="w-full lg:w-[48%] bg-white/95 backdrop-blur-xl rounded-2xl sm:rounded-3xl border border-slate-200/80 shadow-md p-4 sm:p-5 lg:p-6 flex flex-col justify-between shrink-0 relative lg:h-full">
+        <div className="w-full lg:w-[48%] bg-white/95 backdrop-blur-xl rounded-2xl sm:rounded-3xl border border-slate-200/90 shadow-xl sm:shadow-2xl p-5 sm:p-6 lg:p-7 flex flex-col justify-between shrink-0 relative lg:h-full max-w-[430px] lg:max-w-none mx-auto">
           
           <div className="w-full max-w-[390px] mx-auto my-auto flex flex-col justify-center space-y-3 sm:space-y-3.5">
             
             {/* Header Titles */}
             <div>
-              <h2 className="text-lg sm:text-xl font-black text-slate-800 tracking-tight flex items-center gap-1.5">
-                {txt.welcome_back} <span className="text-lg">👋</span>
+              <h2 className="text-xl sm:text-2xl font-black text-slate-900 tracking-tight flex items-center gap-2">
+                {txt.welcome_back} <span className="text-xl">👋</span>
               </h2>
-              <div className="h-1 w-10 bg-gradient-to-r from-[#FF5722] to-[#FF8A65] rounded-full mt-1"></div>
-              <p className="text-slate-500 font-medium mt-0.5 text-xs">{txt.welcome_sub}</p>
+              <div className="h-1 w-12 bg-gradient-to-r from-[#FF5722] via-[#FF8A65] to-amber-400 rounded-full mt-1.5"></div>
+              <p className="text-slate-500 font-medium mt-1 text-xs sm:text-sm leading-relaxed">{txt.welcome_sub}</p>
             </div>
             
             {/* Error Banner */}
@@ -394,7 +394,7 @@ const Login = () => {
             )}
             
             {/* Form */}
-            <form onSubmit={handleLogin} className="space-y-3">
+            <form onSubmit={handleLogin} className="space-y-3.5 my-auto">
               
               {/* 1. Username / Mobile Field */}
               <div>
@@ -402,7 +402,7 @@ const Login = () => {
                   {txt.username_label}
                 </label>
                 <div className="relative group">
-                  <div className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-[#FF5722] transition-colors flex items-center">
+                  <div className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-[#FF5722] transition-colors duration-200 flex items-center pointer-events-none">
                     <At weight="bold" className="text-base" />
                   </div>
                   <input 
@@ -412,7 +412,7 @@ const Login = () => {
                     required
                     autoCapitalize="none"
                     autoCorrect="off"
-                    className="w-full h-10 bg-slate-50 border border-slate-200 rounded-xl pl-9 pr-3 font-semibold font-mono text-slate-800 outline-none focus:bg-white focus:border-[#FF5722] focus:ring-2 focus:ring-[#FF5722]/15 transition-all placeholder:font-sans placeholder:font-normal placeholder:text-slate-400 text-xs sm:text-sm"
+                    className="w-full h-11 bg-slate-50/80 hover:bg-slate-50 border border-slate-200/90 rounded-xl pl-10 pr-3.5 font-semibold font-mono text-slate-800 outline-none focus:bg-white focus:border-[#FF5722] focus:ring-3 focus:ring-[#FF5722]/15 transition-all duration-200 placeholder:font-sans placeholder:font-normal placeholder:text-slate-400 text-xs sm:text-sm"
                     placeholder={txt.username_placeholder} 
                   />
                 </div>
@@ -427,14 +427,14 @@ const Login = () => {
                   <button 
                     type="button"
                     onClick={openForgotModal}
-                    className="text-[11px] font-bold text-[#FF5722] hover:underline transition cursor-pointer"
+                    className="text-[11px] font-bold text-[#FF5722] hover:text-[#E64A19] hover:underline transition cursor-pointer"
                   >
                     {txt.forgot_password}
                   </button>
                 </div>
 
                 <div className="relative group">
-                  <div className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-[#FF5722] transition-colors flex items-center">
+                  <div className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-[#FF5722] transition-colors duration-200 flex items-center pointer-events-none">
                     <LockKey weight="bold" className="text-base" />
                   </div>
                   <input 
@@ -442,13 +442,13 @@ const Login = () => {
                     value={password}
                     onChange={e => setPassword(e.target.value)}
                     required
-                    className="w-full h-10 bg-slate-50 border border-slate-200 rounded-xl pl-9 pr-9 font-semibold text-slate-800 outline-none focus:bg-white focus:border-[#FF5722] focus:ring-2 focus:ring-[#FF5722]/15 transition-all text-xs sm:text-sm placeholder:font-normal placeholder:text-slate-400"
+                    className="w-full h-11 bg-slate-50/80 hover:bg-slate-50 border border-slate-200/90 rounded-xl pl-10 pr-10 font-semibold text-slate-800 outline-none focus:bg-white focus:border-[#FF5722] focus:ring-3 focus:ring-[#FF5722]/15 transition-all duration-200 text-xs sm:text-sm placeholder:font-normal placeholder:text-slate-400"
                     placeholder={txt.password_placeholder}
                   />
                   <button 
                     type="button" 
                     onClick={() => setShowPassword(!showPassword)}
-                    className="absolute right-2.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-700 p-1 transition cursor-pointer"
+                    className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-700 p-1 rounded-md transition cursor-pointer"
                   >
                     {showPassword ? (
                       <EyeSlash weight="bold" className="text-base text-[#FF5722]" />
@@ -463,7 +463,7 @@ const Login = () => {
               <button 
                 type="submit" 
                 disabled={loading}
-                className="w-full h-10 sm:h-10.5 bg-gradient-to-r from-[#FF5722] to-[#FF7043] hover:from-[#E64A19] hover:to-[#FF5722] text-white font-black rounded-xl transition-all shadow-[0_4px_15px_rgba(255,87,34,0.22)] active:scale-98 disabled:opacity-70 flex justify-center items-center gap-2 text-xs sm:text-sm cursor-pointer mt-1"
+                className="w-full h-11 bg-gradient-to-r from-[#FF5722] via-[#FF6E40] to-[#FF8A65] hover:from-[#E64A19] hover:to-[#FF5722] text-white font-black rounded-xl transition-all duration-200 shadow-[0_6px_20px_rgba(255,87,34,0.32)] hover:shadow-[0_8px_25px_rgba(255,87,34,0.45)] active:scale-[0.99] disabled:opacity-70 flex justify-center items-center gap-2 text-xs sm:text-sm cursor-pointer mt-2"
               >
                 {loading ? (
                   <>
@@ -480,7 +480,7 @@ const Login = () => {
             </form>
             
             {/* New Store Registration Prompt */}
-            <div className="pt-1 text-center text-xs">
+            <div className="pt-1.5 text-center text-xs">
               <p className="text-slate-600 font-medium">
                 {txt.new_store_prompt}{' '}
                 <Link to="/register" className="text-[#FF5722] font-black hover:underline underline-offset-4">

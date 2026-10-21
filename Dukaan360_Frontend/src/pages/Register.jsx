@@ -170,24 +170,24 @@ const Register = () => {
       </header>
 
       {/* ================= FULL-PAGE WORKSPACE ================= */}
-      <main className="relative z-10 flex-1 w-full max-w-[1500px] mx-auto p-3 sm:p-4 lg:py-3 lg:px-6 flex flex-col lg:flex-row gap-4 sm:gap-5 items-stretch lg:overflow-hidden">
+      <main className="relative z-10 flex-1 w-full max-w-[1440px] mx-auto p-3 sm:p-4 lg:py-4 lg:px-6 flex flex-col lg:flex-row gap-4 sm:gap-6 items-stretch lg:items-center justify-center">
         
         {/* LEFT COLUMN: Registration Form */}
-        <div className="w-full lg:w-[56%] bg-white/95 backdrop-blur-xl rounded-2xl sm:rounded-3xl border border-slate-200/80 shadow-md p-3.5 sm:p-5 flex flex-col justify-between relative lg:overflow-y-auto">
+        <div className="w-full lg:w-[54%] bg-white/95 backdrop-blur-xl rounded-2xl sm:rounded-3xl border border-slate-200/90 shadow-xl sm:shadow-2xl p-4 sm:p-5 lg:p-6 flex flex-col justify-between relative max-w-[560px] lg:max-w-none mx-auto lg:h-full">
           
-          <div className="w-full max-w-[540px] mx-auto flex flex-col justify-between h-full">
+          <div className="w-full max-w-[520px] mx-auto flex flex-col justify-between h-full">
             
             {/* Header Title */}
             <div>
-              <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-orange-50 border border-orange-200/80 text-[10px] sm:text-[10.5px] font-bold text-[#FF5722] mb-1">
+              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-gradient-to-r from-orange-50 to-amber-50 border border-orange-200/90 text-[10.5px] font-black text-[#FF5722] shadow-2xs mb-1.5">
                 <Sparkle weight="fill" className="text-xs text-[#FF5722]" />
                 <span>{txt.free_plan_display} • {txt.free_price} ({txt.free_tag})</span>
               </div>
-              <h2 className="text-lg sm:text-xl font-black text-slate-800 tracking-tight flex items-center gap-1.5">
-                {txt.create_account} <span className="text-lg">🚀</span>
+              <h2 className="text-xl sm:text-2xl font-black text-slate-900 tracking-tight flex items-center gap-2">
+                {txt.create_account} <span className="text-xl">🚀</span>
               </h2>
-              <div className="h-1 w-10 bg-gradient-to-r from-[#FF5722] to-[#FF8A65] rounded-full mt-1"></div>
-              <p className="text-slate-500 font-medium mt-0.5 text-[11px] sm:text-xs">{txt.right_desc}</p>
+              <div className="h-1 w-12 bg-gradient-to-r from-[#FF5722] via-[#FF8A65] to-amber-400 rounded-full mt-1.5"></div>
+              <p className="text-slate-500 font-medium mt-1 text-xs leading-relaxed">{txt.right_desc}</p>
             </div>
 
             {/* Error Banner */}
@@ -208,13 +208,13 @@ const Register = () => {
                     {txt.store_name}
                   </label>
                   <div className="relative group">
-                    <Buildings className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-base group-focus-within:text-[#FF5722] transition-colors" />
+                    <Buildings className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-base group-focus-within:text-[#FF5722] transition-colors duration-200 pointer-events-none" />
                     <input 
                       required 
                       type="text" 
                       value={formData.store_name} 
                       onChange={e => setFormData({...formData, store_name: e.target.value})}
-                      className="w-full h-10 bg-slate-50 border border-slate-200 rounded-xl pl-9 pr-3 text-xs sm:text-sm font-semibold text-slate-800 outline-none focus:bg-white focus:border-[#FF5722] focus:ring-2 focus:ring-[#FF5722]/15 transition-all placeholder:font-normal placeholder:text-slate-400"
+                      className="w-full h-10.5 bg-slate-50/80 hover:bg-slate-50 border border-slate-200/90 rounded-xl pl-10 pr-3.5 text-xs sm:text-sm font-semibold text-slate-800 outline-none focus:bg-white focus:border-[#FF5722] focus:ring-3 focus:ring-[#FF5722]/15 transition-all duration-200 placeholder:font-normal placeholder:text-slate-400"
                       placeholder={txt.store_name_placeholder}
                     />
                   </div>
@@ -225,13 +225,13 @@ const Register = () => {
                     {txt.owner_name}
                   </label>
                   <div className="relative group">
-                    <User className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-base group-focus-within:text-[#FF5722] transition-colors" />
+                    <User className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-base group-focus-within:text-[#FF5722] transition-colors duration-200 pointer-events-none" />
                     <input 
                       required 
                       type="text" 
                       value={formData.owner_name} 
                       onChange={e => setFormData({...formData, owner_name: e.target.value})}
-                      className="w-full h-10 bg-slate-50 border border-slate-200 rounded-xl pl-9 pr-3 text-xs sm:text-sm font-semibold text-slate-800 outline-none focus:bg-white focus:border-[#FF5722] focus:ring-2 focus:ring-[#FF5722]/15 transition-all placeholder:font-normal placeholder:text-slate-400"
+                      className="w-full h-10.5 bg-slate-50/80 hover:bg-slate-50 border border-slate-200/90 rounded-xl pl-10 pr-3.5 text-xs sm:text-sm font-semibold text-slate-800 outline-none focus:bg-white focus:border-[#FF5722] focus:ring-3 focus:ring-[#FF5722]/15 transition-all duration-200 placeholder:font-normal placeholder:text-slate-400"
                       placeholder={txt.owner_name_placeholder}
                     />
                   </div>
@@ -245,14 +245,14 @@ const Register = () => {
                     {txt.mobile}
                   </label>
                   <div className="relative group">
-                    <Phone className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-base group-focus-within:text-[#FF5722] transition-colors" />
+                    <Phone className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-base group-focus-within:text-[#FF5722] transition-colors duration-200 pointer-events-none" />
                     <input 
                       required 
                       type="tel" 
                       maxLength="10" 
                       value={formData.mobile} 
                       onChange={e => setFormData({...formData, mobile: e.target.value.replace(/\D/g, '')})}
-                      className="w-full h-10 bg-slate-50 border border-slate-200 rounded-xl pl-9 pr-3 text-xs sm:text-sm font-semibold text-slate-800 outline-none focus:bg-white focus:border-[#FF5722] focus:ring-2 focus:ring-[#FF5722]/15 transition-all placeholder:font-normal placeholder:text-slate-400"
+                      className="w-full h-10.5 bg-slate-50/80 hover:bg-slate-50 border border-slate-200/90 rounded-xl pl-10 pr-3.5 text-xs sm:text-sm font-semibold text-slate-800 outline-none focus:bg-white focus:border-[#FF5722] focus:ring-3 focus:ring-[#FF5722]/15 transition-all duration-200 placeholder:font-normal placeholder:text-slate-400"
                       placeholder={txt.mobile_placeholder}
                     />
                   </div>
@@ -266,13 +266,13 @@ const Register = () => {
                     <span className="text-[10px] text-[#FF5722] font-black">{txt.email_otp_badge}</span>
                   </div>
                   <div className="relative group">
-                    <EnvelopeSimple className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-base group-focus-within:text-[#FF5722] transition-colors" />
+                    <EnvelopeSimple className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-base group-focus-within:text-[#FF5722] transition-colors duration-200 pointer-events-none" />
                     <input 
                       required 
                       type="email" 
                       value={formData.email} 
                       onChange={e => setFormData({...formData, email: e.target.value.toLowerCase().trim()})}
-                      className="w-full h-10 bg-slate-50 border border-slate-200 rounded-xl pl-9 pr-3 text-xs sm:text-sm font-semibold text-slate-800 outline-none focus:bg-white focus:border-[#FF5722] focus:ring-2 focus:ring-[#FF5722]/15 transition-all placeholder:font-normal placeholder:text-slate-400"
+                      className="w-full h-10.5 bg-slate-50/80 hover:bg-slate-50 border border-slate-200/90 rounded-xl pl-10 pr-3.5 text-xs sm:text-sm font-semibold text-slate-800 outline-none focus:bg-white focus:border-[#FF5722] focus:ring-3 focus:ring-[#FF5722]/15 transition-all duration-200 placeholder:font-normal placeholder:text-slate-400"
                       placeholder={txt.email_placeholder}
                     />
                   </div>
@@ -286,13 +286,13 @@ const Register = () => {
                     {txt.password}
                   </label>
                   <div className="relative group">
-                    <LockKey className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-base group-focus-within:text-[#FF5722] transition-colors" />
+                    <LockKey className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-base group-focus-within:text-[#FF5722] transition-colors duration-200 pointer-events-none" />
                     <input 
                       required 
                       type="password" 
                       value={formData.password} 
                       onChange={e => setFormData({...formData, password: e.target.value})}
-                      className="w-full h-10 bg-slate-50 border border-slate-200 rounded-xl pl-9 pr-3 text-xs sm:text-sm font-semibold text-slate-800 outline-none focus:bg-white focus:border-[#FF5722] focus:ring-2 focus:ring-[#FF5722]/15 transition-all placeholder:font-normal placeholder:text-slate-400"
+                      className="w-full h-10.5 bg-slate-50/80 hover:bg-slate-50 border border-slate-200/90 rounded-xl pl-10 pr-3.5 text-xs sm:text-sm font-semibold text-slate-800 outline-none focus:bg-white focus:border-[#FF5722] focus:ring-3 focus:ring-[#FF5722]/15 transition-all duration-200 placeholder:font-normal placeholder:text-slate-400"
                       placeholder={txt.password_placeholder}
                     />
                   </div>
@@ -303,13 +303,13 @@ const Register = () => {
                     {txt.address}
                   </label>
                   <div className="relative group">
-                    <MapPin className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-base group-focus-within:text-[#FF5722] transition-colors" />
+                    <MapPin className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-base group-focus-within:text-[#FF5722] transition-colors duration-200 pointer-events-none" />
                     <input 
                       required 
                       type="text" 
                       value={formData.address} 
                       onChange={e => setFormData({...formData, address: e.target.value})}
-                      className="w-full h-10 bg-slate-50 border border-slate-200 rounded-xl pl-9 pr-3 text-xs sm:text-sm font-semibold text-slate-800 outline-none focus:bg-white focus:border-[#FF5722] focus:ring-2 focus:ring-[#FF5722]/15 transition-all placeholder:font-normal placeholder:text-slate-400"
+                      className="w-full h-10.5 bg-slate-50/80 hover:bg-slate-50 border border-slate-200/90 rounded-xl pl-10 pr-3.5 text-xs sm:text-sm font-semibold text-slate-800 outline-none focus:bg-white focus:border-[#FF5722] focus:ring-3 focus:ring-[#FF5722]/15 transition-all duration-200 placeholder:font-normal placeholder:text-slate-400"
                       placeholder={txt.address_placeholder}
                     />
                   </div>
@@ -318,11 +318,11 @@ const Register = () => {
 
               <input type="hidden" name="plan_type" value="1 Month" />
 
-              {/* Row 5: Submit Button */}
+              {/* Row 4: Submit Button */}
               <button 
                 type="submit" 
                 disabled={loading}
-                className="w-full h-10 sm:h-11 bg-gradient-to-r from-[#FF5722] to-[#FF7043] hover:from-[#E64A19] hover:to-[#FF5722] text-white font-black rounded-xl transition-all shadow-[0_4px_15px_rgba(255,87,34,0.22)] active:scale-98 disabled:opacity-70 flex justify-center items-center gap-2 text-xs sm:text-sm cursor-pointer mt-1"
+                className="w-full h-11 bg-gradient-to-r from-[#FF5722] via-[#FF6E40] to-[#FF8A65] hover:from-[#E64A19] hover:to-[#FF5722] text-white font-black rounded-xl transition-all duration-200 shadow-[0_6px_20px_rgba(255,87,34,0.32)] hover:shadow-[0_8px_25px_rgba(255,87,34,0.45)] active:scale-[0.99] disabled:opacity-70 flex justify-center items-center gap-2 text-xs sm:text-sm cursor-pointer mt-2"
               >
                 {loading ? (
                   <>
@@ -339,10 +339,10 @@ const Register = () => {
             </form>
 
             {/* Bottom Footer & Login Link */}
-            <div className="pt-1.5 text-center text-xs">
+            <div className="pt-2 text-center text-xs">
               <p className="text-slate-600 font-medium">
                 {txt.already_registered}{' '}
-                <Link to="/login" className="text-[#FF5722] font-black hover:underline underline-offset-4">
+                <Link to="/login" className="text-[#FF5722] font-black hover:text-[#E64A19] hover:underline underline-offset-4 ml-1 transition">
                   {txt.sign_in_instead}
                 </Link>
               </p>
@@ -353,51 +353,51 @@ const Register = () => {
         </div>
 
         {/* RIGHT COLUMN: Executive Dark Slate-900 Perks & Guide (DESKTOP ONLY) */}
-        <div className="hidden lg:flex lg:w-[44%] bg-slate-900 rounded-2xl border border-slate-800 shadow-md p-5 text-white flex-col justify-between lg:h-full relative overflow-hidden">
+        <div className="hidden lg:flex lg:w-[46%] bg-gradient-to-b from-slate-900 via-slate-900 to-slate-950 rounded-2xl sm:rounded-3xl border border-slate-800/90 shadow-2xl p-5 sm:p-6 text-white flex-col justify-between lg:h-full relative overflow-hidden">
           <div className="absolute inset-0 opacity-10 bg-[radial-gradient(circle_at_2px_2px,white_1px,transparent_0)] bg-[length:24px_24px] pointer-events-none"></div>
 
           {/* Top: Headline & ₹0 Badge */}
           <div className="relative z-10 space-y-1">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">
-                <h3 className="text-base font-black text-white tracking-tight">
+                <h3 className="text-base sm:text-lg font-black text-white tracking-tight">
                   {txt.right_title}
                 </h3>
-                <span className="text-[10px] font-black text-[#FF5722] bg-[#FF5722]/15 border border-[#FF5722]/30 px-2.5 py-0.5 rounded-full">
+                <span className="text-[10.5px] font-black text-[#FF5722] bg-[#FF5722]/15 border border-[#FF5722]/30 px-2.5 py-0.5 rounded-full shadow-2xs">
                   ₹0
                 </span>
               </div>
-              <span className="text-[10px] font-black text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 px-2.5 py-0.5 rounded-full flex items-center gap-1">
+              <span className="text-[10px] font-black text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 px-2.5 py-0.5 rounded-full flex items-center gap-1 shadow-2xs">
                 <Sparkle weight="fill" className="text-xs" />
                 <span>{txt.right_badge}</span>
               </span>
             </div>
-            <p className="text-slate-400 font-medium text-xs leading-relaxed">
+            <p className="text-slate-300 font-medium text-xs leading-relaxed">
               {txt.right_desc}
             </p>
           </div>
 
           {/* Middle 1: Trial Features Grid (4 Perks) */}
-          <div className="relative z-10 bg-slate-800/40 border border-slate-700/50 rounded-xl p-3">
+          <div className="relative z-10 bg-slate-800/40 border border-slate-700/50 rounded-xl sm:rounded-2xl p-3 sm:p-3.5 my-2">
             <p className="text-[10px] font-black uppercase tracking-wider text-amber-400 mb-2 flex items-center gap-1">
               <Lightning weight="fill" className="text-xs" />
               <span>{txt.trial_features_title}</span>
             </p>
-            <div className="grid grid-cols-2 gap-2">
+            <div className="grid grid-cols-2 gap-2 sm:gap-2.5">
               {txt.features?.map((f, idx) => (
-                <div key={idx} className="bg-slate-900/60 border border-slate-750/60 rounded-lg p-2.5 transition-all hover:border-slate-600">
-                  <div className="flex items-center gap-1.5 mb-0.5">
-                    <span className="text-sm">{f.icon}</span>
+                <div key={idx} className="bg-slate-900/70 hover:bg-slate-900 border border-slate-750/70 hover:border-slate-600 rounded-xl p-2.5 transition-all shadow-xs group">
+                  <div className="flex items-center gap-1.5 mb-1">
+                    <span className="text-sm group-hover:scale-110 transition-transform">{f.icon}</span>
                     <span className="text-[11px] font-bold text-slate-200 truncate">{f.title}</span>
                   </div>
-                  <p className="text-[10px] text-slate-400 leading-tight">{f.desc}</p>
+                  <p className="text-[10px] text-slate-400 leading-snug">{f.desc}</p>
                 </div>
               ))}
             </div>
           </div>
 
           {/* Middle 2: 3-Point Guarantee / 30 Days Later (Clean & Uncluttered) */}
-          <div className="relative z-10 bg-slate-800/40 border border-slate-700/50 rounded-xl p-3 space-y-2">
+          <div className="relative z-10 bg-slate-800/40 border border-slate-700/50 rounded-xl sm:rounded-2xl p-3 sm:p-3.5 space-y-2">
             <div className="flex items-center gap-1.5 text-orange-400 font-black text-[11px]">
               <Sparkle weight="fill" className="text-xs shrink-0" />
               <span>{txt.after_trial_title}</span>
@@ -405,7 +405,7 @@ const Register = () => {
 
             <div className="space-y-1.5">
               <div className="flex items-start gap-2 text-[10.5px]">
-                <div className="w-4 h-4 rounded-full bg-emerald-500/15 text-emerald-400 flex items-center justify-center text-[10px] font-black shrink-0 mt-0.5">
+                <div className="w-4 h-4 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-[10px] font-black shrink-0 mt-0.5 shadow-2xs">
                   ✓
                 </div>
                 <div className="leading-tight">
@@ -415,7 +415,7 @@ const Register = () => {
               </div>
 
               <div className="flex items-start gap-2 text-[10.5px]">
-                <div className="w-4 h-4 rounded-full bg-orange-500/15 text-orange-400 flex items-center justify-center text-[10px] font-black shrink-0 mt-0.5">
+                <div className="w-4 h-4 rounded-full bg-orange-500/20 text-orange-400 flex items-center justify-center text-[10px] font-black shrink-0 mt-0.5 shadow-2xs">
                   ✓
                 </div>
                 <div className="leading-tight">
@@ -425,7 +425,7 @@ const Register = () => {
               </div>
 
               <div className="flex items-start gap-2 text-[10.5px]">
-                <div className="w-4 h-4 rounded-full bg-purple-500/15 text-purple-400 flex items-center justify-center text-[10px] font-black shrink-0 mt-0.5">
+                <div className="w-4 h-4 rounded-full bg-purple-500/20 text-purple-400 flex items-center justify-center text-[10px] font-black shrink-0 mt-0.5 shadow-2xs">
                   ✓
                 </div>
                 <div className="leading-tight">
@@ -437,7 +437,7 @@ const Register = () => {
           </div>
 
           {/* Footer: Support & Trust Points (Spacious & Integrated) */}
-          <div className="relative z-10 pt-2 border-t border-slate-800 space-y-2.5">
+          <div className="relative z-10 pt-2.5 border-t border-slate-800/80 space-y-2.5">
             <div className="flex items-center justify-between text-[11px]">
               <div className="flex items-center gap-2 text-slate-300">
                 <WhatsappLogo weight="fill" className="text-emerald-400 text-base shrink-0" />
@@ -447,7 +447,7 @@ const Register = () => {
                 href={`https://wa.me/91${txt.support_phone}?text=Hello%20Dukaan360%20Support`}
                 target="_blank"
                 rel="noreferrer"
-                className="font-bold text-emerald-400 hover:text-emerald-300 bg-emerald-500/10 hover:bg-emerald-500/20 px-2.5 py-1 rounded-lg border border-emerald-500/20 transition-all text-[11px]"
+                className="font-bold text-emerald-400 hover:text-emerald-300 bg-emerald-500/10 hover:bg-emerald-500/20 px-2.5 py-1 rounded-lg border border-emerald-500/20 transition-all text-[11px] shadow-2xs"
               >
                 +{txt.support_phone} ↗
               </a>
@@ -472,6 +472,40 @@ const Register = () => {
         </div>
 
       </main>
+
+      {/* CSS Keyframes for Fluid Blobs & Tech Dot Grid */}
+      <style>{`
+        /* Continuous Fluid Aurora Blobs */
+        @keyframes blob-float-1 {
+          0%, 100% { transform: translate(0px, 0px) scale(1) rotate(0deg); }
+          33% { transform: translate(65px, -55px) scale(1.1) rotate(6deg); }
+          66% { transform: translate(-45px, 45px) scale(0.92) rotate(-5deg); }
+        }
+        @keyframes blob-float-2 {
+          0%, 100% { transform: translate(0px, 0px) scale(1) rotate(0deg); }
+          33% { transform: translate(-70px, 65px) scale(1.12) rotate(-7deg); }
+          66% { transform: translate(55px, -50px) scale(0.88) rotate(6deg); }
+        }
+        @keyframes blob-float-3 {
+          0%, 100% { transform: translate(0px, 0px) scale(1); }
+          50% { transform: translate(60px, 50px) scale(1.14); }
+        }
+        @keyframes blob-float-4 {
+          0%, 100% { transform: translate(0px, 0px) scale(1); }
+          50% { transform: translate(-55px, -45px) scale(1.1); }
+        }
+        .animate-blob-1 { animation: blob-float-1 18s ease-in-out infinite; will-change: transform; }
+        .animate-blob-2 { animation: blob-float-2 22s ease-in-out infinite; will-change: transform; }
+        .animate-blob-3 { animation: blob-float-3 16s ease-in-out infinite; will-change: transform; }
+        .animate-blob-4 { animation: blob-float-4 20s ease-in-out infinite; will-change: transform; }
+
+        /* Tech Dot Grid Drift */
+        @keyframes grid-drift {
+          0% { background-position: 0px 0px; }
+          100% { background-position: 48px 48px; }
+        }
+        .animate-grid-pan { animation: grid-drift 26s linear infinite; }
+      `}</style>
 
     </div>
   );
