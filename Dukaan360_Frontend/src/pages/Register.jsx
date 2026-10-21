@@ -157,7 +157,7 @@ const Register = () => {
             >
               <ArrowLeft weight="bold" className="text-xs" />
               <span className="hidden sm:inline">{txt.return_to_login}</span>
-              <span className="sm:hidden font-bold">लॉगिन</span>
+              <span className="sm:hidden font-bold">{txt.nav_login_short || txt.return_to_login}</span>
             </Link>
           </div>
         </div>
@@ -176,49 +176,49 @@ const Register = () => {
             <div className="space-y-1.5">
               <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/90 border border-orange-200/80 text-[11px] font-black text-[#FF5722] shadow-2xs">
                 <Sparkle weight="fill" className="text-xs text-[#FF5722]" />
-                <span>३० दिवस मोफत ऑल-इन-वन ॲक्सेस • ₹० शुल्क</span>
+                <span>{txt.side_badge}</span>
               </div>
 
               <h2 className="text-2xl font-black text-slate-900 tracking-tight leading-snug">
-                दुकानाची विक्री वाढवा आणि <br />
+                {txt.side_title_1} <br />
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FF5722] via-[#FF6E40] to-[#FFA726]">
-                  उधारी १००% वसूल करा.
+                  {txt.side_title_highlight}
                 </span>
               </h2>
               <p className="text-slate-500 text-xs font-medium leading-relaxed">
-                {txt.right_desc}
+                {txt.side_desc}
               </p>
             </div>
 
             {/* 3 Spacious Feature Cards (No cluttered grid!) */}
             <div className="space-y-2.5">
+              <div className="bg-white/80 hover:bg-white border border-emerald-100/90 rounded-2xl p-2.5 flex items-center gap-3 shadow-2xs transition">
+                <div className="w-8.5 h-8.5 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center text-base font-black shrink-0 border border-emerald-200/60">
+                  <WhatsappLogo weight="fill" />
+                </div>
+                <div>
+                  <h4 className="text-xs font-black text-slate-800">{txt.side_card1_title}</h4>
+                  <p className="text-[10.5px] text-slate-500 font-medium">{txt.side_card1_desc}</p>
+                </div>
+              </div>
+
+              <div className="bg-white/80 hover:bg-white border border-blue-100/90 rounded-2xl p-2.5 flex items-center gap-3 shadow-2xs transition">
+                <div className="w-8.5 h-8.5 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center text-base font-black shrink-0 border border-blue-200/60">
+                  <Package weight="fill" />
+                </div>
+                <div>
+                  <h4 className="text-xs font-black text-slate-800">{txt.side_card2_title}</h4>
+                  <p className="text-[10.5px] text-slate-500 font-medium">{txt.side_card2_desc}</p>
+                </div>
+              </div>
+
               <div className="bg-white/80 hover:bg-white border border-orange-100/90 rounded-2xl p-2.5 flex items-center gap-3 shadow-2xs transition">
                 <div className="w-8.5 h-8.5 rounded-xl bg-orange-50 text-[#FF5722] flex items-center justify-center text-base font-black shrink-0 border border-orange-200/60">
                   <Lightning weight="fill" />
                 </div>
                 <div>
-                  <h4 className="text-xs font-black text-slate-800">सुपरफास्ट १-क्लिक बिलिंग</h4>
-                  <p className="text-[10.5px] text-slate-500 font-medium">बारकोड स्कॅन करून ५ सेकंदात बिल प्रिंट</p>
-                </div>
-              </div>
-
-              <div className="bg-white/80 hover:bg-white border border-orange-100/90 rounded-2xl p-2.5 flex items-center gap-3 shadow-2xs transition">
-                <div className="w-8.5 h-8.5 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center text-base font-black shrink-0 border border-emerald-200/60">
-                  <WhatsappLogo weight="fill" />
-                </div>
-                <div>
-                  <h4 className="text-xs font-black text-slate-800">WhatsApp बिलिंग व उधारी</h4>
-                  <p className="text-[10.5px] text-slate-500 font-medium">कागद खर्च ₹० + वेळेवर पेमेंट वसुली</p>
-                </div>
-              </div>
-
-              <div className="bg-white/80 hover:bg-white border border-orange-100/90 rounded-2xl p-2.5 flex items-center gap-3 shadow-2xs transition">
-                <div className="w-8.5 h-8.5 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center text-base font-black shrink-0 border border-blue-200/60">
-                  <Package weight="fill" />
-                </div>
-                <div>
-                  <h4 className="text-xs font-black text-slate-800">स्मार्ट स्टॉक व एक्सपायरी गार्ड</h4>
-                  <p className="text-[10.5px] text-slate-500 font-medium">माल संपण्याआधी आणि एक्सपायरी आधी सूचना</p>
+                  <h4 className="text-xs font-black text-slate-800">{txt.side_card3_title}</h4>
+                  <p className="text-[10.5px] text-slate-500 font-medium">{txt.side_card3_desc}</p>
                 </div>
               </div>
             </div>
@@ -250,7 +250,7 @@ const Register = () => {
               <div className="mb-2">
                 <div className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-orange-50 border border-orange-200/80 text-[10px] font-black text-[#FF5722] mb-1 shadow-2xs">
                   <Sparkle weight="fill" className="text-xs text-[#FF5722]" />
-                  <span>३० दिवस मोफत Pro ॲक्सेस • ₹० शुल्क</span>
+                  <span>{txt.form_badge || '३० दिवस मोफत Pro ॲक्सेस • ₹० शुल्क'}</span>
                 </div>
                 <h2 className="text-xl sm:text-2xl font-black text-slate-900 tracking-tight leading-tight flex items-center gap-1.5">
                   {txt.create_account} <span className="text-xl">🚀</span>

@@ -211,7 +211,8 @@ const Login = () => {
               to="/register"
               className="text-xs font-black text-white bg-gradient-to-r from-[#FF5722] via-[#FF6E40] to-[#FFA726] hover:from-[#E64A19] hover:to-[#FF5722] px-3.5 py-1.5 rounded-xl transition-all flex items-center gap-1 shadow-sm shadow-orange-500/25 active:scale-98 shrink-0 whitespace-nowrap"
             >
-              <span>{txt.register_now.replace('→', '').trim()}</span>
+              <span className="hidden sm:inline">{txt.register_now.replace('→', '').trim()}</span>
+              <span className="sm:hidden font-bold">{txt.nav_register_short || 'Register'}</span>
               <ArrowRight weight="bold" className="text-xs" />
             </Link>
           </div>
@@ -231,7 +232,7 @@ const Login = () => {
             <div className="space-y-1.5">
               <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/90 border border-orange-200/80 text-[11px] font-black text-[#FF5722] shadow-2xs">
                 <Sparkle weight="fill" className="text-xs text-[#FF5722]" />
-                <span>स्मार्ट किराणा व रिटेल POS प्लॅटफॉर्म</span>
+                <span>{txt.side_badge}</span>
               </div>
 
               <h2 className="text-2xl xl:text-[26px] font-black text-slate-900 tracking-tight leading-snug">
@@ -252,8 +253,8 @@ const Login = () => {
                   <Lightning weight="fill" />
                 </div>
                 <div>
-                  <h4 className="text-xs font-black text-slate-800">सुपरफास्ट १-क्लिक बिलिंग</h4>
-                  <p className="text-[11px] text-slate-500 font-medium">बारकोड स्कॅन करून ५ सेकंदात बिल प्रिंट</p>
+                  <h4 className="text-xs font-black text-slate-800">{txt.side_card1_title}</h4>
+                  <p className="text-[11px] text-slate-500 font-medium">{txt.side_card1_desc}</p>
                 </div>
               </div>
 
@@ -262,8 +263,8 @@ const Login = () => {
                   <WhatsappLogo weight="fill" />
                 </div>
                 <div>
-                  <h4 className="text-xs font-black text-slate-800">WhatsApp बिलिंग व उधारी</h4>
-                  <p className="text-[11px] text-slate-500 font-medium">कागद खर्च शून्य + थेट ग्राहकाला मेसेज</p>
+                  <h4 className="text-xs font-black text-slate-800">{txt.side_card2_title}</h4>
+                  <p className="text-[11px] text-slate-500 font-medium">{txt.side_card2_desc}</p>
                 </div>
               </div>
 
@@ -272,8 +273,8 @@ const Login = () => {
                   <ChartLineUp weight="fill" />
                 </div>
                 <div>
-                  <h4 className="text-xs font-black text-slate-800">दैनिक नफा व स्टॉक अलर्ट</h4>
-                  <p className="text-[11px] text-slate-500 font-medium">आज किती कमावले? एका क्लिकवर अचूक हिशोब</p>
+                  <h4 className="text-xs font-black text-slate-800">{txt.side_card3_title}</h4>
+                  <p className="text-[11px] text-slate-500 font-medium">{txt.side_card3_desc}</p>
                 </div>
               </div>
             </div>

@@ -7,10 +7,19 @@ export const AUTH_TRANSLATIONS = {
     login: {
       brand_title: "Dukaan360",
       brand_subtitle: "किराणा व रिटेल POS",
-      brand_quote_1: "तुमचा व्यवसाय व्यवस्थापित करा",
+      side_badge: "🏪 दैनिक दुकान सहाय्यक",
+      brand_quote_1: "आजचा व्यवसाय सुरू करा",
       brand_quote_highlight: "सहज आणि स्मार्टपणे.",
-      brand_subquote: "भारतातील सर्वात सोपा व जलद बिलिंग, स्टॉक आणि खातेवही प्लॅटफॉर्म.",
-      trusted_stores: "५००+ पेक्षा जास्त दुकानांचा विश्वास",
+      brand_subquote: "दुकानदाराचा विश्वासू POS • जलद बिलिंग, अचूक हिशोब आणि उधारी नियंत्रण.",
+      
+      side_card1_title: "सुपरफास्ट १-क्लिक बिलिंग",
+      side_card1_desc: "बारकोड स्कॅन करून ५ सेकंदात बिल प्रिंट करा व गर्दी संपवा",
+      side_card2_title: "स्मार्ट उधारी वसुली व WhatsApp",
+      side_card2_desc: "कोणाकडे किती बाकी आहे याचा रिअल-टाईम हिशोब व १-क्लिक रिमाइंडर",
+      side_card3_title: "दैनिक नफा व लाईव्ह स्टॉक गार्ड",
+      side_card3_desc: "आज किती कमाई झाली? आणि कोणता माल संपत आलाय याचे लगेच अलर्ट",
+      
+      trusted_stores: "५००+ दुकानांचा विश्वास",
       welcome_back: "पुन्हा स्वागत आहे",
       welcome_sub: "दुकानात प्रवेश करण्यासाठी युझरनेम किंवा मोबाईल नंबर टाका.",
       cloud_badge: "क्लाउड",
@@ -23,6 +32,7 @@ export const AUTH_TRANSLATIONS = {
       logging_in: "लॉगिन होत आहे...",
       new_store_prompt: "नवीन दुकान आहे का?",
       register_now: "नवीन दुकान नोंदणी करा (Register) →",
+      nav_register_short: "नोंदणी",
       
       // Alerts & Errors
       pending_approval: "तुमचे स्टोअर सध्या ॲडमिन मंजुरीच्या प्रतीक्षेत आहे.",
@@ -87,6 +97,22 @@ export const AUTH_TRANSLATIONS = {
       submitting: "नोंदणी होत आहे...",
       already_registered: "आधीच नोंदणी झाली आहे?",
       sign_in_instead: "येथे लॉगिन करा",
+      nav_login_short: "लॉगिन",
+
+      // Left Showcase Box: Trial & Business Value
+      side_badge: "✨ ३० दिवस मोफत Pro ॲक्सेस • ₹० शुल्क",
+      side_title_1: "दुकानाची विक्री वाढवा आणि",
+      side_title_highlight: "उधारी १००% वसूल करा.",
+      side_desc: "नोंदणी करा आणि ३० दिवस Dukaan360 चे सर्व प्रगत फीचर्स मोफत अनुभवा. क्रेडिट कार्ड लागत नाही.",
+      
+      side_card1_title: "उधारी पैसे परत आणणारा सिस्टीम",
+      side_card1_desc: "थेट ग्राहकाच्या WhatsApp वर बिल व पेमेंट लिंक पाठवून जलद वसुली",
+      side_card2_title: "पैसा अडकला आहे ते दाखवणारा ट्रॅकर",
+      side_card2_desc: "कोणता माल ६० दिवसांपासून विकला नाही व कोणता संपणार आहे ते लगेच दिसेल",
+      side_card3_title: "कागद व वेळेची १००% बचत",
+      side_card3_desc: "कोणत्याही मोबाईल किंवा लॅपटॉपवर सोपे बारकोड बिलिंग व संपूर्ण खातेवही",
+      
+      form_badge: "✨ ३० दिवस मोफत Pro ॲक्सेस • ₹० शुल्क",
 
       // Right Side Box: Trial details
       right_brand_sub: "किराणा व रिटेल POS",
@@ -248,9 +274,18 @@ export const AUTH_TRANSLATIONS = {
     login: {
       brand_title: "Dukaan360",
       brand_subtitle: "किराना और रिटेल POS",
-      brand_quote_1: "अपना रिटेल व्यापार संभालें",
-      brand_quote_highlight: "आसानी और स्मार्ट तरीके से.",
-      brand_subquote: "भारत का सबसे सरल और तेज़ बिलिंग, स्टॉक और बहीखाता प्लेटफ़ॉर्म।",
+      side_badge: "🏪 दैनिक दुकान सहायक",
+      brand_quote_1: "आज का व्यापार शुरू करें",
+      brand_quote_highlight: "सरल और स्मार्ट तरीके से.",
+      brand_subquote: "दुकानदार का भरोसेमंद POS • तेज़ बिलिंग, सटीक हिसाब और उधारी नियंत्रण।",
+      
+      side_card1_title: "सुपरफास्ट 1-क्लिक बिलिंग",
+      side_card1_desc: "बारकोड स्कैन करके 5 सेकंड में बिल प्रिंट करें व भीड़ खत्म करें",
+      side_card2_title: "स्मार्ट उधारी वसूली व WhatsApp",
+      side_card2_desc: "किस ग्राहक पर कितना बकाया है इसका लाइव हिसाब व 1-क्लिक रिमाइंडर",
+      side_card3_title: "दैनिक मुनाफ़ा व लाइव स्टॉक गार्ड",
+      side_card3_desc: "आज कितनी कमाई हुई? और कौन सा माल खत्म होने वाला है इसका अलर्ट",
+      
       trusted_stores: "500+ से अधिक दुकानों का भरोसा",
       welcome_back: "वापसी पर स्वागत है",
       welcome_sub: "दुकान में प्रवेश करने के लिए यूज़रनेम या मोबाइल नंबर दर्ज करें।",
@@ -264,6 +299,7 @@ export const AUTH_TRANSLATIONS = {
       logging_in: "लॉगिन हो रहा है...",
       new_store_prompt: "नई दुकान है?",
       register_now: "नई दुकान रजिस्टर करें (Register) →",
+      nav_register_short: "रजिस्टर",
       
       // Alerts & Errors
       pending_approval: "आपकी दुकान अभी एडमिन मंज़ूरी की प्रतीक्षा में है।",
@@ -328,6 +364,22 @@ export const AUTH_TRANSLATIONS = {
       submitting: "पंजीकरण हो रहा है...",
       already_registered: "पहले से खाता है?",
       sign_in_instead: "यहाँ लॉगिन करें",
+      nav_login_short: "लॉगिन",
+
+      // Left Showcase Box: Trial & Business Value
+      side_badge: "✨ 30 दिन मुफ़्त Pro एक्सेस • ₹0 शुल्क",
+      side_title_1: "दुकान की बिक्री बढ़ाएं और",
+      side_title_highlight: "उधारी 100% वसूल करें.",
+      side_desc: "रजिस्टर करें और 30 दिन Dukaan360 के सभी प्रीमियम फीचर्स मुफ्त अनुभव करें। क्रेडिट कार्ड की आवश्यकता नहीं।",
+      
+      side_card1_title: "उधारी पैसे वापस लाने वाला सिस्टम",
+      side_card1_desc: "सीधे ग्राहक के WhatsApp पर बिल व UPI लिंक भेजकर 3x तेज़ वसूली",
+      side_card2_title: "पैसा अटका है वो दिखाने वाला ट्रैकर",
+      side_card2_desc: "कौन सा माल महीनों से बिका नहीं और कौन सा तुरंत मंगाना है, लाइव दिखेगा",
+      side_card3_title: "कागज़ और समय की 100% बचत",
+      side_card3_desc: "किसी भी मोबाइल या कंप्यूटर पर सरल बारकोड बिलिंग व पक्की खाता बही",
+      
+      form_badge: "✨ 30 दिन मुफ़्त Pro एक्सेस • ₹0 शुल्क",
 
       // Right Side Box: Trial details
       right_brand_sub: "किराना और रिटेल POS",
@@ -489,9 +541,18 @@ export const AUTH_TRANSLATIONS = {
     login: {
       brand_title: "Dukaan360",
       brand_subtitle: "Kirana & Retail POS",
-      brand_quote_1: "Manage your retail business",
-      brand_quote_highlight: "effortlessly.",
-      brand_subquote: "India's easiest and fastest billing, stock and ledger platform.",
+      side_badge: "🏪 Daily Retail Assistant",
+      brand_quote_1: "Power Your Store Operations",
+      brand_quote_highlight: "Fast, Simple & Reliable.",
+      brand_subquote: "India's trusted retail POS • Fast billing, ledger accuracy and smart due recovery.",
+      
+      side_card1_title: "Superfast 1-Click Billing",
+      side_card1_desc: "Scan barcodes & print bills in 5s, eliminate counter queues",
+      side_card2_title: "Smart Udhari Recovery & WhatsApp",
+      side_card2_desc: "Real-time pending ledger with 1-click WhatsApp payment reminders",
+      side_card3_title: "Daily Profit & Live Stock Guard",
+      side_card3_desc: "Instant profit calculations and low inventory shortage alerts",
+      
       trusted_stores: "500+ stores trust Dukaan360",
       welcome_back: "Welcome Back",
       welcome_sub: "Enter your username or mobile number to access your store.",
@@ -505,6 +566,7 @@ export const AUTH_TRANSLATIONS = {
       logging_in: "Logging in...",
       new_store_prompt: "New store owner?",
       register_now: "Register New Store →",
+      nav_register_short: "Register",
       
       // Alerts & Errors
       pending_approval: "Your store registration is pending admin approval.",
@@ -569,6 +631,22 @@ export const AUTH_TRANSLATIONS = {
       submitting: "Submitting...",
       already_registered: "Already registered?",
       sign_in_instead: "Sign In instead",
+      nav_login_short: "Login",
+
+      // Left Showcase Box: Trial & Business Value
+      side_badge: "✨ 30 Days Free Pro Access • ₹0 Fee",
+      side_title_1: "Grow Store Sales & Recover",
+      side_title_highlight: "100% Pending Dues.",
+      side_desc: "Register now and experience all premium features of Dukaan360 completely free for 30 days. No card required.",
+      
+      side_card1_title: "Automatic Udhari Recovery System",
+      side_card1_desc: "Send instant bills & payment links to customer WhatsApp for fast dues collection",
+      side_card2_title: "Dead-Stock & Shortage Tracker",
+      side_card2_desc: "Identify slow-moving dead inventory and predict upcoming stock shortages",
+      side_card3_title: "100% Paperless & Zero Training POS",
+      side_card3_desc: "Runs smoothly on any phone or PC with barcode scanning and instant ledger",
+      
+      form_badge: "✨ 30 Days Free Pro Access • ₹0 Fee",
 
       // Right Side Box: Trial details
       right_brand_sub: "Kirana & Retail POS",
