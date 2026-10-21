@@ -472,8 +472,8 @@ const Login = () => {
                   </>
                 ) : (
                   <>
-                    <span>{txt.login_btn}</span>
-                    <ArrowRight weight="bold" className="text-sm" />
+                    <span>{txt.login_btn.replace('→', '').trim()}</span>
+                    <ArrowRight weight="bold" className="text-base" />
                   </>
                 )}
               </button>
@@ -483,7 +483,7 @@ const Login = () => {
             <div className="pt-1.5 text-center text-xs">
               <p className="text-slate-600 font-medium">
                 {txt.new_store_prompt}{' '}
-                <Link to="/register" className="text-[#FF5722] font-black hover:underline underline-offset-4">
+                <Link to="/register" className="text-[#FF5722] font-black hover:text-[#E64A19] hover:underline underline-offset-4 ml-1 transition">
                   {txt.register_now}
                 </Link>
               </p>

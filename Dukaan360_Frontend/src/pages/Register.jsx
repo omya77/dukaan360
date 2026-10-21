@@ -173,38 +173,38 @@ const Register = () => {
       <main className="relative z-10 flex-1 w-full max-w-[1440px] mx-auto p-3 sm:p-4 lg:py-4 lg:px-6 flex flex-col lg:flex-row gap-4 sm:gap-6 items-stretch lg:items-center justify-center">
         
         {/* LEFT COLUMN: Registration Form */}
-        <div className="w-full lg:w-[54%] bg-white/95 backdrop-blur-xl rounded-2xl sm:rounded-3xl border border-slate-200/90 shadow-xl sm:shadow-2xl p-4 sm:p-5 lg:p-6 flex flex-col justify-between relative max-w-[560px] lg:max-w-none mx-auto lg:h-full">
+        <div className="w-full lg:w-[54%] bg-white/95 backdrop-blur-xl rounded-2xl sm:rounded-3xl border border-slate-200/90 shadow-xl sm:shadow-2xl p-5 sm:p-6 lg:p-7 flex flex-col justify-center relative max-w-[580px] lg:max-w-none mx-auto">
           
-          <div className="w-full max-w-[520px] mx-auto flex flex-col justify-between h-full">
+          <div className="w-full max-w-[520px] mx-auto flex flex-col space-y-3 sm:space-y-3.5">
             
             {/* Header Title */}
             <div>
-              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-gradient-to-r from-orange-50 to-amber-50 border border-orange-200/90 text-[10.5px] font-black text-[#FF5722] shadow-2xs mb-1.5">
+              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-orange-50 border border-orange-200 text-xs font-bold text-[#FF5722] mb-1.5 shadow-2xs">
                 <Sparkle weight="fill" className="text-xs text-[#FF5722]" />
-                <span>{txt.free_plan_display} • {txt.free_price} ({txt.free_tag})</span>
+                <span>३० दिवस मोफत ट्रायल • ₹० शुल्क</span>
               </div>
               <h2 className="text-xl sm:text-2xl font-black text-slate-900 tracking-tight flex items-center gap-2">
                 {txt.create_account} <span className="text-xl">🚀</span>
               </h2>
-              <div className="h-1 w-12 bg-gradient-to-r from-[#FF5722] via-[#FF8A65] to-amber-400 rounded-full mt-1.5"></div>
+              <div className="h-1.5 w-12 bg-gradient-to-r from-[#FF5722] to-[#FF8A65] rounded-full mt-1.5"></div>
               <p className="text-slate-500 font-medium mt-1 text-xs leading-relaxed">{txt.right_desc}</p>
             </div>
 
             {/* Error Banner */}
             {error && (
-              <div className="bg-red-50 border border-red-200 text-red-600 p-2.5 rounded-xl my-1.5 text-xs font-bold flex items-start gap-2 shadow-xs">
+              <div className="bg-red-50 border border-red-200 text-red-600 p-2.5 rounded-xl text-xs font-bold flex items-start gap-2 shadow-xs">
                 <WarningCircle weight="fill" className="text-sm shrink-0 mt-0.5" />
                 <p className="leading-snug">{error}</p>
               </div>
             )}
 
             {/* The Form */}
-            <form onSubmit={handleSubmit} className="space-y-2.5 sm:space-y-3 my-auto py-1">
+            <form onSubmit={handleSubmit} className="space-y-3">
               
               {/* Row 1: Store & Owner Name */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 sm:gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div>
-                  <label className="block text-[11px] font-bold text-slate-600 uppercase tracking-wider mb-1">
+                  <label className="block text-[11px] font-bold text-slate-700 uppercase tracking-wider mb-1">
                     {txt.store_name}
                   </label>
                   <div className="relative group">
@@ -214,14 +214,14 @@ const Register = () => {
                       type="text" 
                       value={formData.store_name} 
                       onChange={e => setFormData({...formData, store_name: e.target.value})}
-                      className="w-full h-10.5 bg-slate-50/80 hover:bg-slate-50 border border-slate-200/90 rounded-xl pl-10 pr-3.5 text-xs sm:text-sm font-semibold text-slate-800 outline-none focus:bg-white focus:border-[#FF5722] focus:ring-3 focus:ring-[#FF5722]/15 transition-all duration-200 placeholder:font-normal placeholder:text-slate-400"
+                      className="w-full h-10.5 bg-slate-50 border border-slate-200 rounded-xl pl-10 pr-3.5 text-xs sm:text-sm font-semibold text-slate-800 outline-none focus:bg-white focus:border-[#FF5722] focus:ring-2 focus:ring-[#FF5722]/15 transition-all placeholder:font-normal placeholder:text-slate-400"
                       placeholder={txt.store_name_placeholder}
                     />
                   </div>
                 </div>
 
                 <div>
-                  <label className="block text-[11px] font-bold text-slate-600 uppercase tracking-wider mb-1">
+                  <label className="block text-[11px] font-bold text-slate-700 uppercase tracking-wider mb-1">
                     {txt.owner_name}
                   </label>
                   <div className="relative group">
@@ -231,7 +231,7 @@ const Register = () => {
                       type="text" 
                       value={formData.owner_name} 
                       onChange={e => setFormData({...formData, owner_name: e.target.value})}
-                      className="w-full h-10.5 bg-slate-50/80 hover:bg-slate-50 border border-slate-200/90 rounded-xl pl-10 pr-3.5 text-xs sm:text-sm font-semibold text-slate-800 outline-none focus:bg-white focus:border-[#FF5722] focus:ring-3 focus:ring-[#FF5722]/15 transition-all duration-200 placeholder:font-normal placeholder:text-slate-400"
+                      className="w-full h-10.5 bg-slate-50 border border-slate-200 rounded-xl pl-10 pr-3.5 text-xs sm:text-sm font-semibold text-slate-800 outline-none focus:bg-white focus:border-[#FF5722] focus:ring-2 focus:ring-[#FF5722]/15 transition-all placeholder:font-normal placeholder:text-slate-400"
                       placeholder={txt.owner_name_placeholder}
                     />
                   </div>
@@ -239,9 +239,9 @@ const Register = () => {
               </div>
 
               {/* Row 2: Mobile & Email */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 sm:gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div>
-                  <label className="block text-[11px] font-bold text-slate-600 uppercase tracking-wider mb-1">
+                  <label className="block text-[11px] font-bold text-slate-700 uppercase tracking-wider mb-1">
                     {txt.mobile}
                   </label>
                   <div className="relative group">
@@ -252,7 +252,7 @@ const Register = () => {
                       maxLength="10" 
                       value={formData.mobile} 
                       onChange={e => setFormData({...formData, mobile: e.target.value.replace(/\D/g, '')})}
-                      className="w-full h-10.5 bg-slate-50/80 hover:bg-slate-50 border border-slate-200/90 rounded-xl pl-10 pr-3.5 text-xs sm:text-sm font-semibold text-slate-800 outline-none focus:bg-white focus:border-[#FF5722] focus:ring-3 focus:ring-[#FF5722]/15 transition-all duration-200 placeholder:font-normal placeholder:text-slate-400"
+                      className="w-full h-10.5 bg-slate-50 border border-slate-200 rounded-xl pl-10 pr-3.5 text-xs sm:text-sm font-semibold text-slate-800 outline-none focus:bg-white focus:border-[#FF5722] focus:ring-2 focus:ring-[#FF5722]/15 transition-all placeholder:font-normal placeholder:text-slate-400"
                       placeholder={txt.mobile_placeholder}
                     />
                   </div>
@@ -260,7 +260,7 @@ const Register = () => {
 
                 <div>
                   <div className="flex items-center justify-between mb-1">
-                    <label className="block text-[11px] font-bold text-slate-600 uppercase tracking-wider">
+                    <label className="block text-[11px] font-bold text-slate-700 uppercase tracking-wider">
                       {txt.email}
                     </label>
                     <span className="text-[10px] text-[#FF5722] font-black">{txt.email_otp_badge}</span>
@@ -272,17 +272,17 @@ const Register = () => {
                       type="email" 
                       value={formData.email} 
                       onChange={e => setFormData({...formData, email: e.target.value.toLowerCase().trim()})}
-                      className="w-full h-10.5 bg-slate-50/80 hover:bg-slate-50 border border-slate-200/90 rounded-xl pl-10 pr-3.5 text-xs sm:text-sm font-semibold text-slate-800 outline-none focus:bg-white focus:border-[#FF5722] focus:ring-3 focus:ring-[#FF5722]/15 transition-all duration-200 placeholder:font-normal placeholder:text-slate-400"
+                      className="w-full h-10.5 bg-slate-50 border border-slate-200 rounded-xl pl-10 pr-3.5 text-xs sm:text-sm font-semibold text-slate-800 outline-none focus:bg-white focus:border-[#FF5722] focus:ring-2 focus:ring-[#FF5722]/15 transition-all placeholder:font-normal placeholder:text-slate-400"
                       placeholder={txt.email_placeholder}
                     />
                   </div>
                 </div>
               </div>
 
-              {/* Row 3: Password & Shop Address */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 sm:gap-3">
+              {/* Row 3: Password & Subscription Plan (1 Month Free ₹0) */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div>
-                  <label className="block text-[11px] font-bold text-slate-600 uppercase tracking-wider mb-1">
+                  <label className="block text-[11px] font-bold text-slate-700 uppercase tracking-wider mb-1">
                     {txt.password}
                   </label>
                   <div className="relative group">
@@ -292,37 +292,59 @@ const Register = () => {
                       type="password" 
                       value={formData.password} 
                       onChange={e => setFormData({...formData, password: e.target.value})}
-                      className="w-full h-10.5 bg-slate-50/80 hover:bg-slate-50 border border-slate-200/90 rounded-xl pl-10 pr-3.5 text-xs sm:text-sm font-semibold text-slate-800 outline-none focus:bg-white focus:border-[#FF5722] focus:ring-3 focus:ring-[#FF5722]/15 transition-all duration-200 placeholder:font-normal placeholder:text-slate-400"
+                      className="w-full h-10.5 bg-slate-50 border border-slate-200 rounded-xl pl-10 pr-3.5 text-xs sm:text-sm font-semibold text-slate-800 outline-none focus:bg-white focus:border-[#FF5722] focus:ring-2 focus:ring-[#FF5722]/15 transition-all placeholder:font-normal placeholder:text-slate-400"
                       placeholder={txt.password_placeholder}
                     />
                   </div>
                 </div>
 
                 <div>
-                  <label className="block text-[11px] font-bold text-slate-600 uppercase tracking-wider mb-1">
-                    {txt.address}
-                  </label>
-                  <div className="relative group">
-                    <MapPin className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-base group-focus-within:text-[#FF5722] transition-colors duration-200 pointer-events-none" />
-                    <input 
-                      required 
-                      type="text" 
-                      value={formData.address} 
-                      onChange={e => setFormData({...formData, address: e.target.value})}
-                      className="w-full h-10.5 bg-slate-50/80 hover:bg-slate-50 border border-slate-200/90 rounded-xl pl-10 pr-3.5 text-xs sm:text-sm font-semibold text-slate-800 outline-none focus:bg-white focus:border-[#FF5722] focus:ring-3 focus:ring-[#FF5722]/15 transition-all duration-200 placeholder:font-normal placeholder:text-slate-400"
-                      placeholder={txt.address_placeholder}
-                    />
+                  <div className="flex items-center justify-between mb-1">
+                    <label className="block text-[11px] font-bold text-slate-700 uppercase tracking-wider">
+                      {txt.plan_label}
+                    </label>
+                    <span className="text-[10px] font-black text-emerald-700 bg-emerald-50 border border-emerald-200 px-1.5 py-0.2 rounded-full">
+                      {txt.free_tag}
+                    </span>
                   </div>
+                  <div className="w-full h-10.5 bg-orange-50/70 border border-orange-200 rounded-xl px-3 flex items-center justify-between shadow-2xs">
+                    <div className="flex items-center gap-1.5 min-w-0">
+                      <span className="w-2 h-2 rounded-full bg-[#FF5722] animate-pulse shrink-0"></span>
+                      <span className="text-xs font-bold text-slate-800 truncate">
+                        {txt.free_plan_display}
+                      </span>
+                    </div>
+                    <span className="text-[11px] font-black text-[#FF5722] bg-white px-2 py-0.5 rounded-md border border-orange-200 shrink-0 shadow-2xs">
+                      {txt.free_price}
+                    </span>
+                  </div>
+                  <input type="hidden" name="plan_type" value="1 Month" />
                 </div>
               </div>
 
-              <input type="hidden" name="plan_type" value="1 Month" />
+              {/* Row 4: Shop Address */}
+              <div>
+                <label className="block text-[11px] font-bold text-slate-700 uppercase tracking-wider mb-1">
+                  {txt.address}
+                </label>
+                <div className="relative group">
+                  <MapPin className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-base group-focus-within:text-[#FF5722] transition-colors duration-200 pointer-events-none" />
+                  <input 
+                    required 
+                    type="text" 
+                    value={formData.address} 
+                    onChange={e => setFormData({...formData, address: e.target.value})}
+                    className="w-full h-10.5 bg-slate-50 border border-slate-200 rounded-xl pl-10 pr-3.5 text-xs sm:text-sm font-semibold text-slate-800 outline-none focus:bg-white focus:border-[#FF5722] focus:ring-2 focus:ring-[#FF5722]/15 transition-all placeholder:font-normal placeholder:text-slate-400"
+                    placeholder={txt.address_placeholder}
+                  />
+                </div>
+              </div>
 
-              {/* Row 4: Submit Button */}
+              {/* Row 5: Submit Button */}
               <button 
                 type="submit" 
                 disabled={loading}
-                className="w-full h-11 bg-gradient-to-r from-[#FF5722] via-[#FF6E40] to-[#FF8A65] hover:from-[#E64A19] hover:to-[#FF5722] text-white font-black rounded-xl transition-all duration-200 shadow-[0_6px_20px_rgba(255,87,34,0.32)] hover:shadow-[0_8px_25px_rgba(255,87,34,0.45)] active:scale-[0.99] disabled:opacity-70 flex justify-center items-center gap-2 text-xs sm:text-sm cursor-pointer mt-2"
+                className="w-full h-11 bg-gradient-to-r from-[#FF5722] via-[#FF6E40] to-[#FF8A65] hover:from-[#E64A19] hover:to-[#FF5722] text-white font-black rounded-xl transition-all duration-200 shadow-[0_6px_20px_rgba(255,87,34,0.3)] hover:shadow-[0_8px_25px_rgba(255,87,34,0.4)] active:scale-[0.99] disabled:opacity-70 flex justify-center items-center gap-2 text-xs sm:text-sm cursor-pointer mt-1"
               >
                 {loading ? (
                   <>
@@ -331,15 +353,15 @@ const Register = () => {
                   </>
                 ) : (
                   <>
-                    <span>{txt.register_btn}</span>
-                    <ArrowRight weight="bold" className="text-sm" />
+                    <span>{txt.register_btn.replace('→', '').trim()}</span>
+                    <ArrowRight weight="bold" className="text-base" />
                   </>
                 )}
               </button>
             </form>
 
             {/* Bottom Footer & Login Link */}
-            <div className="pt-2 text-center text-xs">
+            <div className="pt-1.5 text-center text-xs">
               <p className="text-slate-600 font-medium">
                 {txt.already_registered}{' '}
                 <Link to="/login" className="text-[#FF5722] font-black hover:text-[#E64A19] hover:underline underline-offset-4 ml-1 transition">
