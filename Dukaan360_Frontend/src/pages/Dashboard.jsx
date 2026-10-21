@@ -59,16 +59,11 @@ const Dashboard = () => {
 
   // Smart Purchase Order State
   const [showPOModal, setShowPOModal] = useState(false);
-  const [poSupplierName, setPoSupplierName] = useState('बालाजी ट्रेडिंग (होलसेलर)');
+  const [poSupplierName, setPoSupplierName] = useState('');
   const [poSupplierMobile, setPoSupplierMobile] = useState('');
-  const [poItems, setPoItems] = useState([
-    { product_name: 'साखर (Sugar M30)', quantity: 10, unit: 'Bags', est_rate: 3800 },
-    { product_name: 'Fortune Sunlite Oil 1L', quantity: 24, unit: 'Pouches', est_rate: 110 },
-    { product_name: 'Wagh Bakri Chai 250g', quantity: 15, unit: 'Packets', est_rate: 135 },
-    { product_name: 'Parle-G Gold 100g', quantity: 10, unit: 'Cartons', est_rate: 450 }
-  ]);
+  const [poItems, setPoItems] = useState([]);
   const [newPoItem, setNewPoItem] = useState({ product_name: '', quantity: '', unit: 'Packets', est_rate: '' });
-  const [poNotes, setPoNotes] = useState('कृपया उद्या सकाळपर्यंत डिलिव्हरी पाठवावी.');
+  const [poNotes, setPoNotes] = useState('');
   const [isSendingPO, setIsSendingPO] = useState(false);
 
   // Smart Combo State
@@ -1021,7 +1016,7 @@ const Dashboard = () => {
                       type="text" 
                       value={poSupplierName} 
                       onChange={e => setPoSupplierName(e.target.value)}
-                      placeholder="उदा. बालाजी ट्रेडिंग"
+                      placeholder="सप्लायर / व्यापाऱ्याचे नाव"
                       className="w-full h-10 px-3 bg-slate-50 border border-slate-200 rounded-xl text-xs font-bold text-slate-800 focus:outline-none focus:border-indigo-500"
                     />
                   </div>
@@ -1188,7 +1183,7 @@ const Dashboard = () => {
                     type="text"
                     value={expenseData.description}
                     onChange={(e) => setExpenseData({...expenseData, description: e.target.value})}
-                    placeholder="उदा. गाडीवाल्याला दिलेले भाडे"
+                    placeholder="खर्चाचा तपशील प्रविष्ट करा"
                     className="w-full h-11 bg-slate-50 border border-slate-200 rounded-xl px-3 text-sm font-bold text-slate-800 focus:outline-none focus:border-brand focus:ring-1 focus:ring-brand"
                   />
                 </div>

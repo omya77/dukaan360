@@ -2608,6 +2608,12 @@ if os.path.exists(STATIC_DIR):
         if os.path.exists(folder):
             app.mount(f"/{sub}", StaticFiles(directory=folder), name=sub)
 
+    INDEX_HEADERS = {
+        "Cache-Control": "no-cache, no-store, must-revalidate, max-age=0",
+        "Pragma": "no-cache",
+        "Expires": "0"
+    }
+
     @app.get("/{full_path:path}")
     async def serve_frontend_spa(full_path: str):
         clean_path = full_path.strip("/")
@@ -2615,7 +2621,7 @@ if os.path.exists(STATIC_DIR):
         if clean_path in ("", "admin", "login", "pos", "inventory", "history", "register", "renew", "dashboard"):
             index_file = os.path.join(STATIC_DIR, "index.html")
             if os.path.exists(index_file):
-                return FileResponse(index_file)
+                return FileResponse(index_file, headers=INDEX_HEADERS)
 
         # Do not catch backend API, documentation or schema routes
         if full_path.startswith(("api", "auth", "docs", "openapi.json", "health", "admin/")):
@@ -2629,5 +2635,5 @@ if os.path.exists(STATIC_DIR):
         # Return React index.html for client-side routing
         index_file = os.path.join(STATIC_DIR, "index.html")
         if os.path.exists(index_file):
-            return FileResponse(index_file)
+            return FileResponse(index_file, headers=INDEX_HEADERS)
         return {"status": "online", "message": "Dukaan360 API running"}

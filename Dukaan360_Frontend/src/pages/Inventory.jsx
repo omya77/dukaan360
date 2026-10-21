@@ -804,7 +804,7 @@ const Inventory = () => {
                   type="text" required
                   value={newProdName} onChange={e => setNewProdName(e.target.value)}
                   className="w-full h-11 border border-slate-200 rounded-xl px-3.5 font-bold focus:border-brand focus:outline-none focus:ring-2 focus:ring-brand/20" 
-                  placeholder="e.g., Tata Salt, Aashirvaad Atta"
+                  placeholder="उत्पादनाचे / वस्तूचे नाव प्रविष्ट करा"
                 />
               </div>
 
@@ -847,7 +847,7 @@ const Inventory = () => {
                     type="number" required step="0.01" min="0"
                     value={newProdSelling} onChange={e => setNewProdSelling(e.target.value)}
                     className="w-full h-11 border border-slate-200 rounded-xl px-3.5 font-black text-emerald-600 focus:border-brand focus:outline-none focus:ring-2 focus:ring-brand/20" 
-                    placeholder="e.g. 100"
+                    placeholder="विक्री किंमत (₹)"
                   />
                 </div>
                 <div>
@@ -979,7 +979,7 @@ const Inventory = () => {
                     step="any" 
                     min="0.01" 
                     required 
-                    placeholder="उदा. 2"
+                    placeholder="प्रमाण प्रविष्ट करा"
                     value={adjustQty} 
                     onChange={e => setAdjustQty(e.target.value)}
                     className="w-full h-10 border border-slate-200 rounded-xl px-3 font-bold text-xs focus:border-brand focus:outline-none"
@@ -1005,7 +1005,7 @@ const Inventory = () => {
                 <label className="block text-[11px] font-bold text-slate-500 uppercase mb-1">टीप / स्पष्टीकरण (Notes - Optional)</label>
                 <input 
                   type="text" 
-                  placeholder="उदा. संध्याकाळी मोजणी करताना कमी आढळले..."
+                  placeholder="तफावतीचे कारण / टीप प्रविष्ट करा..."
                   value={adjustNotes} 
                   onChange={e => setAdjustNotes(e.target.value)}
                   className="w-full h-10 border border-slate-200 rounded-xl px-3 font-medium text-xs focus:border-brand focus:outline-none"

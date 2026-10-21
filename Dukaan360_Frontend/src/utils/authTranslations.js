@@ -189,7 +189,7 @@ export const AUTH_TRANSLATIONS = {
       
       step1_title: "पायरी १: दुकान शोधा (Search Store)",
       step1_verified: "दुकान सत्यापित",
-      search_placeholder: "दुकानाचे नाव किंवा मोबाईल नंबर टाका (उदा. Matoshree)...",
+      search_placeholder: "दुकानाचे नाव किंवा मोबाईल नंबर प्रविष्ट करा...",
       search_btn: "शोधा",
       searching: "शोधत आहे...",
       found_stores: "सापडलेली दुकाने (निवडण्यासाठी क्लिक करा):",
@@ -489,7 +489,7 @@ export const AUTH_TRANSLATIONS = {
       
       step1_title: "चरण 1: दुकान खोजें (Search Store)",
       step1_verified: "दुकान सत्यापित",
-      search_placeholder: "दुकान का नाम या मोबाइल नंबर दर्ज करें (उदा. Matoshree)...",
+      search_placeholder: "दुकान का नाम या मोबाइल नंबर दर्ज करें...",
       search_btn: "खोजें",
       searching: "खोज रहे हैं...",
       found_stores: "मिली हुई दुकानें (चुनने के लिए क्लिक करें):",
@@ -789,7 +789,7 @@ export const AUTH_TRANSLATIONS = {
       
       step1_title: "Step 1: Search Store",
       step1_verified: "Store Verified",
-      search_placeholder: "Enter store name or mobile number (e.g. Matoshree)...",
+      search_placeholder: "Enter store name or mobile number...",
       search_btn: "Search",
       searching: "Searching...",
       found_stores: "Matching Stores (Click to select):",

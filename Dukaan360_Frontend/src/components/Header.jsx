@@ -138,7 +138,7 @@ const Header = ({ onMenuClick, searchTerm, onSearch }) => {
 
     const email = (staffData.email || '').trim().toLowerCase();
     if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-      errs.email = language === 'mr' ? 'वैध ईमेल आयडी प्रविष्ट करा (उदा. store@gmail.com)' : (language === 'hi' ? 'वैध ईमेल आईडी दर्ज करें' : 'Valid email address required');
+      errs.email = language === 'mr' ? 'वैध ईमेल आयडी प्रविष्ट करा' : (language === 'hi' ? 'वैध ईमेल आईडी दर्ज करें' : 'Valid email address required');
     }
 
     return errs;
@@ -634,7 +634,7 @@ const Header = ({ onMenuClick, searchTerm, onSearch }) => {
                     value={staffData.name} 
                     onBlur={() => setStaffTouched(prev => ({ ...prev, name: true }))}
                     onChange={e => setStaffData(prev => ({ ...prev, name: e.target.value }))}
-                    placeholder="कर्मचाऱ्याचे पूर्ण नाव (उदा. राहुल शर्मा)"
+                    placeholder="कर्मचाऱ्याचे पूर्ण नाव प्रविष्ट करा"
                     className={`w-full h-10 border rounded-xl px-3 text-sm font-medium outline-none transition ${
                       staffTouched.name && errors.name 
                         ? 'border-red-400 bg-red-50/30 focus:border-red-500' 
@@ -666,7 +666,7 @@ const Header = ({ onMenuClick, searchTerm, onSearch }) => {
                         const clean = e.target.value.toLowerCase().replace(/\s+/g, '_').replace(/[^a-z0-9_.]/g, '');
                         setStaffData(prev => ({ ...prev, username: clean }));
                       }}
-                      placeholder="उदा. cashier_1 किंवा billing_counter"
+                      placeholder="कर्मचाऱ्याचे युझरनेम प्रविष्ट करा"
                       className={`w-full h-10 border rounded-xl pl-7 pr-3 text-sm font-bold font-mono text-slate-800 outline-none transition ${
                         staffTouched.username && errors.username 
                           ? 'border-red-400 bg-red-50/30 focus:border-red-500' 
@@ -680,7 +680,7 @@ const Header = ({ onMenuClick, searchTerm, onSearch }) => {
                     </p>
                   ) : (
                     <p className="text-[10px] text-slate-400 mt-0.5 font-medium">
-                      फक्त लहान अक्षरे, आकडे व _ (उदा. cashier_1, billing_staff)
+                      फक्त लहान अक्षरे, आकडे व _ (किमान ३ अक्षरे)
                     </p>
                   )}
                 </div>
@@ -732,7 +732,7 @@ const Header = ({ onMenuClick, searchTerm, onSearch }) => {
                       value={staffData.email} 
                       onBlur={() => setStaffTouched(prev => ({ ...prev, email: true }))}
                       onChange={e => setStaffData(prev => ({ ...prev, email: e.target.value }))}
-                      placeholder="उदा. staff@gmail.com"
+                      placeholder="कर्मचाऱ्याचा ईमेल आयडी प्रविष्ट करा"
                       className={`w-full h-10 border rounded-xl pl-9 pr-3 text-sm font-medium outline-none transition ${
                         staffTouched.email && errors.email 
                           ? 'border-red-400 bg-red-50/30 focus:border-red-500' 
