@@ -436,7 +436,7 @@ const Register = () => {
                           type="text" 
                           value={formData.store_name} 
                           onChange={e => setFormData({...formData, store_name: e.target.value})}
-                          className="w-full h-9 bg-[#FFFBF7] hover:bg-white border border-amber-200/80 rounded-xl pl-8.5 pr-2.5 text-xs font-semibold text-slate-800 outline-none focus:bg-white focus:border-[#FF5722] focus:ring-2 focus:ring-[#FF5722]/15 transition-all placeholder:font-normal placeholder:text-slate-400 shadow-2xs"
+                          className="w-full h-9 bg-[#FFFBF7] hover:bg-white border border-amber-200/80 rounded-xl pl-8 pr-2.5 text-xs font-semibold text-slate-800 outline-none focus:bg-white focus:border-[#FF5722] focus:ring-2 focus:ring-[#FF5722]/15 transition-all placeholder:font-normal placeholder:text-[11px] placeholder:text-slate-400 shadow-2xs"
                           placeholder={txt.store_name_placeholder}
                         />
                       </div>
@@ -447,13 +447,13 @@ const Register = () => {
                         {txt.owner_name}
                       </label>
                       <div className="relative group">
-                        <User className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-sm group-focus-within:text-[#FF5722] transition-colors pointer-events-none" />
+                        <User className="absolute left-2.5 top-1/2 -translate-y-1/2 text-slate-400 text-sm group-focus-within:text-[#FF5722] transition-colors pointer-events-none" />
                         <input 
                           required 
                           type="text" 
                           value={formData.owner_name} 
                           onChange={e => setFormData({...formData, owner_name: e.target.value})}
-                          className="w-full h-9 bg-[#FFFBF7] hover:bg-white border border-amber-200/80 rounded-xl pl-8.5 pr-2.5 text-xs font-semibold text-slate-800 outline-none focus:bg-white focus:border-[#FF5722] focus:ring-2 focus:ring-[#FF5722]/15 transition-all placeholder:font-normal placeholder:text-slate-400 shadow-2xs"
+                          className="w-full h-9 bg-[#FFFBF7] hover:bg-white border border-amber-200/80 rounded-xl pl-8 pr-2.5 text-xs font-semibold text-slate-800 outline-none focus:bg-white focus:border-[#FF5722] focus:ring-2 focus:ring-[#FF5722]/15 transition-all placeholder:font-normal placeholder:text-[11px] placeholder:text-slate-400 shadow-2xs"
                           placeholder={txt.owner_name_placeholder}
                         />
                       </div>
@@ -467,14 +467,14 @@ const Register = () => {
                         {txt.mobile}
                       </label>
                       <div className="relative group">
-                        <Phone className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-sm group-focus-within:text-[#FF5722] transition-colors pointer-events-none" />
+                        <Phone className="absolute left-2.5 top-1/2 -translate-y-1/2 text-slate-400 text-sm group-focus-within:text-[#FF5722] transition-colors pointer-events-none" />
                         <input 
                           required 
                           type="tel" 
                           maxLength="10" 
                           value={formData.mobile} 
                           onChange={e => setFormData({...formData, mobile: e.target.value.replace(/\D/g, '')})}
-                          className="w-full h-9 bg-[#FFFBF7] hover:bg-white border border-amber-200/80 rounded-xl pl-8.5 pr-9 text-xs font-semibold text-slate-800 outline-none focus:bg-white focus:border-[#FF5722] focus:ring-2 focus:ring-[#FF5722]/15 transition-all placeholder:font-normal placeholder:text-slate-400 shadow-2xs"
+                          className="w-full h-9 bg-[#FFFBF7] hover:bg-white border border-amber-200/80 rounded-xl pl-8 pr-8 text-xs font-semibold text-slate-800 outline-none focus:bg-white focus:border-[#FF5722] focus:ring-2 focus:ring-[#FF5722]/15 transition-all placeholder:font-normal placeholder:text-[11px] placeholder:text-slate-400 shadow-2xs"
                           placeholder={txt.mobile_placeholder}
                         />
                         {/* Indian Flag Micro Badge */}
@@ -492,16 +492,16 @@ const Register = () => {
                         <span className="text-[9px] text-[#FF5722] font-black">{txt.email_otp_badge}</span>
                       </div>
                       <div className="relative group">
-                        <EnvelopeSimple className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-sm group-focus-within:text-[#FF5722] transition-colors pointer-events-none" />
+                        <EnvelopeSimple className="absolute left-2.5 top-1/2 -translate-y-1/2 text-slate-400 text-sm group-focus-within:text-[#FF5722] transition-colors pointer-events-none" />
                         <input 
                           required 
                           type="email" 
                           value={formData.email} 
                           onChange={e => setFormData({...formData, email: e.target.value.toLowerCase().trim()})}
-                          className="w-full h-9 bg-[#FFFBF7] hover:bg-white border border-amber-200/80 rounded-xl pl-8.5 pr-8 text-xs font-semibold text-slate-800 outline-none focus:bg-white focus:border-[#FF5722] focus:ring-2 focus:ring-[#FF5722]/15 transition-all placeholder:font-normal placeholder:text-slate-400 shadow-2xs"
+                          className="w-full h-9 bg-[#FFFBF7] hover:bg-white border border-amber-200/80 rounded-xl pl-8 pr-7.5 text-xs font-semibold text-slate-800 outline-none focus:bg-white focus:border-[#FF5722] focus:ring-2 focus:ring-[#FF5722]/15 transition-all placeholder:font-normal placeholder:text-[11px] placeholder:text-slate-400 shadow-2xs"
                           placeholder={txt.email_placeholder}
                         />
-                        <ShieldCheck className="absolute right-2.5 top-1/2 -translate-y-1/2 text-emerald-500 text-xs pointer-events-none" />
+                        <ShieldCheck className="absolute right-2 top-1/2 -translate-y-1/2 text-emerald-500 text-xs pointer-events-none" />
                       </div>
                     </div>
                   </div>
@@ -513,19 +513,19 @@ const Register = () => {
                         {txt.password}
                       </label>
                       <div className="relative group">
-                        <LockKey className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-sm group-focus-within:text-[#FF5722] transition-colors pointer-events-none" />
+                        <LockKey className="absolute left-2.5 top-1/2 -translate-y-1/2 text-slate-400 text-sm group-focus-within:text-[#FF5722] transition-colors pointer-events-none" />
                         <input 
                           required 
                           type={showPassword ? "text" : "password"} 
                           value={formData.password} 
                           onChange={e => setFormData({...formData, password: e.target.value})}
-                          className="w-full h-9 bg-[#FFFBF7] hover:bg-white border border-amber-200/80 rounded-xl pl-8.5 pr-8 text-xs font-semibold text-slate-800 outline-none focus:bg-white focus:border-[#FF5722] focus:ring-2 focus:ring-[#FF5722]/15 transition-all placeholder:font-normal placeholder:text-slate-400 shadow-2xs"
+                          className="w-full h-9 bg-[#FFFBF7] hover:bg-white border border-amber-200/80 rounded-xl pl-8 pr-7 text-xs font-semibold text-slate-800 outline-none focus:bg-white focus:border-[#FF5722] focus:ring-2 focus:ring-[#FF5722]/15 transition-all placeholder:font-normal placeholder:text-[11px] placeholder:text-slate-400 shadow-2xs"
                           placeholder={txt.password_placeholder}
                         />
                         <button
                           type="button"
                           onClick={() => setShowPassword(!showPassword)}
-                          className="absolute right-2.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 transition p-0.5 cursor-pointer"
+                          className="absolute right-2 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 transition p-0.5 cursor-pointer"
                         >
                           {showPassword ? <EyeSlash size={14} /> : <Eye size={14} />}
                         </button>
@@ -537,13 +537,13 @@ const Register = () => {
                         {txt.address}
                       </label>
                       <div className="relative group">
-                        <MapPin className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-sm group-focus-within:text-[#FF5722] transition-colors pointer-events-none" />
+                        <MapPin className="absolute left-2.5 top-1/2 -translate-y-1/2 text-slate-400 text-sm group-focus-within:text-[#FF5722] transition-colors pointer-events-none" />
                         <input 
                           required 
                           type="text" 
                           value={formData.address} 
                           onChange={e => setFormData({...formData, address: e.target.value})}
-                          className="w-full h-9 bg-[#FFFBF7] hover:bg-white border border-amber-200/80 rounded-xl pl-8.5 pr-2.5 text-xs font-semibold text-slate-800 outline-none focus:bg-white focus:border-[#FF5722] focus:ring-2 focus:ring-[#FF5722]/15 transition-all placeholder:font-normal placeholder:text-slate-400 shadow-2xs"
+                          className="w-full h-9 bg-[#FFFBF7] hover:bg-white border border-amber-200/80 rounded-xl pl-8 pr-2.5 text-xs font-semibold text-slate-800 outline-none focus:bg-white focus:border-[#FF5722] focus:ring-2 focus:ring-[#FF5722]/15 transition-all placeholder:font-normal placeholder:text-[11px] placeholder:text-slate-400 shadow-2xs"
                           placeholder={txt.address_placeholder}
                         />
                       </div>
