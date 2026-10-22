@@ -723,55 +723,92 @@ const Dashboard = () => {
         {/* Cash Tally Modal */}
         {isTallyModalOpen && (
           <div className="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-start justify-center p-4 pt-24 sm:pt-28 overflow-y-auto">
-            <div className="bg-white rounded-[32px] w-full max-w-sm sm:max-w-md shadow-2xl border border-slate-100 p-6 flex flex-col relative overflow-hidden animate-scale-up max-h-[calc(100vh-120px)]">
+            <div className="bg-white rounded-[32px] w-full max-w-sm sm:max-w-md shadow-2xl border border-slate-100 p-6 flex flex-col relative animate-scale-up">
               
               {/* Header */}
               <div className="flex items-center justify-between mb-5">
                 <div className="flex items-center gap-3">
-                  <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-amber-500 to-orange-600 flex items-center justify-center shadow-lg shadow-orange-500/25 shrink-0 select-none text-white">
-                    <Calculator weight="fill" className="text-2xl" />
+                  {/* 3D Calculator Graphic */}
+                  <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-amber-400 via-orange-500 to-amber-600 flex items-center justify-center shadow-lg shadow-orange-500/25 shrink-0 select-none p-2.5">
+                    <svg className="w-full h-full select-none" viewBox="0 0 28 28" fill="none">
+                      <rect x="4" y="2" width="20" height="24" rx="4" fill="#C2410C" />
+                      <rect x="4" y="2" width="20" height="22" rx="4" fill="#EA580C" />
+                      <rect x="5" y="3" width="18" height="20" rx="3.5" fill="#FB923C" />
+                      {/* Screen */}
+                      <rect x="7" y="5" width="14" height="5" rx="1.5" fill="#FFF7ED" />
+                      <rect x="8.5" y="6.8" width="5.5" height="1.4" rx="0.7" fill="#EA580C" />
+                      {/* Buttons */}
+                      <rect x="7" y="12" width="3.4" height="2.8" rx="0.8" fill="#FFF7ED" />
+                      <rect x="12.3" y="12" width="3.4" height="2.8" rx="0.8" fill="#FFF7ED" />
+                      <rect x="17.6" y="12" width="3.4" height="2.8" rx="0.8" fill="#FFF7ED" />
+                      <rect x="7" y="16.5" width="3.4" height="2.8" rx="0.8" fill="#FFF7ED" />
+                      <rect x="12.3" y="16.5" width="3.4" height="2.8" rx="0.8" fill="#FFF7ED" />
+                      <rect x="17.6" y="16.5" width="3.4" height="2.8" rx="0.8" fill="#FDE047" />
+                    </svg>
                   </div>
                   <div>
                     <h3 className="font-black text-xl text-slate-900 leading-tight">गल्ला मोजा (Cash Tally)</h3>
-                    <p className="text-xs font-bold text-slate-500 mt-0.5">कॅश नोटांची अचूक बेरीज</p>
+                    <p className="text-xs font-bold text-slate-400 mt-0.5">कॅश नोटांची अचूक बेरीज</p>
                   </div>
                 </div>
 
                 <button 
                   onClick={() => setIsTallyModalOpen(false)}
-                  className="w-8 h-8 bg-slate-100 hover:bg-slate-200 text-slate-500 rounded-full flex items-center justify-center transition cursor-pointer"
+                  className="w-8 h-8 bg-slate-100 hover:bg-slate-200 text-slate-400 hover:text-slate-600 rounded-full flex items-center justify-center transition cursor-pointer"
                 >
                   <X weight="bold" className="text-base" />
                 </button>
               </div>
 
-              <div className="space-y-4">
+              <div className="flex flex-col gap-3.5">
+                {/* 2-Column Denominations Grid */}
                 <div className="grid grid-cols-2 gap-2.5">
                   {[500, 200, 100, 50, 20, 10].map(denom => (
-                    <div key={denom} className="flex items-center gap-2 bg-slate-50/90 p-2.5 rounded-2xl border border-slate-200/80">
-                      <span className="w-11 text-right font-black text-xs text-slate-700">₹{denom}</span>
-                      <span className="text-slate-400 font-bold text-xs">×</span>
-                      <input 
-                        type="number" min="0" placeholder="0"
-                        value={notes[denom]}
-                        onChange={(e) => setNotes(prev => ({...prev, [denom]: e.target.value}))}
-                        className="w-full bg-white border border-slate-200/90 rounded-xl px-2 py-1 text-center font-black text-xs text-slate-900 outline-none focus:border-brand"
-                      />
+                    <div 
+                      key={denom} 
+                      className="flex items-center justify-between bg-slate-50/80 border border-slate-200/90 rounded-2xl h-11 px-3 transition focus-within:border-brand focus-within:bg-white"
+                    >
+                      <div className="flex items-center gap-1.5 shrink-0">
+                        <span className="font-black text-xs sm:text-sm text-slate-800 tracking-tight">₹{denom}</span>
+                        <span className="text-slate-400 font-bold text-xs">×</span>
+                      </div>
+
+                      <div className="flex items-center bg-white border border-slate-200/90 rounded-xl px-2.5 py-0.5 shadow-xs focus-within:border-[#FF5722] focus-within:ring-2 focus-within:ring-[#FF5722]/15 transition">
+                        <input 
+                          type="number" min="0" placeholder="0"
+                          value={notes[denom]}
+                          onChange={(e) => setNotes(prev => ({...prev, [denom]: e.target.value}))}
+                          className="w-8 sm:w-10 text-center font-black text-xs sm:text-sm text-slate-900 outline-none bg-transparent"
+                        />
+                        <svg className="w-4 h-4 text-slate-400 shrink-0 select-none ml-1" viewBox="0 0 20 20" fill="none">
+                          <rect x="1.5" y="4.5" width="17" height="11" rx="2" stroke="currentColor" strokeWidth="1.3" />
+                          <circle cx="10" cy="10" r="2.2" stroke="currentColor" strokeWidth="1.3" />
+                          <line x1="4.5" y1="8" x2="4.5" y2="8.01" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+                          <line x1="15.5" y1="12" x2="15.5" y2="12.01" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+                        </svg>
+                      </div>
                     </div>
                   ))}
                 </div>
 
                 {/* Total Cash Box */}
-                <div className="bg-gradient-to-br from-orange-50 via-amber-50 to-orange-100/60 border border-orange-200/80 rounded-2xl p-4 text-center">
-                  <p className="text-[10px] font-black text-orange-600 uppercase tracking-wider mb-1">एकूण कॅश रक्कम (TOTAL CASH)</p>
-                  <h2 className="text-3xl font-black text-orange-700 tracking-tight">₹{calculateTotalCash().toLocaleString('en-IN', { minimumFractionDigits: 2 })}</h2>
+                <div className="bg-gradient-to-b from-[#FFF5E8] via-[#FFEED9] to-[#FFE6C7] border border-amber-200/90 rounded-2xl py-3 px-4 text-center shadow-xs">
+                  <p className="text-[10px] font-black text-[#C2410C] uppercase tracking-wider mb-0.5">
+                    एकूण कॅश रक्कम (TOTAL CASH)
+                  </p>
+                  <h2 className="text-3xl sm:text-4xl font-black text-[#C2410C] tracking-tight">
+                    ₹{calculateTotalCash().toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+                  </h2>
                 </div>
 
+                {/* Done Button */}
                 <button 
+                  type="button"
                   onClick={() => setIsTallyModalOpen(false)}
-                  className="w-full h-11 rounded-2xl bg-gradient-to-r from-[#FF5722] via-[#FF6E40] to-[#FF8A65] hover:opacity-95 text-white font-black text-sm flex items-center justify-center gap-1 shadow-md shadow-orange-500/30 transition cursor-pointer"
+                  className="w-full h-12 rounded-2xl bg-gradient-to-r from-[#FF5722] via-[#FF6E40] to-[#FF5722] hover:opacity-95 text-white font-black text-sm flex items-center justify-center gap-1.5 shadow-lg shadow-orange-500/30 active:scale-98 transition cursor-pointer"
                 >
-                  पूर्ण झाले (Done)
+                  <span>पूर्ण झाले (Done)</span>
+                  <Check weight="bold" className="text-base" />
                 </button>
               </div>
 
