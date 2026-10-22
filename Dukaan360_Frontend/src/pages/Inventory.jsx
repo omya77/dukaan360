@@ -1117,29 +1117,7 @@ const Inventory = () => {
                   </div>
                 )}
 
-                {/* Common Kirana Presets */}
-                <div className="flex items-center gap-1.5 overflow-x-auto pt-0.5">
-                  <span className="text-[9px] font-bold text-slate-400 shrink-0">तयार फोटो:</span>
-                  {[
-                    { label: 'दूध', url: '/images/milk.jpg' },
-                    { label: 'बिस्कीट', url: '/images/goodday.jpg' },
-                    { label: 'साखर', url: '/images/sugar.jpg' },
-                    { label: 'तूर डाळ', url: '/images/dal.jpg' },
-                    { label: 'तेल', url: '/images/oil.jpg' },
-                    { label: 'तूप', url: '/images/ghee.jpg' },
-                    { label: 'हळद', url: '/images/haldi.jpg' },
-                    { label: 'मीठ', url: '/images/salt.jpg' }
-                  ].map((preset, idx) => (
-                    <button
-                      key={idx}
-                      type="button"
-                      onClick={() => setNewProdImage(preset.url)}
-                      className="px-2 py-0.5 bg-white hover:bg-orange-50 border border-slate-200 hover:border-orange-300 rounded-md text-[10px] font-bold text-slate-600 hover:text-brand transition shrink-0 cursor-pointer shadow-2xs"
-                    >
-                      {preset.label}
-                    </button>
-                  ))}
-                </div>
+
               </div>
 
               <button type="submit" className="w-full h-12 bg-gradient-to-r from-[#FF5722] via-[#FF6E40] to-[#FF8A65] hover:opacity-95 text-white rounded-2xl font-black mt-2 transition shadow-lg shadow-orange-500/30 cursor-pointer">
