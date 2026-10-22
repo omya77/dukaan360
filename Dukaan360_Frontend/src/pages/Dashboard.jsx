@@ -478,8 +478,8 @@ const Dashboard = () => {
 
         {/* Wholesale Reorder List Modal */}
         {showReorderModal && (
-          <div className="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-            <div className="bg-white rounded-2xl w-full max-w-lg shadow-2xl border border-slate-100 flex flex-col overflow-hidden max-h-[90vh]">
+          <div className="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-start justify-center p-4 pt-20 sm:pt-24 overflow-y-auto">
+            <div className="bg-white rounded-2xl w-full max-w-lg shadow-2xl border border-slate-100 flex flex-col overflow-hidden max-h-[calc(100vh-120px)]">
               
               <div className="p-4 border-b border-slate-100 flex justify-between items-center bg-slate-50 no-print">
                 <div className="flex items-center gap-2">
@@ -551,8 +551,8 @@ const Dashboard = () => {
 
         {/* Add Expense Modal */}
         {showExpenseModal && (
-          <div className="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-            <div className="bg-white rounded-3xl w-full max-w-sm shadow-2xl p-6 flex flex-col">
+          <div className="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-start justify-center p-4 pt-20 sm:pt-24 overflow-y-auto">
+            <div className="bg-white rounded-3xl w-full max-w-sm shadow-2xl p-6 flex flex-col max-h-[calc(100vh-120px)]">
               <div className="flex justify-between items-center mb-6">
                 <div>
                   <h3 className="font-black text-xl text-slate-800">Add Expense</h3>
@@ -615,8 +615,8 @@ const Dashboard = () => {
 
         {/* Cash Tally Modal */}
         {isTallyModalOpen && (
-          <div className="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-            <div className="bg-white rounded-2xl w-full max-w-sm shadow-2xl overflow-hidden">
+          <div className="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-start justify-center p-4 pt-20 sm:pt-24 overflow-y-auto">
+            <div className="bg-white rounded-2xl w-full max-w-sm shadow-2xl overflow-hidden max-h-[calc(100vh-120px)]">
               <div className="bg-brand p-4 flex justify-between items-center text-white">
                 <h3 className="font-black text-lg flex items-center gap-2"><Calculator weight="fill" /> गल्ला मोजा (Cash Tally)</h3>
                 <button onClick={() => setIsTallyModalOpen(false)} className="hover:bg-white/20 p-1 rounded-lg cursor-pointer"><X weight="bold" /></button>
@@ -647,8 +647,8 @@ const Dashboard = () => {
 
         {/* Smart Purchase Order Modal */}
         {showPOModal && (
-          <div className="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-            <div className="bg-white rounded-3xl w-full max-w-lg shadow-2xl border border-slate-100 flex flex-col overflow-hidden max-h-[90vh]">
+          <div className="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-start justify-center p-4 pt-20 sm:pt-24 overflow-y-auto">
+            <div className="bg-white rounded-3xl w-full max-w-lg shadow-2xl border border-slate-100 flex flex-col overflow-hidden max-h-[calc(100vh-120px)]">
               
               <div className="p-4 border-b border-slate-100 flex justify-between items-center bg-indigo-50/50">
                 <div className="flex items-center gap-2.5">
