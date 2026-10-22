@@ -48,7 +48,9 @@ axios.interceptors.request.use((config) => {
     if (config.url.startsWith('/') && !config.url.startsWith('//')) {
       config.url = `${API_BASE_URL}${config.url}`;
     } else if (config.url.includes('localhost:8000')) {
-      config.url = config.url.replace('http://localhost:8000', API_BASE_URL);
+      config.url = config.url.replace('http://localhost:8000', API_BASE_URL).replace('https://localhost:8000', API_BASE_URL);
+    } else if (config.url.includes('127.0.0.1:8000')) {
+      config.url = config.url.replace('http://127.0.0.1:8000', API_BASE_URL).replace('https://127.0.0.1:8000', API_BASE_URL);
     }
   }
   return config;
