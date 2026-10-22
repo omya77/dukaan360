@@ -1,17 +1,14 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import api, { getAuthToken, getAuthHeaders } from '../services/api';
 
 const AuthContext = createContext();
 
 export const useAuth = () => useContext(AuthContext);
 
 export const AuthProvider = ({ children }) => {
-
-
-  const [token, setToken] = useState(() => {
-    return sessionStorage.getItem('saas_token') || localStorage.getItem('saas_token') || null;
-  });
+  const [token, setToken] = useState(() => getAuthToken());
   const [user, setUser] = useState(() => {
     const sessionSaved = sessionStorage.getItem('saas_user');
     if (sessionSaved) {
@@ -24,6 +21,7 @@ export const AuthProvider = ({ children }) => {
     return null;
   });
   const [loading, setLoading] = useState(false);
+
   // Dynamically update document title based on store name
   useEffect(() => {
     if (user?.store_name) {
@@ -33,37 +31,13 @@ export const AuthProvider = ({ children }) => {
     }
   }, [user]);
 
-  // Configure global axios interceptor for token
+  // Keep axios default header in sync with state
   useEffect(() => {
-    const requestInterceptor = axios.interceptors.request.use((config) => {
-      const activeToken = token || sessionStorage.getItem('saas_token') || localStorage.getItem('saas_token');
-      if (activeToken) {
-        config.headers.Authorization = `Bearer ${activeToken}`;
-      }
-      return config;
-    });
-
-    const responseInterceptor = axios.interceptors.response.use(
-      (response) => response,
-      (error) => {
-        if (error.response && error.response.status === 401) {
-          logout();
-        }
-        if (error.response && error.response.status === 403 && error.response.data?.detail === "SUBSCRIPTION_EXPIRED") {
-          const currentUsername = user?.username || '';
-          logout();
-          window.location.href = `/renew?username=${encodeURIComponent(currentUsername)}`;
-        }
-        return Promise.reject(error);
-      }
-    );
-
-    setLoading(false);
-
-    return () => {
-      axios.interceptors.request.eject(requestInterceptor);
-      axios.interceptors.response.eject(responseInterceptor);
-    };
+    if (token) {
+      axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+    } else {
+      delete axios.defaults.headers.common['Authorization'];
+    }
   }, [token]);
 
   const login = (accessToken, userData) => {

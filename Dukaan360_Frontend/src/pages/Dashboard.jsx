@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Header from '../components/Header';
+import { getAuthHeaders } from '../services/api';
 import { 
   ChartLineUp, 
   Users, 
@@ -59,12 +60,12 @@ const Dashboard = () => {
         category: expenseData.category,
         amount: parseFloat(expenseData.amount),
         description: expenseData.description
-      });
+      }, { headers: getAuthHeaders() });
       alert('Expense added successfully!');
       setShowExpenseModal(false);
       setExpenseData({ category: 'Tea & Snacks', amount: '', description: '' });
       // Re-fetch summary
-      const res = await axios.get('http://localhost:8000/dashboard/summary/');
+      const res = await axios.get('http://localhost:8000/dashboard/summary/', { headers: getAuthHeaders() });
       setSummary(res.data);
     } catch (err) {
       console.error(err);
@@ -75,8 +76,8 @@ const Dashboard = () => {
   const handlePrintReorder = async () => {
     try {
       const [prodRes, batchRes] = await Promise.all([
-        axios.get('http://localhost:8000/products/'),
-        axios.get('http://localhost:8000/stock/batches/')
+        axios.get('http://localhost:8000/products/', { headers: getAuthHeaders() }),
+        axios.get('http://localhost:8000/stock/batches/', { headers: getAuthHeaders() })
       ]);
       
       const stockMap = {};
@@ -162,7 +163,7 @@ const Dashboard = () => {
         })),
         notes: poNotes
       };
-      const res = await axios.post('http://localhost:8000/inventory/purchase-order', payload);
+      const res = await axios.post('http://localhost:8000/inventory/purchase-order', payload, { headers: getAuthHeaders() });
       alert(`ऑर्डर तयार झाली आहे! आता WhatsApp वर पाठवत आहोत.`);
       if (res.data?.whatsapp_url) {
         window.open(res.data.whatsapp_url, '_blank');
@@ -195,7 +196,7 @@ const Dashboard = () => {
   useEffect(() => {
     const fetchSummary = async () => {
       try {
-        const res = await axios.get('http://localhost:8000/dashboard/summary/');
+        const res = await axios.get('http://localhost:8000/dashboard/summary/', { headers: getAuthHeaders() });
         setSummary(res.data);
       } catch (err) {
         console.error("Dashboard fetch error:", err);
