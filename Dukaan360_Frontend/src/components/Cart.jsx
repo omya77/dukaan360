@@ -4,10 +4,41 @@ import { useLanguage } from '../contexts/LanguageContext';
 
 const Cart = ({ cartItems, isMobileOpen, toggleMobileCart, updateQuantity, setExactQuantity, onCheckout, customers = [], selectedCustomerId, setSelectedCustomerId, openCustomerModal }) => {
   const { t, tProduct, tUnit } = useLanguage();
-  const getStep = (size) => {
+  const isWeightItem = (size, name = '') => {
     const s = String(size || '').toLowerCase();
-    const isWeight = s.includes('kg') || s.includes('gm') || s.includes('g') || s.includes('litre') || s.includes('l') || s.includes('ml');
-    return isWeight ? 0.25 : 1;
+    const n = String(name || '').toLowerCase();
+    return (
+      s.includes('kg') || s.includes('gm') || s.includes('gram') || s.includes('g') || 
+      s.includes('litre') || s.includes('ltr') || s.includes('l') || s.includes('ml') ||
+      s.includes('किलो') || s.includes('ग्रॅ') || s.includes('लिटर') || s.includes('मिली') ||
+      n.includes('किलो') || n.includes('kg') || n.includes('ग्रॅ') || n.includes('gm') || 
+      n.includes('लिटर') || n.includes('ltr') || n.includes('साखर') || n.includes('डाल') || 
+      n.includes('डाळ') || n.includes('तेल') || n.includes('तूप') || n.includes('मीठ') || 
+      n.includes('तांदूळ') || n.includes('गहू') || n.includes('रवा') || n.includes('पोहा') ||
+      n.includes('पोहे') || n.includes('बेसन') || n.includes('शेंगदाणे') || n.includes('गूळ') ||
+      n.includes('sugar') || n.includes('dal') || n.includes('oil') || n.includes('ghee') ||
+      n.includes('salt') || n.includes('rice') || n.includes('wheat') || n.includes('atta') ||
+      n.includes('flour')
+    );
+  };
+
+  const getStep = (size, name = '') => {
+    return isWeightItem(size, name) ? 0.25 : 1;
+  };
+
+  const getWeightLabel = (qty, size = '', name = '') => {
+    const q = parseFloat(qty);
+    if (!isWeightItem(size, name) || isNaN(q)) return null;
+    if (q === 0.25) return 'पावशेर (250g)';
+    if (q === 0.5) return 'अर्धा किलो (500g)';
+    if (q === 0.75) return 'पाऊण किलो (750g)';
+    if (q === 1) return '१ किलो';
+    if (q === 1.25) return 'सव्वा किलो (1.25 kg)';
+    if (q === 1.5) return 'दीड किलो (1.5 kg)';
+    if (q === 1.75) return 'पावणे दोन किलो (1.75 kg)';
+    if (q === 2) return '२ किलो';
+    if (q > 0 && q < 1) return `${Math.round(q * 1000)}g`;
+    return null;
   };
 
   const [selectedMethod, setSelectedMethod] = useState('Cash');
@@ -80,37 +111,112 @@ const Cart = ({ cartItems, isMobileOpen, toggleMobileCart, updateQuantity, setEx
               <p className="text-xs text-slate-400 mt-0.5">{t('add_products_to_start') || 'बिलिंग सुरू करण्यासाठी वस्तू निवडा'}</p>
             </div>
           ) : (
-            cartItems.map((item) => (
-              <div key={item.id} className="p-2.5 rounded-2xl bg-white/80 hover:bg-white border border-slate-200/70 hover:border-slate-300 flex items-center gap-2.5 transition shadow-2xs">
-                <div className="w-12 h-12 rounded-xl bg-slate-100 border border-slate-200/80 overflow-hidden shrink-0 shadow-xs">
-                  <img 
-                    src={item.image || '/images/atta.jpg'} 
-                    alt={tProduct(item.name)} 
-                    onError={(e) => { e.currentTarget.onerror = null; e.currentTarget.src = '/images/atta.jpg'; }}
-                    className="w-full h-full object-cover" 
-                  />
-                </div>
-                <div className="flex-1 min-w-0">
-                  <div className="flex justify-between items-start gap-1">
-                    <h4 className="text-xs font-bold text-slate-900 truncate">{tProduct(item.name)}</h4>
-                    <span className="text-xs font-black text-slate-900 shrink-0">₹{(item.price * item.quantity).toFixed(0)}</span>
-                  </div>
-                  <div className="flex justify-between items-center mt-1">
-                    <p className="text-[10px] text-slate-400 font-medium">{tUnit(item.size)} • ₹{item.price}</p>
-                    <div className="flex items-center gap-2">
-                      <button onClick={() => updateQuantity(item.id, 'remove')} className="text-slate-400 hover:text-red-500 transition cursor-pointer">
-                        <X weight="bold" className="text-xs" />
-                      </button>
-                      <div className="flex items-center gap-1 bg-white border border-slate-200 rounded-lg px-2 py-0.5 shadow-2xs">
-                        <button onClick={() => updateQuantity(item.id, -getStep(item.size))} className="text-slate-600 hover:text-brand font-black text-xs px-1 cursor-pointer">−</button>
-                        <span className="text-xs font-black text-slate-800 w-4 text-center">{item.quantity}</span>
-                        <button onClick={() => updateQuantity(item.id, getStep(item.size))} className="text-slate-600 hover:text-brand font-black text-xs px-1 cursor-pointer">+</button>
+            cartItems.map((item) => {
+              const isWeight = isWeightItem(item.size, item.name);
+              const weightBadge = getWeightLabel(item.quantity, item.size, item.name);
+              const itemTotal = (item.price * (parseFloat(item.quantity) || 0));
+
+              return (
+                <div key={item.id} className="p-2.5 rounded-2xl bg-white/80 hover:bg-white border border-slate-200/70 hover:border-slate-300 flex flex-col gap-1.5 transition shadow-2xs">
+                  <div className="flex items-center gap-2.5">
+                    <div className="w-12 h-12 rounded-xl bg-slate-100 border border-slate-200/80 overflow-hidden shrink-0 shadow-xs">
+                      <img 
+                        src={item.image || '/images/atta.jpg'} 
+                        alt={tProduct(item.name)} 
+                        onError={(e) => { e.currentTarget.onerror = null; e.currentTarget.src = '/images/atta.jpg'; }}
+                        className="w-full h-full object-cover" 
+                      />
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <div className="flex justify-between items-start gap-1">
+                        <h4 className="text-xs font-bold text-slate-900 truncate">{tProduct(item.name)}</h4>
+                        <span className="text-xs font-black text-slate-900 shrink-0">
+                          ₹{itemTotal.toFixed(2).replace(/\.00$/, '')}
+                        </span>
+                      </div>
+                      
+                      <div className="flex justify-between items-center mt-1">
+                        <div className="flex items-center gap-1.5 min-w-0 flex-wrap">
+                          <p className="text-[10px] text-slate-400 font-medium shrink-0">
+                            {tUnit(item.size)} • ₹{item.price}
+                          </p>
+                          {weightBadge && (
+                            <span className="text-[9px] font-black text-orange-600 bg-orange-50 px-1.5 py-0.2 rounded-md border border-orange-200/60 leading-tight">
+                              {weightBadge}
+                            </span>
+                          )}
+                        </div>
+
+                        <div className="flex items-center gap-1.5 shrink-0">
+                          <button 
+                            type="button"
+                            onClick={() => updateQuantity(item.id, 'remove')} 
+                            className="text-slate-400 hover:text-red-500 transition cursor-pointer p-0.5"
+                            title="काढून टाका"
+                          >
+                            <X weight="bold" className="text-xs" />
+                          </button>
+                          <div className="flex items-center bg-white border border-slate-200 rounded-lg p-0.5 shadow-2xs">
+                            <button 
+                              type="button"
+                              onClick={() => updateQuantity(item.id, -getStep(item.size, item.name))} 
+                              className="w-5 h-5 flex items-center justify-center text-slate-600 hover:text-white hover:bg-brand rounded font-black text-xs cursor-pointer transition select-none active:scale-90"
+                              title="कमी करा (अर्धा / पावशेर)"
+                            >
+                              −
+                            </button>
+                            <input 
+                              type="number" 
+                              step="any"
+                              min="0"
+                              value={item.quantity} 
+                              onChange={(e) => setExactQuantity(item.id, e.target.value)} 
+                              className="text-xs font-black w-10 text-center text-slate-900 bg-transparent outline-none focus:bg-orange-50/50 rounded"
+                            />
+                            <button 
+                              type="button"
+                              onClick={() => updateQuantity(item.id, getStep(item.size, item.name))} 
+                              className="w-5 h-5 flex items-center justify-center text-slate-600 hover:text-white hover:bg-brand rounded font-black text-xs cursor-pointer transition select-none active:scale-90"
+                              title="वाढवा"
+                            >
+                              +
+                            </button>
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>
+
+                  {/* Quick Kirana Fraction Chips for Weight Items */}
+                  {isWeight && (
+                    <div className="flex items-center gap-1 pt-1.5 border-t border-slate-100/90">
+                      {[
+                        { label: 'पावशेर', qty: 0.25 },
+                        { label: 'अर्धा किलो', qty: 0.5 },
+                        { label: 'पाऊण किलो', qty: 0.75 },
+                        { label: '१ किलो', qty: 1 }
+                      ].map(preset => {
+                        const isSelected = parseFloat(item.quantity) === preset.qty;
+                        return (
+                          <button
+                            key={preset.label}
+                            type="button"
+                            onClick={() => setExactQuantity(item.id, preset.qty)}
+                            className={`flex-1 py-0.5 px-1 rounded-md text-[9px] font-bold transition text-center cursor-pointer select-none ${
+                              isSelected 
+                                ? 'bg-[#FF5722] text-white font-black shadow-xs' 
+                                : 'bg-slate-100/80 hover:bg-orange-50 text-slate-600 hover:text-[#FF5722]'
+                            }`}
+                          >
+                            {preset.label}
+                          </button>
+                        );
+                      })}
+                    </div>
+                  )}
                 </div>
-              </div>
-            ))
+              );
+            })
           )}
         </div>
 

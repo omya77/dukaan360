@@ -21,7 +21,7 @@ const ProductCard = ({ product, onAddToCart, cartQuantity = 0 }) => {
       
       {/* Top-Right Quantity Badge when in cart */}
       {inCart && !isOutOfStock && (
-        <div className="absolute -top-1.5 -right-1.5 w-5 h-5 bg-[#FF5722] text-white rounded-full flex items-center justify-center text-xs font-black shadow-md shadow-orange-500/30 z-10 select-none">
+        <div className="absolute -top-1.5 -right-1.5 min-w-5 h-5 px-1.5 bg-[#FF5722] text-white rounded-full flex items-center justify-center text-[10px] font-black shadow-md shadow-orange-500/30 z-10 select-none">
           {cartQuantity}
         </div>
       )}

@@ -199,7 +199,10 @@ function POS() {
     setCartItems(prev => {
       const existing = prev.find(item => item.id === product.id);
       if (existing) {
-        return prev.map(item => item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item);
+        const currentQ = parseFloat(existing.quantity) || 0;
+        const step = (currentQ < 1 && (String(existing.size || '').toLowerCase().includes('kg') || String(existing.size || '').toLowerCase().includes('किलो') || String(existing.name || '').includes('साखर') || String(existing.name || '').includes('डाळ'))) ? 0.25 : 1;
+        const newQ = Math.round((currentQ + step) * 1000) / 1000;
+        return prev.map(item => item.id === product.id ? { ...item, quantity: newQ } : item);
       }
       return [...prev, { ...product, quantity: 1 }];
     });
@@ -209,7 +212,9 @@ function POS() {
     setCartItems(prev => prev.map(item => {
       if (item.id === id) {
         if (delta === 'remove') return null;
-        const newQ = (parseFloat(item.quantity) || 0) + delta;
+        const currentQ = parseFloat(item.quantity) || 0;
+        const newQ = Math.round((currentQ + delta) * 1000) / 1000;
+        if (newQ <= 0) return null;
         return { ...item, quantity: newQ };
       }
       return item;
@@ -223,13 +228,17 @@ function POS() {
     }
     
     // Allow ending with a dot (e.g. "0.", "-0.")
-    if (value.endsWith('.') || value === "-") {
+    if (String(value).endsWith('.') || value === "-") {
       setCartItems(prev => prev.map(item => item.id === id ? { ...item, quantity: value } : item));
       return;
     }
 
     const val = parseFloat(value);
     if (isNaN(val)) return;
+    if (val <= 0) {
+      setCartItems(prev => prev.filter(item => item.id !== id));
+      return;
+    }
     setCartItems(prev => prev.map(item => item.id === id ? { ...item, quantity: val } : item));
   };
 
