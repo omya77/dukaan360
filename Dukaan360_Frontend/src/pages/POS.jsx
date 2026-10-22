@@ -12,8 +12,15 @@ import { useLanguage } from '../contexts/LanguageContext';
 const fallbackImages = {
   "Grocery": "/images/atta.jpg",
   "Dairy": "/images/milk.jpg",
-  "Snacks": "/images/sugar.jpg",
-  "Cleaning": "/images/tea.jpg"
+  "Snacks": "/images/biscuit.jpg",
+  "Cleaning": "/images/soap.jpg",
+  "किराणा व धान्य": "/images/atta.jpg",
+  "तेल व तूप": "/images/oil.jpg",
+  "मसाले व मीठ": "/images/haldi.jpg",
+  "चहा, साखर व पेये": "/images/tea.jpg",
+  "नाश्ता व बिस्कीट": "/images/biscuit.jpg",
+  "साबण व स्वच्छता": "/images/soap.jpg",
+  "दुग्धजन्य पदार्थ": "/images/milk.jpg"
 };
 
 function POS() {
@@ -66,7 +73,7 @@ function POS() {
           size: p.unit,
           stock: totalStock,
           batch_id: availableBatch ? availableBatch.id : p.id, // Better batch resolution
-          image: p.image_url ? p.image_url : (fallbackImages[p.category?.name] || "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1d/Wheat_flour.jpg/320px-Wheat_flour.jpg"),
+          image: p.image_url ? p.image_url : (fallbackImages[p.category?.name] || "/images/atta.jpg"),
           category_id: p.category_id
         };
       });

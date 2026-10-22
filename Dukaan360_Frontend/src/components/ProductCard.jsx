@@ -23,8 +23,12 @@ const ProductCard = ({ product, onAddToCart, cartQuantity = 0 }) => {
         inCart ? 'bg-brandLight' : 'bg-slate-50 group-hover:bg-brandLight'
       }`}>
         <img 
-          src={product.image || 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/1d/Wheat_flour.jpg/320px-Wheat_flour.jpg'} 
+          src={product.image || '/images/atta.jpg'} 
           alt={tProduct(product.name)}
+          onError={(e) => {
+            e.currentTarget.onerror = null;
+            e.currentTarget.src = '/images/atta.jpg';
+          }}
           className={`object-cover w-full h-full rounded-lg transition-transform ${
             isOutOfStock ? 'grayscale' : 'group-hover:scale-105'
           }`}

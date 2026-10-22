@@ -478,11 +478,15 @@ const Inventory = () => {
                     {/* 1. Product Thumbnail & Name */}
                     <div className="lg:col-span-4 flex items-center gap-3 w-full lg:w-auto">
                       <div className="w-11 h-11 rounded-xl bg-slate-100 border border-slate-200/80 overflow-hidden flex items-center justify-center shrink-0 shadow-sm relative">
-                        {p.image_url ? (
-                          <img src={p.image_url} alt={p.name} className="w-full h-full object-cover" />
-                        ) : (
-                          <span className="text-xl">📦</span>
-                        )}
+                        <img 
+                          src={p.image_url || '/images/atta.jpg'} 
+                          alt={p.name} 
+                          onError={(e) => {
+                            e.currentTarget.onerror = null;
+                            e.currentTarget.src = '/images/atta.jpg';
+                          }}
+                          className="w-full h-full object-cover" 
+                        />
                         {isOutOfStock && (
                           <div className="absolute inset-0 bg-red-600/60 flex items-center justify-center text-white text-[8px] font-black">
                             {t('out_of_stock_badge')}
