@@ -647,133 +647,265 @@ const Dashboard = () => {
 
         {/* Smart Purchase Order Modal */}
         {showPOModal && (
-          <div className="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-start justify-center p-4 pt-20 sm:pt-24 overflow-y-auto">
-            <div className="bg-white rounded-3xl w-full max-w-lg shadow-2xl border border-slate-100 flex flex-col overflow-hidden max-h-[calc(100vh-120px)]">
+          <div className="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-start justify-center p-4 pt-24 sm:pt-28 overflow-y-auto">
+            <div className="bg-white rounded-[28px] sm:rounded-[32px] w-full max-w-lg shadow-2xl border border-slate-200/80 flex flex-col overflow-hidden max-h-[calc(100vh-130px)] animate-scale-up">
               
-              <div className="p-4 border-b border-slate-100 flex justify-between items-center bg-indigo-50/50">
-                <div className="flex items-center gap-2.5">
-                  <div className="w-9 h-9 rounded-xl bg-indigo-600 text-white flex items-center justify-center">
+              {/* Header */}
+              <div className="p-4 sm:p-5 border-b border-slate-100 flex justify-between items-center bg-white relative">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-2xl bg-gradient-to-br from-indigo-500 to-purple-600 text-white flex items-center justify-center shadow-md shadow-indigo-500/25 shrink-0">
                     <Package weight="fill" className="text-xl" />
                   </div>
                   <div>
-                    <h3 className="font-black text-slate-800 text-base">Smart Purchase Order (सप्लायर ऑर्डर)</h3>
-                    <p className="text-[11px] text-slate-500 font-medium">१-क्लिकमध्ये WhatsApp वर तयार ऑर्डर पाठवा</p>
+                    <h3 className="font-black text-slate-900 text-base sm:text-lg leading-tight">
+                      Smart Purchase Order (सप्लायर ऑर्डर)
+                    </h3>
+                    <div className="flex items-center gap-1 mt-0.5 text-[11px] text-slate-500 font-bold">
+                      <span>1-क्लिकमध्ये WhatsApp वर</span>
+                      <span className="bg-[#FF7A00] text-white text-[10px] font-black px-1.5 py-0.2 rounded-sm shadow-2xs">
+                        तयार
+                      </span>
+                      <span>ऑर्डर पाठवा</span>
+                    </div>
                   </div>
                 </div>
-                <button onClick={() => setShowPOModal(false)} className="w-8 h-8 flex items-center justify-center rounded-full text-slate-400 hover:text-red-500 hover:bg-slate-200 transition cursor-pointer">
-                  <X weight="bold" className="text-lg" />
-                </button>
+
+                <div className="flex items-center gap-2">
+                  {/* 3D Parcel Box graphic */}
+                  <div className="relative w-11 h-10 flex items-center justify-center select-none pointer-events-none">
+                    <svg className="w-11 h-10" viewBox="0 0 48 40" fill="none">
+                      <path d="M24 4L38 11V26L24 33L10 26V11L24 4Z" fill="#6366F1" />
+                      <path d="M24 4L38 11L24 18L10 11L24 4Z" fill="#818CF8" />
+                      <path d="M24 18V33L38 26V11L24 18Z" fill="#4F46E5" />
+                      <path d="M12 18L22 23V34L12 29V18Z" fill="#F97316" />
+                      <path d="M12 18L22 23L30 19L20 14L12 18Z" fill="#FB923C" />
+                      <path d="M22 23V34L30 30V19L22 23Z" fill="#EA580C" />
+                      <path d="M20 22L22 23L22 34L20 33Z" fill="#FED7AA" opacity="0.6" />
+                    </svg>
+                  </div>
+
+                  {/* Close button */}
+                  <button 
+                    onClick={() => setShowPOModal(false)} 
+                    className="w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-500 flex items-center justify-center transition cursor-pointer"
+                  >
+                    <X weight="bold" className="text-base" />
+                  </button>
+                </div>
               </div>
 
+              {/* Form Body */}
               <div className="p-5 overflow-y-auto space-y-4">
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                {/* Supplier Name and WhatsApp Number Row */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
                   <div>
-                    <label className="block text-[11px] font-bold text-slate-500 uppercase mb-1">सप्लायर / होलसेलर नाव</label>
+                    <label className="block text-[10px] font-black text-slate-500 uppercase tracking-wider mb-1.5">
+                      सप्लायर / होलसेलर नाव
+                    </label>
                     <input 
                       type="text" 
                       value={poSupplierName} 
                       onChange={e => setPoSupplierName(e.target.value)}
-                      placeholder="सप्लायर / व्यापाऱ्याचे नाव"
-                      className="w-full h-10 px-3 bg-slate-50 border border-slate-200 rounded-xl text-xs font-bold text-slate-800 focus:outline-none focus:border-indigo-500"
+                      placeholder="उदा. साई सुपर मार्केट / व्यापाऱ्याचे नाव"
+                      className="w-full h-11 px-3.5 bg-slate-50/80 border border-slate-200/90 rounded-2xl text-xs font-bold text-slate-800 placeholder-slate-400 focus:outline-none focus:border-indigo-500 focus:bg-white transition"
                     />
                   </div>
+
                   <div>
-                    <label className="block text-[11px] font-bold text-slate-500 uppercase mb-1">WhatsApp नंबर (पर्यायी)</label>
-                    <input 
-                      type="tel" 
-                      value={poSupplierMobile} 
-                      onChange={e => setPoSupplierMobile(e.target.value)}
-                      placeholder="१०-अंकी मोबाईल नंबर"
-                      className="w-full h-10 px-3 bg-slate-50 border border-slate-200 rounded-xl text-xs font-bold text-slate-800 focus:outline-none focus:border-indigo-500"
-                    />
+                    <label className="block text-[10px] font-black text-slate-500 uppercase tracking-wider mb-1.5">
+                      WHATSAPP नंबर (पर्यायी)
+                    </label>
+                    <div className="relative flex items-center">
+                      <div className="absolute left-3.5 flex items-center gap-1.5 pointer-events-none select-none text-xs font-bold text-slate-600">
+                        <span>🇮🇳</span>
+                        <span className="text-slate-700">+91</span>
+                      </div>
+                      <input 
+                        type="tel" 
+                        value={poSupplierMobile} 
+                        onChange={e => setPoSupplierMobile(e.target.value)}
+                        placeholder="10-अंकी मोबाईल नंबर"
+                        className="w-full h-11 pl-16 pr-10 bg-slate-50/80 border border-slate-200/90 rounded-2xl text-xs font-bold text-slate-800 placeholder-slate-400 focus:outline-none focus:border-indigo-500 focus:bg-white transition"
+                      />
+                      <div className="absolute right-3.5 text-slate-400 pointer-events-none">
+                        <svg className="w-4 h-4 text-slate-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                          <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z" />
+                        </svg>
+                      </div>
+                    </div>
                   </div>
                 </div>
 
+                {/* Order Items List */}
                 <div>
                   <div className="flex items-center justify-between mb-2">
-                    <label className="text-[11px] font-bold text-slate-500 uppercase">ऑर्डर मधील वस्तू ({poItems.length})</label>
-                    <span className="text-[11px] text-indigo-600 font-bold">
-                      अंदाजे किंमत: ₹{poItems.reduce((acc, it) => acc + (it.quantity * (it.est_rate || 0)), 0).toLocaleString()}
+                    <span className="text-[11px] font-black text-slate-700">
+                      ऑर्डर मधील वस्तू ({poItems.length})
+                    </span>
+                    <span className="bg-[#1E293B] text-white text-[10px] font-bold px-3 py-1 rounded-full shadow-2xs">
+                      अंदाजे किंमत: ₹{poItems.reduce((acc, it) => acc + (it.quantity * (it.est_rate || 0)), 0)}
                     </span>
                   </div>
 
-                  <div className="border border-slate-200 rounded-2xl overflow-hidden divide-y divide-slate-100 max-h-48 overflow-y-auto">
-                    {poItems.map((it, idx) => (
-                      <div key={idx} className="p-2.5 flex items-center justify-between text-xs hover:bg-slate-50">
-                        <div>
-                          <p className="font-bold text-slate-800">{it.product_name}</p>
-                          <p className="text-[10px] text-slate-500">{it.quantity} {it.unit} {it.est_rate ? `• अंदाजे ₹${it.est_rate}/${it.unit}` : ''}</p>
-                        </div>
-                        <button onClick={() => removePoItem(idx)} className="text-red-500 hover:text-red-700 p-1 cursor-pointer">
-                          <X weight="bold" />
-                        </button>
+                  {poItems.length === 0 ? (
+                    /* Dashed Empty State Card with Clipboard and Notepad Illustrations */
+                    <div className="border border-dashed border-slate-300 bg-slate-50/70 rounded-2xl p-4 flex items-center justify-between gap-3">
+                      {/* Left: 3D Clipboard illustration */}
+                      <div className="w-12 h-12 shrink-0 select-none flex items-center justify-center">
+                        <svg className="w-11 h-11" viewBox="0 0 44 44" fill="none">
+                          <rect x="8" y="10" width="28" height="30" rx="4" fill="#E2E8F0" stroke="#94A3B8" strokeWidth="1.5" />
+                          <rect x="14" y="6" width="16" height="6" rx="2" fill="#64748B" />
+                          <rect x="12" y="14" width="20" height="22" rx="2" fill="#FFFFFF" />
+                          <line x1="16" y1="19" x2="28" y2="19" stroke="#CBD5E1" strokeWidth="2" strokeLinecap="round" />
+                          <line x1="16" y1="24" x2="28" y2="24" stroke="#CBD5E1" strokeWidth="2" strokeLinecap="round" />
+                          <line x1="16" y1="29" x2="24" y2="29" stroke="#CBD5E1" strokeWidth="2" strokeLinecap="round" />
+                          <circle cx="28" cy="28" r="6" fill="#F97316" />
+                          <path d="M25.5 28L27 29.5L30.5 26" stroke="#FFFFFF" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                        </svg>
                       </div>
-                    ))}
-                    {poItems.length === 0 && (
-                      <p className="p-4 text-center text-xs text-slate-400 font-bold">अद्याप कोणतीही वस्तू जोडलेली नाही</p>
-                    )}
-                  </div>
+
+                      <p className="text-xs font-bold text-slate-500 text-center flex-1">
+                        अद्याप कोणतीही वस्तू जोडलेली नाही
+                      </p>
+
+                      {/* Right: 3D Notepad illustration */}
+                      <div className="w-12 h-12 shrink-0 select-none flex items-center justify-center">
+                        <svg className="w-11 h-11" viewBox="0 0 44 44" fill="none">
+                          <rect x="10" y="8" width="24" height="28" rx="3" fill="#FFF7ED" stroke="#FDBA74" strokeWidth="1.5" />
+                          <circle cx="14" cy="8" r="1.5" fill="#F97316" />
+                          <circle cx="20" cy="8" r="1.5" fill="#F97316" />
+                          <circle cx="26" cy="8" r="1.5" fill="#F97316" />
+                          <circle cx="30" cy="8" r="1.5" fill="#F97316" />
+                          <line x1="15" y1="16" x2="28" y2="16" stroke="#FDBA74" strokeWidth="1.5" strokeLinecap="round" />
+                          <line x1="15" y1="21" x2="28" y2="21" stroke="#FDBA74" strokeWidth="1.5" strokeLinecap="round" />
+                          <line x1="15" y1="26" x2="24" y2="26" stroke="#FDBA74" strokeWidth="1.5" strokeLinecap="round" />
+                          <line x1="15" y1="31" x2="20" y2="31" stroke="#FDBA74" strokeWidth="1.5" strokeLinecap="round" />
+                        </svg>
+                      </div>
+                    </div>
+                  ) : (
+                    <div className="border border-slate-200 rounded-2xl overflow-hidden divide-y divide-slate-100 max-h-48 overflow-y-auto bg-white">
+                      {poItems.map((it, idx) => (
+                        <div key={idx} className="p-3 flex items-center justify-between text-xs hover:bg-slate-50">
+                          <div>
+                            <p className="font-black text-slate-800">{it.product_name}</p>
+                            <p className="text-[10px] text-slate-500 font-bold mt-0.5">{it.quantity} {it.unit}</p>
+                          </div>
+                          <button onClick={() => removePoItem(idx)} className="w-6 h-6 rounded-full bg-red-50 text-red-500 hover:bg-red-100 flex items-center justify-center cursor-pointer">
+                            <X weight="bold" className="text-xs" />
+                          </button>
+                        </div>
+                      ))}
+                    </div>
+                  )}
                 </div>
 
-                <form onSubmit={handleAddPoItem} className="bg-indigo-50/40 border border-indigo-100 p-3 rounded-2xl space-y-2">
-                  <p className="text-[11px] font-bold text-indigo-900">नवीन वस्तू जोडा:</p>
-                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
-                    <input 
-                      type="text" 
-                      placeholder="वस्तूचे नाव"
-                      value={newPoItem.product_name}
-                      onChange={e => setNewPoItem(prev => ({...prev, product_name: e.target.value}))}
-                      className="col-span-2 h-9 px-2.5 bg-white border border-slate-200 rounded-xl text-xs font-bold text-slate-800 focus:outline-none focus:border-indigo-500"
-                    />
+                {/* Add New Item Form */}
+                <form onSubmit={handleAddPoItem} className="space-y-2.5">
+                  <label className="block text-xs font-black text-[#1E3A8A]">
+                    नवीन वस्तू जोडा:
+                  </label>
+
+                  <div className="flex items-center gap-2">
+                    <div className="relative flex-1">
+                      <input 
+                        type="text" 
+                        placeholder="वस्तूचे नाव"
+                        value={newPoItem.product_name}
+                        onChange={e => setNewPoItem(prev => ({...prev, product_name: e.target.value}))}
+                        className="w-full h-11 pl-3.5 pr-9 bg-white border border-slate-200 rounded-2xl text-xs font-bold text-slate-800 placeholder-slate-400 focus:outline-none focus:border-indigo-500"
+                      />
+                      <div className="absolute right-3 top-1/2 -translate-y-1/2 flex items-center gap-1 text-slate-400 pointer-events-none">
+                        <svg className="w-4 h-4 text-slate-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                          <circle cx="11" cy="11" r="8" />
+                          <line x1="21" y1="21" x2="16.65" y2="16.65" />
+                        </svg>
+                      </div>
+                    </div>
+
                     <input 
                       type="number" 
                       placeholder="नग / प्रमाण"
                       value={newPoItem.quantity}
                       onChange={e => setNewPoItem(prev => ({...prev, quantity: e.target.value}))}
-                      className="h-9 px-2.5 bg-white border border-slate-200 rounded-xl text-xs font-bold text-slate-800 focus:outline-none focus:border-indigo-500"
+                      className="w-28 h-11 px-3 bg-white border border-slate-200 rounded-2xl text-xs font-bold text-slate-800 placeholder-slate-400 focus:outline-none focus:border-indigo-500 text-center"
                     />
-                    <select 
-                      value={newPoItem.unit}
-                      onChange={e => setNewPoItem(prev => ({...prev, unit: e.target.value}))}
-                      className="h-9 px-2 bg-white border border-slate-200 rounded-xl text-xs font-bold text-slate-800 focus:outline-none focus:border-indigo-500"
-                    >
-                      <option value="Packets">Packets</option>
-                      <option value="Boxes">Boxes</option>
-                      <option value="Kg">Kg</option>
-                      <option value="Litres">Litres</option>
-                      <option value="Pcs">Pcs</option>
-                    </select>
+
+                    <div className="relative">
+                      <select 
+                        value={newPoItem.unit}
+                        onChange={e => setNewPoItem(prev => ({...prev, unit: e.target.value}))}
+                        className="h-11 pl-3 pr-8 bg-sky-50/70 border border-sky-200/90 rounded-2xl text-xs font-bold text-slate-700 appearance-none focus:outline-none focus:border-sky-400 cursor-pointer"
+                      >
+                        <option value="Packets">Packets</option>
+                        <option value="Boxes">Boxes</option>
+                        <option value="Kg">Kg</option>
+                        <option value="Litres">Litres</option>
+                        <option value="Pcs">Pcs</option>
+                      </select>
+                      <span className="absolute right-2.5 top-1/2 -translate-y-1/2 pointer-events-none text-slate-500 text-xs font-bold">
+                        ⌄
+                      </span>
+                    </div>
                   </div>
-                  <button type="submit" className="w-full py-2 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-xl text-xs transition shadow-xs cursor-pointer">
+
+                  <button 
+                    type="submit" 
+                    className="w-full h-10 rounded-2xl bg-gradient-to-r from-[#3B82F6] via-[#4F46E5] to-[#6366F1] hover:opacity-95 text-white font-bold text-xs flex items-center justify-center gap-1.5 shadow-md shadow-indigo-500/20 active:scale-98 transition cursor-pointer"
+                  >
                     + ऑर्डरमध्ये जोडा
                   </button>
                 </form>
 
+                {/* Notes Section with pencil on notepad graphic */}
                 <div>
-                  <label className="block text-[11px] font-bold text-slate-500 uppercase mb-1">टीप / सूचना (पर्यायी)</label>
-                  <input 
-                    type="text"
-                    value={poNotes}
-                    onChange={e => setPoNotes(e.target.value)}
-                    placeholder="उदा. उद्या सकाळी डिलिव्हरी द्या"
-                    className="w-full h-10 px-3 bg-slate-50 border border-slate-200 rounded-xl text-xs font-bold text-slate-800 focus:outline-none focus:border-indigo-500"
-                  />
+                  <label className="block text-[10px] font-black text-slate-500 uppercase tracking-wider mb-1.5">
+                    टीप / सूचना (पर्यायी)
+                  </label>
+                  <div className="relative flex items-center">
+                    <input 
+                      type="text"
+                      value={poNotes}
+                      onChange={e => setPoNotes(e.target.value)}
+                      placeholder="उदा. उद्या सकाळी डिलिव्हरी द्या"
+                      className="w-full h-11 pl-3.5 pr-12 bg-slate-50/80 border border-slate-200/90 rounded-2xl text-xs font-bold text-slate-800 placeholder-slate-400 focus:outline-none focus:border-indigo-500 focus:bg-white transition"
+                    />
+                    <div className="absolute right-3.5 select-none pointer-events-none">
+                      <svg className="w-5 h-5 text-amber-500" viewBox="0 0 24 24" fill="none">
+                        <rect x="4" y="3" width="14" height="18" rx="2" fill="#FEF3C7" stroke="#F59E0B" strokeWidth="1.5" />
+                        <line x1="7" y1="7" x2="15" y2="7" stroke="#D97706" strokeWidth="1.5" strokeLinecap="round" />
+                        <line x1="7" y1="11" x2="15" y2="11" stroke="#D97706" strokeWidth="1.5" strokeLinecap="round" />
+                        <line x1="7" y1="15" x2="12" y2="15" stroke="#D97706" strokeWidth="1.5" strokeLinecap="round" />
+                        <path d="M14 17L19 12L21 14L16 19L14 19L14 17Z" fill="#3B82F6" stroke="#1D4ED8" strokeWidth="1" />
+                      </svg>
+                    </div>
+                  </div>
                 </div>
               </div>
 
-              <div className="p-4 border-t border-slate-100 bg-slate-50 flex items-center justify-between">
+              {/* Footer */}
+              <div className="p-4 sm:p-5 border-t border-slate-100 bg-slate-50/70 flex items-center justify-between">
                 <button 
                   onClick={() => setShowPOModal(false)}
-                  className="px-4 py-2 border border-slate-200 text-slate-600 font-bold rounded-xl text-xs hover:bg-slate-100 transition cursor-pointer"
+                  className="px-5 py-2.5 bg-white border border-slate-200/90 text-slate-600 font-bold rounded-2xl text-xs hover:bg-slate-100 transition shadow-2xs cursor-pointer"
                 >
                   रद्द करा
                 </button>
+
+                {/* Center Green Checkmark Badge */}
+                <div className="w-8 h-8 rounded-full bg-[#10B981] text-white flex items-center justify-center font-black shadow-md shadow-emerald-500/30 select-none">
+                  <svg className="w-4 h-4 text-white" viewBox="0 0 20 20" fill="currentColor">
+                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                  </svg>
+                </div>
+
+                {/* WhatsApp Button */}
                 <button 
                   onClick={handleSendPO}
                   disabled={isSendingPO || poItems.length === 0}
-                  className="px-4 py-2 bg-[#25D366] hover:bg-[#128C7E] text-white font-bold rounded-xl text-xs transition flex items-center gap-1.5 shadow-sm disabled:opacity-50 cursor-pointer"
+                  className="px-5 py-2.5 bg-[#25D366] hover:bg-[#128C7E] text-white font-black rounded-2xl text-xs transition flex items-center gap-2 shadow-lg shadow-emerald-500/25 disabled:opacity-50 cursor-pointer"
                 >
-                  <WhatsappLogo weight="fill" className="text-base" />
+                  <WhatsappLogo weight="fill" className="text-lg" />
                   <span>{isSendingPO ? 'पाठवत आहे...' : 'WhatsApp वर पाठवा'}</span>
                 </button>
               </div>
