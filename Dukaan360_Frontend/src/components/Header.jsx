@@ -265,18 +265,10 @@ const Header = ({ onMenuClick, searchTerm, onSearch }) => {
             
             {/* Store Type & Live Indicator */}
             <div className="flex items-center gap-1.5 leading-none mt-1">
-              <span className="text-[9px] sm:text-[10px] font-extrabold text-slate-400 tracking-wider uppercase flex items-center gap-1">
+              <span className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded bg-emerald-50 text-emerald-700 border border-emerald-200/80 text-[9px] font-extrabold select-none">
                 <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
-                Kirana Store
+                <span>Online / सक्रिय</span>
               </span>
-              {user?.address && (
-                <>
-                  <span className="text-slate-300 text-[10px]">•</span>
-                  <span className="text-[10px] font-medium text-slate-400 truncate max-w-[100px] sm:max-w-[150px]">
-                    {user.address}
-                  </span>
-                </>
-              )}
             </div>
           </div>
         </Link>

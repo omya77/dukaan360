@@ -279,35 +279,51 @@ function POS() {
   };
 
   return (
-    <div className="h-screen flex flex-col overflow-hidden selection:bg-brand selection:text-white bg-premium-app">
+    <div className="h-screen flex flex-col overflow-hidden selection:bg-brand selection:text-white bg-[#FDFBF7] relative">
+      {/* Ambient Mesh Glow Blobs matching screenshot */}
+      <div className="absolute -top-24 -left-20 w-96 h-96 bg-gradient-to-tr from-amber-200/50 via-orange-200/40 to-transparent rounded-full blur-3xl pointer-events-none"></div>
+      <div className="absolute top-20 right-0 w-[450px] h-[450px] bg-gradient-to-bl from-teal-200/40 via-cyan-100/30 to-transparent rounded-full blur-3xl pointer-events-none"></div>
+      <div className="absolute bottom-10 left-1/3 w-[500px] h-[500px] bg-gradient-to-tr from-orange-100/40 via-amber-100/30 to-transparent rounded-full blur-3xl pointer-events-none"></div>
+
       <Header onMenuClick={() => alert('Mobile menu clicked')} />
 
-      <main className="flex-1 flex flex-col lg:flex-row overflow-hidden relative">
+      <main className="flex-1 flex flex-col lg:flex-row overflow-hidden relative z-10">
         <Sidebar activeCategory={activeCategory} setActiveCategory={setActiveCategory} dynamicCategories={categories} />
 
-        <section className="flex-1 p-3 lg:p-4 overflow-y-auto pb-20 lg:pb-4 relative bg-surface">
+        <section className="flex-1 p-3 lg:p-4 overflow-y-auto pb-20 lg:pb-4 relative">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 mb-3">
-            <div className="flex items-center justify-between">
-              <h2 className="text-sm lg:text-[15px] font-black text-slate-800 flex items-center gap-2">
-                {t('products')} <span className="text-[10px] lg:text-xs font-bold text-slate-600 bg-slate-200/80 px-2.5 py-0.5 rounded-full">{filteredProducts.length}</span>
+            <div className="flex items-center gap-2">
+              <h2 className="text-base font-black text-slate-800 tracking-tight">
+                {t('products') || 'दुकानातील वस्तू'}
               </h2>
-              <button className="sm:hidden text-slate-500"><Faders weight="bold" className="text-lg" /></button>
+              <span className="text-xs font-bold text-slate-600 bg-slate-200/70 px-2.5 py-0.5 rounded-full select-none">
+                {filteredProducts.length}
+              </span>
             </div>
 
-            {/* Dedicated In-Page Search Bar */}
-            <div className="relative w-full sm:w-72 lg:w-80">
-              <MagnifyingGlass className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-sm" />
+            {/* Dedicated In-Page Search Bar with Scanner Wave */}
+            <div className="relative w-full sm:w-80 lg:w-96">
+              <MagnifyingGlass className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-base" />
               <input 
                 type="text" 
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                placeholder={t('search_products')} 
-                className="glass-input w-full h-8 sm:h-9 rounded-xl text-xs font-bold pl-8 sm:pl-9 pr-7 outline-none border border-slate-200/80 focus:border-brand"
+                placeholder={t('search_products') || "वस्तू शोधा किंवा बारकोड स्कॅन करा..."} 
+                className="w-full h-9 rounded-2xl text-xs font-bold pl-10 pr-10 outline-none bg-white/80 backdrop-blur-sm border border-slate-200/80 shadow-xs focus:border-brand focus:bg-white transition text-slate-800"
               />
+              <div className="absolute right-3 top-1/2 -translate-y-1/2 flex items-center gap-1 pointer-events-none">
+                <svg className="w-5 h-5 text-orange-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M3 7V5a2 2 0 012-2h2M17 3h2a2 2 0 012 2v2M21 17v2a2 2 0 01-2 2h-2M7 21H5a2 2 0 01-2-2v-2" />
+                  <line x1="7" y1="8" x2="7" y2="16" />
+                  <line x1="10" y1="8" x2="10" y2="16" />
+                  <line x1="14" y1="8" x2="14" y2="16" />
+                  <line x1="17" y1="8" x2="17" y2="16" />
+                </svg>
+              </div>
               {searchTerm && (
                 <button 
                   onClick={() => setSearchTerm('')} 
-                  className="absolute right-2.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 p-0.5"
+                  className="absolute right-9 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 p-0.5 cursor-pointer"
                 >
                   <X weight="bold" className="text-xs" />
                 </button>
@@ -320,7 +336,7 @@ function POS() {
               <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-brand"></div>
             </div>
           ) : (
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-2.5 lg:gap-3.5">
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3">
               {filteredProducts.map(product => {
                 const cartItem = cartItems.find(i => i.id === product.id);
                 return (
