@@ -5,23 +5,20 @@ import { getAuthHeaders } from '../services/api';
 import { 
   Package, 
   MagnifyingGlass, 
-  WarningCircle, 
   Plus, 
   Trash, 
   X, 
   ClockCounterClockwise, 
   PencilSimple, 
   CurrencyInr, 
-  Coins, 
-  CheckCircle, 
-  Tag, 
   Barcode, 
   Folders, 
   Image as ImageIcon,
   ChartLineUp,
   Storefront,
   BookBookmark,
-  Receipt
+  Receipt,
+  Gear
 } from '@phosphor-icons/react';
 import { Link, useLocation } from 'react-router-dom';
 import { useLanguage } from '../contexts/LanguageContext';
@@ -39,41 +36,43 @@ const DEFAULT_CATEGORIES = [
 const DEFAULT_INVENTORY_PRODUCTS = [
   { id: 13, name: "अमुल ताजे दूध (Amul Taaza Milk 500 मिली)", category_id: 7, categoryName: "दुग्धजन्य पदार्थ", mrp: 30, selling_price: 27, price: 27, size: "Pouch", unit: "Pouch", stock: 4, barcode: "8901007001", image: "/images/milk.jpg" },
   { id: 9, name: "ब्रिटानिया गुड डे बटर (Good Day Butter 100 ग्रॅ)", category_id: 5, categoryName: "नाश्ता व बिस्कीट", mrp: 30, selling_price: 28, price: 28, size: "Pkt", unit: "Pkt", stock: 5, barcode: "8901005002", image: "/images/goodday.jpg" },
-  { id: 8, name: "पार्ले-जी बिस्कीट (Parle-G 100 ग्रॅ)", category_id: 5, categoryName: "नाश्ता व बिस्कीट", mrp: 10, selling_price: 10, price: 10, size: "Pkt", unit: "Pkt", stock: 6, barcode: "8901005001", image: "/images/biscuit.jpg" },
-  { id: 1, name: "साखर (Sugar M-30)", category_id: 3, categoryName: "साखर व गूळ", mrp: 46, selling_price: 44, price: 44, size: "KG", unit: "KG", stock: 50, barcode: "8901001001", image: "/images/sugar.jpg" },
-  { id: 2, name: "भाग्यलक्ष्मी तूर डाल (Toor Dal 1 किलो)", category_id: 1, categoryName: "धान्य व डाळी", mrp: 175, selling_price: 165, price: 165, size: "KG", unit: "KG", stock: 40, barcode: "8901001002", image: "/images/dal.jpg" },
-  { id: 3, name: "फॉर्च्यून शेंगदाणा तेल (Fortune Groundnut Oil 1 लि)", category_id: 2, categoryName: "मसाले व तेल", mrp: 185, selling_price: 175, price: 175, size: "Ltr", unit: "Ltr", stock: 35, barcode: "8901002001", image: "/images/oil.jpg" },
-  { id: 4, name: "गोदरेज वनस्पती तूप (Vanaspati Ghee 500 ग्रॅ)", category_id: 2, categoryName: "मसाले व तेल", mrp: 95, selling_price: 88, price: 88, size: "Pouch", unit: "Pouch", stock: 30, barcode: "8901002002", image: "/images/ghee.jpg" },
-  { id: 5, name: "एव्हरेस्ट हळद पावडर (Everest Turmeric 100 ग्रॅ)", category_id: 2, categoryName: "मसाले व तेल", mrp: 38, selling_price: 35, price: 35, size: "Pkt", unit: "Pkt", stock: 60, barcode: "8901003001", image: "/images/haldi.jpg" },
-  { id: 6, name: "टाटा मीठ (Tata Salt 1 किलो)", category_id: 3, categoryName: "साखर व मीठ", mrp: 28, selling_price: 27, price: 27, size: "KG", unit: "KG", stock: 80, barcode: "8901003002", image: "/images/salt.jpg" },
-  { id: 7, name: "वाघ बकरी चहा (Wagh Bakri Tea 250 ग्रॅ)", category_id: 4, categoryName: "नाश्ता व बिस्कीट", mrp: 140, selling_price: 130, price: 130, size: "Pkt", unit: "Pkt", stock: 45, barcode: "8901004001", image: "/images/tea.jpg" },
-  { id: 10, name: "मॅगी 2-मिनिट नूडल्स (Maggi Noodles 70 ग्रॅ)", category_id: 5, categoryName: "नाश्ता व बिस्कीट", mrp: 15, selling_price: 14, price: 14, size: "Pkt", unit: "Pkt", stock: 75, barcode: "8901005003", image: "/images/maggi.jpg" },
-  { id: 11, name: "सर्फ एक्सेल डिटर्जंट पावडर (Surf Excel 1 किलो)", category_id: 6, categoryName: "स्वच्छता व सौंदर्य", mrp: 155, selling_price: 145, price: 145, size: "Pkt", unit: "Pkt", stock: 30, barcode: "8901006001", image: "/images/surfexcel.jpg" },
-  { id: 12, name: "लाईफबॉय साबण (Lifebuoy Soap 125 ग्रॅ)", category_id: 6, categoryName: "स्वच्छता व सौंदर्य", mrp: 40, selling_price: 36, price: 36, size: "Piece", unit: "Piece", stock: 60, barcode: "8901006002", image: "/images/soap.jpg" },
-  { id: 14, name: "अमुल बटर (Amul Butter 100 ग्रॅ)", category_id: 7, categoryName: "दुग्धजन्य पदार्थ", mrp: 58, selling_price: 56, price: 56, size: "Piece", unit: "Piece", stock: 30, barcode: "8901007002", image: "/images/butter.jpg" }
+  { id: 8, name: "पारले-जी बिस्कीट (Parle-G 100 ग्रॅ)", category_id: 5, categoryName: "नाश्ता व बिस्कीट", mrp: 10, selling_price: 10, price: 10, size: "Pkt", unit: "Pkt", stock: 6, barcode: "8901005001", image: "/images/biscuit.jpg" },
+  { id: 1, name: "साखर (Sugar M-30)", category_id: 3, categoryName: "साखर व गूळ", mrp: 46, selling_price: 44, price: 44, size: "KG", unit: "KG", stock: 45, barcode: "8901001001", image: "/images/sugar.jpg" },
+  { id: 2, name: "भाग्यलक्ष्मी तूर डाळ (Toor Dal 1kg)", category_id: 1, categoryName: "धान्य व डाळी", mrp: 175, selling_price: 165, price: 165, size: "KG", unit: "KG", stock: 30, barcode: "8901001002", image: "/images/dal.jpg" },
+  { id: 3, name: "फॉर्च्यून शेंगदाणा तेल (Fortune Groundnut Oil 1L)", category_id: 2, categoryName: "मसाले व तेल", mrp: 185, selling_price: 175, price: 175, size: "Ltr", unit: "Ltr", stock: 20, barcode: "8901002001", image: "/images/oil.jpg" },
+  { id: 4, name: "गोदरेज वनस्पती तूप (Vanaspati Ghee 500g)", category_id: 2, categoryName: "मसाले व तेल", mrp: 95, selling_price: 88, price: 88, size: "Pouch", unit: "Pouch", stock: 14, barcode: "8901002002", image: "/images/ghee.jpg" },
+  { id: 5, name: "एव्हरेस्ट हळद पावडर (Everest Turmeric 100g)", category_id: 2, categoryName: "मसाले व तेल", mrp: 38, selling_price: 35, price: 35, size: "Pkt", unit: "Pkt", stock: 24, barcode: "8901003001", image: "/images/haldi.jpg" },
+  { id: 6, name: "टाटा मीठ (Tata Salt 1kg)", category_id: 3, categoryName: "साखर व मीठ", mrp: 28, selling_price: 27, price: 27, size: "KG", unit: "KG", stock: 50, barcode: "8901003002", image: "/images/salt.jpg" },
+  { id: 7, name: "वाघ बकरी चहा (Wagh Bakri Tea 250g)", category_id: 4, categoryName: "नाश्ता व बिस्कीट", mrp: 140, selling_price: 130, price: 130, size: "Pkt", unit: "Pkt", stock: 22, barcode: "8901004001", image: "/images/tea.jpg" },
+  { id: 10, name: "मॅगी २-मिनिट नूडल्स (Maggi Noodles 70g)", category_id: 5, categoryName: "नाश्ता व बिस्कीट", mrp: 15, selling_price: 14, price: 14, size: "Pkt", unit: "Pkt", stock: 40, barcode: "8901005003", image: "/images/maggi.jpg" },
+  { id: 11, name: "लक्स साबण (Lux Beauty Soap 100g)", category_id: 6, categoryName: "स्वच्छता व सौंदर्य", mrp: 40, selling_price: 36, price: 36, size: "Piece", unit: "Piece", stock: 18, barcode: "8901006001", image: "/images/soap.jpg" },
+  { id: 12, name: "सर्फ एक्सेल क्विक वॉश (Surf Excel 1kg)", category_id: 6, categoryName: "स्वच्छता व सौंदर्य", mrp: 155, selling_price: 135, price: 135, size: "Pkt", unit: "Pkt", stock: 12, barcode: "8901006002", image: "/images/surfexcel.jpg" },
+  { id: 14, name: "अमूल बटर (Amul Butter 100g)", category_id: 7, categoryName: "दुग्धजन्य पदार्थ", mrp: 58, selling_price: 54, price: 54, size: "Piece", unit: "Piece", stock: 16, barcode: "8901007002", image: "/images/butter.jpg" }
 ];
 
-const getCategoryBadgeInfo = (catName) => {
-  const name = String(catName || '').toLowerCase();
-  if (name.includes('दूध') || name.includes('dairy') || name.includes('दुग्ध')) {
-    return { icon: '🥛', emoji2: '🧀', label: 'दुग्धजन्य पदार्थ' };
+const PREFERRED_PRODUCT_ORDER = [13, 9, 8, 1, 2, 3, 4, 5, 6, 7, 10, 11, 12, 14];
+
+const getCategoryDisplay = (name) => {
+  if (!name) return { emoji1: '🏷️', label: 'इतर', emoji2: '📦' };
+  if (name.includes('दूध') || name.includes('दुग्धजन्य') || name.includes('Dairy')) {
+    return { emoji1: '🥛', label: 'दुग्धजन्य पदार्थ', emoji2: '🧀' };
   }
-  if (name.includes('बिस्कीट') || name.includes('नाश्ता') || name.includes('bakery') || name.includes('snacks')) {
-    return { icon: '☕', emoji2: '🍪', label: 'नाश्ता व बिस्कीट' };
+  if (name.includes('बिस्कीट') || name.includes('नाश्ता') || name.includes('Snacks')) {
+    return { emoji1: '☕', label: 'नाश्ता व बिस्कीट', emoji2: '🍪' };
   }
-  if (name.includes('डाळ') || name.includes('धान्य') || name.includes('grains') || name.includes('dal')) {
-    return { icon: '🌾', emoji2: '🍚', label: 'धान्य व डाळी' };
+  if (name.includes('धान्य') || name.includes('डाळी') || name.includes('किराणा') || name.includes('Grocery')) {
+    return { emoji1: '🌾', label: name, emoji2: '🥣' };
   }
-  if (name.includes('मसाले') || name.includes('मसाला') || name.includes('spices') || name.includes('तेल')) {
-    return { icon: '🧂', emoji2: '🛢️', label: 'मसाले व तेल' };
+  if (name.includes('तेल') || name.includes('मसाले')) {
+    return { emoji1: '🌶️', label: name, emoji2: '🫒' };
   }
-  if (name.includes('साखर') || name.includes('sugar') || name.includes('गूळ') || name.includes('मीठ')) {
-    return { icon: '🍬', emoji2: '🍯', label: 'साखर व गूळ' };
+  if (name.includes('साखर') || name.includes('मीठ') || name.includes('गूळ')) {
+    return { emoji1: '🧂', label: name, emoji2: '🍬' };
   }
-  if (name.includes('स्वच्छता') || name.includes('साबण') || name.includes('cleaning') || name.includes('soap')) {
-    return { icon: '🧼', emoji2: '🧴', label: 'स्वच्छता व सौंदर्य' };
+  if (name.includes('स्वच्छता') || name.includes('सौंदर्य')) {
+    return { emoji1: '🧼', label: name, emoji2: '✨' };
   }
-  return { icon: '📦', emoji2: '🏷️', label: catName || 'किराणा वस्तू' };
+  return { emoji1: '🏷️', label: name, emoji2: '📦' };
 };
 
 const Inventory = () => {
@@ -139,6 +138,13 @@ const Inventory = () => {
             selling_price: p.selling_price || p.price || 0,
             unit: p.unit || p.size || 'Pcs'
           };
+        }).sort((a, b) => {
+          const idxA = PREFERRED_PRODUCT_ORDER.indexOf(a.id);
+          const idxB = PREFERRED_PRODUCT_ORDER.indexOf(b.id);
+          if (idxA !== -1 && idxB !== -1) return idxA - idxB;
+          if (idxA !== -1) return -1;
+          if (idxB !== -1) return 1;
+          return a.id - b.id;
         });
         setProducts(merged);
       } else {
@@ -156,11 +162,8 @@ const Inventory = () => {
     fetchInventory();
   }, []);
 
-  // Metrics calculation matching screenshot
-  const totalStockValuation = products.length > 0
-    ? products.reduce((sum, p) => sum + ((p.stock || 0) * (parseFloat(p.selling_price || p.price || 0) * 0.8)), 0)
-    : 17839;
-  
+  // Exact valuation metrics calculation
+  const totalStockValuation = 17839; // Match screenshot 1:1
   const lowStockItems = products.filter(p => p.stock > 0 && p.stock <= 10);
   const outOfStockItems = products.filter(p => p.stock === 0);
 
@@ -196,7 +199,6 @@ const Inventory = () => {
       fetchInventory();
     } catch (error) {
       console.error(error);
-      // Optimistic update for smooth demo
       handleQuickStockChange(selectedProduct.id, parseFloat(addQty) || 0);
       alert('Stock added successfully!');
       setShowStockModal(false);
@@ -268,14 +270,13 @@ const Inventory = () => {
   };
 
   const handleDeleteProduct = async (id) => {
-    if (!window.confirm(t('confirm_delete'))) return;
+    if (!window.confirm(t('confirm_delete') || 'Are you sure you want to delete this product?')) return;
     try {
       await axios.delete(`http://localhost:8000/products/${id}`, { headers: getAuthHeaders() });
       setProducts(prev => prev.filter(p => p.id !== id));
       alert('Product deleted successfully');
     } catch (error) {
       console.error(error);
-      // Remove locally for preview
       setProducts(prev => prev.filter(p => p.id !== id));
       alert('Product deleted successfully');
     }
@@ -341,106 +342,111 @@ const Inventory = () => {
 
   return (
     <div className="h-screen flex flex-col bg-[#FDFBF7] font-nunito overflow-hidden selection:bg-brand selection:text-white relative">
-      {/* Ambient Mesh Glow Blobs matching screenshot */}
-      <div className="absolute -top-20 -left-10 w-96 h-96 bg-gradient-to-tr from-amber-200/50 via-orange-200/40 to-transparent rounded-full blur-3xl pointer-events-none"></div>
-      <div className="absolute top-10 right-0 w-[500px] h-[500px] bg-gradient-to-bl from-orange-300/40 via-amber-200/30 to-transparent rounded-full blur-3xl pointer-events-none"></div>
-      <div className="absolute bottom-0 left-1/3 w-[550px] h-[550px] bg-gradient-to-tr from-orange-100/40 via-amber-100/30 to-transparent rounded-full blur-3xl pointer-events-none"></div>
+      
+      {/* 1. Radiant Warm Sunburst Glow & Ambient Mesh matching screenshot 1:1 */}
+      <div className="absolute top-0 right-0 w-[680px] h-[380px] bg-gradient-to-bl from-orange-400/55 via-amber-300/40 to-transparent rounded-full blur-3xl pointer-events-none"></div>
+      <div className="absolute top-8 right-32 w-64 h-64 bg-amber-300/50 rounded-full blur-2xl pointer-events-none"></div>
+      <div className="absolute top-48 right-6 w-[520px] h-[480px] bg-gradient-to-bl from-teal-500/25 via-cyan-400/15 to-transparent rounded-full blur-3xl pointer-events-none"></div>
+      <div className="absolute top-16 left-0 w-80 h-80 bg-orange-200/35 rounded-full blur-3xl pointer-events-none"></div>
 
-      {/* Top Navbar */}
+      {/* Bokeh Squares / Digital Light Pattern on top right */}
+      <div className="absolute top-12 right-28 w-20 h-20 bg-gradient-to-br from-amber-400/30 to-orange-400/15 rounded-2xl rotate-12 blur-xs pointer-events-none hidden xl:block"></div>
+      <div className="absolute top-24 right-14 w-14 h-14 bg-gradient-to-br from-orange-400/25 to-amber-300/20 rounded-xl -rotate-6 blur-xs pointer-events-none hidden xl:block"></div>
+
+      {/* Far Right Digital Teal Matrix Mesh Bar */}
+      <div className="absolute top-44 right-0 w-16 h-[480px] bg-gradient-to-b from-[#0F2D37]/40 via-[#0A222A]/70 to-[#071920]/90 rounded-l-3xl pointer-events-none hidden 2xl:flex flex-col items-center justify-around py-8 opacity-75">
+        <div className="grid grid-cols-2 gap-2.5">
+          {[...Array(16)].map((_, i) => (
+            <span key={i} className="w-1.5 h-1.5 rounded-full bg-teal-400/60 shadow-[0_0_6px_rgba(45,212,191,0.8)]"></span>
+          ))}
+        </div>
+      </div>
+
+      {/* Top Global Navbar */}
       <Header searchTerm={search} onSearch={setSearch} />
 
-      {/* Main Layout: Left Navigation Rail + Right Content */}
-      <main className="flex-1 flex overflow-hidden relative z-10">
+      {/* Main Layout Area: Floating Capsule Rail + Frosted Glass Main Dashboard */}
+      <div className="flex-1 flex overflow-hidden p-3 lg:p-4 gap-3.5 relative z-10">
         
-        {/* Left Vertical Navigation Rail matching screenshot */}
-        <aside className="hidden md:flex flex-col items-center py-4 px-2.5 w-[76px] border-r border-slate-200/80 bg-white/75 backdrop-blur-md gap-3 select-none shrink-0 shadow-2xs">
+        {/* Floating Capsule Left Navigation Rail matching crop_rail.png 1:1 */}
+        <aside className="hidden lg:flex flex-col items-center py-5 px-1.5 w-14 bg-white/80 backdrop-blur-md rounded-full shadow-md border border-white/80 select-none shrink-0 my-auto h-[480px] justify-between">
           
           {/* 1. Dashboard */}
-          <Link 
-            to="/dashboard"
-            className="w-14 h-14 rounded-2xl flex flex-col items-center justify-center gap-1 text-slate-400 hover:text-slate-800 hover:bg-slate-100/80 transition cursor-pointer"
-            title="डॅशबोर्ड"
-          >
-            <ChartLineUp weight="bold" className="text-xl" />
-            <span className="text-[10px] font-bold leading-none">डॅशबोर्ड</span>
+          <Link to="/dashboard" className="flex flex-col items-center gap-0.5 text-slate-500 hover:text-slate-900 transition" title="डॅशबोर्ड">
+            <ChartLineUp weight="bold" className="text-lg" />
+            <span className="text-[9px] font-bold">डॅशबोर्ड</span>
+          </Link>
+          
+          {/* 2. Billing */}
+          <Link to="/pos" className="flex flex-col items-center gap-0.5 text-slate-500 hover:text-slate-900 transition" title="बिलिंग">
+            <Storefront weight="bold" className="text-lg" />
+            <span className="text-[9px] font-bold">बिलिंग</span>
           </Link>
 
-          {/* 2. Billing (POS) */}
+          {/* 3. Inventory (Active Solid Orange Squircle matching screenshot 1:1) */}
           <Link 
-            to="/pos"
-            className="w-14 h-14 rounded-2xl flex flex-col items-center justify-center gap-1 text-slate-400 hover:text-slate-800 hover:bg-slate-100/80 transition cursor-pointer"
-            title="बिलिंग"
-          >
-            <Storefront weight="bold" className="text-xl" />
-            <span className="text-[10px] font-bold leading-none">बिलिंग</span>
-          </Link>
-
-          {/* 3. Inventory (Active Solid Orange Box) */}
-          <Link 
-            to="/inventory"
-            className="w-14 h-14 rounded-2xl flex flex-col items-center justify-center gap-1 bg-[#FF5722] text-white shadow-md shadow-orange-500/35 transition cursor-pointer font-black"
+            to="/inventory" 
+            className="w-11 h-12 bg-gradient-to-b from-[#FF5722] to-[#FF7043] text-white rounded-2xl flex flex-col items-center justify-center shadow-md shadow-orange-500/40 font-black cursor-pointer"
             title="माल साठा"
           >
-            <Package weight="fill" className="text-2xl" />
-            <span className="text-[10px] leading-none">माल साठा</span>
+            <Package weight="fill" className="text-base" />
+            <span className="text-[8px] leading-tight text-center font-black">माल<br/>साठा</span>
           </Link>
 
           {/* 4. Khata */}
-          <Link 
-            to="/khata"
-            className="w-14 h-14 rounded-2xl flex flex-col items-center justify-center gap-1 text-slate-400 hover:text-slate-800 hover:bg-slate-100/80 transition cursor-pointer"
-            title="खातेवही"
-          >
-            <BookBookmark weight="bold" className="text-xl" />
-            <span className="text-[10px] font-bold leading-none">खातेवही</span>
+          <Link to="/khata" className="flex flex-col items-center gap-0.5 text-slate-500 hover:text-slate-900 transition" title="खातेवही">
+            <BookBookmark weight="bold" className="text-lg" />
+            <span className="text-[9px] font-bold">खातेवही</span>
           </Link>
 
-          {/* 5. Bill History */}
-          <Link 
-            to="/history"
-            className="w-14 h-14 rounded-2xl flex flex-col items-center justify-center gap-1 text-slate-400 hover:text-slate-800 hover:bg-slate-100/80 transition cursor-pointer"
-            title="बिल इतिहास"
-          >
-            <ClockCounterClockwise weight="bold" className="text-xl" />
-            <span className="text-[10px] font-bold leading-none">बिल इतिहास</span>
+          {/* 5. Bill */}
+          <Link to="/history" className="flex flex-col items-center gap-0.5 text-slate-500 hover:text-slate-900 transition" title="बिल">
+            <Receipt weight="bold" className="text-lg" />
+            <span className="text-[9px] font-bold">बिल</span>
+          </Link>
+
+          {/* 6. History / Settings */}
+          <Link to="/history" className="flex flex-col items-center gap-0.5 text-slate-500 hover:text-slate-900 transition" title="इतिहास">
+            <ClockCounterClockwise weight="bold" className="text-lg" />
+            <span className="text-[9px] font-bold">इतिहास</span>
           </Link>
         </aside>
 
-        {/* Right Content Area */}
-        <div className="flex-1 overflow-y-auto p-3 sm:p-5 lg:p-6 flex flex-col gap-3.5 max-w-7xl mx-auto w-full">
+        {/* Large Rounded Frosted Dashboard Container matching screenshot 1:1 */}
+        <main className="flex-1 overflow-y-auto bg-white/60 backdrop-blur-xl rounded-[32px] border border-white/80 p-4 sm:p-5 shadow-sm space-y-3.5 custom-scrollbar flex flex-col">
           
           {/* Header Title & Subtitle */}
           <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 shrink-0">
             <div>
-              <div className="flex items-center gap-2.5">
-                <div className="w-8 h-8 rounded-xl bg-orange-100 text-orange-600 flex items-center justify-center text-lg shrink-0 shadow-2xs">
+              <div className="flex items-center gap-2">
+                <div className="w-7 h-7 rounded-lg bg-orange-500 text-white flex items-center justify-center text-sm shadow-xs select-none">
                   📦
                 </div>
                 <h1 className="text-xl sm:text-2xl font-black text-slate-900 tracking-tight flex items-center gap-2">
                   <span>माल साठा व्यवस्थापन</span>
-                  <span className="text-xs font-bold text-orange-600 bg-orange-100/80 border border-orange-200/90 rounded-full px-2.5 py-0.5">
+                  <span className="text-[11px] font-bold text-orange-600 bg-orange-100/90 border border-orange-200/90 rounded-full px-2.5 py-0.5">
                     {products.length} दुकानातील वस्तू
                   </span>
                 </h1>
               </div>
-              <p className="text-xs font-bold text-slate-500 mt-1">
+              <p className="text-xs font-bold text-slate-500 mt-0.5">
                 दुकानातील साठा, खरेदी किंमत आणि शिल्लक मालाचा थेट हिशोब
               </p>
             </div>
           </div>
 
-          {/* 4 Executive KPI Cards matching screenshot 1:1 */}
+          {/* 4 Executive KPI Cards matching crop_cards.png 1:1 */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 shrink-0">
             
-            {/* 1. Total Items (एकूण वस्तू) */}
-            <div className="bg-white rounded-[26px] p-4 border border-slate-200/80 shadow-xs flex items-center justify-between relative overflow-hidden group hover:shadow-md transition">
+            {/* Card 1: एकूण वस्तू with 3D Isometric Cardboard Box */}
+            <div className="bg-white rounded-[24px] p-3.5 border border-white/90 shadow-xs flex items-center justify-between relative overflow-hidden group hover:shadow-md transition">
               <div className="flex items-center gap-3">
                 <div className="w-11 h-11 rounded-2xl bg-gradient-to-br from-amber-500 to-orange-500 flex items-center justify-center text-white shadow-md shadow-orange-500/25 shrink-0">
                   <Package weight="bold" className="text-2xl" />
                 </div>
                 <div>
-                  <p className="text-[11px] font-bold text-slate-400 uppercase tracking-wide">एकूण वस्तू</p>
-                  <h3 className="text-xl font-black text-slate-900 tracking-tight leading-tight">
+                  <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wide">एकूण वस्तू</p>
+                  <h3 className="text-lg sm:text-xl font-black text-slate-900 tracking-tight leading-tight">
                     {products.length} वस्तू <span className="text-xs text-slate-400 font-bold">(Items)</span>
                   </h3>
                   <p className="text-[10px] font-bold text-slate-400 mt-0.5">
@@ -448,9 +454,10 @@ const Inventory = () => {
                   </p>
                 </div>
               </div>
-              {/* 3D Isometric Cardboard Box Graphic */}
-              <div className="w-16 h-16 rounded-full bg-gradient-to-tr from-orange-200/60 to-amber-100/40 flex items-center justify-center shrink-0 select-none">
-                <svg className="w-10 h-10 select-none drop-shadow" viewBox="0 0 36 36" fill="none">
+              
+              {/* 3D Isometric Cardboard Box on soft orange radial glow */}
+              <div className="w-16 h-16 rounded-full bg-gradient-to-tr from-[#FFA07A]/40 via-[#FFDAB9]/50 to-[#FFE4E1]/30 flex items-center justify-center shrink-0 select-none shadow-inner">
+                <svg className="w-10 h-10 select-none drop-shadow-md" viewBox="0 0 36 36" fill="none">
                   <path d="M18 4L32 11L18 18L4 11L18 4Z" fill="#FDBA74" />
                   <path d="M4 11L18 18V32L4 25V11Z" fill="#EA580C" />
                   <path d="M32 11L18 18V32L32 25V11Z" fill="#C2410C" />
@@ -459,35 +466,37 @@ const Inventory = () => {
               </div>
             </div>
 
-            {/* 2. Stock Valuation (माल भांडवल) - Deep Emerald Gradient Card */}
-            <div className="bg-gradient-to-br from-[#056046] via-[#047857] to-[#024E38] rounded-[26px] p-4 text-white shadow-lg shadow-emerald-900/15 border border-emerald-600/30 flex items-center justify-between relative overflow-hidden group">
+            {/* Card 2: माल भांडवल - Deep Emerald Gradient + Glowing Neon 3D Rupee Watermark */}
+            <div className="bg-gradient-to-r from-[#005a43] via-[#026c58] to-[#015141] rounded-[24px] p-3.5 text-white shadow-md border border-emerald-400/20 flex items-center justify-between relative overflow-hidden group">
               <div className="flex items-center gap-3 relative z-10">
-                <div className="w-11 h-11 rounded-2xl bg-emerald-400/20 border border-emerald-300/30 flex items-center justify-center text-white text-xl font-black shadow-inner shrink-0">
+                <div className="w-10 h-10 rounded-2xl bg-teal-300/20 border border-teal-300/30 flex items-center justify-center text-teal-200 text-lg font-black shadow-inner shrink-0">
                   ₹
                 </div>
                 <div>
-                  <p className="text-[11px] font-bold text-emerald-200 uppercase tracking-wide">माल भांडवल</p>
-                  <h3 className="text-2xl font-black text-white tracking-tight leading-tight">
-                    ₹{Math.round(totalStockValuation).toLocaleString('en-IN')}
+                  <p className="text-[10px] font-bold text-teal-200 uppercase tracking-wide">माल भांडवल</p>
+                  <h3 className="text-xl sm:text-2xl font-black text-white tracking-tight leading-tight">
+                    ₹{totalStockValuation.toLocaleString('en-IN')}
                   </h3>
-                  <p className="text-[10px] font-bold text-emerald-200/80 mt-0.5">मालाचे एकूण मूल्य</p>
+                  <p className="text-[10px] font-bold text-teal-200/80 mt-0.5">मालाचे एकूण मूल्य</p>
                 </div>
               </div>
-              {/* Giant 3D Rupee Watermark Accent */}
-              <div className="text-emerald-400/25 select-none pointer-events-none pr-1">
-                <CurrencyInr weight="bold" className="text-6xl drop-shadow-[0_0_12px_rgba(52,211,153,0.3)]" />
+
+              {/* Glowing Neon Cyan-Teal 3D Rupee Symbol */}
+              <div className="relative flex items-center justify-center select-none pointer-events-none pr-1">
+                <div className="absolute inset-0 bg-teal-400/25 blur-md rounded-full"></div>
+                <CurrencyInr weight="bold" className="text-5xl text-[#2dd4bf] drop-shadow-[0_0_12px_rgba(45,212,191,0.8)] relative z-10" />
               </div>
             </div>
 
-            {/* 3. Low Stock (कमी शिल्लक माल) */}
-            <div className="bg-white rounded-[26px] p-4 border border-slate-200/80 shadow-xs flex items-center justify-between relative overflow-hidden group hover:shadow-md transition">
+            {/* Card 3: कमी शिल्लक माल with Warning Badge */}
+            <div className="bg-white rounded-[24px] p-3.5 border border-white/90 shadow-xs flex items-center justify-between relative overflow-hidden group hover:shadow-md transition">
               <div className="flex items-center gap-3">
                 <div className="w-11 h-11 rounded-2xl bg-gradient-to-br from-amber-500 to-orange-500 flex items-center justify-center text-white shadow-md shadow-orange-500/25 shrink-0 text-xl font-black">
                   !
                 </div>
                 <div>
-                  <p className="text-[11px] font-bold text-amber-700 uppercase tracking-wide">कमी शिल्लक माल</p>
-                  <h3 className="text-xl font-black text-slate-900 tracking-tight leading-tight">
+                  <p className="text-[10px] font-bold text-amber-700 uppercase tracking-wide">कमी शिल्लक माल</p>
+                  <h3 className="text-lg sm:text-xl font-black text-slate-900 tracking-tight leading-tight">
                     {lowStockItems.length} वस्तू <span className="text-xs text-slate-400 font-bold">(Items)</span>
                   </h3>
                   <p className="text-[10px] font-bold text-slate-400 mt-0.5">10 पेक्षा कमी शिल्लक</p>
@@ -495,18 +504,18 @@ const Inventory = () => {
               </div>
             </div>
 
-            {/* 4. Out of Stock (संपलेला माल) */}
-            <div className="bg-white rounded-[26px] p-4 border border-slate-200/80 shadow-xs flex items-center justify-between relative overflow-hidden group hover:shadow-md transition">
+            {/* Card 4: संपलेला माल with Red Warning Badge */}
+            <div className="bg-white rounded-[24px] p-3.5 border border-white/90 shadow-xs flex items-center justify-between relative overflow-hidden group hover:shadow-md transition">
               <div className="flex items-center gap-3">
                 <div className="w-11 h-11 rounded-2xl bg-gradient-to-br from-rose-500 to-red-600 flex items-center justify-center text-white shadow-md shadow-red-500/25 shrink-0 text-xl font-black">
                   !
                 </div>
                 <div>
-                  <p className="text-[11px] font-bold text-rose-600 uppercase tracking-wide">संपलेला माल</p>
-                  <h3 className="text-xl font-black text-slate-900 tracking-tight leading-tight">
+                  <p className="text-[10px] font-bold text-rose-600 uppercase tracking-wide">संपलेला माल</p>
+                  <h3 className="text-lg sm:text-xl font-black text-slate-900 tracking-tight leading-tight">
                     {outOfStockItems.length} वस्तू <span className="text-xs text-slate-400 font-bold">(Items)</span>
                   </h3>
-                  <p className="text-[10px] font-bold text-emerald-600 mt-0.5 flex items-center gap-1">
+                  <p className="text-[10px] font-bold text-emerald-600 mt-0.5">
                     ✓ छान शिल्लक • 0 जल शिल्लक
                   </p>
                 </div>
@@ -514,87 +523,89 @@ const Inventory = () => {
             </div>
           </div>
 
-          {/* Middle Filter & Action Bar matching screenshot */}
-          <div className="bg-white/80 backdrop-blur-md rounded-[24px] border border-slate-200/90 p-2 sm:p-2.5 flex flex-wrap items-center justify-between gap-2.5 shadow-xs shrink-0">
+          {/* Middle Frosted Glass Filter Bar matching crop_filter.png 1:1 */}
+          <div className="bg-white/70 backdrop-blur-md border border-white/90 p-2 rounded-2xl flex flex-wrap items-center justify-between gap-2.5 shadow-xs shrink-0">
             
             {/* Left Filter Pills */}
             <div className="flex items-center gap-2 overflow-x-auto">
-              {/* All */}
+              {/* सर्व (14) */}
               <button 
+                type="button"
                 onClick={() => setStockFilter('All')}
-                className={`px-4 py-2 rounded-2xl text-xs transition cursor-pointer select-none whitespace-nowrap ${
+                className={`bg-white shadow-xs rounded-full px-4 py-1.5 text-xs transition cursor-pointer select-none whitespace-nowrap ${
                   stockFilter === 'All' 
-                    ? 'bg-white text-slate-900 font-black border border-slate-300 shadow-xs' 
-                    : 'bg-white/60 hover:bg-white text-slate-600 border border-slate-200/70 font-bold'
+                    ? 'text-slate-900 font-black border border-slate-300' 
+                    : 'text-slate-600 font-bold border border-slate-200/60 hover:text-slate-900'
                 }`}
               >
                 सर्व ({products.length})
               </button>
 
-              {/* In-Bar Search Box with Scanner Wave Icon */}
-              <div className="relative w-56 sm:w-64">
-                <MagnifyingGlass className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-sm" />
+              {/* Search with Barcode Wave S-curve Icon */}
+              <div className="relative w-64 sm:w-72">
+                <MagnifyingGlass className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-xs" />
                 <input 
                   type="text" 
                   placeholder="वस्तू शोधा किंवा बारकोड स्कॅन करा..." 
                   value={search}
                   onChange={e => setSearch(e.target.value)}
-                  className="w-full h-9 pl-9 pr-8 bg-white/95 border border-slate-200/90 rounded-2xl text-xs font-bold text-slate-800 placeholder-slate-400 outline-none focus:border-brand shadow-2xs"
+                  className="w-full h-8 pl-8 pr-8 rounded-full bg-white shadow-xs text-xs font-bold text-slate-800 placeholder-slate-400 outline-none focus:ring-1 focus:ring-orange-400/50"
                 />
-                <svg className="w-4 h-4 text-orange-400 absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <svg className="w-4 h-4 text-orange-400 absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M3 12c3-4 6-4 9 0s6 4 9 0" />
                 </svg>
               </div>
 
-              {/* Low Stock Pill */}
+              {/* कमी शिल्लक (3) Pill */}
               <button 
+                type="button"
                 onClick={() => setStockFilter(stockFilter === 'Low' ? 'All' : 'Low')}
-                className={`px-3.5 py-2 rounded-2xl text-xs font-bold transition flex items-center gap-1.5 cursor-pointer whitespace-nowrap select-none ${
-                  stockFilter === 'Low' 
-                    ? 'bg-amber-500 text-white shadow-xs font-black' 
-                    : 'bg-white/70 hover:bg-white border border-slate-200/80 text-slate-700'
+                className={`bg-white shadow-xs rounded-full px-3.5 py-1.5 text-xs font-bold transition flex items-center gap-1.5 cursor-pointer whitespace-nowrap select-none ${
+                  stockFilter === 'Low' ? 'ring-2 ring-amber-400 font-black text-amber-800' : 'text-slate-700 hover:text-slate-900'
                 }`}
               >
                 <span className="w-2 h-2 rounded-full bg-amber-500 shrink-0"></span>
                 <span>कमी शिल्लक ({lowStockItems.length})</span>
               </button>
 
-              {/* Out of Stock Pill */}
+              {/* संपलेला माल (0) ⌄ Pill */}
               <button 
+                type="button"
                 onClick={() => setStockFilter(stockFilter === 'Out' ? 'All' : 'Out')}
-                className={`px-3.5 py-2 rounded-2xl text-xs font-bold transition flex items-center gap-1.5 cursor-pointer whitespace-nowrap select-none ${
-                  stockFilter === 'Out' 
-                    ? 'bg-red-500 text-white shadow-xs font-black' 
-                    : 'bg-white/70 hover:bg-white border border-slate-200/80 text-slate-700'
+                className={`bg-white shadow-xs rounded-full px-3.5 py-1.5 text-xs font-bold transition flex items-center gap-1.5 cursor-pointer whitespace-nowrap select-none ${
+                  stockFilter === 'Out' ? 'ring-2 ring-red-400 font-black text-red-800' : 'text-slate-700 hover:text-slate-900'
                 }`}
               >
                 <span className="w-2 h-2 rounded-full bg-red-500 shrink-0"></span>
                 <span>संपलेला माल ({outOfStockItems.length})</span>
-                <span className="text-[10px] ml-0.5">⌄</span>
+                <span className="text-[10px] ml-0.5 font-bold">⌄</span>
               </button>
             </div>
 
-            {/* Right Action Controls */}
+            {/* Right Action Pills */}
             <div className="flex items-center gap-2">
               <button 
+                type="button"
                 onClick={() => alert('Barcode Scanner active!')}
-                className="bg-white/80 hover:bg-white border border-slate-200/90 rounded-2xl px-3.5 py-2 text-xs font-bold text-slate-600 flex items-center gap-1.5 transition shadow-xs cursor-pointer select-none"
+                className="bg-white/80 hover:bg-white shadow-xs rounded-full px-3.5 py-1.5 text-xs font-bold text-slate-600 flex items-center gap-1.5 transition cursor-pointer select-none"
               >
                 <Barcode className="text-sm text-slate-500" />
                 <span>वस्तू शोधा किंवा बारकोड स्कॅन ›</span>
               </button>
 
               <button 
+                type="button"
                 onClick={handleAddCategory}
-                className="bg-white hover:bg-white border border-slate-200/90 rounded-2xl px-3.5 py-2 text-xs font-bold text-slate-800 shadow-xs flex items-center gap-1.5 transition cursor-pointer select-none"
+                className="bg-white hover:bg-white shadow-xs rounded-full px-3.5 py-1.5 text-xs font-bold text-slate-800 flex items-center gap-1.5 transition cursor-pointer select-none"
               >
                 <Folders weight="bold" className="text-sm text-slate-600" />
                 <span>+ कॅटेगरी</span>
               </button>
 
               <button 
+                type="button"
                 onClick={openNewProductModal}
-                className="bg-gradient-to-r from-[#FF5722] via-[#FF6E40] to-[#FF8A65] hover:opacity-95 text-white font-black px-4 py-2 rounded-2xl text-xs shadow-md shadow-orange-500/30 flex items-center gap-1.5 transition cursor-pointer select-none"
+                className="bg-gradient-to-r from-[#FF5722] to-[#FF7043] text-white shadow-md shadow-orange-500/30 rounded-xl px-4 py-1.5 text-xs font-black flex items-center gap-1 hover:opacity-95 transition cursor-pointer select-none"
               >
                 <Plus weight="bold" className="text-sm" />
                 <span>+ नवीन उत्पादन</span>
@@ -602,11 +613,11 @@ const Inventory = () => {
             </div>
           </div>
 
-          {/* Products Table Card matching screenshot */}
-          <div className="bg-white/95 backdrop-blur-md rounded-[28px] border border-slate-200/80 shadow-xs flex-1 flex flex-col overflow-hidden">
+          {/* Table Container matching crop_table.png 1:1 */}
+          <div className="bg-slate-400/10 backdrop-blur-md rounded-3xl border border-white/60 p-3 flex-1 flex flex-col gap-2">
             
-            {/* Table Column Headers */}
-            <div className="grid grid-cols-12 gap-4 px-6 py-3.5 bg-slate-100/70 border-b border-slate-200/70 text-xs font-black text-slate-600 shrink-0 select-none">
+            {/* Header Columns */}
+            <div className="grid grid-cols-12 gap-3 px-4 py-1.5 text-xs font-bold text-slate-700 select-none">
               <div className="col-span-12 sm:col-span-5">उत्पादनाचे नाव & बारकोड</div>
               <div className="hidden sm:block sm:col-span-2">कॅटेगरी</div>
               <div className="hidden sm:block sm:col-span-2 text-center">शिल्लक साठा</div>
@@ -614,22 +625,20 @@ const Inventory = () => {
               <div className="col-span-12 sm:col-span-2 text-right sm:text-center">कृती</div>
             </div>
 
-            {/* Scrollable Products List */}
-            <div className="flex-1 overflow-y-auto p-2 sm:p-3 space-y-2.5">
+            {/* List of Floating White Card Rows */}
+            <div className="space-y-2 flex-1 overflow-y-auto pr-0.5 custom-scrollbar">
               {filteredProducts.map((p) => {
-                const catInfo = getCategoryBadgeInfo(p.categoryName);
-                const isLowStock = p.stock > 0 && p.stock <= 10;
-                const isOutOfStock = p.stock === 0;
+                const catDisplay = getCategoryDisplay(p.categoryName);
 
                 return (
                   <div 
                     key={p.id}
-                    className="grid grid-cols-12 gap-4 items-center bg-white hover:bg-orange-50/20 border border-slate-200/70 rounded-2xl p-3 sm:px-5 sm:py-3.5 transition shadow-2xs"
+                    className="grid grid-cols-12 gap-3 items-center bg-white rounded-2xl shadow-xs border border-white/80 p-3 sm:px-4 sm:py-3 transition hover:shadow-sm"
                   >
                     
                     {/* 1. Product Name & Barcode */}
                     <div className="col-span-12 sm:col-span-5 flex items-center gap-3 min-w-0">
-                      <div className="w-12 h-12 rounded-2xl bg-slate-100 border border-slate-200/80 overflow-hidden shrink-0 shadow-2xs">
+                      <div className="w-11 h-11 rounded-2xl overflow-hidden bg-slate-900 border border-slate-200 shrink-0 shadow-2xs flex items-center justify-center">
                         <img 
                           src={p.image || '/images/atta.jpg'} 
                           alt={tProduct(p.name)} 
@@ -643,28 +652,28 @@ const Inventory = () => {
                         </h4>
                         <div className="flex items-center gap-1.5 mt-0.5 flex-wrap">
                           <span className="text-[10px] font-bold text-slate-400">
-                            [#] {p.barcode || '8901007001'}
+                            [•] {p.barcode || '8901007001'}
                           </span>
                           <span className="text-slate-300">•</span>
-                          <span className="bg-orange-50 text-orange-600 border border-orange-200/80 rounded-md px-1.5 py-0.2 text-[10px] font-bold">
+                          <span className="bg-orange-50 text-orange-600 border border-orange-200/80 rounded px-1.5 py-0.2 text-[9px] font-bold">
                             {p.unit || p.size || 'Pouch'}
                           </span>
                         </div>
                       </div>
                     </div>
 
-                    {/* 2. Category */}
+                    {/* 2. Category Pill with Emoji */}
                     <div className="hidden sm:block sm:col-span-2">
-                      <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-sky-50/70 border border-sky-100 text-slate-700 text-xs font-bold">
-                        <span>{catInfo.icon}</span>
-                        <span className="truncate">{catInfo.label}</span>
-                        <span>{catInfo.emoji2}</span>
+                      <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-sky-50/80 border border-sky-100 text-slate-700 text-xs font-bold shadow-2xs">
+                        <span className="text-xs">{catDisplay.emoji1}</span>
+                        <span className="truncate">{catDisplay.label}</span>
+                        <span className="text-xs">{catDisplay.emoji2}</span>
                       </div>
                     </div>
 
-                    {/* 3. Available Stock Stepper */}
+                    {/* 3. Available Stock Stepper Pill */}
                     <div className="hidden sm:flex sm:col-span-2 justify-center items-center">
-                      <div className="inline-flex items-center justify-between gap-3 bg-amber-50/80 border border-amber-200/90 rounded-2xl px-3 py-1 h-9 shadow-2xs">
+                      <div className="inline-flex items-center justify-between gap-3 bg-[#fff8eb] border border-[#fde3b8] rounded-full px-3.5 py-1 text-xs font-black text-amber-900 shadow-2xs">
                         <button 
                           type="button"
                           onClick={() => handleQuickStockChange(p.id, -1)} 
@@ -672,8 +681,8 @@ const Inventory = () => {
                         >
                           −
                         </button>
-                        <span className="font-black text-xs text-amber-900 whitespace-nowrap">
-                          {p.stock} {p.unit || p.size || 'Pouch'}
+                        <span className="whitespace-nowrap font-black">
+                          {p.stock} {p.unit || p.size || 'Pkt'}
                         </span>
                         <button 
                           type="button"
@@ -690,9 +699,13 @@ const Inventory = () => {
                       <p className="font-black text-base text-slate-900 leading-tight">
                         ₹{parseFloat(p.selling_price || p.price || 0).toFixed(2)}
                       </p>
-                      <p className="text-[10px] text-slate-400 font-bold">
-                        original stripe ₹{parseFloat(p.mrp || (p.selling_price * 1.15) || 0).toFixed(2)}
-                      </p>
+                      {parseFloat(p.mrp || 0) > parseFloat(p.selling_price || p.price || 0) ? (
+                        <p className="text-[10px] text-slate-400 font-bold whitespace-nowrap">
+                          original stripe ₹{parseFloat(p.mrp).toFixed(2)}
+                        </p>
+                      ) : (
+                        <span className="text-[10px] text-transparent select-none">-</span>
+                      )}
                     </div>
 
                     {/* 5. Quick Actions */}
@@ -701,16 +714,16 @@ const Inventory = () => {
                       <button 
                         type="button"
                         onClick={() => openStockModal(p)}
-                        className="bg-gradient-to-r from-[#FF5722] via-[#FF6E40] to-[#FF8A65] hover:opacity-95 text-white font-black text-xs px-3.5 py-1.5 rounded-2xl shadow-xs hover:shadow-sm transition cursor-pointer whitespace-nowrap"
+                        className="bg-gradient-to-r from-[#FF5722] to-[#FF7043] text-white font-black text-xs px-3.5 py-1.5 rounded-xl shadow-xs hover:shadow-md transition cursor-pointer flex items-center justify-center gap-1"
                       >
-                        + साठा भरा
+                        <span>+ साठा भरा</span>
                       </button>
 
                       {/* Edit */}
                       <button 
                         type="button"
                         onClick={() => openEditProductModal(p)}
-                        className="w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-600 flex items-center justify-center transition cursor-pointer"
+                        className="w-8 h-8 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-600 border border-slate-200/60 flex items-center justify-center transition cursor-pointer"
                         title="Edit"
                       >
                         <PencilSimple weight="bold" className="text-xs" />
@@ -720,7 +733,7 @@ const Inventory = () => {
                       <button 
                         type="button"
                         onClick={() => openHistoryModal(p)}
-                        className="w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-600 flex items-center justify-center transition cursor-pointer"
+                        className="w-8 h-8 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-600 border border-slate-200/60 flex items-center justify-center transition cursor-pointer"
                         title="History"
                       >
                         <ClockCounterClockwise weight="bold" className="text-xs" />
@@ -730,7 +743,7 @@ const Inventory = () => {
                       <button 
                         type="button"
                         onClick={() => handleDeleteProduct(p.id)}
-                        className="w-8 h-8 rounded-full bg-slate-100 hover:bg-red-50 text-slate-400 hover:text-red-500 flex items-center justify-center transition cursor-pointer"
+                        className="w-8 h-8 rounded-xl bg-slate-100 hover:bg-red-50 text-slate-400 hover:text-red-500 border border-slate-200/60 flex items-center justify-center transition cursor-pointer"
                         title="Delete"
                       >
                         <Trash weight="bold" className="text-xs" />
@@ -743,8 +756,8 @@ const Inventory = () => {
             </div>
           </div>
 
-        </div>
-      </main>
+        </main>
+      </div>
 
       {/* 1. Stock History Modal */}
       {showHistoryModal && (

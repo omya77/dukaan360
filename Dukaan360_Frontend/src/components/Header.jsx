@@ -276,12 +276,12 @@ const Header = ({ onMenuClick, searchTerm, onSearch }) => {
 
       {/* Desktop Navigation Tabs (Centered & Balanced Layout) */}
       <nav className="hidden lg:flex flex-1 justify-center items-center px-4">
-        <div className="flex items-center bg-slate-100/80 p-1 rounded-xl border border-slate-200/90 gap-1">
+        <div className="flex items-center bg-slate-100/80 p-1 rounded-full border border-slate-200/90 gap-1 shadow-2xs">
           {user?.role !== 'Cashier' && (
             <Link 
               to="/dashboard" 
               onClick={(e) => { e.preventDefault(); navigate('/dashboard'); }}
-              className={`cursor-pointer px-3.5 py-1.5 rounded-lg text-xs font-black transition flex items-center gap-1.5 select-none ${
+              className={`cursor-pointer px-4 py-1.5 rounded-full text-xs font-black transition flex items-center gap-1.5 select-none ${
                 location.pathname === '/dashboard' ? 'bg-gradient-to-r from-[#FF5722] via-[#FF6E40] to-[#FF8A65] text-white shadow-md shadow-orange-500/30' : 'text-slate-500 hover:text-slate-800'
               }`}
             >
@@ -292,7 +292,7 @@ const Header = ({ onMenuClick, searchTerm, onSearch }) => {
           <Link 
             to="/pos" 
             onClick={(e) => { e.preventDefault(); navigate('/pos'); }}
-            className={`cursor-pointer px-3.5 py-1.5 rounded-lg text-xs font-black transition flex items-center gap-1.5 select-none ${
+            className={`cursor-pointer px-4 py-1.5 rounded-full text-xs font-black transition flex items-center gap-1.5 select-none ${
               location.pathname === '/pos' ? 'bg-gradient-to-r from-[#FF5722] via-[#FF6E40] to-[#FF8A65] text-white shadow-md shadow-orange-500/30' : 'text-slate-500 hover:text-slate-800'
             }`}
           >
@@ -304,7 +304,7 @@ const Header = ({ onMenuClick, searchTerm, onSearch }) => {
               <Link 
                 to="/inventory" 
                 onClick={(e) => { e.preventDefault(); navigate('/inventory'); }}
-                className={`cursor-pointer px-3.5 py-1.5 rounded-lg text-xs font-black transition flex items-center gap-1.5 select-none ${
+                className={`cursor-pointer px-4 py-1.5 rounded-full text-xs font-black transition flex items-center gap-1.5 select-none ${
                   location.pathname === '/inventory' ? 'bg-gradient-to-r from-[#FF5722] via-[#FF6E40] to-[#FF8A65] text-white shadow-md shadow-orange-500/30' : 'text-slate-500 hover:text-slate-800'
                 }`}
               >
@@ -313,7 +313,7 @@ const Header = ({ onMenuClick, searchTerm, onSearch }) => {
               <Link 
                 to="/khata" 
                 onClick={(e) => { e.preventDefault(); navigate('/khata'); }}
-                className={`cursor-pointer px-3.5 py-1.5 rounded-lg text-xs font-black transition flex items-center gap-1.5 select-none ${
+                className={`cursor-pointer px-4 py-1.5 rounded-full text-xs font-black transition flex items-center gap-1.5 select-none ${
                   location.pathname === '/khata' ? 'bg-gradient-to-r from-[#FF5722] via-[#FF6E40] to-[#FF8A65] text-white shadow-md shadow-orange-500/30' : 'text-slate-500 hover:text-slate-800'
                 }`}
               >
@@ -325,7 +325,7 @@ const Header = ({ onMenuClick, searchTerm, onSearch }) => {
           <Link 
             to="/history" 
             onClick={(e) => { e.preventDefault(); navigate('/history'); }}
-            className={`cursor-pointer px-3.5 py-1.5 rounded-lg text-xs font-black transition flex items-center gap-1.5 select-none ${
+            className={`cursor-pointer px-4 py-1.5 rounded-full text-xs font-black transition flex items-center gap-1.5 select-none ${
               location.pathname === '/history' ? 'bg-gradient-to-r from-[#FF5722] via-[#FF6E40] to-[#FF8A65] text-white shadow-md shadow-orange-500/30' : 'text-slate-500 hover:text-slate-800'
             }`}
           >
