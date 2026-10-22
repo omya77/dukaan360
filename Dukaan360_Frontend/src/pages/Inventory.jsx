@@ -18,7 +18,11 @@ import {
   Storefront,
   BookBookmark,
   Receipt,
-  Gear
+  Gear,
+  UploadSimple,
+  LinkSimple,
+  CheckCircle,
+  CircleNotch
 } from '@phosphor-icons/react';
 import { Link, useLocation } from 'react-router-dom';
 import { useLanguage } from '../contexts/LanguageContext';
@@ -108,6 +112,42 @@ const Inventory = () => {
   const [newProdSelling, setNewProdSelling] = useState('');
   const [newProdBarcode, setNewProdBarcode] = useState('');
   const [newProdImage, setNewProdImage] = useState('');
+  const [imageInputMode, setImageInputMode] = useState('upload'); // 'upload' or 'url'
+  const [uploadingImage, setUploadingImage] = useState(false);
+
+  const handleImageFileUpload = async (e) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    setUploadingImage(true);
+
+    // Instant local preview
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      setNewProdImage(reader.result);
+    };
+    reader.readAsDataURL(file);
+
+    try {
+      const formData = new FormData();
+      formData.append('file', file);
+
+      const res = await axios.post('http://localhost:8000/upload/', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+          ...getAuthHeaders()
+        }
+      });
+
+      if (res.data?.image_url) {
+        setNewProdImage(res.data.image_url);
+      }
+    } catch (err) {
+      console.warn("Upload endpoint notice, keeping instant local preview:", err);
+    } finally {
+      setUploadingImage(false);
+    }
+  };
 
   const fetchInventory = async () => {
     try {
@@ -216,6 +256,7 @@ const Inventory = () => {
     setNewProdSelling('');
     setNewProdUnit('kg');
     setNewProdImage('');
+    setImageInputMode('upload');
     if (categories.length > 0) setNewProdCategoryId(categories[0].id);
     setShowProductModal(true);
   };
@@ -230,6 +271,7 @@ const Inventory = () => {
     setNewProdUnit(product.unit || product.size || 'kg');
     setNewProdCategoryId(product.category_id || (categories[0] ? categories[0].id : ''));
     setNewProdImage(product.image || '');
+    setImageInputMode(product.image?.startsWith('http') || product.image?.startsWith('/images') ? 'url' : 'upload');
     setShowProductModal(true);
   };
 
@@ -940,16 +982,163 @@ const Inventory = () => {
                 </div>
               </div>
 
-              <div>
-                <label className="block text-[11px] font-bold text-slate-500 uppercase mb-1">{t('image_url')} (Optional)</label>
-                <div className="relative">
-                  <ImageIcon className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-lg" />
-                  <input 
-                    type="text"
-                    value={newProdImage} onChange={e => setNewProdImage(e.target.value)}
-                    className="w-full h-11 border border-slate-200 rounded-2xl pl-10 pr-3.5 font-bold focus:border-brand focus:outline-none" 
-                    placeholder="उदा. /images/milk.jpg"
-                  />
+              {/* Photo Upload & URL Dual-Mode Selector */}
+              <div className="bg-slate-50/80 border border-slate-200/80 rounded-2xl p-3 space-y-2.5">
+                <div className="flex items-center justify-between">
+                  <label className="text-[11px] font-bold text-slate-700 uppercase tracking-wide flex items-center gap-1.5">
+                    <ImageIcon className="text-sm text-[#FF5722]" />
+                    <span>उत्पादनाचा फोटो (Product Photo)</span>
+                  </label>
+                  
+                  {/* Mode Switcher Tabs */}
+                  <div className="flex items-center bg-white border border-slate-200 rounded-lg p-0.5 shadow-2xs">
+                    <button
+                      type="button"
+                      onClick={() => setImageInputMode('upload')}
+                      className={`px-2.5 py-1 rounded-md text-[10px] font-black transition cursor-pointer flex items-center gap-1 ${
+                        imageInputMode === 'upload' 
+                          ? 'bg-gradient-to-r from-[#FF5722] to-[#FF7043] text-white shadow-xs' 
+                          : 'text-slate-500 hover:text-slate-800'
+                      }`}
+                    >
+                      <UploadSimple weight="bold" />
+                      <span>फोटो अपलोड</span>
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => setImageInputMode('url')}
+                      className={`px-2.5 py-1 rounded-md text-[10px] font-black transition cursor-pointer flex items-center gap-1 ${
+                        imageInputMode === 'url' 
+                          ? 'bg-gradient-to-r from-[#FF5722] to-[#FF7043] text-white shadow-xs' 
+                          : 'text-slate-500 hover:text-slate-800'
+                      }`}
+                    >
+                      <LinkSimple weight="bold" />
+                      <span>URL लिंक</span>
+                    </button>
+                  </div>
+                </div>
+
+                {imageInputMode === 'upload' ? (
+                  /* 1. File Upload Dropzone / Selector for Downloaded Photos */
+                  <div>
+                    {newProdImage ? (
+                      /* Live Preview of Selected Photo */
+                      <div className="flex items-center justify-between p-2.5 bg-white rounded-xl border border-orange-200 shadow-2xs gap-3">
+                        <div className="flex items-center gap-3 min-w-0">
+                          <img 
+                            src={newProdImage} 
+                            alt="Preview" 
+                            className="w-14 h-14 rounded-xl object-cover border border-slate-200 shadow-xs shrink-0 bg-slate-100" 
+                            onError={(e) => { e.currentTarget.src = '/images/atta.jpg'; }}
+                          />
+                          <div className="min-w-0">
+                            <span className="text-[10px] font-black text-emerald-600 bg-emerald-50 border border-emerald-200 px-2 py-0.5 rounded-full inline-flex items-center gap-1">
+                              <CheckCircle weight="fill" className="text-xs" /> फोटो जोडला आहे
+                            </span>
+                            <p className="text-xs font-bold text-slate-700 truncate mt-1">
+                              {newProdImage.startsWith('data:') ? 'स्थानिक फाईल (Local File)' : newProdImage.split('/').pop()}
+                            </p>
+                          </div>
+                        </div>
+                        <div className="flex items-center gap-1.5 shrink-0">
+                          <label className="cursor-pointer bg-slate-100 hover:bg-slate-200 text-slate-700 text-[11px] font-black px-2.5 py-1.5 rounded-lg border border-slate-200 transition flex items-center gap-1 select-none">
+                            <UploadSimple weight="bold" />
+                            <span>बदला</span>
+                            <input 
+                              type="file" 
+                              accept="image/*" 
+                              className="hidden" 
+                              onChange={handleImageFileUpload} 
+                            />
+                          </label>
+                          <button
+                            type="button"
+                            onClick={() => setNewProdImage('')}
+                            className="w-8 h-8 rounded-lg bg-red-50 hover:bg-red-100 text-red-500 flex items-center justify-center transition cursor-pointer"
+                            title="फोटो काढा"
+                          >
+                            <Trash weight="bold" className="text-xs" />
+                          </button>
+                        </div>
+                      </div>
+                    ) : (
+                      /* Click to Upload Downloaded Photo Box */
+                      <label className="flex flex-col items-center justify-center p-4 border-2 border-dashed border-orange-200 hover:border-orange-400 bg-white hover:bg-orange-50/20 rounded-xl cursor-pointer transition group select-none">
+                        <input 
+                          type="file" 
+                          accept="image/*" 
+                          className="hidden" 
+                          onChange={handleImageFileUpload} 
+                        />
+                        <div className="w-10 h-10 rounded-full bg-orange-100 text-orange-600 flex items-center justify-center text-lg mb-1.5 group-hover:scale-105 transition shadow-2xs">
+                          {uploadingImage ? <CircleNotch weight="bold" className="animate-spin text-lg" /> : <UploadSimple weight="bold" />}
+                        </div>
+                        <span className="text-xs font-black text-slate-800 text-center">
+                          {uploadingImage ? 'फोटो अपलोड होत आहे...' : 'डाऊनलोड केलेला किंवा गॅलरीतून फोटो निवडा'}
+                        </span>
+                        <span className="text-[10px] font-bold text-slate-400 mt-0.5">
+                          JPG, PNG, WEBP, JPEG • येथे क्लिक करा
+                        </span>
+                      </label>
+                    )}
+                  </div>
+                ) : (
+                  /* 2. Direct Image URL Input */
+                  <div>
+                    <div className="relative">
+                      <ImageIcon className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-base" />
+                      <input 
+                        type="text"
+                        value={newProdImage} 
+                        onChange={e => setNewProdImage(e.target.value)}
+                        className="w-full h-11 border border-slate-200 rounded-xl pl-9 pr-3.5 text-xs font-bold text-slate-800 bg-white focus:border-brand focus:outline-none focus:ring-1 focus:ring-brand/30" 
+                        placeholder="उदा. /images/milk.jpg किंवा https://..."
+                      />
+                    </div>
+                    {newProdImage && (
+                      <div className="mt-2 flex items-center gap-2 p-1.5 bg-white rounded-lg border border-slate-200">
+                        <img 
+                          src={newProdImage} 
+                          alt="Preview" 
+                          className="w-8 h-8 rounded-md object-cover border border-slate-200 shrink-0 bg-slate-100" 
+                          onError={(e) => { e.currentTarget.src = '/images/atta.jpg'; }}
+                        />
+                        <span className="text-[10px] font-bold text-slate-500 truncate flex-1">{newProdImage}</span>
+                        <button 
+                          type="button" 
+                          onClick={() => setNewProdImage('')} 
+                          className="text-slate-400 hover:text-red-500 text-xs px-1 cursor-pointer font-bold"
+                        >
+                          ✕
+                        </button>
+                      </div>
+                    )}
+                  </div>
+                )}
+
+                {/* Common Kirana Presets */}
+                <div className="flex items-center gap-1.5 overflow-x-auto pt-0.5">
+                  <span className="text-[9px] font-bold text-slate-400 shrink-0">तयार फोटो:</span>
+                  {[
+                    { label: 'दूध', url: '/images/milk.jpg' },
+                    { label: 'बिस्कीट', url: '/images/goodday.jpg' },
+                    { label: 'साखर', url: '/images/sugar.jpg' },
+                    { label: 'तूर डाळ', url: '/images/dal.jpg' },
+                    { label: 'तेल', url: '/images/oil.jpg' },
+                    { label: 'तूप', url: '/images/ghee.jpg' },
+                    { label: 'हळद', url: '/images/haldi.jpg' },
+                    { label: 'मीठ', url: '/images/salt.jpg' }
+                  ].map((preset, idx) => (
+                    <button
+                      key={idx}
+                      type="button"
+                      onClick={() => setNewProdImage(preset.url)}
+                      className="px-2 py-0.5 bg-white hover:bg-orange-50 border border-slate-200 hover:border-orange-300 rounded-md text-[10px] font-bold text-slate-600 hover:text-brand transition shrink-0 cursor-pointer shadow-2xs"
+                    >
+                      {preset.label}
+                    </button>
+                  ))}
                 </div>
               </div>
 

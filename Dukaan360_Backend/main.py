@@ -7,11 +7,12 @@ if BASE_DIR not in sys.path:
 from dotenv import load_dotenv
 load_dotenv()
 
-from fastapi import FastAPI, Depends, HTTPException, status, APIRouter, Response
+from fastapi import FastAPI, Depends, HTTPException, status, APIRouter, Response, UploadFile, File
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
+import shutil
 from sqlalchemy.orm import Session
 from sqlalchemy import or_, func
 from pydantic import BaseModel
@@ -2573,6 +2574,46 @@ def get_customer_360(customer_id: int, db: Session = Depends(get_db), user: mode
         "suggested_offer_text": suggested_offer,
         "whatsapp_offer_url": f"https://wa.me/{cust.mobile}?text={urllib.parse.quote(suggested_offer)}" if cust.mobile else ""
     }
+
+# --- IMAGE UPLOAD ENDPOINT (FOR DOWNLOADED PHOTOS & LOCAL FILES) ---
+@app.post("/upload/", tags=["Uploads"])
+async def upload_image(file: UploadFile = File(...)):
+    try:
+        orig_name = file.filename or "image.jpg"
+        ext = os.path.splitext(orig_name)[1].lower()
+        if not ext or ext not in [".jpg", ".jpeg", ".png", ".webp", ".gif", ".svg"]:
+            ext = ".jpg"
+        
+        base_name = re.sub(r'[^a-zA-Z0-9_-]', '_', os.path.splitext(orig_name)[0])[:30]
+        safe_filename = f"{uuid.uuid4().hex[:10]}_{base_name}{ext}"
+
+        # 1. Save to frontend public/uploads directory (if running Vite dev server)
+        frontend_upload_dir = os.path.normpath(os.path.join(BASE_DIR, "..", "Dukaan360_Frontend", "public", "uploads"))
+        os.makedirs(frontend_upload_dir, exist_ok=True)
+        frontend_file_path = os.path.join(frontend_upload_dir, safe_filename)
+
+        # 2. Save to backend static/uploads directory (for production static serving)
+        backend_upload_dir = os.path.normpath(os.path.join(BASE_DIR, "static", "uploads"))
+        os.makedirs(backend_upload_dir, exist_ok=True)
+        backend_file_path = os.path.join(backend_upload_dir, safe_filename)
+
+        contents = await file.read()
+        try:
+            with open(frontend_file_path, "wb") as f1:
+                f1.write(contents)
+        except Exception as e_fe:
+            print("Frontend save warning:", e_fe)
+
+        with open(backend_file_path, "wb") as f2:
+            f2.write(contents)
+
+        return {
+            "success": True,
+            "image_url": f"/uploads/{safe_filename}",
+            "filename": safe_filename
+        }
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Failed to upload image: {str(e)}")
 
 app.include_router(api)
 
