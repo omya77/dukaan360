@@ -19,9 +19,20 @@ import {
   FileText,
   Plus,
   Lightning,
-  CheckCircle
+  CheckCircle,
+  CaretDown,
+  Check
 } from '@phosphor-icons/react';
 import { Link } from 'react-router-dom';
+
+const EXPENSE_CATEGORIES = [
+  { value: 'Tea & Snacks', label: 'Tea & Snacks (चहापाणी)', icon: '☕' },
+  { value: 'Transport', label: 'Transport (गाडी भाडे)', icon: '🚚' },
+  { value: 'Wages', label: 'Wages (मजुरी)', icon: '👷' },
+  { value: 'Supplier Payment', label: 'Supplier Payment (व्यापारी पेमेंट)', icon: '🏢' },
+  { value: 'Electricity / Bills', label: 'Electricity / Bills (बिले)', icon: '⚡' },
+  { value: 'Other', label: 'Other (इतर)', icon: '📦' }
+];
 
 const Dashboard = () => {
   const [summary, setSummary] = useState({
@@ -40,6 +51,7 @@ const Dashboard = () => {
 
   const [showExpenseModal, setShowExpenseModal] = useState(false);
   const [expenseData, setExpenseData] = useState({ category: 'Tea & Snacks', amount: '', description: '' });
+  const [isExpenseCatOpen, setIsExpenseCatOpen] = useState(false);
 
   // Smart Purchase Order State
   const [showPOModal, setShowPOModal] = useState(false);
@@ -63,6 +75,7 @@ const Dashboard = () => {
       }, { headers: getAuthHeaders() });
       alert('Expense added successfully!');
       setShowExpenseModal(false);
+      setIsExpenseCatOpen(false);
       setExpenseData({ category: 'Tea & Snacks', amount: '', description: '' });
       // Re-fetch summary
       const res = await axios.get('http://localhost:8000/dashboard/summary/', { headers: getAuthHeaders() });
@@ -237,7 +250,7 @@ const Dashboard = () => {
                   <span>Smart PO (सप्लायर ऑर्डर)</span>
                 </button>
                 <button 
-                  onClick={() => setShowExpenseModal(true)} 
+                  onClick={() => { setShowExpenseModal(true); setIsExpenseCatOpen(false); }} 
                   className="bg-white/95 backdrop-blur-sm border border-slate-200/90 hover:bg-white text-slate-700 px-3.5 py-2 rounded-xl font-bold flex items-center gap-1.5 shadow-xs transition hover:shadow-sm text-xs cursor-pointer"
                 >
                   <Plus weight="bold" className="text-emerald-600 text-sm" />
@@ -552,7 +565,7 @@ const Dashboard = () => {
         {/* Add Expense Modal */}
         {showExpenseModal && (
           <div className="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-start justify-center p-4 pt-24 sm:pt-28 overflow-y-auto">
-            <div className="bg-white rounded-[32px] w-full max-w-sm sm:max-w-md shadow-2xl border border-slate-100 p-6 flex flex-col relative overflow-hidden animate-scale-up">
+            <div className="bg-white rounded-[32px] w-full max-w-sm sm:max-w-md shadow-2xl border border-slate-100 p-6 flex flex-col relative overflow-visible animate-scale-up">
               
               {/* Header */}
               <div className="flex items-center justify-between mb-5">
@@ -575,7 +588,7 @@ const Dashboard = () => {
                 </div>
 
                 <button 
-                  onClick={() => setShowExpenseModal(false)}
+                  onClick={() => { setShowExpenseModal(false); setIsExpenseCatOpen(false); }}
                   className="w-8 h-8 bg-slate-100 hover:bg-slate-200 text-slate-500 rounded-full flex items-center justify-center transition cursor-pointer"
                 >
                   <X weight="bold" className="text-base" />
@@ -584,28 +597,73 @@ const Dashboard = () => {
               
               <form onSubmit={handleAddExpense} className="flex flex-col gap-4">
                 {/* Category Field */}
-                <div>
+                <div className="relative">
                   <label className="block text-[10px] font-black text-slate-500 uppercase tracking-wider mb-1.5">
                     CATEGORY
                   </label>
-                  <div className="relative flex items-center bg-slate-50/80 border border-slate-200/90 rounded-2xl h-12 px-3.5 focus-within:border-brand focus-within:bg-white transition">
-                    <span className="text-base select-none shrink-0 mr-2">☕</span>
-                    <select 
-                      value={expenseData.category}
-                      onChange={(e) => setExpenseData({...expenseData, category: e.target.value})}
-                      className="w-full h-full bg-transparent text-xs sm:text-sm font-bold text-slate-800 appearance-none outline-none cursor-pointer pr-6"
-                    >
-                      <option value="Tea & Snacks">Tea & Snacks (चहापाणी)</option>
-                      <option value="Transport">Transport (गाडी भाडे)</option>
-                      <option value="Wages">Wages (मजुरी)</option>
-                      <option value="Supplier Payment">Supplier Payment (व्यापारी पेमेंट)</option>
-                      <option value="Electricity / Bills">Electricity / Bills (बिले)</option>
-                      <option value="Other">Other (इतर)</option>
-                    </select>
-                    <span className="absolute right-3.5 pointer-events-none text-slate-500 text-xs font-black">
-                      ⌄
-                    </span>
-                  </div>
+                  
+                  {/* Category Trigger Button */}
+                  <button
+                    type="button"
+                    onClick={() => setIsExpenseCatOpen(!isExpenseCatOpen)}
+                    className={`w-full flex items-center justify-between bg-slate-50/80 border ${
+                      isExpenseCatOpen ? 'border-[#FF5722] ring-2 ring-[#FF5722]/15 bg-white' : 'border-slate-200/90 hover:border-slate-300'
+                    } rounded-2xl h-12 px-3.5 transition text-left cursor-pointer select-none`}
+                  >
+                    <div className="flex items-center gap-2.5 min-w-0">
+                      <span className="text-xl select-none shrink-0 drop-shadow-sm">
+                        {(EXPENSE_CATEGORIES.find(c => c.value === expenseData.category) || EXPENSE_CATEGORIES[0]).icon}
+                      </span>
+                      <span className="text-xs sm:text-sm font-bold text-slate-800 truncate">
+                        {(EXPENSE_CATEGORIES.find(c => c.value === expenseData.category) || EXPENSE_CATEGORIES[0]).label}
+                      </span>
+                    </div>
+                    <div className={`transition-transform duration-200 text-slate-400 font-bold ${isExpenseCatOpen ? 'rotate-180 text-[#FF5722]' : ''}`}>
+                      <CaretDown weight="bold" className="text-xs" />
+                    </div>
+                  </button>
+
+                  {/* Backdrop for outside click */}
+                  {isExpenseCatOpen && (
+                    <div 
+                      className="fixed inset-0 z-20" 
+                      onClick={() => setIsExpenseCatOpen(false)} 
+                    />
+                  )}
+
+                  {/* Centered / Aligned Custom Dropdown Menu */}
+                  {isExpenseCatOpen && (
+                    <div className="absolute top-full left-0 right-0 mt-2 z-30 bg-white/98 backdrop-blur-md rounded-2xl border border-slate-200/90 shadow-2xl p-1.5 flex flex-col gap-1 animate-scale-up">
+                      {EXPENSE_CATEGORIES.map((cat) => {
+                        const isSelected = expenseData.category === cat.value;
+                        return (
+                          <button
+                            key={cat.value}
+                            type="button"
+                            onClick={() => {
+                              setExpenseData({ ...expenseData, category: cat.value });
+                              setIsExpenseCatOpen(false);
+                            }}
+                            className={`w-full flex items-center justify-between px-3 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition cursor-pointer select-none ${
+                              isSelected 
+                                ? 'bg-orange-50 text-[#FF5722] font-black' 
+                                : 'text-slate-700 hover:bg-slate-100 hover:text-slate-900'
+                            }`}
+                          >
+                            <div className="flex items-center gap-3">
+                              <span className="w-8 h-8 rounded-xl bg-slate-100/80 flex items-center justify-center text-lg shrink-0">
+                                {cat.icon}
+                              </span>
+                              <span>{cat.label}</span>
+                            </div>
+                            {isSelected && (
+                              <Check weight="bold" className="text-[#FF5722] text-sm shrink-0" />
+                            )}
+                          </button>
+                        );
+                      })}
+                    </div>
+                  )}
                 </div>
 
                 {/* Amount Field */}
