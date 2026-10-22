@@ -233,155 +233,155 @@ const Dashboard = () => {
         <div className="max-w-6xl mx-auto space-y-6">
           
           {/* Top Bar with Title and Actions */}
-          <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-4">
+          <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-3">
             <div>
-              <h1 className="text-2xl sm:text-3xl font-black text-slate-800 tracking-tight">Store Dashboard</h1>
-              <p className="text-slate-500 font-semibold text-xs sm:text-sm mt-0.5">Overview of your retail business • व्यवसायाची सद्यस्थिती</p>
+              <h1 className="text-base sm:text-xl font-black text-slate-800 tracking-tight">Store Dashboard</h1>
+              <p className="text-slate-500 font-semibold text-[11px] sm:text-xs mt-0.5">Overview of your retail business • व्यवसायाची सद्यस्थिती</p>
             </div>
             
-            <div className="flex flex-col items-start lg:items-end gap-2.5 w-full lg:w-auto">
+            <div className="flex flex-col items-start lg:items-end gap-2 w-full lg:w-auto">
               {/* Row 1: Action pills */}
-              <div className="flex flex-wrap items-center gap-2">
+              <div className="flex flex-wrap items-center gap-1.5 sm:gap-2">
                 <button 
                   onClick={() => setShowPOModal(true)} 
-                  className="bg-white/95 backdrop-blur-sm border border-slate-200/90 hover:bg-white text-slate-700 px-3.5 py-2 rounded-xl font-bold flex items-center gap-2 shadow-xs transition hover:shadow-sm text-xs cursor-pointer"
+                  className="bg-white/95 backdrop-blur-sm border border-slate-200/90 hover:bg-white text-slate-700 px-3 py-1.5 rounded-xl font-bold flex items-center gap-1.5 shadow-xs transition hover:shadow-sm text-[11px] sm:text-xs cursor-pointer"
                 >
-                  <Package weight="fill" className="text-indigo-600 text-base" />
-                  <span>Smart PO (सप्लायर ऑर्डर)</span>
+                  <Package weight="fill" className="text-indigo-600 text-sm" />
+                  <span>Smart PO</span>
                 </button>
                 <button 
                   onClick={() => { setShowExpenseModal(true); setIsExpenseCatOpen(false); }} 
-                  className="bg-white/95 backdrop-blur-sm border border-slate-200/90 hover:bg-white text-slate-700 px-3.5 py-2 rounded-xl font-bold flex items-center gap-1.5 shadow-xs transition hover:shadow-sm text-xs cursor-pointer"
+                  className="bg-white/95 backdrop-blur-sm border border-slate-200/90 hover:bg-white text-slate-700 px-3 py-1.5 rounded-xl font-bold flex items-center gap-1.5 shadow-xs transition hover:shadow-sm text-[11px] sm:text-xs cursor-pointer"
                 >
-                  <Plus weight="bold" className="text-emerald-600 text-sm" />
+                  <Plus weight="bold" className="text-emerald-600 text-xs" />
                   <span>खर्च नोंदवा</span>
                 </button>
                 <button 
                   onClick={() => setIsTallyModalOpen(true)} 
-                  className="bg-white/95 backdrop-blur-sm border border-slate-200/90 hover:bg-white text-slate-700 px-3.5 py-2 rounded-xl font-bold flex items-center gap-1.5 shadow-xs transition hover:shadow-sm text-xs cursor-pointer"
+                  className="bg-white/95 backdrop-blur-sm border border-slate-200/90 hover:bg-white text-slate-700 px-3 py-1.5 rounded-xl font-bold flex items-center gap-1.5 shadow-xs transition hover:shadow-sm text-[11px] sm:text-xs cursor-pointer"
                 >
-                  <Calculator weight="fill" className="text-orange-500 text-base" />
+                  <Calculator weight="fill" className="text-orange-500 text-sm" />
                   <span>गल्ला मोजा</span>
                 </button>
                 <button 
                   onClick={handleEndOfDayReport} 
-                  className="bg-[#FDECE2] border border-[#F8D2BD] hover:bg-orange-100 text-orange-950 px-3.5 py-2 rounded-xl font-bold flex items-center gap-1.5 shadow-xs transition hover:shadow-sm text-xs cursor-pointer"
+                  className="bg-[#FDECE2] border border-[#F8D2BD] hover:bg-orange-100 text-orange-950 px-3 py-1.5 rounded-xl font-bold flex items-center gap-1.5 shadow-xs transition hover:shadow-sm text-[11px] sm:text-xs cursor-pointer"
                 >
-                  <ChartLineUp weight="bold" className="text-orange-600 text-base" />
-                  <span>गल्ला बंद रिपोर्ट</span>
+                  <ChartLineUp weight="bold" className="text-orange-600 text-sm" />
+                  <span>गल्ला बंद</span>
                 </button>
                 <button 
                   onClick={handleDownloadMyBackupPdf} 
                   disabled={downloadingBackup}
-                  className="bg-[#EDF2F7] border border-slate-200/90 hover:bg-slate-100 text-slate-700 px-3.5 py-2 rounded-xl font-bold flex items-center gap-1.5 shadow-xs transition hover:shadow-sm text-xs cursor-pointer disabled:opacity-50"
+                  className="bg-[#EDF2F7] border border-slate-200/90 hover:bg-slate-100 text-slate-700 px-3 py-1.5 rounded-xl font-bold flex items-center gap-1.5 shadow-xs transition hover:shadow-sm text-[11px] sm:text-xs cursor-pointer disabled:opacity-50"
                   title="PDF बॅकअप डाऊनलोड करा"
                 >
-                  <FileText weight="fill" className="text-indigo-500 text-base" />
-                  <span>{downloadingBackup ? 'तयार होत आहे...' : 'PDF बॅकअप'}</span>
+                  <FileText weight="fill" className="text-indigo-500 text-sm" />
+                  <span>{downloadingBackup ? '...' : 'PDF बॅकअप'}</span>
                 </button>
               </div>
 
               {/* Row 2: Prominent Glowing Go to POS Button */}
               <Link 
                 to="/pos" 
-                className="bg-gradient-to-r from-[#FF5722] via-[#FF6E40] to-[#FFA726] text-white px-5 py-2.5 rounded-2xl font-black flex items-center gap-2 shadow-lg shadow-orange-500/35 hover:shadow-orange-500/50 hover:scale-[1.02] active:scale-95 transition text-xs sm:text-sm"
+                className="bg-gradient-to-r from-[#FF5722] via-[#FF6E40] to-[#FFA726] text-white px-4 py-2 rounded-xl font-black flex items-center gap-2 shadow-md shadow-orange-500/30 hover:scale-[1.01] active:scale-95 transition text-xs sm:text-sm"
               >
-                <Storefront weight="fill" className="text-base" />
+                <Storefront weight="fill" className="text-sm" />
                 <span>Go to POS (नवीन बिल बनवा)</span>
-                <Lightning weight="fill" className="text-amber-300 text-base" />
+                <Lightning weight="fill" className="text-amber-300 text-sm" />
               </Link>
             </div>
           </div>
 
           {loading ? (
-            <p className="text-center text-slate-400 py-16 font-bold">डॅशबोर्ड लोड होत आहे...</p>
+            <p className="text-center text-slate-400 py-16 font-bold text-xs sm:text-sm">डॅशबोर्ड लोड होत आहे...</p>
           ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
               
-              {/* 1. Today's Sales (आजचा गल्ला) - Deep Emerald Gradient with Wave */}
-              <div className="bg-gradient-to-br from-[#064E43] via-[#09574B] to-[#04332C] text-white p-5 rounded-3xl shadow-xl shadow-emerald-950/20 border border-emerald-400/20 relative overflow-hidden flex flex-col justify-between min-h-[145px] group hover:scale-[1.01] transition-all duration-300">
+              {/* 1. Today's Sales (आजचा गल्ला) */}
+              <div className="bg-gradient-to-br from-[#064E43] via-[#09574B] to-[#04332C] text-white p-3.5 sm:p-4 rounded-2xl sm:rounded-3xl shadow-lg border border-emerald-400/20 relative overflow-hidden flex flex-col justify-between min-h-[120px] group transition-all">
                 <div className="relative z-10">
-                  <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-2xl bg-emerald-500/20 border border-emerald-400/30 flex items-center justify-center text-emerald-300 shrink-0 shadow-inner">
-                      <ChartLineUp weight="bold" className="text-xl" />
+                  <div className="flex items-center gap-2.5">
+                    <div className="w-8 h-8 rounded-xl bg-emerald-500/20 border border-emerald-400/30 flex items-center justify-center text-emerald-300 shrink-0 shadow-inner">
+                      <ChartLineUp weight="bold" className="text-base" />
                     </div>
                     <div>
-                      <p className="text-[11px] font-extrabold uppercase tracking-wider text-emerald-200/80">TODAY'S SALES (आजचा गल्ला)</p>
-                      <h3 className="text-2xl sm:text-3xl font-black text-white tracking-tight mt-0.5">₹{(summary.today_sales || 0).toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</h3>
+                      <p className="text-[10px] font-extrabold uppercase tracking-wider text-emerald-200/80">TODAY'S SALES (आजचा गल्ला)</p>
+                      <h3 className="text-base sm:text-lg font-black text-white tracking-tight mt-0.5">₹{(summary.today_sales || 0).toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</h3>
                     </div>
                   </div>
                 </div>
-                <div className="relative z-10 mt-3">
-                  <span className="text-xs font-semibold text-emerald-200/70">आजची एकूण बिलिंग</span>
+                <div className="relative z-10 mt-2">
+                  <span className="text-[11px] font-semibold text-emerald-200/70">आजची एकूण बिलिंग</span>
                 </div>
                 {/* Emerald Wave Sparkline */}
-                <div className="absolute right-3 bottom-3 w-32 h-14 pointer-events-none select-none">
+                <div className="absolute right-2 bottom-2 w-28 h-12 pointer-events-none select-none">
                   <svg viewBox="0 0 120 40" fill="none" className="w-full h-full text-emerald-400">
-                    <path d="M0 32 Q 20 38, 35 18 T 70 24 T 95 8 T 120 28" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" opacity="0.6" />
+                    <path d="M0 32 Q 20 38, 35 18 T 70 24 T 95 8 T 120 28" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" opacity="0.6" />
                     <path d="M0 32 Q 20 38, 35 18 T 70 24 T 95 8 T 120 28 L 120 40 L 0 40 Z" fill="currentColor" opacity="0.1" />
                   </svg>
                 </div>
               </div>
 
-              {/* 2. Today's Net Profit (आजचा नफा) - Warm Rose-Gold / Peach Gradient with Rupee symbol */}
-              <div className="bg-gradient-to-br from-[#F5D5C6] via-[#E8B49B] to-[#D99A82] text-stone-900 p-5 rounded-3xl shadow-xl shadow-orange-950/10 border border-white/60 relative overflow-hidden flex flex-col justify-between min-h-[145px] group hover:scale-[1.01] transition-all duration-300">
+              {/* 2. Today's Net Profit (आजचा नफा) */}
+              <div className="bg-gradient-to-br from-[#F5D5C6] via-[#E8B49B] to-[#D99A82] text-stone-900 p-3.5 sm:p-4 rounded-2xl sm:rounded-3xl shadow-lg border border-white/60 relative overflow-hidden flex flex-col justify-between min-h-[120px] group transition-all">
                 <div className="relative z-10">
-                  <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-2xl bg-white/40 border border-white/60 flex items-center justify-center text-[#9A3412] font-black text-lg shrink-0 shadow-inner">
+                  <div className="flex items-center gap-2.5">
+                    <div className="w-8 h-8 rounded-xl bg-white/40 border border-white/60 flex items-center justify-center text-[#9A3412] font-black text-base shrink-0 shadow-inner">
                       ₹
                     </div>
                     <div>
-                      <p className="text-[11px] font-extrabold uppercase tracking-wider text-stone-800">TODAY'S NET PROFIT (आजचा नफा)</p>
-                      <h3 className="text-2xl sm:text-3xl font-black text-stone-900 tracking-tight mt-0.5">₹{(summary.today_profit || 0).toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</h3>
+                      <p className="text-[10px] font-extrabold uppercase tracking-wider text-stone-800">TODAY'S NET PROFIT (आजचा नफा)</p>
+                      <h3 className="text-base sm:text-lg font-black text-stone-900 tracking-tight mt-0.5">₹{(summary.today_profit || 0).toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</h3>
                     </div>
                   </div>
                 </div>
-                <div className="relative z-10 mt-3">
-                  <span className="text-xs font-semibold text-stone-700">खर्च व खरेदी किंमत वजा जाता</span>
+                <div className="relative z-10 mt-2">
+                  <span className="text-[11px] font-semibold text-stone-700">खर्च व खरेदी किंमत वजा जाता</span>
                 </div>
-                {/* Large Stylized Glowing Rupee Watermark */}
-                <span className="absolute -right-1 top-1 text-7xl sm:text-8xl font-black text-white/55 select-none pointer-events-none drop-shadow-[0_4px_12px_rgba(255,255,255,0.6)]">
+                {/* Stylized Rupee Watermark */}
+                <span className="absolute -right-1 top-1 text-6xl font-black text-white/50 select-none pointer-events-none">
                   ₹
                 </span>
               </div>
 
-              {/* 3. Market Due (बाजार उधारी) - Clean White Card */}
-              <div className="bg-white/95 backdrop-blur-md text-slate-800 p-5 rounded-3xl shadow-xl shadow-slate-200/60 border border-slate-200/80 relative overflow-hidden flex flex-col justify-between min-h-[145px] group hover:scale-[1.01] transition-all duration-300">
+              {/* 3. Market Due (बाजार उधारी) */}
+              <div className="bg-white/95 backdrop-blur-md text-slate-800 p-3.5 sm:p-4 rounded-2xl sm:rounded-3xl shadow-lg border border-slate-200/80 relative overflow-hidden flex flex-col justify-between min-h-[120px] group transition-all">
                 <div className="relative z-10">
-                  <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-2xl bg-orange-50 border border-orange-100 flex items-center justify-center text-orange-600 shrink-0 shadow-inner">
-                      <BookBookmark weight="fill" className="text-xl" />
+                  <div className="flex items-center gap-2.5">
+                    <div className="w-8 h-8 rounded-xl bg-orange-50 border border-orange-100 flex items-center justify-center text-orange-600 shrink-0 shadow-inner">
+                      <BookBookmark weight="fill" className="text-base" />
                     </div>
                     <div>
-                      <p className="text-[11px] font-extrabold uppercase tracking-wider text-slate-500">MARKET DUE (बाजार उधारी)</p>
-                      <h3 className="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight mt-0.5">₹{(summary.total_due || 0).toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</h3>
+                      <p className="text-[10px] font-extrabold uppercase tracking-wider text-slate-500">MARKET DUE (बाजार उधारी)</p>
+                      <h3 className="text-base sm:text-lg font-black text-slate-900 tracking-tight mt-0.5">₹{(summary.total_due || 0).toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</h3>
                     </div>
                   </div>
                 </div>
-                <div className="relative z-10 mt-3">
-                  <span className="text-xs font-medium text-slate-400">ग्राहकांकडून येणे बाकी रक्कम</span>
+                <div className="relative z-10 mt-2">
+                  <span className="text-[11px] font-medium text-slate-400">ग्राहकांकडून येणे बाकी रक्कम</span>
                 </div>
               </div>
 
-              {/* 4. Inventory Value (माल गुंतवणूक) - Deep Royal Purple Gradient with 3D Boxes */}
-              <div className="bg-gradient-to-br from-[#2D1B69] via-[#351A7E] to-[#1C0D45] text-white p-5 rounded-3xl shadow-xl shadow-purple-950/30 border border-purple-400/20 relative overflow-hidden flex flex-col justify-between min-h-[145px] group hover:scale-[1.01] transition-all duration-300">
+              {/* 4. Inventory Value (माल गुंतवणूक) */}
+              <div className="bg-gradient-to-br from-[#2D1B69] via-[#351A7E] to-[#1C0D45] text-white p-3.5 sm:p-4 rounded-2xl sm:rounded-3xl shadow-lg border border-purple-400/20 relative overflow-hidden flex flex-col justify-between min-h-[120px] group transition-all">
                 <div className="relative z-10">
-                  <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-2xl bg-purple-500/20 border border-purple-400/30 flex items-center justify-center text-purple-300 shrink-0 shadow-inner">
-                      <Package weight="fill" className="text-xl" />
+                  <div className="flex items-center gap-2.5">
+                    <div className="w-8 h-8 rounded-xl bg-purple-500/20 border border-purple-400/30 flex items-center justify-center text-purple-300 shrink-0 shadow-inner">
+                      <Package weight="fill" className="text-base" />
                     </div>
                     <div>
-                      <p className="text-[11px] font-extrabold uppercase tracking-wider text-purple-200/80">INVENTORY VALUE (माल गुंतवणूक)</p>
-                      <h3 className="text-2xl sm:text-3xl font-black text-white tracking-tight mt-0.5">₹{(summary.total_inventory_value || 0).toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</h3>
+                      <p className="text-[10px] font-extrabold uppercase tracking-wider text-purple-200/80">INVENTORY VALUE (माल गुंतवणूक)</p>
+                      <h3 className="text-base sm:text-lg font-black text-white tracking-tight mt-0.5">₹{(summary.total_inventory_value || 0).toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</h3>
                     </div>
                   </div>
                 </div>
-                <div className="relative z-10 mt-3">
-                  <span className="text-xs font-semibold text-purple-200/70">सध्याच्या शिल्लक साठ्याची खरेदी किंमत</span>
+                <div className="relative z-10 mt-2">
+                  <span className="text-[11px] font-semibold text-purple-200/70">शिल्लक साठ्याची खरेदी किंमत</span>
                 </div>
                 {/* 3D Stacked Boxes Graphic */}
-                <div className="absolute right-3 bottom-2 opacity-25 pointer-events-none select-none text-purple-300">
-                  <svg width="75" height="75" viewBox="0 0 100 100" fill="none" stroke="currentColor" strokeWidth="3.5">
+                <div className="absolute right-2 bottom-1 opacity-20 pointer-events-none select-none text-purple-300">
+                  <svg width="60" height="60" viewBox="0 0 100 100" fill="none" stroke="currentColor" strokeWidth="3">
                     <polygon points="50,15 88,34 50,53 12,34" fill="rgba(255,255,255,0.12)" />
                     <polygon points="12,34 50,53 50,92 12,73" fill="rgba(255,255,255,0.06)" />
                     <polygon points="88,34 50,53 50,92 88,73" fill="rgba(255,255,255,0.18)" />
@@ -389,52 +389,52 @@ const Dashboard = () => {
                 </div>
               </div>
 
-              {/* 5. Low Stock Alerts (माल संपत आला आहे) - Warm Amber Gradient with Print Pill */}
-              <div className="bg-gradient-to-br from-[#E2B777] via-[#D49E55] to-[#C4893F] text-stone-900 p-5 rounded-3xl shadow-xl shadow-amber-950/15 border border-white/50 relative overflow-hidden flex flex-col justify-between min-h-[145px] group hover:scale-[1.01] transition-all duration-300">
+              {/* 5. Low Stock Alerts (माल संपत आला आहे) */}
+              <div className="bg-gradient-to-br from-[#E2B777] via-[#D49E55] to-[#C4893F] text-stone-900 p-3.5 sm:p-4 rounded-2xl sm:rounded-3xl shadow-lg border border-white/50 relative overflow-hidden flex flex-col justify-between min-h-[120px] group transition-all">
                 <div className="relative z-10">
-                  <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-2xl bg-white/40 border border-white/60 flex items-center justify-center text-red-600 shrink-0 shadow-inner">
-                      <Warning weight="fill" className="text-xl" />
+                  <div className="flex items-center gap-2.5">
+                    <div className="w-8 h-8 rounded-xl bg-white/40 border border-white/60 flex items-center justify-center text-red-600 shrink-0 shadow-inner">
+                      <Warning weight="fill" className="text-base" />
                     </div>
                     <div>
-                      <p className="text-[11px] font-extrabold uppercase tracking-wider text-stone-900">LOW STOCK ALERTS (माल संपत आला आहे)</p>
-                      <h3 className="text-2xl sm:text-3xl font-black text-stone-950 tracking-tight mt-0.5">{(summary.low_stock_alerts || 0)} Items</h3>
+                      <p className="text-[10px] font-extrabold uppercase tracking-wider text-stone-900">LOW STOCK ALERTS</p>
+                      <h3 className="text-base sm:text-lg font-black text-stone-950 tracking-tight mt-0.5">{(summary.low_stock_alerts || 0)} Items</h3>
                     </div>
                   </div>
                 </div>
-                <div className="relative z-10 mt-3">
-                  <span className="text-xs font-semibold text-stone-800">१० पेक्षा कमी शिल्लक आयटम</span>
+                <div className="relative z-10 mt-2">
+                  <span className="text-[11px] font-semibold text-stone-800">१० पेक्षा कमी शिल्लक आयटम</span>
                 </div>
                 {/* Print Button Pill on Right */}
                 <button 
                   onClick={handlePrintReorder} 
-                  className="absolute right-4 top-1/2 -translate-y-1/2 bg-white hover:bg-white/95 text-stone-800 rounded-2xl p-2.5 px-3.5 flex flex-col items-center justify-center shadow-md transition hover:scale-105 active:scale-95 border border-white/80 cursor-pointer"
+                  className="absolute right-3 top-1/2 -translate-y-1/2 bg-white hover:bg-white/95 text-stone-800 rounded-xl p-2 px-2.5 flex flex-col items-center justify-center shadow-xs transition hover:scale-105 active:scale-95 border border-white/80 cursor-pointer"
                   title="Print Reorder List"
                 >
-                  <Printer weight="fill" className="text-red-500 text-lg mb-0.5" />
-                  <span className="text-[9px] font-black text-stone-800 tracking-wider">PRINT</span>
+                  <Printer weight="fill" className="text-red-500 text-base mb-0.5" />
+                  <span className="text-[8px] font-black text-stone-800 tracking-wider">PRINT</span>
                 </button>
               </div>
 
-              {/* 6. Total Customers (एकूण ग्राहक) - Midnight Blue Gradient with Checkmark */}
-              <div className="bg-gradient-to-br from-[#1E3A8A] via-[#1E293B] to-[#0F172A] text-white p-5 rounded-3xl shadow-xl shadow-blue-950/30 border border-blue-400/20 relative overflow-hidden flex flex-col justify-between min-h-[145px] group hover:scale-[1.01] transition-all duration-300">
+              {/* 6. Total Customers (एकूण ग्राहक) */}
+              <div className="bg-gradient-to-br from-[#1E3A8A] via-[#1E293B] to-[#0F172A] text-white p-3.5 sm:p-4 rounded-2xl sm:rounded-3xl shadow-lg border border-blue-400/20 relative overflow-hidden flex flex-col justify-between min-h-[120px] group transition-all">
                 <div className="relative z-10">
-                  <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-2xl bg-blue-500/20 border border-blue-400/30 flex items-center justify-center text-blue-300 shrink-0 shadow-inner">
-                      <Users weight="fill" className="text-xl" />
+                  <div className="flex items-center gap-2.5">
+                    <div className="w-8 h-8 rounded-xl bg-blue-500/20 border border-blue-400/30 flex items-center justify-center text-blue-300 shrink-0 shadow-inner">
+                      <Users weight="fill" className="text-base" />
                     </div>
                     <div>
-                      <p className="text-[11px] font-extrabold uppercase tracking-wider text-blue-200/80">TOTAL CUSTOMERS (एकूण ग्राहक)</p>
-                      <h3 className="text-2xl sm:text-3xl font-black text-white tracking-tight mt-0.5">{(summary.total_customers || 0)}</h3>
+                      <p className="text-[10px] font-extrabold uppercase tracking-wider text-blue-200/80">TOTAL CUSTOMERS (एकूण ग्राहक)</p>
+                      <h3 className="text-base sm:text-lg font-black text-white tracking-tight mt-0.5">{(summary.total_customers || 0)}</h3>
                     </div>
                   </div>
                 </div>
-                <div className="relative z-10 mt-3">
-                  <span className="text-xs font-semibold text-blue-200/70">खातेवहीत नोंद असलेले ग्राहक</span>
+                <div className="relative z-10 mt-2">
+                  <span className="text-[11px] font-semibold text-blue-200/70">खातेवहीत नोंद असलेले ग्राहक</span>
                 </div>
-                {/* Checkmark Shield Graphic */}
-                <div className="absolute right-3 bottom-2 opacity-15 pointer-events-none select-none text-blue-300">
-                  <CheckCircle weight="fill" className="text-7xl" />
+                {/* Checkmark Graphic */}
+                <div className="absolute right-2 bottom-1 opacity-15 pointer-events-none select-none text-blue-300">
+                  <CheckCircle weight="fill" className="text-5xl" />
                 </div>
               </div>
               
@@ -442,40 +442,40 @@ const Dashboard = () => {
           )}
 
           {/* Quick Navigation (झटपट मेनू) */}
-          <div className="pt-2">
-            <h2 className="text-base sm:text-lg font-black text-slate-800 mb-3">Quick Navigation (झटपट मेनू)</h2>
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+          <div className="pt-1">
+            <h2 className="text-sm sm:text-base font-black text-slate-800 mb-2.5">Quick Navigation (झटपट मेनू)</h2>
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 sm:gap-4">
               
-              <Link to="/pos" className="bg-white/95 backdrop-blur-sm p-5 rounded-3xl border border-slate-200/80 hover:border-brand hover:shadow-xl hover:-translate-y-0.5 transition shadow-sm flex flex-col items-center text-center group cursor-pointer">
-                <div className="w-12 h-12 rounded-2xl bg-gradient-to-tr from-[#FF5722] to-[#FF8A65] text-white flex items-center justify-center mb-2.5 shadow-md shadow-orange-500/25 group-hover:scale-110 transition">
-                  <Storefront weight="fill" className="text-2xl" />
+              <Link to="/pos" className="bg-white/95 backdrop-blur-sm p-3.5 sm:p-4 rounded-2xl sm:rounded-3xl border border-slate-200/80 hover:border-brand hover:shadow-lg transition shadow-2xs flex flex-col items-center text-center group cursor-pointer">
+                <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-2xl bg-gradient-to-tr from-[#FF5722] to-[#FF8A65] text-white flex items-center justify-center mb-2 shadow-md shadow-orange-500/25 group-hover:scale-105 transition">
+                  <Storefront weight="fill" className="text-xl" />
                 </div>
-                <h4 className="font-black text-slate-800 text-sm">New Bill (POS)</h4>
-                <p className="text-[11px] text-slate-400 font-medium mt-0.5">नवीन बिल बनवा</p>
+                <h4 className="font-black text-slate-800 text-xs sm:text-sm">New Bill (POS)</h4>
+                <p className="text-[10px] sm:text-[11px] text-slate-400 font-medium mt-0.5">नवीन बिल बनवा</p>
               </Link>
               
-              <Link to="/khata" className="bg-white/95 backdrop-blur-sm p-5 rounded-3xl border border-slate-200/80 hover:border-blue-500 hover:shadow-xl hover:-translate-y-0.5 transition shadow-sm flex flex-col items-center text-center group cursor-pointer">
-                <div className="w-12 h-12 rounded-2xl bg-gradient-to-tr from-blue-600 to-indigo-500 text-white flex items-center justify-center mb-2.5 shadow-md shadow-blue-500/25 group-hover:scale-110 transition">
-                  <BookBookmark weight="fill" className="text-2xl" />
+              <Link to="/khata" className="bg-white/95 backdrop-blur-sm p-3.5 sm:p-4 rounded-2xl sm:rounded-3xl border border-slate-200/80 hover:border-blue-500 hover:shadow-lg transition shadow-2xs flex flex-col items-center text-center group cursor-pointer">
+                <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-2xl bg-gradient-to-tr from-blue-600 to-indigo-500 text-white flex items-center justify-center mb-2 shadow-md shadow-blue-500/25 group-hover:scale-105 transition">
+                  <BookBookmark weight="fill" className="text-xl" />
                 </div>
-                <h4 className="font-black text-slate-800 text-sm">Customer Khata</h4>
-                <p className="text-[11px] text-slate-400 font-medium mt-0.5">ग्राहक खातेवही व उधारी</p>
+                <h4 className="font-black text-slate-800 text-xs sm:text-sm">Customer Khata</h4>
+                <p className="text-[10px] sm:text-[11px] text-slate-400 font-medium mt-0.5">ग्राहक खातेवही व उधारी</p>
               </Link>
 
-              <Link to="/inventory" className="bg-white/95 backdrop-blur-sm p-5 rounded-3xl border border-slate-200/80 hover:border-slate-800 hover:shadow-xl hover:-translate-y-0.5 transition shadow-sm flex flex-col items-center text-center group cursor-pointer">
-                <div className="w-12 h-12 rounded-2xl bg-gradient-to-tr from-slate-700 to-slate-900 text-white flex items-center justify-center mb-2.5 shadow-md shadow-slate-700/25 group-hover:scale-110 transition">
-                  <Package weight="fill" className="text-2xl" />
+              <Link to="/inventory" className="bg-white/95 backdrop-blur-sm p-3.5 sm:p-4 rounded-2xl sm:rounded-3xl border border-slate-200/80 hover:border-slate-800 hover:shadow-lg transition shadow-2xs flex flex-col items-center text-center group cursor-pointer">
+                <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-2xl bg-gradient-to-tr from-slate-700 to-slate-900 text-white flex items-center justify-center mb-2 shadow-md shadow-slate-700/25 group-hover:scale-105 transition">
+                  <Package weight="fill" className="text-xl" />
                 </div>
-                <h4 className="font-black text-slate-800 text-sm">Inventory Stock</h4>
-                <p className="text-[11px] text-slate-400 font-medium mt-0.5">स्टॉक व बॅच मॅनेजमेंट</p>
+                <h4 className="font-black text-slate-800 text-xs sm:text-sm">Inventory Stock</h4>
+                <p className="text-[10px] sm:text-[11px] text-slate-400 font-medium mt-0.5">स्टॉक व्यवस्थापन</p>
               </Link>
 
-              <button onClick={() => setShowPOModal(true)} className="bg-white/95 backdrop-blur-sm p-5 rounded-3xl border border-slate-200/80 hover:border-emerald-500 hover:shadow-xl hover:-translate-y-0.5 transition shadow-sm flex flex-col items-center text-center group cursor-pointer">
-                <div className="w-12 h-12 rounded-2xl bg-gradient-to-tr from-emerald-500 to-teal-600 text-white flex items-center justify-center mb-2.5 shadow-md shadow-emerald-500/25 group-hover:scale-110 transition">
-                  <WhatsappLogo weight="fill" className="text-2xl" />
+              <button onClick={() => setShowPOModal(true)} className="bg-white/95 backdrop-blur-sm p-3.5 sm:p-4 rounded-2xl sm:rounded-3xl border border-slate-200/80 hover:border-emerald-500 hover:shadow-lg transition shadow-2xs flex flex-col items-center text-center group cursor-pointer">
+                <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-2xl bg-gradient-to-tr from-emerald-500 to-teal-600 text-white flex items-center justify-center mb-2 shadow-md shadow-emerald-500/25 group-hover:scale-105 transition">
+                  <WhatsappLogo weight="fill" className="text-xl" />
                 </div>
-                <h4 className="font-black text-slate-800 text-sm">Supplier PO</h4>
-                <p className="text-[11px] text-slate-400 font-medium mt-0.5">WhatsApp सप्लायर ऑर्डर</p>
+                <h4 className="font-black text-slate-800 text-xs sm:text-sm">Supplier PO</h4>
+                <p className="text-[10px] sm:text-[11px] text-slate-400 font-medium mt-0.5">WhatsApp सप्लायर ऑर्डर</p>
               </button>
 
             </div>

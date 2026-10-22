@@ -253,11 +253,11 @@ const Header = ({ onMenuClick, searchTerm, onSearch }) => {
           {/* Attractive Dual-Tone Store Branding */}
           <div className="flex flex-col">
             <div className="flex items-center gap-1 sm:gap-1.5 leading-none">
-              <span className="font-extrabold text-sm sm:text-base lg:text-[19px] xl:text-[21px] tracking-tight text-slate-900 group-hover:text-brand transition-colors drop-shadow-sm whitespace-nowrap">
+              <span className="font-black text-xs sm:text-sm md:text-base tracking-tight text-slate-900 group-hover:text-brand transition-colors drop-shadow-sm whitespace-nowrap">
                 {storeFirstWord}
               </span>
               {storeRestWords && (
-                <span className="font-black text-sm sm:text-base lg:text-[19px] xl:text-[21px] tracking-tight bg-gradient-to-r from-[#FF5722] via-[#FF7043] to-[#FFA726] bg-clip-text text-transparent drop-shadow-sm whitespace-nowrap">
+                <span className="font-black text-xs sm:text-sm md:text-base tracking-tight bg-gradient-to-r from-[#FF5722] via-[#FF7043] to-[#FFA726] bg-clip-text text-transparent drop-shadow-sm whitespace-nowrap">
                   {storeRestWords}
                 </span>
               )}
@@ -493,7 +493,7 @@ const Header = ({ onMenuClick, searchTerm, onSearch }) => {
       />
     )}
 
-    <aside className={`lg:hidden fixed inset-y-0 right-0 w-72 sm:w-80 bg-white/95 backdrop-blur-xl shadow-2xl z-50 p-5 flex flex-col justify-between border-l border-white/60 transition-transform duration-300 ease-in-out ${
+    <aside className={`lg:hidden fixed inset-y-0 right-0 w-72 max-w-[85vw] bg-white/95 backdrop-blur-xl shadow-2xl z-50 p-4 sm:p-5 flex flex-col justify-between border-l border-white/60 transition-transform duration-300 ease-in-out ${
       isMobileMenuOpen ? 'translate-x-0' : 'translate-x-full'
     }`}>
       <div>
@@ -503,7 +503,7 @@ const Header = ({ onMenuClick, searchTerm, onSearch }) => {
             <div className="w-8 h-8 rounded-lg bg-gradient-to-tr from-brand to-orange-400 flex items-center justify-center text-white shadow-md shadow-brand/20">
               <Storefront weight="fill" className="text-lg" />
             </div>
-            <h2 className="font-extrabold text-base text-slate-800 truncate max-w-[170px]">
+            <h2 className="font-black text-sm sm:text-base text-slate-800 truncate max-w-[160px]">
               {user?.store_name || "Dukaan360"}
             </h2>
           </div>

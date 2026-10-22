@@ -110,29 +110,29 @@ const BillHistory = () => {
         <div className="flex flex-col gap-3 shrink-0">
           <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2">
             <div>
-              <h1 className="text-xl lg:text-2xl font-black text-slate-800 tracking-tight flex items-center gap-2">
-                <ClockCounterClockwise weight="fill" className="text-brand text-2xl lg:text-3xl" />
+              <h1 className="text-base sm:text-lg font-black text-slate-800 tracking-tight flex items-center gap-2">
+                <ClockCounterClockwise weight="fill" className="text-brand text-lg sm:text-xl" />
                 <span>{t('bill_history_title')}</span>
-                <span className="text-xs font-bold px-2.5 py-0.5 rounded-full bg-brand/10 text-brand border border-brand/20">
+                <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-brand/10 text-brand border border-brand/20">
                   {bills.length} {t('bills_count')}
                 </span>
               </h1>
-              <p className="text-xs lg:text-[13px] font-bold text-slate-500 mt-0.5">
+              <p className="text-[11px] sm:text-xs font-semibold text-slate-500 mt-0.5">
                 {t('bill_history_subtitle')}
               </p>
             </div>
           </div>
 
           {/* 4 Summary Glass Cards */}
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-2.5 lg:gap-3">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-3">
             {/* Total Revenue */}
-            <div className="glass-panel p-3 lg:p-4 rounded-2xl flex items-center gap-3 border border-white/60 shadow-sm relative overflow-hidden group hover:shadow-md transition">
-              <div className="w-10 h-10 lg:w-11 lg:h-11 rounded-xl bg-gradient-to-tr from-brand to-orange-400 flex items-center justify-center text-white shadow-md shadow-brand/20 shrink-0">
-                <CurrencyInr weight="bold" className="text-xl lg:text-2xl" />
+            <div className="glass-panel p-2.5 sm:p-3 rounded-2xl flex items-center gap-2.5 border border-white/60 shadow-xs relative overflow-hidden group hover:shadow-md transition">
+              <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-xl bg-gradient-to-tr from-brand to-orange-400 flex items-center justify-center text-white shadow-xs shrink-0">
+                <CurrencyInr weight="bold" className="text-base sm:text-xl" />
               </div>
               <div className="min-w-0">
-                <p className="text-[10px] lg:text-[11px] font-extrabold text-slate-500 uppercase tracking-wide truncate">{t('total_invoiced')}</p>
-                <h3 className="text-base lg:text-xl font-black text-slate-800 tracking-tight">
+                <p className="text-[9px] sm:text-[10px] font-extrabold text-slate-500 uppercase tracking-wide truncate">{t('total_invoiced')}</p>
+                <h3 className="text-sm sm:text-base font-black text-slate-800 tracking-tight truncate">
                   ₹{totalRevenue.toLocaleString('en-IN', { maximumFractionDigits: 0 })}
                 </h3>
                 <span className="text-[9px] font-bold text-slate-400">{bills.length} {t('bills_count')}</span>
@@ -140,13 +140,13 @@ const BillHistory = () => {
             </div>
 
             {/* Cash Collected */}
-            <div className="glass-panel p-3 lg:p-4 rounded-2xl flex items-center gap-3 border border-emerald-100/60 shadow-sm relative overflow-hidden group hover:shadow-md transition">
-              <div className="w-10 h-10 lg:w-11 lg:h-11 rounded-xl bg-gradient-to-tr from-emerald-500 to-teal-400 flex items-center justify-center text-white shadow-md shadow-emerald-500/20 shrink-0">
-                <Coins weight="fill" className="text-xl lg:text-2xl" />
+            <div className="glass-panel p-2.5 sm:p-3 rounded-2xl flex items-center gap-2.5 border border-emerald-100/60 shadow-xs relative overflow-hidden group hover:shadow-md transition">
+              <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-xl bg-gradient-to-tr from-emerald-500 to-teal-400 flex items-center justify-center text-white shadow-xs shrink-0">
+                <Coins weight="fill" className="text-base sm:text-xl" />
               </div>
               <div className="min-w-0">
-                <p className="text-[10px] lg:text-[11px] font-extrabold text-emerald-600 uppercase tracking-wide truncate">{t('cash_pill')}</p>
-                <h3 className="text-base lg:text-xl font-black text-slate-800 tracking-tight">
+                <p className="text-[9px] sm:text-[10px] font-extrabold text-emerald-600 uppercase tracking-wide truncate">{t('cash_pill')}</p>
+                <h3 className="text-sm sm:text-base font-black text-slate-800 tracking-tight truncate">
                   ₹{cashTotal.toLocaleString('en-IN', { maximumFractionDigits: 0 })}
                 </h3>
                 <span className="text-[9px] font-bold text-emerald-700/70">{cashBills.length} {t('cash_pill')}</span>
@@ -154,13 +154,13 @@ const BillHistory = () => {
             </div>
 
             {/* UPI Online */}
-            <div className="glass-panel p-3 lg:p-4 rounded-2xl flex items-center gap-3 border border-blue-100/60 shadow-sm relative overflow-hidden group hover:shadow-md transition">
-              <div className="w-10 h-10 lg:w-11 lg:h-11 rounded-xl bg-gradient-to-tr from-blue-500 to-indigo-500 flex items-center justify-center text-white shadow-md shadow-blue-500/20 shrink-0">
-                <CreditCard weight="fill" className="text-xl lg:text-2xl" />
+            <div className="glass-panel p-2.5 sm:p-3 rounded-2xl flex items-center gap-2.5 border border-blue-100/60 shadow-xs relative overflow-hidden group hover:shadow-md transition">
+              <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-xl bg-gradient-to-tr from-blue-500 to-indigo-500 flex items-center justify-center text-white shadow-xs shrink-0">
+                <CreditCard weight="fill" className="text-base sm:text-xl" />
               </div>
               <div className="min-w-0">
-                <p className="text-[10px] lg:text-[11px] font-extrabold text-blue-600 uppercase tracking-wide truncate">{t('upi_pill')}</p>
-                <h3 className="text-base lg:text-xl font-black text-slate-800 tracking-tight">
+                <p className="text-[9px] sm:text-[10px] font-extrabold text-blue-600 uppercase tracking-wide truncate">{t('upi_pill')}</p>
+                <h3 className="text-sm sm:text-base font-black text-slate-800 tracking-tight truncate">
                   ₹{upiTotal.toLocaleString('en-IN', { maximumFractionDigits: 0 })}
                 </h3>
                 <span className="text-[9px] font-bold text-blue-700/70">{upiBills.length} {t('upi_pill')}</span>
@@ -168,13 +168,13 @@ const BillHistory = () => {
             </div>
 
             {/* Khata / Udhaar */}
-            <div className="glass-panel p-3 lg:p-4 rounded-2xl flex items-center gap-3 border border-amber-100/60 shadow-sm relative overflow-hidden group hover:shadow-md transition">
-              <div className="w-10 h-10 lg:w-11 lg:h-11 rounded-xl bg-gradient-to-tr from-amber-500 to-orange-500 flex items-center justify-center text-white shadow-md shadow-amber-500/20 shrink-0">
-                <BookBookmark weight="fill" className="text-xl lg:text-2xl" />
+            <div className="glass-panel p-2.5 sm:p-3 rounded-2xl flex items-center gap-2.5 border border-amber-100/60 shadow-xs relative overflow-hidden group hover:shadow-md transition">
+              <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-xl bg-gradient-to-tr from-amber-500 to-orange-500 flex items-center justify-center text-white shadow-xs shrink-0">
+                <BookBookmark weight="fill" className="text-base sm:text-xl" />
               </div>
               <div className="min-w-0">
-                <p className="text-[10px] lg:text-[11px] font-extrabold text-amber-600 uppercase tracking-wide truncate">{t('khata_pill')}</p>
-                <h3 className="text-base lg:text-xl font-black text-slate-800 tracking-tight">
+                <p className="text-[9px] sm:text-[10px] font-extrabold text-amber-600 uppercase tracking-wide truncate">{t('khata_pill')}</p>
+                <h3 className="text-sm sm:text-base font-black text-slate-800 tracking-tight truncate">
                   ₹{creditTotal.toLocaleString('en-IN', { maximumFractionDigits: 0 })}
                 </h3>
                 <span className="text-[9px] font-bold text-amber-700/70">{creditBills.length} {t('khata_pill')}</span>

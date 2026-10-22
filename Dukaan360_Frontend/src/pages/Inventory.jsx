@@ -462,45 +462,45 @@ const Inventory = () => {
           <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 shrink-0">
             <div>
               <div className="flex items-center gap-2">
-                <div className="w-7 h-7 rounded-lg bg-orange-500 text-white flex items-center justify-center text-sm shadow-xs select-none">
+                <div className="w-7 h-7 rounded-lg bg-orange-500 text-white flex items-center justify-center text-xs shadow-xs select-none">
                   📦
                 </div>
-                <h1 className="text-xl sm:text-2xl font-black text-slate-900 tracking-tight flex items-center gap-2">
+                <h1 className="text-base sm:text-lg font-black text-slate-900 tracking-tight flex items-center gap-2">
                   <span>माल साठा व्यवस्थापन</span>
-                  <span className="text-[11px] font-bold text-orange-600 bg-orange-100/90 border border-orange-200/90 rounded-full px-2.5 py-0.5">
+                  <span className="text-[10px] font-bold text-orange-600 bg-orange-100/90 border border-orange-200/90 rounded-full px-2 py-0.5">
                     {products.length} दुकानातील वस्तू
                   </span>
                 </h1>
               </div>
-              <p className="text-xs font-bold text-slate-500 mt-0.5">
+              <p className="text-[11px] sm:text-xs font-semibold text-slate-500 mt-0.5">
                 दुकानातील साठा, खरेदी किंमत आणि शिल्लक मालाचा थेट हिशोब
               </p>
             </div>
           </div>
 
-          {/* 4 Executive KPI Cards matching crop_cards.png 1:1 */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 shrink-0">
+          {/* 4 Executive KPI Cards */}
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-3 shrink-0">
             
-            {/* Card 1: एकूण वस्तू with 3D Isometric Cardboard Box */}
-            <div className="bg-white rounded-[24px] p-3.5 border border-white/90 shadow-xs flex items-center justify-between relative overflow-hidden group hover:shadow-md transition">
-              <div className="flex items-center gap-3">
-                <div className="w-11 h-11 rounded-2xl bg-gradient-to-br from-amber-500 to-orange-500 flex items-center justify-center text-white shadow-md shadow-orange-500/25 shrink-0">
-                  <Package weight="bold" className="text-2xl" />
+            {/* Card 1: एकूण वस्तू */}
+            <div className="bg-white rounded-2xl sm:rounded-[24px] p-2.5 sm:p-3.5 border border-white/90 shadow-xs flex items-center justify-between relative overflow-hidden group hover:shadow-md transition">
+              <div className="flex items-center gap-2 sm:gap-3 min-w-0">
+                <div className="w-8 h-8 sm:w-11 sm:h-11 rounded-xl sm:rounded-2xl bg-gradient-to-br from-amber-500 to-orange-500 flex items-center justify-center text-white shadow-md shadow-orange-500/25 shrink-0">
+                  <Package weight="bold" className="text-base sm:text-2xl" />
                 </div>
-                <div>
-                  <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wide">एकूण वस्तू</p>
-                  <h3 className="text-lg sm:text-xl font-black text-slate-900 tracking-tight leading-tight">
-                    {products.length} वस्तू <span className="text-xs text-slate-400 font-bold">(Items)</span>
+                <div className="min-w-0">
+                  <p className="text-[9px] sm:text-[10px] font-bold text-slate-400 uppercase tracking-wide truncate">एकूण वस्तू</p>
+                  <h3 className="text-sm sm:text-base font-black text-slate-900 tracking-tight leading-tight truncate">
+                    {products.length} वस्तू <span className="text-[10px] sm:text-xs text-slate-400 font-bold hidden sm:inline">(Items)</span>
                   </h3>
-                  <p className="text-[10px] font-bold text-slate-400 mt-0.5">
+                  <p className="text-[9px] sm:text-[10px] font-bold text-slate-400 mt-0.5 truncate">
                     {categories.length} सर्व कॅटेगरीज
                   </p>
                 </div>
               </div>
               
-              {/* 3D Isometric Cardboard Box on soft orange radial glow */}
-              <div className="w-16 h-16 rounded-full bg-gradient-to-tr from-[#FFA07A]/40 via-[#FFDAB9]/50 to-[#FFE4E1]/30 flex items-center justify-center shrink-0 select-none shadow-inner">
-                <svg className="w-10 h-10 select-none drop-shadow-md" viewBox="0 0 36 36" fill="none">
+              {/* 3D Isometric Cardboard Box */}
+              <div className="w-10 h-10 sm:w-16 sm:h-16 rounded-full bg-gradient-to-tr from-[#FFA07A]/40 via-[#FFDAB9]/50 to-[#FFE4E1]/30 flex items-center justify-center shrink-0 select-none shadow-inner">
+                <svg className="w-6 h-6 sm:w-10 sm:h-10 select-none drop-shadow-md" viewBox="0 0 36 36" fill="none">
                   <path d="M18 4L32 11L18 18L4 11L18 4Z" fill="#FDBA74" />
                   <path d="M4 11L18 18V32L4 25V11Z" fill="#EA580C" />
                   <path d="M32 11L18 18V32L32 25V11Z" fill="#C2410C" />
@@ -509,73 +509,73 @@ const Inventory = () => {
               </div>
             </div>
 
-            {/* Card 2: माल भांडवल - Deep Emerald Gradient + Glowing Neon 3D Rupee Watermark */}
-            <div className="bg-gradient-to-r from-[#005a43] via-[#026c58] to-[#015141] rounded-[24px] p-3.5 text-white shadow-md border border-emerald-400/20 flex items-center justify-between relative overflow-hidden group">
-              <div className="flex items-center gap-3 relative z-10">
-                <div className="w-10 h-10 rounded-2xl bg-teal-300/20 border border-teal-300/30 flex items-center justify-center text-teal-200 text-lg font-black shadow-inner shrink-0">
+            {/* Card 2: माल भांडवल */}
+            <div className="bg-gradient-to-r from-[#005a43] via-[#026c58] to-[#015141] rounded-2xl sm:rounded-[24px] p-2.5 sm:p-3.5 text-white shadow-md border border-emerald-400/20 flex items-center justify-between relative overflow-hidden group">
+              <div className="flex items-center gap-2 sm:gap-3 relative z-10 min-w-0">
+                <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-xl sm:rounded-2xl bg-teal-300/20 border border-teal-300/30 flex items-center justify-center text-teal-200 text-sm sm:text-lg font-black shadow-inner shrink-0">
                   ₹
                 </div>
-                <div>
-                  <p className="text-[10px] font-bold text-teal-200 uppercase tracking-wide">माल भांडवल</p>
-                  <h3 className="text-xl sm:text-2xl font-black text-white tracking-tight leading-tight">
+                <div className="min-w-0">
+                  <p className="text-[9px] sm:text-[10px] font-bold text-teal-200 uppercase tracking-wide truncate">माल भांडवल</p>
+                  <h3 className="text-sm sm:text-lg font-black text-white tracking-tight leading-tight truncate">
                     ₹{totalStockValuation.toLocaleString('en-IN')}
                   </h3>
-                  <p className="text-[10px] font-bold text-teal-200/80 mt-0.5">मालाचे एकूण मूल्य</p>
+                  <p className="text-[9px] sm:text-[10px] font-bold text-teal-200/80 mt-0.5 truncate">मालाचे एकूण मूल्य</p>
                 </div>
               </div>
 
               {/* Glowing Neon Cyan-Teal 3D Rupee Symbol */}
-              <div className="relative flex items-center justify-center select-none pointer-events-none pr-1">
+              <div className="relative flex items-center justify-center select-none pointer-events-none pr-0.5">
                 <div className="absolute inset-0 bg-teal-400/25 blur-md rounded-full"></div>
-                <CurrencyInr weight="bold" className="text-5xl text-[#2dd4bf] drop-shadow-[0_0_12px_rgba(45,212,191,0.8)] relative z-10" />
+                <CurrencyInr weight="bold" className="text-3xl sm:text-5xl text-[#2dd4bf] drop-shadow-[0_0_12px_rgba(45,212,191,0.8)] relative z-10" />
               </div>
             </div>
 
-            {/* Card 3: कमी शिल्लक माल with Warning Badge */}
-            <div className="bg-white rounded-[24px] p-3.5 border border-white/90 shadow-xs flex items-center justify-between relative overflow-hidden group hover:shadow-md transition">
-              <div className="flex items-center gap-3">
-                <div className="w-11 h-11 rounded-2xl bg-gradient-to-br from-amber-500 to-orange-500 flex items-center justify-center text-white shadow-md shadow-orange-500/25 shrink-0 text-xl font-black">
+            {/* Card 3: कमी शिल्लक माल */}
+            <div className="bg-white rounded-2xl sm:rounded-[24px] p-2.5 sm:p-3.5 border border-white/90 shadow-xs flex items-center justify-between relative overflow-hidden group hover:shadow-md transition">
+              <div className="flex items-center gap-2 sm:gap-3 min-w-0">
+                <div className="w-8 h-8 sm:w-11 sm:h-11 rounded-xl sm:rounded-2xl bg-gradient-to-br from-amber-500 to-orange-500 flex items-center justify-center text-white shadow-md shadow-orange-500/25 shrink-0 text-base sm:text-xl font-black">
                   !
                 </div>
-                <div>
-                  <p className="text-[10px] font-bold text-amber-700 uppercase tracking-wide">कमी शिल्लक माल</p>
-                  <h3 className="text-lg sm:text-xl font-black text-slate-900 tracking-tight leading-tight">
-                    {lowStockItems.length} वस्तू <span className="text-xs text-slate-400 font-bold">(Items)</span>
+                <div className="min-w-0">
+                  <p className="text-[9px] sm:text-[10px] font-bold text-amber-700 uppercase tracking-wide truncate">कमी शिल्लक</p>
+                  <h3 className="text-sm sm:text-base font-black text-slate-900 tracking-tight leading-tight truncate">
+                    {lowStockItems.length} वस्तू <span className="text-[10px] sm:text-xs text-slate-400 font-bold hidden sm:inline">(Items)</span>
                   </h3>
-                  <p className="text-[10px] font-bold text-slate-400 mt-0.5">10 पेक्षा कमी शिल्लक</p>
+                  <p className="text-[9px] sm:text-[10px] font-bold text-slate-400 mt-0.5 truncate">&lt; 10 शिल्लक</p>
                 </div>
               </div>
             </div>
 
-            {/* Card 4: संपलेला माल with Red Warning Badge */}
-            <div className="bg-white rounded-[24px] p-3.5 border border-white/90 shadow-xs flex items-center justify-between relative overflow-hidden group hover:shadow-md transition">
-              <div className="flex items-center gap-3">
-                <div className="w-11 h-11 rounded-2xl bg-gradient-to-br from-rose-500 to-red-600 flex items-center justify-center text-white shadow-md shadow-red-500/25 shrink-0 text-xl font-black">
+            {/* Card 4: संपलेला माल */}
+            <div className="bg-white rounded-2xl sm:rounded-[24px] p-2.5 sm:p-3.5 border border-white/90 shadow-xs flex items-center justify-between relative overflow-hidden group hover:shadow-md transition">
+              <div className="flex items-center gap-2 sm:gap-3 min-w-0">
+                <div className="w-8 h-8 sm:w-11 sm:h-11 rounded-xl sm:rounded-2xl bg-gradient-to-br from-rose-500 to-red-600 flex items-center justify-center text-white shadow-md shadow-red-500/25 shrink-0 text-base sm:text-xl font-black">
                   !
                 </div>
-                <div>
-                  <p className="text-[10px] font-bold text-rose-600 uppercase tracking-wide">संपलेला माल</p>
-                  <h3 className="text-lg sm:text-xl font-black text-slate-900 tracking-tight leading-tight">
-                    {outOfStockItems.length} वस्तू <span className="text-xs text-slate-400 font-bold">(Items)</span>
+                <div className="min-w-0">
+                  <p className="text-[9px] sm:text-[10px] font-bold text-rose-600 uppercase tracking-wide truncate">संपलेला माल</p>
+                  <h3 className="text-sm sm:text-base font-black text-slate-900 tracking-tight leading-tight truncate">
+                    {outOfStockItems.length} वस्तू <span className="text-[10px] sm:text-xs text-slate-400 font-bold hidden sm:inline">(Items)</span>
                   </h3>
-                  <p className="text-[10px] font-bold text-emerald-600 mt-0.5">
-                    ✓ छान शिल्लक • 0 जल शिल्लक
+                  <p className="text-[9px] sm:text-[10px] font-bold text-emerald-600 mt-0.5 truncate">
+                    0 जल शिल्लक
                   </p>
                 </div>
               </div>
             </div>
           </div>
 
-          {/* Middle Frosted Glass Filter Bar matching crop_filter.png 1:1 */}
-          <div className="bg-white/70 backdrop-blur-md border border-white/90 p-2 rounded-2xl flex flex-wrap items-center justify-between gap-2.5 shadow-xs shrink-0">
+          {/* Middle Frosted Glass Filter Bar */}
+          <div className="bg-white/70 backdrop-blur-md border border-white/90 p-2 rounded-2xl flex flex-col md:flex-row items-stretch md:items-center justify-between gap-2 shadow-xs shrink-0">
             
-            {/* Left Filter Pills */}
-            <div className="flex items-center gap-2 overflow-x-auto">
-              {/* सर्व (14) */}
+            {/* Left Filter Pills & Search */}
+            <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar pb-0.5 md:pb-0">
+              {/* सर्व Pill */}
               <button 
                 type="button"
                 onClick={() => setStockFilter('All')}
-                className={`bg-white shadow-xs rounded-full px-4 py-1.5 text-xs transition cursor-pointer select-none whitespace-nowrap ${
+                className={`bg-white shadow-xs rounded-full px-3 py-1.5 text-xs transition cursor-pointer select-none whitespace-nowrap shrink-0 ${
                   stockFilter === 'All' 
                     ? 'text-slate-900 font-black border border-slate-300' 
                     : 'text-slate-600 font-bold border border-slate-200/60 hover:text-slate-900'
@@ -584,62 +584,61 @@ const Inventory = () => {
                 सर्व ({products.length})
               </button>
 
-              {/* Search with Barcode Wave S-curve Icon */}
-              <div className="relative w-64 sm:w-72">
+              {/* Search with Barcode Wave Icon */}
+              <div className="relative w-44 sm:w-60 lg:w-72 shrink-0">
                 <MagnifyingGlass className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-xs" />
                 <input 
                   type="text" 
-                  placeholder="वस्तू शोधा किंवा बारकोड स्कॅन करा..." 
+                  placeholder="वस्तू शोधा / स्कॅन करा..." 
                   value={search}
                   onChange={e => setSearch(e.target.value)}
-                  className="w-full h-8 pl-8 pr-8 rounded-full bg-white shadow-xs text-xs font-bold text-slate-800 placeholder-slate-400 outline-none focus:ring-1 focus:ring-orange-400/50"
+                  className="w-full h-8 pl-8 pr-7 rounded-full bg-white shadow-xs text-xs font-bold text-slate-800 placeholder-slate-400 outline-none focus:ring-1 focus:ring-orange-400/50"
                 />
-                <svg className="w-4 h-4 text-orange-400 absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2">
+                <svg className="w-3.5 h-3.5 text-orange-400 absolute right-2.5 top-1/2 -translate-y-1/2 pointer-events-none" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M3 12c3-4 6-4 9 0s6 4 9 0" />
                 </svg>
               </div>
 
-              {/* कमी शिल्लक (3) Pill */}
+              {/* कमी शिल्लक Pill */}
               <button 
                 type="button"
                 onClick={() => setStockFilter(stockFilter === 'Low' ? 'All' : 'Low')}
-                className={`bg-white shadow-xs rounded-full px-3.5 py-1.5 text-xs font-bold transition flex items-center gap-1.5 cursor-pointer whitespace-nowrap select-none ${
-                  stockFilter === 'Low' ? 'ring-2 ring-amber-400 font-black text-amber-800' : 'text-slate-700 hover:text-slate-900'
+                className={`bg-white shadow-xs rounded-full px-3 py-1.5 text-xs font-bold transition flex items-center gap-1.5 cursor-pointer whitespace-nowrap select-none shrink-0 ${
+                  stockFilter === 'Low' ? 'ring-2 ring-amber-400 font-black text-amber-800' : 'text-slate-700 hover:text-slate-900 border border-slate-200/60'
                 }`}
               >
                 <span className="w-2 h-2 rounded-full bg-amber-500 shrink-0"></span>
                 <span>कमी शिल्लक ({lowStockItems.length})</span>
               </button>
 
-              {/* संपलेला माल (0) ⌄ Pill */}
+              {/* संपलेला माल Pill */}
               <button 
                 type="button"
                 onClick={() => setStockFilter(stockFilter === 'Out' ? 'All' : 'Out')}
-                className={`bg-white shadow-xs rounded-full px-3.5 py-1.5 text-xs font-bold transition flex items-center gap-1.5 cursor-pointer whitespace-nowrap select-none ${
-                  stockFilter === 'Out' ? 'ring-2 ring-red-400 font-black text-red-800' : 'text-slate-700 hover:text-slate-900'
+                className={`bg-white shadow-xs rounded-full px-3 py-1.5 text-xs font-bold transition flex items-center gap-1.5 cursor-pointer whitespace-nowrap select-none shrink-0 ${
+                  stockFilter === 'Out' ? 'ring-2 ring-red-400 font-black text-red-800' : 'text-slate-700 hover:text-slate-900 border border-slate-200/60'
                 }`}
               >
                 <span className="w-2 h-2 rounded-full bg-red-500 shrink-0"></span>
                 <span>संपलेला माल ({outOfStockItems.length})</span>
-                <span className="text-[10px] ml-0.5 font-bold">⌄</span>
               </button>
             </div>
 
             {/* Right Action Pills */}
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar shrink-0">
               <button 
                 type="button"
                 onClick={() => alert('Barcode Scanner active!')}
-                className="bg-white/80 hover:bg-white shadow-xs rounded-full px-3.5 py-1.5 text-xs font-bold text-slate-600 flex items-center gap-1.5 transition cursor-pointer select-none"
+                className="bg-white/80 hover:bg-white shadow-xs rounded-full px-2.5 py-1.5 text-xs font-bold text-slate-600 flex items-center gap-1 transition cursor-pointer select-none whitespace-nowrap"
               >
                 <Barcode className="text-sm text-slate-500" />
-                <span>वस्तू शोधा किंवा बारकोड स्कॅन ›</span>
+                <span className="hidden sm:inline">बारकोड स्कॅन ›</span>
               </button>
 
               <button 
                 type="button"
                 onClick={handleAddCategory}
-                className="bg-white hover:bg-white shadow-xs rounded-full px-3.5 py-1.5 text-xs font-bold text-slate-800 flex items-center gap-1.5 transition cursor-pointer select-none"
+                className="bg-white hover:bg-white shadow-xs rounded-full px-3 py-1.5 text-xs font-bold text-slate-800 flex items-center gap-1 transition cursor-pointer select-none whitespace-nowrap"
               >
                 <Folders weight="bold" className="text-sm text-slate-600" />
                 <span>+ कॅटेगरी</span>
@@ -648,7 +647,7 @@ const Inventory = () => {
               <button 
                 type="button"
                 onClick={openNewProductModal}
-                className="bg-gradient-to-r from-[#FF5722] to-[#FF7043] text-white shadow-md shadow-orange-500/30 rounded-xl px-4 py-1.5 text-xs font-black flex items-center gap-1 hover:opacity-95 transition cursor-pointer select-none"
+                className="bg-gradient-to-r from-[#FF5722] to-[#FF7043] text-white shadow-md shadow-orange-500/30 rounded-xl px-3.5 py-1.5 text-xs font-black flex items-center gap-1 hover:opacity-95 transition cursor-pointer select-none whitespace-nowrap"
               >
                 <Plus weight="bold" className="text-sm" />
                 <span>+ नवीन उत्पादन</span>
@@ -656,16 +655,16 @@ const Inventory = () => {
             </div>
           </div>
 
-          {/* Table Container matching crop_table.png 1:1 */}
+          {/* Table Container */}
           <div className="bg-slate-400/10 backdrop-blur-md rounded-3xl border border-white/60 p-3 flex-1 flex flex-col gap-2">
             
-            {/* Header Columns */}
-            <div className="grid grid-cols-12 gap-3 px-4 py-1.5 text-xs font-bold text-slate-700 select-none">
-              <div className="col-span-12 sm:col-span-5">उत्पादनाचे नाव & बारकोड</div>
-              <div className="hidden sm:block sm:col-span-2">कॅटेगरी</div>
-              <div className="hidden sm:block sm:col-span-2 text-center">शिल्लक साठा</div>
-              <div className="hidden sm:block sm:col-span-1 text-right">विक्री किंमत</div>
-              <div className="col-span-12 sm:col-span-2 text-right sm:text-center">कृती</div>
+            {/* Header Columns (Desktop only) */}
+            <div className="hidden sm:grid grid-cols-12 gap-3 px-4 py-1.5 text-xs font-bold text-slate-700 select-none">
+              <div className="col-span-5">उत्पादनाचे नाव & बारकोड</div>
+              <div className="col-span-2">कॅटेगरी</div>
+              <div className="col-span-2 text-center">शिल्लक साठा</div>
+              <div className="col-span-1 text-right">विक्री किंमत</div>
+              <div className="col-span-2 text-center">कृती</div>
             </div>
 
             {/* List of Floating White Card Rows */}
@@ -676,121 +675,221 @@ const Inventory = () => {
                 return (
                   <div 
                     key={p.id}
-                    className="grid grid-cols-12 gap-3 items-center bg-white rounded-2xl shadow-xs border border-white/80 p-3 sm:px-4 sm:py-3 transition hover:shadow-sm"
+                    className="grid grid-cols-12 gap-2 sm:gap-3 items-center bg-white rounded-2xl shadow-xs border border-white/80 p-2.5 sm:px-4 sm:py-3 transition hover:shadow-sm"
                   >
                     
-                    {/* 1. Product Name & Barcode */}
-                    <div className="col-span-12 sm:col-span-5 flex items-center gap-3 min-w-0">
-                      <div className="w-11 h-11 rounded-2xl overflow-hidden bg-slate-900 border border-slate-200 shrink-0 shadow-2xs flex items-center justify-center">
-                        <img 
-                          src={p.image || '/images/atta.jpg'} 
-                          alt={tProduct(p.name)} 
-                          onError={(e) => { e.currentTarget.onerror = null; e.currentTarget.src = '/images/atta.jpg'; }}
-                          className="w-full h-full object-cover" 
-                        />
-                      </div>
-                      <div className="min-w-0 flex-1">
-                        <h4 className="text-xs sm:text-sm font-black text-slate-900 truncate">
-                          {tProduct(p.name)}
-                        </h4>
-                        <div className="flex items-center gap-1.5 mt-0.5 flex-wrap">
-                          <span className="text-[10px] font-bold text-slate-400">
-                            [•] {p.barcode || '8901007001'}
-                          </span>
-                          <span className="text-slate-300">•</span>
-                          <span className="bg-orange-50 text-orange-600 border border-orange-200/80 rounded px-1.5 py-0.2 text-[9px] font-bold">
-                            {p.unit || p.size || 'Pouch'}
-                          </span>
+                    {/* --- DESKTOP VIEW (sm:contents) --- */}
+                    <div className="hidden sm:contents">
+                      {/* 1. Product Name & Barcode */}
+                      <div className="col-span-5 flex items-center gap-3 min-w-0">
+                        <div className="w-10 h-10 rounded-2xl overflow-hidden bg-slate-900 border border-slate-200 shrink-0 shadow-2xs flex items-center justify-center">
+                          <img 
+                            src={p.image || '/images/atta.jpg'} 
+                            alt={tProduct(p.name)} 
+                            onError={(e) => { e.currentTarget.onerror = null; e.currentTarget.src = '/images/atta.jpg'; }}
+                            className="w-full h-full object-cover" 
+                          />
+                        </div>
+                        <div className="min-w-0 flex-1">
+                          <h4 className="text-xs sm:text-[13px] font-black text-slate-900 truncate">
+                            {tProduct(p.name)}
+                          </h4>
+                          <div className="flex items-center gap-1.5 mt-0.5 flex-wrap">
+                            <span className="text-[9px] sm:text-[10px] font-bold text-slate-400">
+                              [•] {p.barcode || '8901007001'}
+                            </span>
+                            <span className="text-slate-300">•</span>
+                            <span className="bg-orange-50 text-orange-600 border border-orange-200/80 rounded px-1.5 py-0.2 text-[9px] font-bold">
+                              {p.unit || p.size || 'Pouch'}
+                            </span>
+                          </div>
                         </div>
                       </div>
-                    </div>
 
-                    {/* 2. Category Pill with Emoji */}
-                    <div className="hidden sm:block sm:col-span-2">
-                      <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-sky-50/80 border border-sky-100 text-slate-700 text-xs font-bold shadow-2xs">
-                        <span className="text-xs">{catDisplay.emoji1}</span>
-                        <span className="truncate">{catDisplay.label}</span>
-                        <span className="text-xs">{catDisplay.emoji2}</span>
+                      {/* 2. Category Pill with Emoji */}
+                      <div className="col-span-2">
+                        <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-sky-50/80 border border-sky-100 text-slate-700 text-xs font-bold shadow-2xs">
+                          <span className="text-xs">{catDisplay.emoji1}</span>
+                          <span className="truncate">{catDisplay.label}</span>
+                          <span className="text-xs">{catDisplay.emoji2}</span>
+                        </div>
                       </div>
-                    </div>
 
-                    {/* 3. Available Stock Stepper Pill */}
-                    <div className="hidden sm:flex sm:col-span-2 justify-center items-center">
-                      <div className="inline-flex items-center justify-between gap-3 bg-[#fff8eb] border border-[#fde3b8] rounded-full px-3.5 py-1 text-xs font-black text-amber-900 shadow-2xs">
-                        <button 
-                          type="button"
-                          onClick={() => handleQuickStockChange(p.id, -1)} 
-                          className="text-amber-700 hover:text-amber-900 font-black text-sm px-1 cursor-pointer transition select-none"
-                        >
-                          −
-                        </button>
-                        <span className="whitespace-nowrap font-black">
-                          {p.stock} {p.unit || p.size || 'Pkt'}
-                        </span>
-                        <button 
-                          type="button"
-                          onClick={() => handleQuickStockChange(p.id, 1)} 
-                          className="text-amber-700 hover:text-amber-900 font-black text-sm px-1 cursor-pointer transition select-none"
-                        >
-                          +
-                        </button>
+                      {/* 3. Available Stock Stepper Pill */}
+                      <div className="col-span-2 flex justify-center items-center">
+                        <div className="inline-flex items-center justify-between gap-2.5 bg-[#fff8eb] border border-[#fde3b8] rounded-full px-3 py-1 text-xs font-black text-amber-900 shadow-2xs">
+                          <button 
+                            type="button"
+                            onClick={() => handleQuickStockChange(p.id, -1)} 
+                            className="text-amber-700 hover:text-amber-900 font-black text-xs px-1 cursor-pointer transition select-none"
+                          >
+                            −
+                          </button>
+                          <span className="whitespace-nowrap font-black">
+                            {p.stock} {p.unit || p.size || 'Pkt'}
+                          </span>
+                          <button 
+                            type="button"
+                            onClick={() => handleQuickStockChange(p.id, 1)} 
+                            className="text-amber-700 hover:text-amber-900 font-black text-xs px-1 cursor-pointer transition select-none"
+                          >
+                            +
+                          </button>
+                        </div>
                       </div>
-                    </div>
 
-                    {/* 4. Selling Price */}
-                    <div className="hidden sm:block sm:col-span-1 text-right">
-                      <p className="font-black text-base text-slate-900 leading-tight">
-                        ₹{parseFloat(p.selling_price || p.price || 0).toFixed(2)}
-                      </p>
-                      {parseFloat(p.mrp || 0) > parseFloat(p.selling_price || p.price || 0) ? (
-                        <p className="text-[10px] text-slate-400 font-bold whitespace-nowrap">
-                          original stripe ₹{parseFloat(p.mrp).toFixed(2)}
+                      {/* 4. Selling Price */}
+                      <div className="col-span-1 text-right">
+                        <p className="font-black text-xs sm:text-sm text-slate-900 leading-tight">
+                          ₹{parseFloat(p.selling_price || p.price || 0).toFixed(2)}
                         </p>
-                      ) : (
-                        <span className="text-[10px] text-transparent select-none">-</span>
-                      )}
+                        {parseFloat(p.mrp || 0) > parseFloat(p.selling_price || p.price || 0) ? (
+                          <p className="text-[9px] text-slate-400 font-bold whitespace-nowrap line-through">
+                            ₹{parseFloat(p.mrp).toFixed(2)}
+                          </p>
+                        ) : (
+                          <span className="text-[9px] text-transparent select-none">-</span>
+                        )}
+                      </div>
+
+                      {/* 5. Quick Actions */}
+                      <div className="col-span-2 flex items-center justify-end gap-1.5">
+                        <button 
+                          type="button"
+                          onClick={() => openStockModal(p)}
+                          className="bg-gradient-to-r from-[#FF5722] to-[#FF7043] text-white font-black text-[11px] px-3 py-1.5 rounded-xl shadow-xs hover:shadow-md transition cursor-pointer flex items-center justify-center gap-1 whitespace-nowrap"
+                        >
+                          <span>+ साठा</span>
+                        </button>
+
+                        <button 
+                          type="button"
+                          onClick={() => openEditProductModal(p)}
+                          className="w-7 h-7 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-600 border border-slate-200/60 flex items-center justify-center transition cursor-pointer"
+                          title="Edit"
+                        >
+                          <PencilSimple weight="bold" className="text-xs" />
+                        </button>
+
+                        <button 
+                          type="button"
+                          onClick={() => openHistoryModal(p)}
+                          className="w-7 h-7 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-600 border border-slate-200/60 flex items-center justify-center transition cursor-pointer"
+                          title="History"
+                        >
+                          <ClockCounterClockwise weight="bold" className="text-xs" />
+                        </button>
+
+                        <button 
+                          type="button"
+                          onClick={() => handleDeleteProduct(p.id)}
+                          className="w-7 h-7 rounded-xl bg-slate-100 hover:bg-red-50 text-slate-400 hover:text-red-500 border border-slate-200/60 flex items-center justify-center transition cursor-pointer"
+                          title="Delete"
+                        >
+                          <Trash weight="bold" className="text-xs" />
+                        </button>
+                      </div>
                     </div>
 
-                    {/* 5. Quick Actions */}
-                    <div className="col-span-12 sm:col-span-2 flex items-center justify-end gap-1.5">
-                      {/* + साठा भरा Button */}
-                      <button 
-                        type="button"
-                        onClick={() => openStockModal(p)}
-                        className="bg-gradient-to-r from-[#FF5722] to-[#FF7043] text-white font-black text-xs px-3.5 py-1.5 rounded-xl shadow-xs hover:shadow-md transition cursor-pointer flex items-center justify-center gap-1"
-                      >
-                        <span>+ साठा भरा</span>
-                      </button>
+                    {/* --- MOBILE VIEW (< sm) --- */}
+                    <div className="sm:hidden col-span-12 flex flex-col gap-2">
+                      {/* Top Row: Image + Name/barcode + Price */}
+                      <div className="flex items-center justify-between gap-2.5">
+                        <div className="flex items-center gap-2.5 min-w-0 flex-1">
+                          <div className="w-10 h-10 rounded-xl overflow-hidden bg-slate-900 border border-slate-200 shrink-0 shadow-2xs flex items-center justify-center">
+                            <img 
+                              src={p.image || '/images/atta.jpg'} 
+                              alt={tProduct(p.name)} 
+                              onError={(e) => { e.currentTarget.onerror = null; e.currentTarget.src = '/images/atta.jpg'; }}
+                              className="w-full h-full object-cover" 
+                            />
+                          </div>
+                          <div className="min-w-0 flex-1">
+                            <h4 className="text-xs font-black text-slate-900 truncate">
+                              {tProduct(p.name)}
+                            </h4>
+                            <div className="flex items-center gap-1.5 mt-0.5">
+                              <span className="text-[9px] font-bold text-slate-400 truncate">
+                                [•] {p.barcode || '8901007001'}
+                              </span>
+                              <span className="bg-orange-50 text-orange-600 border border-orange-200/80 rounded px-1 text-[8px] font-bold shrink-0">
+                                {p.unit || p.size || 'Pkt'}
+                              </span>
+                            </div>
+                          </div>
+                        </div>
 
-                      {/* Edit */}
-                      <button 
-                        type="button"
-                        onClick={() => openEditProductModal(p)}
-                        className="w-8 h-8 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-600 border border-slate-200/60 flex items-center justify-center transition cursor-pointer"
-                        title="Edit"
-                      >
-                        <PencilSimple weight="bold" className="text-xs" />
-                      </button>
+                        {/* Price on Right */}
+                        <div className="text-right shrink-0">
+                          <p className="font-black text-xs text-slate-900 leading-tight">
+                            ₹{parseFloat(p.selling_price || p.price || 0).toFixed(2)}
+                          </p>
+                          {parseFloat(p.mrp || 0) > parseFloat(p.selling_price || p.price || 0) && (
+                            <p className="text-[9px] text-slate-400 font-bold line-through">
+                              ₹{parseFloat(p.mrp).toFixed(2)}
+                            </p>
+                          )}
+                        </div>
+                      </div>
 
-                      {/* History */}
-                      <button 
-                        type="button"
-                        onClick={() => openHistoryModal(p)}
-                        className="w-8 h-8 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-600 border border-slate-200/60 flex items-center justify-center transition cursor-pointer"
-                        title="History"
-                      >
-                        <ClockCounterClockwise weight="bold" className="text-xs" />
-                      </button>
+                      {/* Bottom Row on Mobile: Stepper + Actions */}
+                      <div className="flex items-center justify-between gap-1.5 pt-1.5 border-t border-slate-100">
+                        {/* Stepper */}
+                        <div className="inline-flex items-center gap-2 bg-[#fff8eb] border border-[#fde3b8] rounded-full px-2.5 py-0.5 text-[11px] font-black text-amber-900">
+                          <button 
+                            type="button"
+                            onClick={() => handleQuickStockChange(p.id, -1)} 
+                            className="text-amber-700 hover:text-amber-900 font-black text-xs px-0.5 cursor-pointer"
+                          >
+                            −
+                          </button>
+                          <span className="whitespace-nowrap font-black">
+                            {p.stock} {p.unit || p.size || 'Pkt'}
+                          </span>
+                          <button 
+                            type="button"
+                            onClick={() => handleQuickStockChange(p.id, 1)} 
+                            className="text-amber-700 hover:text-amber-900 font-black text-xs px-0.5 cursor-pointer"
+                          >
+                            +
+                          </button>
+                        </div>
 
-                      {/* Delete */}
-                      <button 
-                        type="button"
-                        onClick={() => handleDeleteProduct(p.id)}
-                        className="w-8 h-8 rounded-xl bg-slate-100 hover:bg-red-50 text-slate-400 hover:text-red-500 border border-slate-200/60 flex items-center justify-center transition cursor-pointer"
-                        title="Delete"
-                      >
-                        <Trash weight="bold" className="text-xs" />
-                      </button>
+                        {/* Actions */}
+                        <div className="flex items-center gap-1">
+                          <button 
+                            type="button"
+                            onClick={() => openStockModal(p)}
+                            className="bg-gradient-to-r from-[#FF5722] to-[#FF7043] text-white font-black text-[10px] px-2.5 py-1 rounded-lg shadow-xs cursor-pointer whitespace-nowrap"
+                          >
+                            + साठा
+                          </button>
+                          <button 
+                            type="button"
+                            onClick={() => openEditProductModal(p)}
+                            className="w-6 h-6 rounded-lg bg-slate-100 text-slate-600 flex items-center justify-center cursor-pointer"
+                            title="Edit"
+                          >
+                            <PencilSimple weight="bold" className="text-[10px]" />
+                          </button>
+                          <button 
+                            type="button"
+                            onClick={() => openHistoryModal(p)}
+                            className="w-6 h-6 rounded-lg bg-slate-100 text-slate-600 flex items-center justify-center cursor-pointer"
+                            title="History"
+                          >
+                            <ClockCounterClockwise weight="bold" className="text-[10px]" />
+                          </button>
+                          <button 
+                            type="button"
+                            onClick={() => handleDeleteProduct(p.id)}
+                            className="w-6 h-6 rounded-lg bg-slate-100 text-slate-400 hover:text-red-500 flex items-center justify-center cursor-pointer"
+                            title="Delete"
+                          >
+                            <Trash weight="bold" className="text-[10px]" />
+                          </button>
+                        </div>
+                      </div>
                     </div>
 
                   </div>
@@ -804,35 +903,35 @@ const Inventory = () => {
 
       {/* 1. Stock History Modal */}
       {showHistoryModal && (
-        <div className="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-          <div className="bg-white rounded-3xl p-6 w-full max-w-lg shadow-2xl border border-slate-100 flex flex-col max-h-[80vh] animate-scale-up">
-            <div className="flex justify-between items-center mb-5 shrink-0">
+        <div className="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-3 sm:p-4">
+          <div className="bg-white rounded-3xl p-5 sm:p-6 w-full max-w-lg shadow-2xl border border-slate-100 flex flex-col max-h-[80vh] animate-scale-up">
+            <div className="flex justify-between items-center mb-4 shrink-0">
               <div>
-                <h3 className="font-black text-xl text-slate-900 flex items-center gap-2">
-                  <ClockCounterClockwise className="text-brand text-2xl" /> {t('stock_batch_history')}
+                <h3 className="font-black text-base sm:text-lg text-slate-900 flex items-center gap-2">
+                  <ClockCounterClockwise className="text-brand text-xl" /> {t('stock_batch_history')}
                 </h3>
-                <p className="text-sm font-bold text-slate-500 mt-1">{tProduct(selectedProduct?.name)}</p>
+                <p className="text-xs font-bold text-slate-500 mt-0.5">{tProduct(selectedProduct?.name)}</p>
               </div>
               <button onClick={() => setShowHistoryModal(false)} className="text-slate-400 hover:text-red-500 hover:bg-slate-100 p-1.5 rounded-full transition cursor-pointer">
-                <X weight="bold" className="text-xl"/> 
+                <X weight="bold" className="text-lg"/> 
               </button>
             </div>
             
-            <div className="flex-1 overflow-y-auto custom-scrollbar space-y-2.5">
+            <div className="flex-1 overflow-y-auto custom-scrollbar space-y-2">
               {historyLoading ? (
                 <div className="flex justify-center py-10"><div className="animate-spin h-6 w-6 border-2 border-brand rounded-full border-t-transparent"></div></div>
               ) : stockHistory.length === 0 ? (
-                <div className="text-center py-10 text-slate-500 font-medium">{t('no_stock_batches')}</div>
+                <div className="text-center py-10 text-slate-500 font-medium text-xs">{t('no_stock_batches')}</div>
               ) : (
                 stockHistory.map((batch, idx) => (
-                  <div key={idx} className="bg-slate-50 border border-slate-200/70 rounded-2xl p-4 flex justify-between items-center">
+                  <div key={idx} className="bg-slate-50 border border-slate-200/70 rounded-2xl p-3 flex justify-between items-center">
                     <div>
-                      <p className="font-black text-slate-800 text-sm">{t('batch')}: {batch.batch_number}</p>
-                      <p className="text-xs font-bold text-slate-500 uppercase mt-1">{t('current_quantity')}: {batch.current_quantity}</p>
+                      <p className="font-black text-slate-800 text-xs sm:text-sm">{t('batch')}: {batch.batch_number}</p>
+                      <p className="text-[11px] font-bold text-slate-500 uppercase mt-0.5">{t('current_quantity')}: {batch.current_quantity}</p>
                     </div>
                     <div className="text-right">
-                      <p className="text-[10px] font-bold text-slate-500 uppercase mb-0.5">{t('purchase_cost')}</p>
-                      <p className="font-black text-brand text-lg">₹{batch.purchase_rate.toFixed(2)}</p>
+                      <p className="text-[9px] font-bold text-slate-500 uppercase mb-0.5">{t('purchase_cost')}</p>
+                      <p className="font-black text-brand text-sm sm:text-base">₹{batch.purchase_rate.toFixed(2)}</p>
                     </div>
                   </div>
                 ))
@@ -844,47 +943,47 @@ const Inventory = () => {
 
       {/* 2. Add Stock (साठा भरा) Modal */}
       {showStockModal && (
-        <div className="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-          <div className="bg-white rounded-3xl p-6 w-full max-w-sm shadow-2xl border border-slate-100 animate-scale-up">
-            <div className="flex justify-between items-center mb-4">
-              <h3 className="font-black text-xl text-slate-900 flex items-center gap-2">
+        <div className="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-3 sm:p-4">
+          <div className="bg-white rounded-3xl p-5 sm:p-6 w-full max-w-sm shadow-2xl border border-slate-100 animate-scale-up">
+            <div className="flex justify-between items-center mb-3">
+              <h3 className="font-black text-base sm:text-lg text-slate-900 flex items-center gap-2">
                 <Plus weight="bold" className="text-emerald-500" /> साठा भरा (Add Stock)
               </h3>
               <button onClick={() => setShowStockModal(false)} className="text-slate-400 hover:text-red-500 hover:bg-slate-100 p-1.5 rounded-full transition cursor-pointer">
-                <X weight="bold" className="text-xl"/> 
+                <X weight="bold" className="text-lg"/> 
               </button>
             </div>
             
-            <div className="p-3 rounded-2xl bg-orange-50 border border-orange-100 mb-4">
-              <p className="text-xs font-bold text-slate-500 uppercase">{t('product_name')}</p>
-              <h4 className="text-sm font-black text-slate-800 mt-0.5">{tProduct(selectedProduct?.name)}</h4>
+            <div className="p-2.5 rounded-2xl bg-orange-50 border border-orange-100 mb-3">
+              <p className="text-[10px] font-bold text-slate-500 uppercase">{t('product_name')}</p>
+              <h4 className="text-xs font-black text-slate-800 mt-0.5">{tProduct(selectedProduct?.name)}</h4>
             </div>
 
-            <form onSubmit={handleAddStock} className="flex flex-col gap-4">
+            <form onSubmit={handleAddStock} className="flex flex-col gap-3">
               <div>
-                <label className="block text-[11px] font-bold text-slate-500 uppercase mb-1 flex justify-between">
+                <label className="block text-[10px] font-bold text-slate-500 uppercase mb-1 flex justify-between">
                   <span>{t('quantity_received')}</span>
                   <span className="text-brand bg-orange-100 px-1.5 rounded font-black">{tUnit(selectedProduct?.unit || selectedProduct?.size) || 'Unit'}</span>
                 </label>
                 <input 
                   type="number" required min="0.01" step="0.01"
                   value={addQty} onChange={e => setAddQty(e.target.value)}
-                  className="w-full h-11 border border-slate-200 rounded-2xl px-4 font-bold focus:border-brand focus:outline-none focus:ring-2 focus:ring-brand/20 transition text-base" 
+                  className="w-full h-10 border border-slate-200 rounded-xl px-3 font-bold focus:border-brand focus:outline-none focus:ring-2 focus:ring-brand/20 transition text-sm" 
                   placeholder={t('quantity_received')}
                   autoFocus
                 />
               </div>
               
               <div>
-                <label className="block text-[11px] font-bold text-slate-500 uppercase mb-1">{t('purchase_rate_per_unit')} (₹)</label>
+                <label className="block text-[10px] font-bold text-slate-500 uppercase mb-1">{t('purchase_rate_per_unit')} (₹)</label>
                 <input 
                   type="number" required step="0.01"
                   value={costPrice} onChange={e => setCostPrice(e.target.value)}
-                  className="w-full h-11 border border-slate-200 rounded-2xl px-4 font-bold focus:border-brand focus:outline-none focus:ring-2 focus:ring-brand/20 transition text-base" 
+                  className="w-full h-10 border border-slate-200 rounded-xl px-3 font-bold focus:border-brand focus:outline-none focus:ring-2 focus:ring-brand/20 transition text-sm" 
                 />
               </div>
               
-              <button type="submit" className="w-full h-12 bg-gradient-to-r from-[#FF5722] via-[#FF6E40] to-[#FF8A65] hover:opacity-95 text-white rounded-2xl font-black mt-2 transition shadow-lg shadow-orange-500/30 cursor-pointer">
+              <button type="submit" className="w-full h-10 sm:h-11 bg-gradient-to-r from-[#FF5722] via-[#FF6E40] to-[#FF8A65] hover:opacity-95 text-white rounded-xl font-black mt-1 transition shadow-lg shadow-orange-500/30 cursor-pointer text-xs sm:text-sm">
                 {t('confirm_stock_entry') || 'स्टॉक नोंदवा'}
               </button>
             </form>
@@ -895,22 +994,22 @@ const Inventory = () => {
       {/* 3. Ultra-Attractive Add/Edit Product Modal */}
       {showProductModal && (
         <div className="fixed inset-0 bg-slate-900/60 backdrop-blur-md z-50 flex items-center justify-center p-3 sm:p-4 animate-in fade-in duration-200">
-          <div className="bg-white/95 backdrop-blur-2xl rounded-[32px] p-5 sm:p-7 w-full max-w-lg shadow-[0_25px_60px_-15px_rgba(0,0,0,0.3)] border border-white/80 max-h-[92vh] flex flex-col relative overflow-hidden animate-scale-up">
+          <div className="bg-white/95 backdrop-blur-2xl rounded-[32px] p-4 sm:p-6 w-full max-w-lg shadow-[0_25px_60px_-15px_rgba(0,0,0,0.3)] border border-white/80 max-h-[92vh] flex flex-col relative overflow-hidden animate-scale-up">
             
             {/* Top Radiant Accent Ribbon */}
             <div className="h-1.5 w-full absolute top-0 left-0 bg-gradient-to-r from-[#FF5722] via-[#FFB300] to-[#FF5722]"></div>
 
             {/* Modal Header */}
-            <div className="flex justify-between items-start mb-5 pb-4 border-b border-slate-100 shrink-0">
-              <div className="flex items-center gap-3.5">
-                <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-[#FF5722] via-[#FF6E40] to-[#FF8A65] text-white flex items-center justify-center shadow-lg shadow-orange-500/30 text-2xl font-black shrink-0">
+            <div className="flex justify-between items-start mb-4 pb-3 border-b border-slate-100 shrink-0">
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#FF5722] via-[#FF6E40] to-[#FF8A65] text-white flex items-center justify-center shadow-lg shadow-orange-500/30 text-lg font-black shrink-0">
                   {isEditing ? <PencilSimple weight="bold" /> : <Package weight="fill" />}
                 </div>
                 <div>
-                  <h3 className="font-black text-xl sm:text-2xl text-slate-900 tracking-tight leading-tight">
+                  <h3 className="font-black text-base sm:text-lg text-slate-900 tracking-tight leading-tight">
                     {isEditing ? 'उत्पादनाची माहिती बदला' : 'नवीन वस्तू जोडा'}
                   </h3>
-                  <p className="text-xs font-bold text-slate-500 mt-0.5 flex items-center gap-1.5">
+                  <p className="text-[11px] font-bold text-slate-500 mt-0.5 flex items-center gap-1.5">
                     <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
                     <span>{isEditing ? 'वस्तूचे नाव, किंमत व तपशील अपडेट करा' : 'दुकानात नवीन किराणा किंवा उत्पादन नोंदवा'}</span>
                   </p>
@@ -920,10 +1019,10 @@ const Inventory = () => {
               <button 
                 type="button"
                 onClick={() => setShowProductModal(false)} 
-                className="w-9 h-9 rounded-full bg-slate-100 hover:bg-red-50 text-slate-400 hover:text-red-500 flex items-center justify-center transition cursor-pointer shrink-0"
+                className="w-8 h-8 rounded-full bg-slate-100 hover:bg-red-50 text-slate-400 hover:text-red-500 flex items-center justify-center transition cursor-pointer shrink-0"
                 title="बंद करा"
               >
-                <X weight="bold" className="text-lg" /> 
+                <X weight="bold" className="text-base" /> 
               </button>
             </div>
             

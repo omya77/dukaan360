@@ -114,45 +114,45 @@ const Khata = () => {
         {/* Left Column: Customer List */}
         <section className={`${selectedCustomer ? 'hidden lg:flex' : 'flex'} w-full lg:w-1/3 bg-white rounded-2xl shadow-sm border border-slate-200 flex-col overflow-hidden`}>
           <div className="p-4 border-b border-slate-100 bg-slate-50">
-            <div className="flex justify-between items-center mb-3">
-              <h2 className="font-bold text-lg text-slate-800 flex items-center gap-2">
-                <BookBookmark weight="fill" className="text-brand text-xl" /> {t('khata_title')}
+            <div className="flex justify-between items-center mb-2.5">
+              <h2 className="font-black text-base text-slate-800 flex items-center gap-2">
+                <BookBookmark weight="fill" className="text-brand text-lg" /> {t('khata_title')}
               </h2>
-              <div className="flex gap-2">
+              <div className="flex gap-1.5">
                 <button 
                   onClick={() => { setBulkIndex(0); setIsBulkModalOpen(true); }}
-                  className="bg-[#25D366] text-white text-xs font-bold px-3 py-1.5 rounded-lg hover:bg-[#128C7E] transition shadow-[0_2px_10px_rgba(37,211,102,0.3)] flex items-center gap-1"
+                  className="bg-[#25D366] text-white text-[11px] font-bold px-2.5 py-1.5 rounded-lg hover:bg-[#128C7E] transition shadow-xs flex items-center gap-1 cursor-pointer"
                   title="Send reminders"
                 >
-                  <WhatsappLogo weight="fill" className="text-sm" /> {t('bulk_remind')}
+                  <WhatsappLogo weight="fill" className="text-xs" /> {t('bulk_remind')}
                 </button>
                 <button 
                   onClick={() => setIsAddModalOpen(true)}
-                  className="bg-brand text-white text-xs font-bold px-3 py-1.5 rounded-lg hover:bg-brandHover transition shadow-sm"
+                  className="bg-brand text-white text-[11px] font-bold px-2.5 py-1.5 rounded-lg hover:bg-brandHover transition shadow-xs cursor-pointer"
                 >
                   {t('new_customer_btn')}
                 </button>
               </div>
             </div>
             
-            <div className="bg-orange-50 rounded-xl p-3.5 mb-4 border border-orange-100 flex justify-between items-center">
+            <div className="bg-orange-50 rounded-xl p-3 mb-3 border border-orange-100 flex justify-between items-center">
               <div>
-                <p className="text-[11px] font-bold text-orange-600 uppercase tracking-wide">{t('market_outstanding')}</p>
-                <h3 className="text-lg font-black text-orange-700 mt-0.5">₹{totalMarketOutstanding.toFixed(2)}</h3>
+                <p className="text-[10px] font-bold text-orange-600 uppercase tracking-wide">{t('market_outstanding')}</p>
+                <h3 className="text-base font-black text-orange-700 mt-0.5">₹{totalMarketOutstanding.toFixed(2)}</h3>
               </div>
-              <div className="w-10 h-10 bg-orange-100 rounded-full flex items-center justify-center text-orange-500">
-                <Money weight="fill" className="text-xl" />
+              <div className="w-8 h-8 bg-orange-100 rounded-full flex items-center justify-center text-orange-500">
+                <Money weight="fill" className="text-base" />
               </div>
             </div>
 
             <div className="relative">
-              <MagnifyingGlass weight="bold" className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" />
+              <MagnifyingGlass weight="bold" className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-xs" />
               <input 
                 type="text"
                 placeholder={t('search_customers')}
                 value={searchTerm}
                 onChange={e => setSearchTerm(e.target.value)}
-                className="w-full h-10 pl-9 pr-3 rounded-xl border border-slate-200 bg-white text-sm focus:border-brand focus:ring-2 focus:ring-brand/20 outline-none transition"
+                className="w-full h-9 pl-8 pr-3 rounded-xl border border-slate-200 bg-white text-xs font-bold focus:border-brand focus:ring-1 focus:ring-brand/20 outline-none transition"
               />
             </div>
           </div>
@@ -205,7 +205,7 @@ const Khata = () => {
                     <User weight="fill" className="text-2xl" />
                   </div>
                   <div>
-                    <h2 className="text-lg lg:text-xl font-black text-slate-800">{selectedCustomer.name}</h2>
+                    <h2 className="text-base sm:text-lg font-black text-slate-800">{selectedCustomer.name}</h2>
                     <p className="text-xs font-bold text-slate-500 flex items-center gap-1 mt-0.5">
                       <Phone weight="fill" className="text-slate-400" /> {selectedCustomer.mobile}
                       <span className="mx-1.5 text-slate-300">|</span>
@@ -217,33 +217,33 @@ const Khata = () => {
                 <div className="flex gap-2 w-full lg:w-auto">
                   <button 
                     onClick={handleWhatsAppReminder}
-                    className="flex-1 lg:flex-none px-4 py-2.5 bg-green-50 hover:bg-green-100 text-green-600 rounded-xl font-bold transition flex items-center justify-center gap-2 border border-green-200 text-sm active:scale-95"
+                    className="flex-1 lg:flex-none px-3.5 py-2 bg-green-50 hover:bg-green-100 text-green-600 rounded-xl font-bold transition flex items-center justify-center gap-1.5 border border-green-200 text-xs active:scale-95 cursor-pointer"
                   >
-                    <WhatsappLogo weight="fill" className="text-lg" /> {t('remind')}
+                    <WhatsappLogo weight="fill" className="text-base" /> {t('remind')}
                   </button>
                   <button 
                     onClick={() => setIsPayModalOpen(true)}
-                    className="flex-1 lg:flex-none px-4 py-2.5 bg-brand text-white rounded-xl font-bold shadow-[0_2px_10px_rgba(255,87,34,0.2)] hover:bg-brandHover transition flex items-center justify-center gap-2 text-sm active:scale-95"
+                    className="flex-1 lg:flex-none px-3.5 py-2 bg-brand text-white rounded-xl font-bold shadow-xs hover:bg-brandHover transition flex items-center justify-center gap-1.5 text-xs active:scale-95 cursor-pointer"
                   >
-                    <Money weight="fill" className="text-lg" /> {t('receive_payment_btn')}
+                    <Money weight="fill" className="text-base" /> {t('receive_payment_btn')}
                   </button>
                 </div>
               </div>
 
               {/* Ledger Content */}
-              <div className="flex-1 overflow-y-auto p-4 lg:p-6 bg-slate-50/50">
-                <div className="max-w-2xl mx-auto space-y-6">
+              <div className="flex-1 overflow-y-auto p-3 lg:p-5 bg-slate-50/50">
+                <div className="max-w-2xl mx-auto space-y-4">
                   
                   {/* Total Due Card */}
-                  <div className={`p-5 lg:p-6 rounded-2xl shadow-sm border flex items-center justify-between ${selectedCustomer.current_due > 0 ? 'bg-white border-red-100' : 'bg-white border-green-100'}`}>
+                  <div className={`p-4 lg:p-5 rounded-2xl shadow-xs border flex items-center justify-between ${selectedCustomer.current_due > 0 ? 'bg-white border-red-100' : 'bg-white border-green-100'}`}>
                     <div>
-                      <p className="text-xs font-bold text-slate-500 uppercase tracking-widest mb-1">{t('total_due')}</p>
-                      <h1 className={`text-2xl font-black ${selectedCustomer.current_due > 0 ? 'text-red-500' : 'text-green-500'}`}>
+                      <p className="text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-0.5">{t('total_due')}</p>
+                      <h1 className={`text-lg sm:text-xl font-black ${selectedCustomer.current_due > 0 ? 'text-red-500' : 'text-green-500'}`}>
                         ₹{selectedCustomer.current_due.toFixed(2)}
                       </h1>
                     </div>
-                    <div className={`w-12 h-10 rounded-xl flex items-center justify-center ${selectedCustomer.current_due > 0 ? 'bg-red-50 text-red-500' : 'bg-green-50 text-green-500'}`}>
-                      <Money weight="fill" className="text-2xl" />
+                    <div className={`w-10 h-10 rounded-xl flex items-center justify-center ${selectedCustomer.current_due > 0 ? 'bg-red-50 text-red-500' : 'bg-green-50 text-green-500'}`}>
+                      <Money weight="fill" className="text-xl" />
                     </div>
                   </div>
 
