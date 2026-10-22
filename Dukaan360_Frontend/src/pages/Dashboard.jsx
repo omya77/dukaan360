@@ -551,62 +551,111 @@ const Dashboard = () => {
 
         {/* Add Expense Modal */}
         {showExpenseModal && (
-          <div className="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-start justify-center p-4 pt-20 sm:pt-24 overflow-y-auto">
-            <div className="bg-white rounded-3xl w-full max-w-sm shadow-2xl p-6 flex flex-col max-h-[calc(100vh-120px)]">
-              <div className="flex justify-between items-center mb-6">
-                <div>
-                  <h3 className="font-black text-xl text-slate-800">Add Expense</h3>
-                  <p className="text-xs font-bold text-slate-500 mt-1 uppercase tracking-wide">दुकानचा खर्च</p>
+          <div className="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-start justify-center p-4 pt-24 sm:pt-28 overflow-y-auto">
+            <div className="bg-white rounded-[32px] w-full max-w-sm sm:max-w-md shadow-2xl border border-slate-100 p-6 flex flex-col relative overflow-hidden animate-scale-up">
+              
+              {/* Header */}
+              <div className="flex items-center justify-between mb-5">
+                <div className="flex items-center gap-3">
+                  {/* 3D Leather Wallet Graphic */}
+                  <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-amber-500 to-orange-600 flex items-center justify-center shadow-lg shadow-orange-500/25 shrink-0 select-none">
+                    <svg className="w-8 h-8 select-none" viewBox="0 0 36 36" fill="none">
+                      <rect x="10" y="6" width="16" height="10" rx="1.5" fill="#34D399" transform="rotate(-6 10 6)" />
+                      <rect x="13" y="8" width="16" height="10" rx="1.5" fill="#10B981" />
+                      <rect x="4" y="11" width="28" height="20" rx="4" fill="#9A3412" />
+                      <rect x="4" y="14" width="28" height="17" rx="3.5" fill="#C2410C" />
+                      <path d="M22 17H32V25H22C19.7909 25 18 23.2091 18 21C18 18.7909 19.7909 17 22 17Z" fill="#7C2D12" />
+                      <circle cx="27" cy="21" r="2" fill="#FDE047" stroke="#CA8A04" strokeWidth="0.5" />
+                    </svg>
+                  </div>
+                  <div>
+                    <h3 className="font-black text-xl text-slate-900 leading-tight">Add Expense</h3>
+                    <p className="text-xs font-bold text-slate-500 mt-0.5">दुकानचा खर्च</p>
+                  </div>
                 </div>
+
                 <button 
                   onClick={() => setShowExpenseModal(false)}
-                  className="w-8 h-8 bg-slate-100 rounded-full flex items-center justify-center text-slate-600 hover:bg-slate-200 transition cursor-pointer"
+                  className="w-8 h-8 bg-slate-100 hover:bg-slate-200 text-slate-500 rounded-full flex items-center justify-center transition cursor-pointer"
                 >
-                  <X weight="bold" />
+                  <X weight="bold" className="text-base" />
                 </button>
               </div>
               
               <form onSubmit={handleAddExpense} className="flex flex-col gap-4">
+                {/* Category Field */}
                 <div>
-                  <label className="block text-xs font-bold text-slate-500 uppercase mb-1.5">Category</label>
-                  <select 
-                    value={expenseData.category}
-                    onChange={(e) => setExpenseData({...expenseData, category: e.target.value})}
-                    className="w-full h-11 bg-slate-50 border border-slate-200 rounded-xl px-3 text-sm font-bold text-slate-800 focus:outline-none focus:border-brand focus:ring-1 focus:ring-brand"
-                  >
-                    <option value="Tea & Snacks">Tea & Snacks (चहापाणी)</option>
-                    <option value="Transport">Transport (गाडी भाडे)</option>
-                    <option value="Wages">Wages (मजुरी)</option>
-                    <option value="Supplier Payment">Supplier Payment (व्यापारी पेमेंट)</option>
-                    <option value="Electricity / Bills">Electricity / Bills (बिले)</option>
-                    <option value="Other">Other (इतर)</option>
-                  </select>
+                  <label className="block text-[10px] font-black text-slate-500 uppercase tracking-wider mb-1.5">
+                    CATEGORY
+                  </label>
+                  <div className="relative flex items-center bg-slate-50/80 border border-slate-200/90 rounded-2xl h-12 px-3.5 focus-within:border-brand focus-within:bg-white transition">
+                    <span className="text-base select-none shrink-0 mr-2">☕</span>
+                    <select 
+                      value={expenseData.category}
+                      onChange={(e) => setExpenseData({...expenseData, category: e.target.value})}
+                      className="w-full h-full bg-transparent text-xs sm:text-sm font-bold text-slate-800 appearance-none outline-none cursor-pointer pr-6"
+                    >
+                      <option value="Tea & Snacks">Tea & Snacks (चहापाणी)</option>
+                      <option value="Transport">Transport (गाडी भाडे)</option>
+                      <option value="Wages">Wages (मजुरी)</option>
+                      <option value="Supplier Payment">Supplier Payment (व्यापारी पेमेंट)</option>
+                      <option value="Electricity / Bills">Electricity / Bills (बिले)</option>
+                      <option value="Other">Other (इतर)</option>
+                    </select>
+                    <span className="absolute right-3.5 pointer-events-none text-slate-500 text-xs font-black">
+                      ⌄
+                    </span>
+                  </div>
                 </div>
 
+                {/* Amount Field */}
                 <div>
-                  <label className="block text-xs font-bold text-slate-500 uppercase mb-1.5">Amount (₹)</label>
-                  <input 
-                    type="number" step="any" required min="1"
-                    value={expenseData.amount}
-                    onChange={(e) => setExpenseData({...expenseData, amount: e.target.value})}
-                    placeholder="Enter amount"
-                    className="w-full h-11 bg-slate-50 border border-slate-200 rounded-xl px-3 text-sm font-black text-slate-800 focus:outline-none focus:border-brand focus:ring-1 focus:ring-brand"
-                  />
+                  <label className="block text-[10px] font-black text-slate-500 uppercase tracking-wider mb-1.5">
+                    AMOUNT (₹)
+                  </label>
+                  <div className="relative flex items-center">
+                    <input 
+                      type="number" step="any" required min="1"
+                      value={expenseData.amount}
+                      onChange={(e) => setExpenseData({...expenseData, amount: e.target.value})}
+                      placeholder="Enter amount"
+                      className="w-full h-12 pl-4 pr-12 bg-slate-50/80 border border-slate-200/90 rounded-2xl text-sm font-black text-slate-900 placeholder-slate-400 focus:outline-none focus:border-brand focus:bg-white transition"
+                    />
+                    <div className="absolute right-3 w-7 h-7 rounded-xl bg-slate-200/70 text-slate-600 flex items-center justify-center text-xs font-black pointer-events-none select-none">
+                      ₹
+                    </div>
+                  </div>
                 </div>
 
+                {/* Description Field */}
                 <div>
-                  <label className="block text-xs font-bold text-slate-500 uppercase mb-1.5">Description (Optional)</label>
-                  <input 
-                    type="text"
-                    value={expenseData.description}
-                    onChange={(e) => setExpenseData({...expenseData, description: e.target.value})}
-                    placeholder="e.g. Paid to driver"
-                    className="w-full h-11 bg-slate-50 border border-slate-200 rounded-xl px-3 text-sm font-bold text-slate-800 focus:outline-none focus:border-brand focus:ring-1 focus:ring-brand"
-                  />
+                  <label className="block text-[10px] font-black text-slate-500 uppercase tracking-wider mb-1.5">
+                    DESCRIPTION (OPTIONAL)
+                  </label>
+                  <div className="relative flex items-center">
+                    <input 
+                      type="text"
+                      value={expenseData.description}
+                      onChange={(e) => setExpenseData({...expenseData, description: e.target.value})}
+                      placeholder="e.g. Paid to driver"
+                      className="w-full h-12 pl-4 pr-12 bg-slate-50/80 border border-slate-200/90 rounded-2xl text-xs font-bold text-slate-800 placeholder-slate-400 focus:outline-none focus:border-brand focus:bg-white transition"
+                    />
+                    <div className="absolute right-3.5 select-none pointer-events-none text-slate-400">
+                      <svg className="w-5 h-5 text-slate-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                        <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" />
+                        <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" />
+                      </svg>
+                    </div>
+                  </div>
                 </div>
 
-                <button type="submit" className="h-10 w-full bg-brand hover:bg-brandHover text-white rounded-xl font-black shadow-lg shadow-brand/30 transition-all active:scale-95 mt-2 cursor-pointer">
-                  Save Expense
+                {/* Save Expense Button */}
+                <button 
+                  type="submit" 
+                  className="w-full h-12 rounded-2xl bg-gradient-to-r from-[#FF5722] via-[#FF6E40] to-[#FF8A65] hover:opacity-95 text-white font-black text-sm flex items-center justify-center gap-2 shadow-lg shadow-orange-500/30 active:scale-98 transition cursor-pointer mt-2"
+                >
+                  <span>Save Expense</span>
+                  <span className="text-base font-black tracking-tighter">»</span>
                 </button>
               </form>
             </div>
@@ -615,32 +664,59 @@ const Dashboard = () => {
 
         {/* Cash Tally Modal */}
         {isTallyModalOpen && (
-          <div className="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-start justify-center p-4 pt-20 sm:pt-24 overflow-y-auto">
-            <div className="bg-white rounded-2xl w-full max-w-sm shadow-2xl overflow-hidden max-h-[calc(100vh-120px)]">
-              <div className="bg-brand p-4 flex justify-between items-center text-white">
-                <h3 className="font-black text-lg flex items-center gap-2"><Calculator weight="fill" /> गल्ला मोजा (Cash Tally)</h3>
-                <button onClick={() => setIsTallyModalOpen(false)} className="hover:bg-white/20 p-1 rounded-lg cursor-pointer"><X weight="bold" /></button>
+          <div className="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-start justify-center p-4 pt-24 sm:pt-28 overflow-y-auto">
+            <div className="bg-white rounded-[32px] w-full max-w-sm sm:max-w-md shadow-2xl border border-slate-100 p-6 flex flex-col relative overflow-hidden animate-scale-up max-h-[calc(100vh-120px)]">
+              
+              {/* Header */}
+              <div className="flex items-center justify-between mb-5">
+                <div className="flex items-center gap-3">
+                  <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-amber-500 to-orange-600 flex items-center justify-center shadow-lg shadow-orange-500/25 shrink-0 select-none text-white">
+                    <Calculator weight="fill" className="text-2xl" />
+                  </div>
+                  <div>
+                    <h3 className="font-black text-xl text-slate-900 leading-tight">गल्ला मोजा (Cash Tally)</h3>
+                    <p className="text-xs font-bold text-slate-500 mt-0.5">कॅश नोटांची अचूक बेरीज</p>
+                  </div>
+                </div>
+
+                <button 
+                  onClick={() => setIsTallyModalOpen(false)}
+                  className="w-8 h-8 bg-slate-100 hover:bg-slate-200 text-slate-500 rounded-full flex items-center justify-center transition cursor-pointer"
+                >
+                  <X weight="bold" className="text-base" />
+                </button>
               </div>
-              <div className="p-5">
-                <div className="grid grid-cols-2 gap-3 mb-4">
+
+              <div className="space-y-4">
+                <div className="grid grid-cols-2 gap-2.5">
                   {[500, 200, 100, 50, 20, 10].map(denom => (
-                    <div key={denom} className="flex items-center gap-2 bg-slate-50 p-2 rounded-xl border border-slate-200">
-                      <span className="w-12 text-right font-black text-slate-600">₹{denom}</span>
-                      <span className="text-slate-400 font-bold">x</span>
+                    <div key={denom} className="flex items-center gap-2 bg-slate-50/90 p-2.5 rounded-2xl border border-slate-200/80">
+                      <span className="w-11 text-right font-black text-xs text-slate-700">₹{denom}</span>
+                      <span className="text-slate-400 font-bold text-xs">×</span>
                       <input 
                         type="number" min="0" placeholder="0"
                         value={notes[denom]}
                         onChange={(e) => setNotes(prev => ({...prev, [denom]: e.target.value}))}
-                        className="w-full bg-white border border-slate-200 rounded-lg px-2 py-1 text-center font-bold outline-none focus:border-brand"
+                        className="w-full bg-white border border-slate-200/90 rounded-xl px-2 py-1 text-center font-black text-xs text-slate-900 outline-none focus:border-brand"
                       />
                     </div>
                   ))}
                 </div>
-                <div className="bg-orange-50 border border-orange-200 rounded-xl p-4 text-center">
-                  <p className="text-xs font-bold text-orange-600 uppercase mb-1">Total Cash Calculated</p>
-                  <h2 className="text-3xl font-black text-orange-700">₹{calculateTotalCash()}</h2>
+
+                {/* Total Cash Box */}
+                <div className="bg-gradient-to-br from-orange-50 via-amber-50 to-orange-100/60 border border-orange-200/80 rounded-2xl p-4 text-center">
+                  <p className="text-[10px] font-black text-orange-600 uppercase tracking-wider mb-1">एकूण कॅश रक्कम (TOTAL CASH)</p>
+                  <h2 className="text-3xl font-black text-orange-700 tracking-tight">₹{calculateTotalCash().toLocaleString('en-IN', { minimumFractionDigits: 2 })}</h2>
                 </div>
+
+                <button 
+                  onClick={() => setIsTallyModalOpen(false)}
+                  className="w-full h-11 rounded-2xl bg-gradient-to-r from-[#FF5722] via-[#FF6E40] to-[#FF8A65] hover:opacity-95 text-white font-black text-sm flex items-center justify-center gap-1 shadow-md shadow-orange-500/30 transition cursor-pointer"
+                >
+                  पूर्ण झाले (Done)
+                </button>
               </div>
+
             </div>
           </div>
         )}
