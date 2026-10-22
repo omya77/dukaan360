@@ -284,13 +284,13 @@ const Header = ({ onMenuClick, searchTerm, onSearch }) => {
 
       {/* Desktop Navigation Tabs (Centered & Balanced Layout) */}
       <nav className="hidden lg:flex flex-1 justify-center items-center px-4">
-        <div className="flex items-center bg-slate-100/80 p-1 rounded-xl border border-slate-200 gap-1">
+        <div className="flex items-center bg-slate-100/80 p-1 rounded-xl border border-slate-200/90 gap-1">
           {user?.role !== 'Cashier' && (
             <Link 
               to="/dashboard" 
               onClick={(e) => { e.preventDefault(); navigate('/dashboard'); }}
               className={`cursor-pointer px-3.5 py-1.5 rounded-lg text-xs font-black transition flex items-center gap-1.5 select-none ${
-                location.pathname === '/dashboard' ? 'bg-white text-brand shadow-sm' : 'text-slate-500 hover:text-slate-800'
+                location.pathname === '/dashboard' ? 'bg-gradient-to-r from-[#FF5722] via-[#FF6E40] to-[#FF8A65] text-white shadow-md shadow-orange-500/30' : 'text-slate-500 hover:text-slate-800'
               }`}
             >
               <ChartLineUp weight={location.pathname === '/dashboard' ? "fill" : "bold"} /> {t('dashboard') || 'डॅशबोर्ड'}
@@ -301,7 +301,7 @@ const Header = ({ onMenuClick, searchTerm, onSearch }) => {
             to="/pos" 
             onClick={(e) => { e.preventDefault(); navigate('/pos'); }}
             className={`cursor-pointer px-3.5 py-1.5 rounded-lg text-xs font-black transition flex items-center gap-1.5 select-none ${
-              location.pathname === '/pos' ? 'bg-white text-brand shadow-sm' : 'text-slate-500 hover:text-slate-800'
+              location.pathname === '/pos' ? 'bg-gradient-to-r from-[#FF5722] via-[#FF6E40] to-[#FF8A65] text-white shadow-md shadow-orange-500/30' : 'text-slate-500 hover:text-slate-800'
             }`}
           >
             <Storefront weight={location.pathname === '/pos' ? "fill" : "bold"} /> {t('pos')}
@@ -313,7 +313,7 @@ const Header = ({ onMenuClick, searchTerm, onSearch }) => {
                 to="/inventory" 
                 onClick={(e) => { e.preventDefault(); navigate('/inventory'); }}
                 className={`cursor-pointer px-3.5 py-1.5 rounded-lg text-xs font-black transition flex items-center gap-1.5 select-none ${
-                  location.pathname === '/inventory' ? 'bg-white text-brand shadow-sm' : 'text-slate-500 hover:text-slate-800'
+                  location.pathname === '/inventory' ? 'bg-gradient-to-r from-[#FF5722] via-[#FF6E40] to-[#FF8A65] text-white shadow-md shadow-orange-500/30' : 'text-slate-500 hover:text-slate-800'
                 }`}
               >
                 <Package weight={location.pathname === '/inventory' ? "fill" : "bold"} /> {t('stock')}
@@ -322,7 +322,7 @@ const Header = ({ onMenuClick, searchTerm, onSearch }) => {
                 to="/khata" 
                 onClick={(e) => { e.preventDefault(); navigate('/khata'); }}
                 className={`cursor-pointer px-3.5 py-1.5 rounded-lg text-xs font-black transition flex items-center gap-1.5 select-none ${
-                  location.pathname === '/khata' ? 'bg-white text-brand shadow-sm' : 'text-slate-500 hover:text-slate-800'
+                  location.pathname === '/khata' ? 'bg-gradient-to-r from-[#FF5722] via-[#FF6E40] to-[#FF8A65] text-white shadow-md shadow-orange-500/30' : 'text-slate-500 hover:text-slate-800'
                 }`}
               >
                 <BookBookmark weight={location.pathname === '/khata' ? "fill" : "bold"} /> {t('khata')}
@@ -334,7 +334,7 @@ const Header = ({ onMenuClick, searchTerm, onSearch }) => {
             to="/history" 
             onClick={(e) => { e.preventDefault(); navigate('/history'); }}
             className={`cursor-pointer px-3.5 py-1.5 rounded-lg text-xs font-black transition flex items-center gap-1.5 select-none ${
-              location.pathname === '/history' ? 'bg-white text-brand shadow-sm' : 'text-slate-500 hover:text-slate-800'
+              location.pathname === '/history' ? 'bg-gradient-to-r from-[#FF5722] via-[#FF6E40] to-[#FF8A65] text-white shadow-md shadow-orange-500/30' : 'text-slate-500 hover:text-slate-800'
             }`}
           >
             <ClockCounterClockwise weight={location.pathname === '/history' ? "bold" : "bold"} /> {t('history')}
