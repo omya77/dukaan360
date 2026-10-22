@@ -19,6 +19,7 @@ import {
   BookBookmark,
   Receipt,
   Gear,
+  Tag,
   UploadSimple,
   LinkSimple,
   CheckCircle,
@@ -891,38 +892,75 @@ const Inventory = () => {
         </div>
       )}
 
-      {/* 3. Add/Edit Product Modal */}
+      {/* 3. Ultra-Attractive Add/Edit Product Modal */}
       {showProductModal && (
-        <div className="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-          <div className="bg-white rounded-3xl p-6 w-full max-w-md shadow-2xl border border-slate-100 max-h-[90vh] overflow-y-auto custom-scrollbar animate-scale-up">
-            <div className="flex justify-between items-center mb-5">
-              <h3 className="font-black text-xl text-slate-900">
-                {isEditing ? t('edit_item_details') : t('add_new_product_title')}
-              </h3>
-              <button onClick={() => setShowProductModal(false)} className="text-slate-400 hover:text-red-500 hover:bg-slate-100 p-1.5 rounded-full transition cursor-pointer">
-                <X weight="bold" className="text-xl"/> 
+        <div className="fixed inset-0 bg-slate-900/60 backdrop-blur-md z-50 flex items-center justify-center p-3 sm:p-4 animate-in fade-in duration-200">
+          <div className="bg-white/95 backdrop-blur-2xl rounded-[32px] p-5 sm:p-7 w-full max-w-lg shadow-[0_25px_60px_-15px_rgba(0,0,0,0.3)] border border-white/80 max-h-[92vh] flex flex-col relative overflow-hidden animate-scale-up">
+            
+            {/* Top Radiant Accent Ribbon */}
+            <div className="h-1.5 w-full absolute top-0 left-0 bg-gradient-to-r from-[#FF5722] via-[#FFB300] to-[#FF5722]"></div>
+
+            {/* Modal Header */}
+            <div className="flex justify-between items-start mb-5 pb-4 border-b border-slate-100 shrink-0">
+              <div className="flex items-center gap-3.5">
+                <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-[#FF5722] via-[#FF6E40] to-[#FF8A65] text-white flex items-center justify-center shadow-lg shadow-orange-500/30 text-2xl font-black shrink-0">
+                  {isEditing ? <PencilSimple weight="bold" /> : <Package weight="fill" />}
+                </div>
+                <div>
+                  <h3 className="font-black text-xl sm:text-2xl text-slate-900 tracking-tight leading-tight">
+                    {isEditing ? 'उत्पादनाची माहिती बदला' : 'नवीन वस्तू जोडा'}
+                  </h3>
+                  <p className="text-xs font-bold text-slate-500 mt-0.5 flex items-center gap-1.5">
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                    <span>{isEditing ? 'वस्तूचे नाव, किंमत व तपशील अपडेट करा' : 'दुकानात नवीन किराणा किंवा उत्पादन नोंदवा'}</span>
+                  </p>
+                </div>
+              </div>
+              
+              <button 
+                type="button"
+                onClick={() => setShowProductModal(false)} 
+                className="w-9 h-9 rounded-full bg-slate-100 hover:bg-red-50 text-slate-400 hover:text-red-500 flex items-center justify-center transition cursor-pointer shrink-0"
+                title="बंद करा"
+              >
+                <X weight="bold" className="text-lg" /> 
               </button>
             </div>
             
-            <form onSubmit={handleSaveProduct} className="flex flex-col gap-4">
+            {/* Scrollable Form Body */}
+            <form onSubmit={handleSaveProduct} className="flex-1 overflow-y-auto pr-1 space-y-4 custom-scrollbar">
+              
+              {/* Field 1: Product Name */}
               <div>
-                <label className="block text-[11px] font-bold text-slate-500 uppercase mb-1">{t('product_name')} *</label>
-                <input 
-                  type="text" required
-                  value={newProdName} onChange={e => setNewProdName(e.target.value)}
-                  className="w-full h-11 border border-slate-200 rounded-2xl px-3.5 font-bold focus:border-brand focus:outline-none focus:ring-2 focus:ring-brand/20" 
-                  placeholder="उदा. अमुल ताजे दूध, साखर, इत्यादी"
-                />
+                <label className="block text-xs font-black text-slate-700 uppercase tracking-wide mb-1.5 flex justify-between items-center">
+                  <span>उत्पादनाचे नाव (Product Name) *</span>
+                  <span className="text-[10px] font-bold text-orange-600 bg-orange-50 px-2 py-0.5 rounded-md">आवश्यक</span>
+                </label>
+                <div className="relative">
+                  <Tag weight="bold" className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-lg pointer-events-none" />
+                  <input 
+                    type="text" 
+                    required
+                    value={newProdName} 
+                    onChange={e => setNewProdName(e.target.value)}
+                    className="w-full h-12 pl-10 pr-4 bg-slate-50/70 focus:bg-white border-2 border-slate-200/90 focus:border-[#FF5722] focus:ring-4 focus:ring-orange-500/10 rounded-2xl font-black text-sm text-slate-900 placeholder-slate-400 outline-none transition" 
+                    placeholder="उदा. अमुल ताजे दूध 500 मिली, साखर M-30, इत्यादी"
+                  />
+                </div>
               </div>
 
-              <div className="grid grid-cols-2 gap-3">
+              {/* Field 2 & 3: Category & Unit */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                {/* Category */}
                 <div>
-                  <label className="block text-[11px] font-bold text-slate-500 uppercase mb-1 flex justify-between">
-                    <span>{t('category')} *</span>
+                  <label className="block text-xs font-black text-slate-700 uppercase tracking-wide mb-1.5 flex items-center gap-1">
+                    <Folders weight="bold" className="text-xs text-orange-500" />
+                    <span>कॅटेगरी (Category) *</span>
                   </label>
                   <select 
-                    value={newProdCategoryId} onChange={e => setNewProdCategoryId(e.target.value)}
-                    className="w-full h-11 border border-slate-200 rounded-2xl px-3 font-bold bg-white focus:border-brand focus:outline-none"
+                    value={newProdCategoryId} 
+                    onChange={e => setNewProdCategoryId(e.target.value)}
+                    className="w-full h-11 border-2 border-slate-200/90 focus:border-[#FF5722] bg-slate-50/70 focus:bg-white rounded-2xl px-3.5 font-bold text-xs text-slate-800 outline-none transition cursor-pointer"
                   >
                     {categories.map(c => (
                       <option key={c.id} value={c.id}>{tCategory(c.name)}</option>
@@ -930,11 +968,15 @@ const Inventory = () => {
                   </select>
                 </div>
 
+                {/* Unit */}
                 <div>
-                  <label className="block text-[11px] font-bold text-slate-500 uppercase mb-1">{t('unit')} *</label>
+                  <label className="block text-xs font-black text-slate-700 uppercase tracking-wide mb-1.5">
+                    युनिट / प्रमाण (Unit) *
+                  </label>
                   <select 
-                    value={newProdUnit} onChange={e => setNewProdUnit(e.target.value)}
-                    className="w-full h-11 border border-slate-200 rounded-2xl px-3 font-bold bg-white focus:border-brand focus:outline-none"
+                    value={newProdUnit} 
+                    onChange={e => setNewProdUnit(e.target.value)}
+                    className="w-full h-11 border-2 border-slate-200/90 focus:border-[#FF5722] bg-slate-50/70 focus:bg-white rounded-2xl px-3.5 font-bold text-xs text-slate-800 outline-none transition cursor-pointer"
                   >
                     <option value="kg">kg (किलो)</option>
                     <option value="gm">gm (ग्रॅम)</option>
@@ -947,55 +989,103 @@ const Inventory = () => {
                 </div>
               </div>
 
-              <div className="grid grid-cols-2 gap-3">
-                <div>
-                  <label className="block text-[11px] font-bold text-slate-500 uppercase mb-1">{t('selling_price')} (₹) *</label>
-                  <input 
-                    type="number" required step="0.01" min="0"
-                    value={newProdSelling} onChange={e => setNewProdSelling(e.target.value)}
-                    className="w-full h-11 border border-slate-200 rounded-2xl px-3.5 font-bold focus:border-brand focus:outline-none" 
-                    placeholder="उदा. 27"
-                  />
+              {/* Field 4: Pricing & Margin Calculation Card */}
+              <div className="bg-gradient-to-br from-amber-50/70 via-orange-50/40 to-white border-2 border-amber-200/80 rounded-2xl p-3.5 space-y-2.5 shadow-xs">
+                <div className="flex items-center justify-between">
+                  <span className="text-xs font-black text-slate-800 uppercase tracking-wide flex items-center gap-1.5">
+                    <CurrencyInr weight="bold" className="text-base text-emerald-600" />
+                    <span>किंमत तपशील (Pricing & Margin)</span>
+                  </span>
+                  
+                  {/* Live Discount Pill */}
+                  {newProdMrp && newProdSelling && parseFloat(newProdMrp) > parseFloat(newProdSelling) && (
+                    <span className="text-[10px] font-black text-emerald-800 bg-emerald-100 border border-emerald-300 rounded-full px-2.5 py-0.5 shadow-2xs">
+                      ग्राहक सवलत ₹{(parseFloat(newProdMrp) - parseFloat(newProdSelling)).toFixed(2)} ({Math.round(((parseFloat(newProdMrp) - parseFloat(newProdSelling)) / parseFloat(newProdMrp)) * 100)}% सूट)
+                    </span>
+                  )}
                 </div>
 
-                <div>
-                  <label className="block text-[11px] font-bold text-slate-500 uppercase mb-1">{t('mrp')} (₹)</label>
-                  <input 
-                    type="number" step="0.01" min="0"
-                    value={newProdMrp} onChange={e => setNewProdMrp(e.target.value)}
-                    className="w-full h-11 border border-slate-200 rounded-2xl px-3.5 font-bold focus:border-brand focus:outline-none" 
-                    placeholder="उदा. 30"
-                  />
+                <div className="grid grid-cols-2 gap-3">
+                  {/* Selling Price */}
+                  <div>
+                    <label className="block text-[11px] font-black text-slate-600 uppercase mb-1">
+                      विक्री किंमत (Selling) *
+                    </label>
+                    <div className="relative">
+                      <span className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-500 font-black text-base pointer-events-none">₹</span>
+                      <input 
+                        type="number" 
+                        required 
+                        step="0.01" 
+                        min="0"
+                        value={newProdSelling} 
+                        onChange={e => setNewProdSelling(e.target.value)}
+                        className="w-full h-11 pl-8 pr-3.5 bg-white border-2 border-slate-200/90 focus:border-[#FF5722] rounded-xl font-black text-base text-slate-900 outline-none transition" 
+                        placeholder="27.00"
+                      />
+                    </div>
+                  </div>
+
+                  {/* MRP */}
+                  <div>
+                    <label className="block text-[11px] font-bold text-slate-600 uppercase mb-1">
+                      छापील किंमत (MRP)
+                    </label>
+                    <div className="relative">
+                      <span className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 font-bold text-sm pointer-events-none">₹</span>
+                      <input 
+                        type="number" 
+                        step="0.01" 
+                        min="0"
+                        value={newProdMrp} 
+                        onChange={e => setNewProdMrp(e.target.value)}
+                        className="w-full h-11 pl-8 pr-3.5 bg-white border-2 border-slate-200/90 focus:border-[#FF5722] rounded-xl font-bold text-sm text-slate-700 outline-none transition" 
+                        placeholder="30.00"
+                      />
+                    </div>
+                  </div>
                 </div>
               </div>
 
+              {/* Field 5: Barcode Input with Auto-Generate Helper */}
               <div>
-                <label className="block text-[11px] font-bold text-slate-500 uppercase mb-1">{t('barcode')} (Optional)</label>
-                <div className="relative">
-                  <Barcode className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-lg" />
+                <label className="block text-xs font-black text-slate-700 uppercase tracking-wide mb-1.5 flex justify-between items-center">
+                  <span>बारकोड (Barcode)</span>
+                  <span className="text-[10px] font-bold text-slate-400">ऐच्छिक (Optional)</span>
+                </label>
+                <div className="relative flex items-center">
+                  <Barcode className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-lg pointer-events-none" />
                   <input 
                     type="text"
-                    value={newProdBarcode} onChange={e => setNewProdBarcode(e.target.value)}
-                    className="w-full h-11 border border-slate-200 rounded-2xl pl-10 pr-3.5 font-bold focus:border-brand focus:outline-none" 
-                    placeholder="उदा. 8901007001"
+                    value={newProdBarcode} 
+                    onChange={e => setNewProdBarcode(e.target.value)}
+                    className="w-full h-11 pl-10 pr-24 bg-slate-50/70 focus:bg-white border-2 border-slate-200/90 focus:border-[#FF5722] rounded-2xl text-xs font-bold text-slate-800 outline-none transition" 
+                    placeholder="उदा. 8901007001 किंवा स्कॅन करा"
                   />
+                  <button 
+                    type="button" 
+                    onClick={() => setNewProdBarcode('8901' + Date.now().toString().slice(-6))} 
+                    className="absolute right-1.5 px-2.5 py-1 text-[10px] font-black bg-white hover:bg-orange-50 border border-slate-200 hover:border-orange-300 text-slate-600 hover:text-orange-600 rounded-xl transition cursor-pointer shadow-2xs"
+                  >
+                    ⚡ ऑटो जनरेट
+                  </button>
                 </div>
               </div>
 
-              {/* Photo Upload & URL Dual-Mode Selector */}
-              <div className="bg-slate-50/80 border border-slate-200/80 rounded-2xl p-3 space-y-2.5">
+              {/* Field 6: Photo Upload & URL Dual-Mode Selector */}
+              <div className="bg-slate-50/90 border-2 border-slate-200/90 rounded-2xl p-3.5 space-y-3">
                 <div className="flex items-center justify-between">
-                  <label className="text-[11px] font-bold text-slate-700 uppercase tracking-wide flex items-center gap-1.5">
-                    <ImageIcon className="text-sm text-[#FF5722]" />
+                  <label className="text-xs font-black text-slate-800 uppercase tracking-wide flex items-center gap-1.5">
+                    <ImageIcon className="text-base text-[#FF5722]" />
                     <span>उत्पादनाचा फोटो (Product Photo)</span>
                   </label>
                   
                   {/* Mode Switcher Tabs */}
-                  <div className="flex items-center bg-white border border-slate-200 rounded-lg p-0.5 shadow-2xs">
+                  <div className="flex items-center bg-white border border-slate-200 rounded-xl p-0.5 shadow-2xs">
                     <button
                       type="button"
                       onClick={() => setImageInputMode('upload')}
-                      className={`px-2.5 py-1 rounded-md text-[10px] font-black transition cursor-pointer flex items-center gap-1 ${
+                      className={`px-3 py-1 rounded-lg text-[10px] font-black transition cursor-pointer flex items-center gap-1 select-none ${
                         imageInputMode === 'upload' 
                           ? 'bg-gradient-to-r from-[#FF5722] to-[#FF7043] text-white shadow-xs' 
                           : 'text-slate-500 hover:text-slate-800'
@@ -1007,7 +1097,7 @@ const Inventory = () => {
                     <button
                       type="button"
                       onClick={() => setImageInputMode('url')}
-                      className={`px-2.5 py-1 rounded-md text-[10px] font-black transition cursor-pointer flex items-center gap-1 ${
+                      className={`px-3 py-1 rounded-lg text-[10px] font-black transition cursor-pointer flex items-center gap-1 select-none ${
                         imageInputMode === 'url' 
                           ? 'bg-gradient-to-r from-[#FF5722] to-[#FF7043] text-white shadow-xs' 
                           : 'text-slate-500 hover:text-slate-800'
@@ -1024,25 +1114,25 @@ const Inventory = () => {
                   <div>
                     {newProdImage ? (
                       /* Live Preview of Selected Photo */
-                      <div className="flex items-center justify-between p-2.5 bg-white rounded-xl border border-orange-200 shadow-2xs gap-3">
+                      <div className="flex items-center justify-between p-3 bg-white rounded-2xl border-2 border-orange-200 shadow-xs gap-3">
                         <div className="flex items-center gap-3 min-w-0">
                           <img 
                             src={newProdImage} 
                             alt="Preview" 
-                            className="w-14 h-14 rounded-xl object-cover border border-slate-200 shadow-xs shrink-0 bg-slate-100" 
+                            className="w-16 h-16 rounded-xl object-cover border border-slate-200 shadow-xs shrink-0 bg-slate-100" 
                             onError={(e) => { e.currentTarget.src = '/images/atta.jpg'; }}
                           />
                           <div className="min-w-0">
-                            <span className="text-[10px] font-black text-emerald-600 bg-emerald-50 border border-emerald-200 px-2 py-0.5 rounded-full inline-flex items-center gap-1">
-                              <CheckCircle weight="fill" className="text-xs" /> फोटो जोडला आहे
+                            <span className="text-[10px] font-black text-emerald-700 bg-emerald-50 border border-emerald-200 px-2.5 py-0.5 rounded-full inline-flex items-center gap-1">
+                              <CheckCircle weight="fill" className="text-xs text-emerald-600" /> फोटो जोडला आहे
                             </span>
                             <p className="text-xs font-bold text-slate-700 truncate mt-1">
-                              {newProdImage.startsWith('data:') ? 'स्थानिक फाईल (Local File)' : newProdImage.split('/').pop()}
+                              {newProdImage.startsWith('data:') ? 'स्थानिक फोटो (Local Image File)' : newProdImage.split('/').pop()}
                             </p>
                           </div>
                         </div>
                         <div className="flex items-center gap-1.5 shrink-0">
-                          <label className="cursor-pointer bg-slate-100 hover:bg-slate-200 text-slate-700 text-[11px] font-black px-2.5 py-1.5 rounded-lg border border-slate-200 transition flex items-center gap-1 select-none">
+                          <label className="cursor-pointer bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-black px-3 py-2 rounded-xl border border-slate-200 transition flex items-center gap-1 select-none">
                             <UploadSimple weight="bold" />
                             <span>बदला</span>
                             <input 
@@ -1055,30 +1145,30 @@ const Inventory = () => {
                           <button
                             type="button"
                             onClick={() => setNewProdImage('')}
-                            className="w-8 h-8 rounded-lg bg-red-50 hover:bg-red-100 text-red-500 flex items-center justify-center transition cursor-pointer"
+                            className="w-9 h-9 rounded-xl bg-red-50 hover:bg-red-100 text-red-500 flex items-center justify-center transition cursor-pointer"
                             title="फोटो काढा"
                           >
-                            <Trash weight="bold" className="text-xs" />
+                            <Trash weight="bold" className="text-sm" />
                           </button>
                         </div>
                       </div>
                     ) : (
                       /* Click to Upload Downloaded Photo Box */
-                      <label className="flex flex-col items-center justify-center p-4 border-2 border-dashed border-orange-200 hover:border-orange-400 bg-white hover:bg-orange-50/20 rounded-xl cursor-pointer transition group select-none">
+                      <label className="flex flex-col items-center justify-center p-5 border-2 border-dashed border-orange-300 hover:border-orange-500 bg-white hover:bg-orange-50/30 rounded-2xl cursor-pointer transition group select-none shadow-2xs">
                         <input 
                           type="file" 
                           accept="image/*" 
                           className="hidden" 
                           onChange={handleImageFileUpload} 
                         />
-                        <div className="w-10 h-10 rounded-full bg-orange-100 text-orange-600 flex items-center justify-center text-lg mb-1.5 group-hover:scale-105 transition shadow-2xs">
-                          {uploadingImage ? <CircleNotch weight="bold" className="animate-spin text-lg" /> : <UploadSimple weight="bold" />}
+                        <div className="w-12 h-12 rounded-2xl bg-gradient-to-tr from-orange-100 to-amber-100 text-[#FF5722] flex items-center justify-center text-xl mb-2 group-hover:scale-110 transition shadow-xs">
+                          {uploadingImage ? <CircleNotch weight="bold" className="animate-spin text-xl" /> : <UploadSimple weight="bold" />}
                         </div>
                         <span className="text-xs font-black text-slate-800 text-center">
                           {uploadingImage ? 'फोटो अपलोड होत आहे...' : 'डाऊनलोड केलेला किंवा गॅलरीतून फोटो निवडा'}
                         </span>
-                        <span className="text-[10px] font-bold text-slate-400 mt-0.5">
-                          JPG, PNG, WEBP, JPEG • येथे क्लिक करा
+                        <span className="text-[10px] font-bold text-slate-400 mt-1">
+                          JPG, PNG, WEBP, JPEG • येथे क्लिक करून फाईल निवडा
                         </span>
                       </label>
                     )}
@@ -1087,28 +1177,28 @@ const Inventory = () => {
                   /* 2. Direct Image URL Input */
                   <div>
                     <div className="relative">
-                      <ImageIcon className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-base" />
+                      <ImageIcon className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-base pointer-events-none" />
                       <input 
                         type="text"
                         value={newProdImage} 
                         onChange={e => setNewProdImage(e.target.value)}
-                        className="w-full h-11 border border-slate-200 rounded-xl pl-9 pr-3.5 text-xs font-bold text-slate-800 bg-white focus:border-brand focus:outline-none focus:ring-1 focus:ring-brand/30" 
+                        className="w-full h-11 border-2 border-slate-200/90 focus:border-[#FF5722] rounded-xl pl-9 pr-3.5 text-xs font-bold text-slate-800 bg-white outline-none focus:ring-2 focus:ring-orange-500/10 transition" 
                         placeholder="उदा. /images/milk.jpg किंवा https://..."
                       />
                     </div>
                     {newProdImage && (
-                      <div className="mt-2 flex items-center gap-2 p-1.5 bg-white rounded-lg border border-slate-200">
+                      <div className="mt-2.5 flex items-center gap-2 p-2 bg-white rounded-xl border border-slate-200 shadow-2xs">
                         <img 
                           src={newProdImage} 
                           alt="Preview" 
-                          className="w-8 h-8 rounded-md object-cover border border-slate-200 shrink-0 bg-slate-100" 
+                          className="w-9 h-9 rounded-lg object-cover border border-slate-200 shrink-0 bg-slate-100" 
                           onError={(e) => { e.currentTarget.src = '/images/atta.jpg'; }}
                         />
-                        <span className="text-[10px] font-bold text-slate-500 truncate flex-1">{newProdImage}</span>
+                        <span className="text-[11px] font-bold text-slate-600 truncate flex-1">{newProdImage}</span>
                         <button 
                           type="button" 
                           onClick={() => setNewProdImage('')} 
-                          className="text-slate-400 hover:text-red-500 text-xs px-1 cursor-pointer font-bold"
+                          className="w-6 h-6 rounded-full bg-slate-100 hover:bg-red-50 text-slate-400 hover:text-red-500 text-xs flex items-center justify-center cursor-pointer font-black transition"
                         >
                           ✕
                         </button>
@@ -1116,13 +1206,27 @@ const Inventory = () => {
                     )}
                   </div>
                 )}
-
-
               </div>
 
-              <button type="submit" className="w-full h-12 bg-gradient-to-r from-[#FF5722] via-[#FF6E40] to-[#FF8A65] hover:opacity-95 text-white rounded-2xl font-black mt-2 transition shadow-lg shadow-orange-500/30 cursor-pointer">
-                {isEditing ? t('save_changes') : t('create_product_btn')}
-              </button>
+              {/* Form Action Buttons */}
+              <div className="pt-2 flex items-center gap-3 shrink-0">
+                <button
+                  type="button"
+                  onClick={() => setShowProductModal(false)}
+                  className="px-5 h-12 rounded-2xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs transition cursor-pointer select-none"
+                >
+                  रद्द करा
+                </button>
+
+                <button 
+                  type="submit" 
+                  className="flex-1 h-12 bg-gradient-to-r from-[#FF5722] via-[#FF6E40] to-[#FF8A65] hover:opacity-95 text-white rounded-2xl font-black text-xs sm:text-sm transition shadow-lg shadow-orange-500/30 cursor-pointer flex items-center justify-center gap-2 select-none"
+                >
+                  <Plus weight="bold" className="text-base" />
+                  <span>{isEditing ? 'बदल जतन करा (Save Changes)' : 'नवीन वस्तू जोडा (Save Product)'}</span>
+                </button>
+              </div>
+
             </form>
           </div>
         </div>
